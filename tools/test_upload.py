@@ -46,10 +46,16 @@ if tool=='git':
  sys.exit(0)
 if args[:1]==['api']:
  path=args[1]
+ if '/releases/assets/' not in path and s.get('query_tracking'):
+  counts=s.setdefault('query_attempts',{});counts[path]=counts.get(path,0)+1
+  remaining=s.get('query_failures_left',{}).get(path,0)
+  if remaining:s['query_failures_left'][path]=remaining-1
+  save()
+  if remaining:fail(s.get('query_error','Get "https://api.github.com/fixture": EOF'))
  if path=='user':out({'login':s['login']})
  elif path=='repos/'+repo:
   if not s['repo_exists']:fail('HTTP 404')
-  out({'id':7,'private':s['private'],'owner':{'login':'yk4642d97f-boop'},'full_name':repo})
+  out({'id':7,'private':s['private'],'owner':{'login':s.get('owner_login','yk4642d97f-boop')},'full_name':repo})
  elif '/releases/tags/' in path:
   if not s['release_exists']:fail('HTTP 404')
   out({'id':11})
@@ -73,7 +79,10 @@ elif args[:2]==['release','upload']:
  transfer('upload',p.name)
  s['next_id']+=1;ident=s['next_id'];b=p.read_bytes();(root/str(ident)).write_bytes(b)
  status='starter' if s.get('force_starter_upload_name')==p.name else 'uploaded'
- s['assets'][p.name]={'id':ident,'name':p.name,'size':len(b),'state':status,'digest':None if status=='starter' else 'sha256:'+hashlib.sha256(b).hexdigest()};s['uploads'].append(p.name);save()
+ s['assets'][p.name]={'id':ident,'name':p.name,'size':len(b),'state':status,'digest':None if status=='starter' else 'sha256:'+hashlib.sha256(b).hexdigest()};s['uploads'].append(p.name)
+ if s.get('arm_query_failure_after_upload_name')==p.name:
+  s.setdefault('query_failures_left',{})['repos/'+repo+'/releases/11/assets?per_page=100']=s['arm_query_failure_count'];s.pop('arm_query_failure_after_upload_name')
+ save()
 elif args[:2]==['auth','setup-git']:pass
 else:fail('unexpected gh '+str(args))
 '''
@@ -329,6 +338,89 @@ def main():
         assert state()['download_attempts'][first['name']] == 4
         assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
         checks.append('part readback failure retries three times without reupload; resume completes every physical asset and final report')
+
+        repo_query = 'repos/' + upload.REPO
+        list_query = repo_query + '/releases/11/assets?per_page=100'
+        update(query_tracking=True, query_attempts={}, query_failures_left={'user': 2})
+        assert upload.api('user')['login'] == upload.OWNER
+        assert state()['query_attempts']['user'] == 3
+        checks.append('read-only JSON api recovers from two EOF failures with a bounded third attempt')
+
+        update(query_attempts={}, query_failures_left={repo_query: 2})
+        assert upload.checked_query(['gh', 'api', repo_query]).returncode == 0
+        assert state()['query_attempts'][repo_query] == 3
+        checks.append('checked repository lookup retries EOF instead of interpreting it as a missing repository')
+
+        # An existing successful proof must not bypass repository ownership or
+        # privacy validation, even when a preceding query needed EOF retries.
+        for invalid in ({'private': False}, {'owner_login': 'someone-else'}):
+            before = state()
+            update(query_attempts={}, query_failures_left={repo_query: 2}, **invalid)
+            try:
+                publish()
+            except RuntimeError as error:
+                assert 'exact private repository' in str(error)
+            else:
+                raise AssertionError('Invalid destination accepted after metadata retry')
+            assert state()['uploads'] == before['uploads']
+            assert not json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+            update(private=True, owner_login=upload.OWNER)
+        checks.append('EOF recovery never bypasses private repository and owner checks; both reject before uploads')
+
+        before = state()
+        update(query_attempts={}, query_failures_left={repo_query: 3})
+        try:
+            publish()
+        except upload.ReadOnlyAPIError:
+            pass
+        else:
+            raise AssertionError('Exhausted repository metadata EOF was accepted')
+        assert state()['query_attempts'][repo_query] == 3
+        assert state()['uploads'] == before['uploads']
+        assert not json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+        checks.append('three repository lookup EOFs fail closed without creating a repository or uploading assets')
+
+        update(query_attempts={}, query_failures_left={repo_query: 3}, query_error='HTTP 403 Forbidden')
+        try:
+            upload.checked_query(['gh', 'api', repo_query])
+        except upload.ReadOnlyAPIError:
+            pass
+        else:
+            raise AssertionError('Forbidden metadata query accepted')
+        assert state()['query_attempts'][repo_query] == 1
+        update(query_error='Get "https://api.github.com/fixture": EOF', query_failures_left={})
+        checks.append('explicit 403 metadata error fails immediately and is never retried or treated as a missing resource')
+
+        # Force exactly one upload, then fail the list refresh immediately after
+        # it succeeds. Retrying the metadata must not upload this file again.
+        for failures in (2, 3):
+            before = state()
+            before['assets'][first['name']].update(state='starter', digest=None)
+            update(assets=before['assets'], query_attempts={}, query_failures_left={},
+                   arm_query_failure_after_upload_name=first['name'], arm_query_failure_count=failures)
+            if failures == 2:
+                publish()
+                assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+            else:
+                try:
+                    publish()
+                except RuntimeError as error:
+                    assert 'Delivery transfer failed' in str(error)
+                else:
+                    raise AssertionError('Exhausted post-upload list EOF was accepted')
+                assert not json.loads((base / 'github-verification.json').read_text())['complete']
+                assert not json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+            after = state()
+            assert after['upload_attempts'][first['name']] == before['upload_attempts'][first['name']] + 1
+            assert after['assets'][first['name']]['state'] == 'uploaded'
+            if failures == 3:
+                # The successful upload survives query failure and is downloaded
+                # and verified on resume without another --clobber.
+                publish()
+                assert state()['upload_attempts'][first['name']] == after['upload_attempts'][first['name']]
+                assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+            checks.append('post-upload asset-list EOF ' + ('recovers after two retries' if failures == 2 else 'fails after three attempts and resumes')
+                          + ' without reuploading the completed asset')
 
     result = {'passed': len(checks), 'checks': checks, 'network_used': False,
               'formal_archive_touched': False, 'actual_fake_cli_processes': True}

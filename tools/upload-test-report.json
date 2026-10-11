@@ -1,5 +1,5 @@
 {
-  "passed": 29,
+  "passed": 36,
   "checks": [
     "legacy v1 delivery uploads and reads every original asset back",
     "split index without parent file validates joined hash, transfers actual parts, counts physical assets, and reuses existing small/video assets by readback",
@@ -29,7 +29,14 @@
     "incomplete index is rejected",
     "checksum list missing one physical part is rejected",
     "checksum list containing obsolete unsplit parent is rejected",
-    "part readback failure retries three times without reupload; resume completes every physical asset and final report"
+    "part readback failure retries three times without reupload; resume completes every physical asset and final report",
+    "read-only JSON api recovers from two EOF failures with a bounded third attempt",
+    "checked repository lookup retries EOF instead of interpreting it as a missing repository",
+    "EOF recovery never bypasses private repository and owner checks; both reject before uploads",
+    "three repository lookup EOFs fail closed without creating a repository or uploading assets",
+    "explicit 403 metadata error fails immediately and is never retried or treated as a missing resource",
+    "post-upload asset-list EOF recovers after two retries without reuploading the completed asset",
+    "post-upload asset-list EOF fails after three attempts and resumes without reuploading the completed asset"
   ],
   "network_used": false,
   "formal_archive_touched": false,

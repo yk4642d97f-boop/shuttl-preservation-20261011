@@ -29,8 +29,51 @@ def output(args, **kwargs):
     return subprocess.check_output(args, text=True, env=GH_ENV, **kwargs)
 
 
+class ReadOnlyAPIError(RuntimeError):
+    """A metadata query failed; it must never force a successful upload to repeat."""
+
+
+def readonly_query(arguments, allow_not_found=False):
+    """Retry only transient failures of these read-only gh API queries."""
+    for attempt in range(3):
+        try:
+            result = subprocess.run(arguments, capture_output=True, text=True,
+                                    env=GH_ENV, timeout=60)
+        except subprocess.TimeoutExpired as error:
+            if attempt == 2:
+                raise ReadOnlyAPIError('GitHub metadata query timed out after three attempts.') from error
+        except OSError as error:
+            raise ReadOnlyAPIError('Cannot run GitHub metadata query.') from error
+        else:
+            if result.returncode == 0:
+                return result
+            status = re.search(r'\bHTTP(?:/[0-9.]+)?\s+([1-5][0-9]{2})\b', result.stderr, re.IGNORECASE)
+            code = int(status.group(1)) if status else None
+            if allow_not_found and code == 404:
+                return result
+            # Explicit authorization/not-found errors are not transient. Never
+            # treat a network failure as evidence that a repo/release is absent.
+            transient = (code in (500, 502, 503, 504) if code is not None else bool(re.search(
+                r'\bEOF\b|connection reset|connection aborted|broken pipe|'
+                r'(?:handshake|i/o|request) timeout|context deadline exceeded|'
+                r'temporary failure|network is unreachable|no such host',
+                result.stderr, re.IGNORECASE)))
+            if not transient or attempt == 2:
+                raise ReadOnlyAPIError('GitHub metadata query failed; refusing to continue: ' + result.stderr.strip())
+        time.sleep(5 * (attempt + 1))
+    raise AssertionError('unreachable')
+
+
+def json_query(arguments):
+    result = readonly_query(arguments)
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as error:
+        raise ReadOnlyAPIError('GitHub metadata query returned invalid JSON.') from error
+
+
 def api(path):
-    return json.loads(output(['gh', 'api', path]))
+    return json_query(['gh', 'api', path])
 
 
 def sha(path):
@@ -192,10 +235,7 @@ def private_destination():
 
 
 def checked_query(arguments):
-    result = subprocess.run(arguments, capture_output=True, text=True, env=GH_ENV)
-    if result.returncode and '404' not in result.stderr:
-        raise RuntimeError('GitHub lookup failed; refusing to treat it as a missing resource: ' + result.stderr)
-    return result
+    return readonly_query(arguments, allow_not_found=True)
 
 
 def remote_asset_uploaded(asset):
@@ -295,8 +335,8 @@ def publish(base, workers=4):
         # Serialize refreshes so a slower old snapshot cannot replace a newer
         # shared snapshot. Uploads and download hashing remain independent.
         with assets_lock:
-            pages = json.loads(output(['gh', 'api', f'repos/{REPO}/releases/{release["id"]}/assets?per_page=100',
-                                       '--paginate', '--slurp']))
+            pages = json_query(['gh', 'api', f'repos/{REPO}/releases/{release["id"]}/assets?per_page=100',
+                                '--paginate', '--slurp'])
             items = [a for page in pages for a in page]
             if len({a['name'] for a in items}) != len(items):
                 raise RuntimeError('Duplicate remote asset names.')
@@ -326,9 +366,9 @@ def publish(base, workers=4):
                     raise RuntimeError('Remote round-trip mismatch: ' + path.name)
                 return {'asset_id': asset['id'], 'bytes': size, 'downloaded_sha256': downloaded,
                         'verified_at_unix': time.time()}
-            except RemoteDownloadError:
-                # remote_sha has already exhausted its three download attempts.
-                # Leave the existing asset for a later resume to verify.
+            except (RemoteDownloadError, ReadOnlyAPIError):
+                # Readback or metadata retries are exhausted. Leave a completed
+                # upload intact so a later resume can verify it without reupload.
                 raise
             except (subprocess.CalledProcessError, RuntimeError):
                 if attempt == 2:
