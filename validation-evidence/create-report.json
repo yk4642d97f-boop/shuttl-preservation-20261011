@@ -1,0 +1,12 @@
+{
+  "format": "shuttl-preservation-v1",
+  "run": "0a0435dadc6641b99123e011cf774f1d",
+  "complete": true,
+  "source_entries": 998566,
+  "reused_entries": 998123,
+  "logical_file_bytes": 185652070476,
+  "errors": 0,
+  "recovered_uncommitted_tails": [],
+  "chunks": 609438,
+  "stored_chunk_bytes": 102443369161
+}

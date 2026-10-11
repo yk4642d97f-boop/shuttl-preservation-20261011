@@ -1,0 +1,25 @@
+{
+  "restored": true,
+  "destination": "/Users/yangcong/Downloads/shuttl-preservation-20261011/restore-supplement-v2",
+  "entries": 430,
+  "errors": [],
+  "warnings": [],
+  "scope": {
+    "mode": "selected-prefixes",
+    "include_prefixes": [
+      "/Users/yangcong/.Trash/00\u63d0\u4ea4\u6b65\u9aa4.md",
+      "/Users/yangcong/.Trash/SHA256SUMS.txt",
+      "/Users/yangcong/.Trash/\u53c2\u8003\u8d44\u6599",
+      "/Users/yangcong/Library/Containers/com.apple.CoreDevice.CoreDeviceService/Data/Library/Caches/AppInstallationBinaryDeltas/com.ycyangcong.shuttl",
+      "/Users/yangcong/Library/Containers/com.kingsoft.wpsoffice.mac/Data/.kingsoft/office6/data/backup/Shuttl\u8f6f\u4ef6\u8bbe\u8ba1\u6587\u6863.docx.54CF5524357F696490CCA493DE4DA88B.20261008234148958.wps",
+      "/Users/yangcong/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_08ylqqoid73o12_50b7/msg/file/2026-09/SHUTTL_ASTRA_KIT_0929.zip",
+      "/Users/yangcong/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_08ylqqoid73o12_50b7/msg/file/2026-10/Shuttl\u7b2c\u4e8c\u8d5b\u9053\u63d0\u4ea4\u6750\u6599.zip",
+      "/Users/yangcong/Library/Daemon Containers/2791BC6A-25A8-49DE-9BEA-ACA367EBB7FC/Data/Library/Caches/Placeholders-v2.noindex/com.ycyangcong.shuttl-1.0.0"
+    ],
+    "includes_archived_ancestor_directories": true,
+    "archive_complete": true
+  },
+  "full_archive_restored": false,
+  "hardlinks_restored_as_independent_files": [],
+  "ownership": "uid/gid retained in manifest; restored files belong to current user"
+}

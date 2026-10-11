@@ -17,11 +17,11 @@
 | 完整性范围和已知缺口 | [docs/COVERAGE.md](docs/COVERAGE.md) |
 | 原始文件归档与三部独立宣传/演示视频 | [备份 Release](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/tag/backup-20261011) |
 | 标准库备份读取器及格式文档 | [tools/README.md](tools/README.md) |
-| 加密分卷资产索引 | `recovery/payload-index.json`（打包完成后写入） |
+| 加密分卷资产索引 | `recovery/payload-index.json` |
 
 ## 在新电脑恢复
 
-先安装 GitHub CLI、age 和 Python 3.9+（macOS 可使用 Homebrew），登录拥有仓库访问权的 GitHub 账号。不要把私有恢复密钥提交到本仓库。
+先安装 GitHub CLI、age 和 Python 3.9+（macOS 可使用 Homebrew），登录拥有仓库访问权的 GitHub 账号。默认完整恢复会同时保留约 103 GB 密文、103 GB 解密归档与约 186 GB 原始文件；建议目标磁盘预留至少 **450 GB 可用空间**，可使用外置磁盘。不要把私有恢复密钥提交到本仓库。
 
 ```sh
 brew install gh age python

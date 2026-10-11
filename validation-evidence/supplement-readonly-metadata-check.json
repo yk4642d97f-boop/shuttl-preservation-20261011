@@ -1,0 +1,30 @@
+{
+  "file_mode_mtime_and_quarantine_verified": true,
+  "original_xattr_values_preserved_in_manifest": true,
+  "exact_restored_xattr_match": false,
+  "limitation": "macOS returned success when setting com.apple.provenance, but the restored system-managed provenance value differs for one ZIP. Original bytes remain intact in the archive manifest. File contents, permissions, nanosecond mtime, and quarantine attributes verified.",
+  "checks": [
+    {
+      "source": "/Users/yangcong/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_08ylqqoid73o12_50b7/msg/file/2026-09/SHUTTL_ASTRA_KIT_0929.zip",
+      "restored": "/Users/yangcong/Downloads/shuttl-preservation-20261011/restore-supplement-v2/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_08ylqqoid73o12_50b7/msg/file/2026-09/SHUTTL_ASTRA_KIT_0929.zip",
+      "mode_matches": true,
+      "mtime_ns_matches": true,
+      "all_original_xattrs_equal": false,
+      "xattr_count": 2,
+      "xattr_value_differences": [
+        "com.apple.provenance"
+      ],
+      "archived_xattrs_match_source": true
+    },
+    {
+      "source": "/Users/yangcong/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_08ylqqoid73o12_50b7/msg/file/2026-10/Shuttl第二赛道提交材料.zip",
+      "restored": "/Users/yangcong/Downloads/shuttl-preservation-20261011/restore-supplement-v2/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_08ylqqoid73o12_50b7/msg/file/2026-10/Shuttl第二赛道提交材料.zip",
+      "mode_matches": true,
+      "mtime_ns_matches": true,
+      "all_original_xattrs_equal": true,
+      "xattr_count": 1,
+      "xattr_value_differences": [],
+      "archived_xattrs_match_source": true
+    }
+  ]
+}

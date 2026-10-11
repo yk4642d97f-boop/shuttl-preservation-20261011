@@ -1,0 +1,32 @@
+{
+  "restored": true,
+  "destination": "/Users/yangcong/Downloads/shuttl-preservation-20261011/restore-sample",
+  "entries": 438,
+  "errors": [],
+  "warnings": [],
+  "scope": {
+    "mode": "selected-prefixes",
+    "include_prefixes": [
+      "/Users/yangcong/.claude/file-history/45182803-9d66-41aa-a37b-f3a58f7a261d/05187fee894f18e5@v2",
+      "/Users/yangcong/.claude/file-history/72eeb35d-4253-4c7f-98df-66a1129a05ac/05187fee894f18e5@v2",
+      "/Users/yangcong/.claude/projects/-Users-yangcong-Downloads-----/memory-backup-20261007/MEMORY.md",
+      "/Users/yangcong/.ssh/shuttl_deploy",
+      "/Users/yangcong/Downloads/claude/autodl_backup/shuttl-20261008/database/shuttl.dump",
+      "/Users/yangcong/Downloads/shuttl-preservation-20261011-audit/signing-private",
+      "/Users/yangcong/Downloads/华北五省/backend/.env",
+      "/Users/yangcong/Downloads/华北五省/backend/app",
+      "/Users/yangcong/Downloads/华北五省/iOS/Packages/ShuttlCore/Sources",
+      "/Users/yangcong/Downloads/华北五省/iOS/Resources/Models/ShuttleTracker.mlpackage",
+      "/Users/yangcong/Downloads/华北五省/promo2/out/Shuttl-宣传片-2.mp4",
+      "/Users/yangcong/Downloads/华北五省/research/bst/acc_cache/offi/001/filtered/train/Bottom_切球/1_1_11_27_joints.npy",
+      "/Users/yangcong/Downloads/华北五省/research/bst/data/ShuttleSet_data_merged/dataset_npy_between_2_hits_with_max_limits/train/Bottom_切球/1_1_11_27_joints.npy",
+      "/Users/yangcong/Library/Application Support/Shuttl/CloudBackups/20261008/latest-deletions.json",
+      "/Users/yangcong/Library/Developer/CoreSimulator/Devices/4D49CCDD-F15D-4E47-90D7-EB5034E82789/data/Containers/Data/Application/E688DCD6-35F8-4DD7-B390-EDF2DBE17ED2/.com.apple.mobile_container_manager.metadata.plist"
+    ],
+    "includes_archived_ancestor_directories": true,
+    "archive_complete": true
+  },
+  "full_archive_restored": false,
+  "hardlinks_restored_as_independent_files": [],
+  "ownership": "uid/gid retained in manifest; restored files belong to current user"
+}

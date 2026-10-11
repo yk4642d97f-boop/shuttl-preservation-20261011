@@ -66,6 +66,13 @@ def main():
         if hasattr(os, "setxattr") or mod.DARWIN_XATTR is not None:
             xattr = "com.example.shuttl.test" if sys.platform == "darwin" else "user.shuttl.test"
             mod.xattr_set(source / "nested" / "binary.dat", xattr, b"attribute\x00\xff")
+        readonly = source / "readonly.bin"
+        readonly.write_bytes(b"read-only archive payload\x00\xff")
+        if xattr:
+            mod.xattr_set(readonly, xattr, b"readonly attribute\x00\xff")
+        os.link(readonly, source / "readonly-hardlink.bin")
+        os.chmod(readonly, 0o444)
+        os.utime(readonly, ns=(1600000000000000000, 1600000000456789123))
         config = base / "config.json"
         config.write_text(json.dumps({"roots": [{"path": str(source), "category": "test"},
                                                 {"path": str(other), "category": "external"}],
@@ -103,6 +110,14 @@ def main():
         if xattr:
             assert mod.xattr_get(restored / "hardlink.dat", xattr) == b"attribute\x00\xff"
         checks.append("complete SHA256 restoration, rootfs mapping, soft/hard links, mode, mtime, xattr")
+        readonly_a, readonly_b = (restored / "readonly.bin").stat(), (restored / "readonly-hardlink.bin").stat()
+        assert readonly_a.st_ino == readonly_b.st_ino
+        assert readonly_a.st_mode & 0o777 == 0o444
+        assert readonly_a.st_mtime_ns == readonly.stat().st_mtime_ns
+        if xattr:
+            assert mod.xattr_get(restored / "readonly.bin", xattr) == b"readonly attribute\x00\xff"
+            assert mod.xattr_get(restored / "readonly-hardlink.bin", xattr) == b"readonly attribute\x00\xff"
+        checks.append("read-only files and shared hardlink inodes restore xattrs before final mode and timestamps")
         db = sqlite3.connect(archive / "manifest.sqlite3")
         hard_member, hard_original = db.execute("SELECT path,hardlink_to FROM files WHERE hardlink_to IS NOT NULL LIMIT 1").fetchone()
         db.close()
@@ -257,6 +272,51 @@ def main():
         writer.close()
         db.close()
         checks.append("adaptive random chunk uses zlib level 0; compressible chunk uses level 1; raw SHA256, dedup and bounded volume reader remain unchanged")
+        scope_a, scope_b, scope_archive = base / "scope-a", base / "scope-b", base / "scope-archive"
+        scope_a.mkdir()
+        scope_b.mkdir()
+        (scope_a / "a.bin").write_bytes(b"old source remains" * 1000)
+        (scope_b / "b.bin").write_bytes(b"new source added" * 1000)
+        scope_config = base / "scope-config.json"
+        a_root, b_root = {"path": str(scope_a), "category": "original"}, {"path": str(scope_b), "category": "additional"}
+        first_config = {"roots": [a_root], "excludes": []}
+        expanded_config = {"roots": [a_root, b_root], "excludes": []}
+        scope_config.write_text(json.dumps(first_config))
+        run("create", "--config", scope_config, "--archive", scope_archive)
+        original_db = sqlite3.connect(scope_archive / "manifest.sqlite3")
+        old_chunks = list(original_db.execute("SELECT * FROM chunks ORDER BY hash"))
+        original_db.close()
+        scope_config.write_text(json.dumps(expanded_config))
+        run("create", "--config", scope_config, "--archive", scope_archive, expected=2)
+        original_db = sqlite3.connect(scope_archive / "manifest.sqlite3")
+        assert json.loads(original_db.execute("SELECT value FROM metadata WHERE key='config'").fetchone()[0]) == first_config
+        original_db.close()
+        extension = run("create", "--config", scope_config, "--archive", scope_archive, "--extend-scope")
+        assert extension["complete"] and extension["reused_entries"] >= 2
+        extended_db = sqlite3.connect(scope_archive / "manifest.sqlite3")
+        assert json.loads(extended_db.execute("SELECT value FROM metadata WHERE key='config'").fetchone()[0]) == expanded_config
+        for old_chunk in old_chunks:
+            assert extended_db.execute("SELECT * FROM chunks WHERE hash=?", (old_chunk[0],)).fetchone() == old_chunk
+        extended_db.close()
+        assert run("verify", "--archive", scope_archive)["verified"]
+        scope_restored = base / "scope-restored"
+        assert run("restore", "--archive", scope_archive, "--source-prefix", base, "--destination", scope_restored)["restored"]
+        assert sha(scope_restored / "scope-a" / "a.bin") == sha(scope_a / "a.bin")
+        assert sha(scope_restored / "scope-b" / "b.bin") == sha(scope_b / "b.bin")
+        forbidden = [
+            {"roots": [b_root], "excludes": []},
+            {"roots": [dict(a_root, category="changed"), b_root], "excludes": []},
+            {"roots": [a_root, b_root], "excludes": [str(scope_a / "a.bin")]},
+            {"roots": [a_root, b_root, dict(a_root, category="duplicate-changed")], "excludes": []},
+        ]
+        for candidate in forbidden:
+            scope_config.write_text(json.dumps(candidate))
+            run("create", "--config", scope_config, "--archive", scope_archive, "--extend-scope", expected=2)
+        scope_config.write_text(json.dumps(expanded_config))
+        assert run("verify", "--archive", scope_archive)["verified"]
+        run("verify", "--archive", scope_archive, "--seal")
+        run("create", "--config", scope_config, "--archive", scope_archive, "--extend-scope", expected=2)
+        checks.append("scope extension requires explicit flag, preserves old blocks/config roots, captures added roots, verifies and restores both; removed/category-changed roots, changed excludes, duplicate paths and sealed changes rejected")
     report = {"passed": True, "checks": checks, "python": sys.version.split()[0]}
     Path(__file__).with_name("test-report.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))

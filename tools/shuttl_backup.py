@@ -467,7 +467,25 @@ def create(args):
     db = db_open(archive)
     previous_config = meta_get(db, "config")
     if previous_config is not None and previous_config != config:
-        raise ValueError("config differs from existing archive; use a new archive directory")
+        if not getattr(args, "extend_scope", False):
+            db.close()
+            raise ValueError("config differs from existing archive; use --extend-scope only to append roots, or a new archive directory")
+        if config["excludes"] != previous_config["excludes"]:
+            db.close()
+            raise ValueError("--extend-scope requires exactly the same excludes; exclusions cannot be added, removed, or changed")
+        current_roots = {}
+        for root in config["roots"]:
+            if root["path"] in current_roots:
+                db.close()
+                raise ValueError("--extend-scope requires unique root paths; duplicate roots are not allowed")
+            current_roots[root["path"]] = root["category"]
+        for old_root in previous_config["roots"]:
+            if old_root["path"] not in current_roots or current_roots[old_root["path"]] != old_root["category"]:
+                db.close()
+                raise ValueError("--extend-scope must preserve every old root path and category exactly: " + old_root["path"])
+        added = [root for root in config["roots"] if root not in previous_config["roots"]]
+        emit(event="scope_extension_validated", added_roots=added,
+             preserved_root_count=len(previous_config["roots"]))
     if meta_get(db, "format", FORMAT) != FORMAT:
         raise ValueError("unsupported archive format")
     run = uuid.uuid4().hex
@@ -774,8 +792,12 @@ def safe_parents(path, destination):
 def metadata_restore(path, row, errors):
     try:
         if row["kind"] != "symlink":
-            os.chmod(path, stat.S_IMODE(row["mode"]), follow_symlinks=False)
-        os.utime(path, ns=(row["atime_ns"], row["mtime_ns"]), follow_symlinks=False)
+            # macOS requires owner-write permission for some xattrs. A hardlink
+            # may share an inode whose final read-only mode was already applied
+            # through an earlier restored path, so defer that restriction again.
+            current_mode = stat.S_IMODE(os.lstat(path).st_mode)
+            if not current_mode & stat.S_IWUSR:
+                os.chmod(path, current_mode | stat.S_IWUSR, follow_symlinks=False)
     except (OSError, NotImplementedError) as exc:
         errors.append({"path": row["path"], "metadata_error": str(exc)})
     for name, encoded in json.loads(row["xattrs_json"] or "{}").items():
@@ -783,6 +805,12 @@ def metadata_restore(path, row, errors):
             xattr_set(path, name, base64.b64decode(encoded, validate=True))
         except (OSError, ValueError, AttributeError, NotImplementedError) as exc:
             errors.append({"path": row["path"], "xattr": name, "error": str(exc)})
+    try:
+        if row["kind"] != "symlink":
+            os.chmod(path, stat.S_IMODE(row["mode"]), follow_symlinks=False)
+        os.utime(path, ns=(row["atime_ns"], row["mtime_ns"]), follow_symlinks=False)
+    except (OSError, NotImplementedError) as exc:
+        errors.append({"path": row["path"], "metadata_error": str(exc)})
 
 
 def restore_scope(prefixes, ancestors=True):
@@ -916,9 +944,10 @@ def main():
     p.add_argument("--archive", help="prospective archive path, automatically excluded")
     p.add_argument("--output", help="optional JSON report")
     p.set_defaults(func=inventory)
-    p = sub.add_parser("create", help="create/resume archive with the identical config")
+    p = sub.add_parser("create", help="create/resume archive; explicit --extend-scope permits only appended roots")
     p.add_argument("--config", required=True)
     p.add_argument("--archive", required=True)
+    p.add_argument("--extend-scope", action="store_true", help="allow only additional roots while retaining all old path/category pairs and exactly the same excludes")
     p.set_defaults(func=create)
     p = sub.add_parser("verify", help="validate every object and every complete file SHA256")
     p.add_argument("--archive", required=True)

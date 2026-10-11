@@ -68,7 +68,15 @@ python3 tools/shuttl_backup.py restore --archive archive --source-prefix /Users/
 
 `create` 自动排除位于来源树中的归档输出目录。它为每个文件记录绝对路径、类别、权限 mode、mtime/atime 纳秒值、uid/gid、设备/inode/硬链数、单文件 SHA-256、块顺序、xattr 和状态。软链目标逐字保存。macOS 使用标准库 ctypes 调用系统 xattr 接口；Linux 使用 os 接口。缺失、不可读、特殊文件、xattr 读取失败、读取前后文件变化以及整次运行结束时发现的源文件变化都会明确报错，`complete=false`，退出码 `2`。不静默跳过。
 
-重复执行完全相同的 `create` 命令可续传。已完成且文件签名未变的条目复用；其他条目重新读取并按内容哈希复用块。断电后未提交到 SQLite 的完整块会校验并重新索引；末卷未提交的残帧可截断重建。已被清单引用的截断或损坏不会自动丢弃。配置不能在同一归档上改变。
+重复执行完全相同的 `create` 命令可续传。已完成且文件签名未变的条目复用；其他条目重新读取并按内容哈希复用块。断电后未提交到 SQLite 的完整块会校验并重新索引；末卷未提交的残帧可截断重建。已被清单引用的截断或损坏不会自动丢弃。默认要求配置完全相同。
+
+未封存归档后续发现遗漏来源时，可以仅追加 roots，并显式执行：
+
+```sh
+python3 tools/shuttl_backup.py create --config expanded-config.json --archive archive --extend-scope
+```
+
+新配置必须完整保留所有旧 root 的原 path/category，且 excludes 完全一致；删除旧 root、改变类别、改变排除项或重复 root 路径都会拒绝。验证通过后记录扩大的配置并重新遍历，复用已完成文件和持久化块，完成同样的最终源一致性检查。若中途失败，使用扩大后的配置继续续传；不得退回较小配置。已封存归档即使指定此选项也不能修改。需要改变旧范围或排除规则时创建新的归档。
 
 每 250 条或约 1 秒批量将当前数据卷 flush/fsync，然后提交 SQLite；大文件读取过程中也按约 1 秒持久化新对象。轮换旧卷前先 fsync。只会在数据已持久化后提交其清单引用。`.create.lock` 使用 flock 拒绝同一归档的并发 create。
 
@@ -79,7 +87,7 @@ python3 tools/shuttl_backup.py restore --archive archive --source-prefix /Users/
 创建与恢复抽查完成后，可在验证时加 `--seal`：
 
 ```sh
-python3 tools/shuttl_backup.py verify --archive archive --seal --output verified-and-sealed.json
+python3 tools/shuttl_backup.py verify --archive archive --seal --output archive/verify-report.json
 ```
 
 这会验证所有块和文件，再流式计算清单和每个卷的 SHA-256，写入 `archive/SEALED.json`，将这些资产权限置为只读，并禁止后续 create 修改此归档。封存过程也持有 create 互斥锁。加密和上传必须在封存完成后进行。将 `manifest.sqlite3`、全部 `volumes/volume-*.bin`、`SEALED.json` 以及本工具一并保存；没有清单无法恢复目录结构。`create-report.json` 可同时保存作为证据。`.create.lock`、`manifest.sqlite3-wal`、`manifest.sqlite3-shm` 不属于交付内容；正常完成并关闭连接后 WAL 已 checkpoint。
@@ -104,7 +112,7 @@ python3 tools/shuttl_backup.py restore --archive archive --source-prefix /Users/
 - 指向原来源前缀的绝对软链重写到目的目录；相对软链保留原值。其余绝对软链保留并报告为 external。即使指向外部，也不会跟随它写文件。
 - 所有目录先建立，普通文件/硬链其次，软链最后。写入时检查父目录不为软链，文件使用排他创建，拒绝 `..` 路径和重复目的路径。
 - 普通文件恢复时再验证每块 SHA-256、文件 SHA-256 与大小。硬链恢复为真正的同 inode 链接。
-- mode、mtime/atime、xattr 恢复失败会明确报告。uid/gid 保留在清单但不自动 chown，恢复内容属于当前用户；ACL、文件系统 immutable 标志和稀疏布局没有单独重建。文件字节包括稀疏区域逻辑零字节均保存。
+- mode、mtime/atime、xattr 恢复接口返回失败会明确报告。先写入 xattr，再应用最终权限与时间戳；只读硬链接共享 inode 时会临时恢复 owner-write 权限。macOS 可能重新生成系统管理的 `com.apple.provenance`，即使写入接口返回成功，恢复后的值也可能与原值不同；原始 xattr 字节仍保存在清单。uid/gid 保留在清单但不自动 chown，恢复内容属于当前用户；ACL、文件系统 immutable 标志和稀疏布局没有单独重建。文件字节包括稀疏区域逻辑零字节均保存。
 - 默认拒绝不完整归档。`--allow-incomplete` 是显式抢救选项，只恢复状态为 ok 的条目，不意味着资料完整。
 - 恢复失败时留下新目录供排查；重新恢复应指定另一个新的目的目录。
 

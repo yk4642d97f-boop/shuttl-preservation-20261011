@@ -2,7 +2,7 @@
 
 编写日期：2026-10-11，北京时间。
 
-本指南依据本机源码、依赖清单和历史记录编写。下载、解密和归档验证使用仓库 README 中的 `tools/recover_from_github.py`；交付是否全部完成以 Release 的 `github-verification.json` 为准。后文标注“历史报告”的成功记录来自原文件，本次另做的验证见 `docs/VALIDATION.md`，二者不可混淆。
+本指南依据本机源码、依赖清单和历史记录编写。下载、解密和归档验证使用仓库 README 中的 `tools/recover_from_github.py`；交付是否全部完成以 Release 的 `github-verification.json` 为准。后文标注“历史报告”的成功记录来自原文件；本次归档恢复抽查见 [恢复验证](VALIDATION.md)，实际 App 编译与测试见 [构建与测试报告](../VALIDATION.md)。
 
 ## 1. 接手时先读什么
 
@@ -19,6 +19,7 @@
 | AutoDL 完整恢复包 | `/Users/yangcong/Downloads/claude/autodl_backup/shuttl-20261008/` | 2026-10-08 的服务器代码、模型、训练数据、三层 Python 环境、CUDA、数据库与运维脚本 |
 | 开发历史 | 本次审计的 `context-candidates.json` | Claude/Codex 会话、附件、历史文件版本、产品与设计记忆 |
 | 路径与环境审计 | `source-classification.json`、`source-external-paths.json`、`environment-locks/` | 大文件、模型包、符号链接、外部路径、原环境版本 |
+| 权限开放后补充材料 | `permission-supplement-candidates.json` 列出的 8 个原路径 | 废纸篓提交参考材料、微信项目 ZIP、WPS 文档备份、历史设备安装缓存与 App 元数据 |
 
 建议按以下顺序阅读：
 
@@ -79,6 +80,8 @@ export SHUTTL_SERVER_BACKUP='/新机器/autodl_backup/shuttl-20261008'
 | 原签名团队 | `F878S66X7Q` |
 
 优先在兼容的 Apple Silicon macOS 上安装 Xcode、Command Line Tools、相应模拟器运行时和 XcodeGen。版本升级后需要重新构建验证；本次未证明任意新版 Xcode 或 Intel Mac 都可无改动恢复。
+
+本次已在独立副本中用 Xcode 16.2 和 iPhoneSimulator 18.2 SDK 完成整个 Shuttl App 的 Debug 编译，arm64、x86_64 模拟器架构均生成，五个模型资源实际编译进 App。ShuttlCore 21 项测试全部通过。验证使用未签名的通用模拟器构建，没有启动 App、安装到手机或验证云端连接；新机器仍需完成下述环境与运行验证。
 
 `iOS/project.yml` 是 XcodeGen 工程定义，引用的是工程内的本地 Swift packages。若 `.xcodeproj` 缺失或路径失效，可以重新生成。以下命令根据现有工程定义给出，**本次未运行**：
 
@@ -358,7 +361,7 @@ cd "$SHUTTL_SOURCE/promo2"
 
 数据库是 SwiftData/SQLite。复制时必须在一致的边界保存 `default.store`、相应 WAL/SHM 和引用的 Documents 文件；不要只取主数据库，也不要把来自不同时间的 WAL 拼到一起。恢复先在副本运行只读 `PRAGMA integrity_check`，再核对比赛/回合/击球数与媒体引用。
 
-本次没有新做整部 iPhone 的 Finder/iCloud 备份。旧开发设备配对信息、用户钥匙串登录凭据和手机里尚未导出的数据不应由本机工程归档来保证。项目专用 SSH 文件计划由主备份流程加密保存，其保全状态以最终清单为准；SSH 身份与第 3 节单独导出的 Apple 签名身份是不同材料。
+本次没有新做整部 iPhone 的 Finder/iCloud 备份。旧开发设备配对信息、用户钥匙串登录凭据和手机里尚未导出的数据不应由本机工程归档来保证。项目专用 SSH 文件已纳入加密归档范围；SSH 身份与第 3 节单独导出的 Apple 签名身份是不同材料。
 
 ### 模拟器
 
@@ -422,9 +425,9 @@ rg -n --hidden \
 
 | 项目 | 当前证据/缺口 | 应补的验证 |
 |---|---|---|
-| GitHub 完整交付 | 本草稿不掌握最终上传状态 | 最终文件清单；所有大文件/分卷下载回读；哈希全过 |
-| 可直接继续开发 | 本次未做新机恢复构建 | 空目录解压；Xcode build/test；模型可加载；后端和宣传片样例运行 |
-| 全盘扫描权限 | 编稿时 `full-disk-scan-errors.txt` 记录 326 条权限失败：188 条 Operation not permitted、138 条 Permission denied | 逐项判定是否可能含 Shuttl；需要时通过系统授权后补扫；最终报告更新数字 |
+| GitHub 完整交付 | 以 Release 的 `github-verification.json` 中 `complete=true` 及对应资产哈希为最终交付证据；单独克隆源码不足以恢复大文件 | 下载全部索引资产、解密并验证；不要以仓库存在或上传进度代替完整回读结果 |
+| 可直接继续开发 | 本次完整 App 模拟器编译通过、ShuttlCore 21 项及所选后端 34 项测试通过；703 个隔离验证输入与原件哈希一致；首组恢复 438 个选定条目，新增 8 个项目路径及目录另恢复 430 个条目，最终均为 0 错误/警告 | 仍需在全新系统全量恢复、配置外部服务与签名、运行 App/模型/后端和宣传片样例；本机隔离验证不是空白新机全部恢复的证明 |
+| 全盘扫描权限 | 完整磁盘访问授权后，系统数据卷枚举完成 2,282,858 条路径；193 个剩余错误全部位于系统或服务目录，`/Users/` 下无权限错误；用户目录补扫又发现 8 个项目路径、275 个文件 | 以新的 `full-disk-with-access-status.json`、`permission-supplement-candidates.json` 及最终归档清单核对；193 个不可读位置的内容仍无法证明已检查 |
 | AutoDL 现状 | 只有 10 月 8 日本地历史快照，本次未联网核验 | 核对实例/盘/镜像现状；确认历史备份之后是否有新增数据；有变化则另做一致性备份 |
 | 云平台镜像 | 历史记录是尚未生成 | 以平台实际状态核验，不推定已存在 |
 | 当前手机数据 | 主要完整目录是 before-cloud，后续有部分增量 | 对照手机现有记录/媒体清单；保留最新一致性导出；不要先卸载 App |
@@ -436,15 +439,16 @@ rg -n --hidden \
 
 建议最终保留以下恢复验收记录：新环境版本、每个归档哈希、解压检查、断裂链接检查、Xcode build/test 日志、模型 preflight 报告、数据库完整性与行数、后端健康与真实样例任务、两版宣传片抽帧和成片检查。每项都区分“历史已有证据”“本次重新验证通过”“仍未验证”。
 
-## 12. 本草稿使用的依据
+## 12. 本指南使用的依据
 
 - 本次本机只读版本命令：`sw_vers`、`xcodebuild -version`、`xcrun swift --version`、`xcodegen --version`。
 - `source-discovery.json`、`source-classification.json`、`source-archive-index.json`、`source-external-paths.json`、`environment-locks/`。
-- `context-candidates.json`、`context-audit.md`、`simulator-candidates.json`、`full-disk-scan-errors.txt`。
+- `context-candidates.json`、`context-audit.md`、`simulator-candidates.json`；旧 `full-disk-scan-errors.txt` 只保留为过程记录，最终扫描状态使用 `full-disk-with-access-status.json`、`full-disk-with-access-errors.txt` 与 `permission-supplement-*.json`。
+- 仓库 `VALIDATION.md`、`docs/VALIDATION.md` 与 `validation-evidence/`：实际构建、Swift/后端测试、输入 SHA-256、归档恢复抽查的证据。
 - `iOS/project.yml`、`CloudConfiguration.swift`、`Info.plist`。
 - `backend/requirements.txt`、`pyproject.toml`、`docker-compose.yml`、`Dockerfile`、`.env.example` 的字段名；没有在本文展示原 `.env` 内容。
 - `research/cloud_upgrade/BACKUP_RESTORE.md`、`CLOUD_INFERENCE.md`、`CLOUD_PLAN.md`、`RUNTIME_HANDOFF.md`、`mobile_cloud_20261008/STATUS.md`、`pose_benchmark/README.md`、相关 CLI 源码。
 - `research/hitnet/coreml/README.md`、`promo2/README.md`、两版渲染脚本。
 - AutoDL 恢复包 `README.md`、`关机前检查报告.md`、`平台镜像与关机记录.md`。
 
-本次文档工作未连接远程服务器、未运行训练、未写入原数据库、未上传任何文件。
+原工程保持不变；本次编译、测试和恢复抽查均在独立副本或输出目录中完成。远端服务、GPU 训练和当前手机最新数据仍按上表所列边界单独核验。

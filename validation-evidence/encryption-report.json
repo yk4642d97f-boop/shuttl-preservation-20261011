@@ -1,0 +1,10 @@
+{
+  "complete": true,
+  "assets": 209,
+  "bytes": 103733079102,
+  "encrypted_assets": 206,
+  "encrypted_assets_actual_decryption_sha256_verified": true,
+  "standalone_videos": 3,
+  "private_key_included": false,
+  "delivery_index_sha256": "2fbbe19746f1d6202da2417b52e87e85dcfbeaf465feaa383a2d5e922f5721d8"
+}

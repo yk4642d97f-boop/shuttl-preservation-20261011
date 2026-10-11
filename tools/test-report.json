@@ -5,6 +5,7 @@
     "64 MiB boundary, binary data, empty file, nested Unicode paths, compression and dedup",
     "completed-run resume reuses all file records and objects",
     "complete SHA256 restoration, rootfs mapping, soft/hard links, mode, mtime, xattr",
+    "read-only files and shared hardlink inodes restore xattrs before final mode and timestamps",
     "repeatable prefix selection includes ancestors, excludes unrelated files, and restores hardlink bytes when original is outside scope",
     "existing destination rejected without overwrite",
     "interrupted frame-header tail safely recovered",
@@ -16,7 +17,8 @@
     "committed WAL checkpointed before sealing; fresh copied sealed assets verify without sidecar initialization; nonempty sealed WAL is rejected",
     "untrusted archive path traversal rejected",
     "volume rollover honors configured cap; all rolled objects readable",
-    "adaptive random chunk uses zlib level 0; compressible chunk uses level 1; raw SHA256, dedup and bounded volume reader remain unchanged"
+    "adaptive random chunk uses zlib level 0; compressible chunk uses level 1; raw SHA256, dedup and bounded volume reader remain unchanged",
+    "scope extension requires explicit flag, preserves old blocks/config roots, captures added roots, verifies and restores both; removed/category-changed roots, changed excludes, duplicate paths and sealed changes rejected"
   ],
   "python": "3.9.6"
 }
