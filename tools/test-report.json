@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": [
+    "read-only inventory, exact-prefix exclusion, no symlink traversal",
+    "64 MiB boundary, binary data, empty file, nested Unicode paths, compression and dedup",
+    "completed-run resume reuses all file records and objects",
+    "complete SHA256 restoration, rootfs mapping, soft/hard links, mode, mtime, xattr",
+    "repeatable prefix selection includes ancestors, excludes unrelated files, and restores hardlink bytes when original is outside scope",
+    "existing destination rejected without overwrite",
+    "interrupted frame-header tail safely recovered",
+    "fsynced object with missing DB commit re-indexed and hash-validated",
+    "compressed-object corruption detected",
+    "disappeared source reported; incomplete restore refused by default",
+    "real source mutation during content capture explicitly fails the run",
+    "sealed asset hashes match; further creation blocked; sealed verify/restore still work",
+    "committed WAL checkpointed before sealing; fresh copied sealed assets verify without sidecar initialization; nonempty sealed WAL is rejected",
+    "untrusted archive path traversal rejected",
+    "volume rollover honors configured cap; all rolled objects readable",
+    "adaptive random chunk uses zlib level 0; compressible chunk uses level 1; raw SHA256, dedup and bounded volume reader remain unchanged"
+  ],
+  "python": "3.9.6"
+}

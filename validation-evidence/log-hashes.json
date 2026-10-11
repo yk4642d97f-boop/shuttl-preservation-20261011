@@ -1,0 +1,26 @@
+[
+  {
+    "file": "swift-test.log",
+    "sha256": "833048a5c57c102b62282a283418c829235f2137de7ca7f72e7e84436f579fc0",
+    "bytes": 9671,
+    "local_path": "/Users/yangcong/Downloads/shuttl-preservation-20261011/validation/swift-test.log"
+  },
+  {
+    "file": "swift-test-complete.log",
+    "sha256": "ed3bb90aa4d9d475792694736bd8a739a68bc750714a6b2edfca34b249c097f3",
+    "bytes": 7826,
+    "local_path": "/Users/yangcong/Downloads/shuttl-preservation-20261011/validation/swift-test-complete.log"
+  },
+  {
+    "file": "pytest.log",
+    "sha256": "87894b722afa1886c90967f36ec43e77a927abfcd8f3fb588856e5486a1cdac6",
+    "bytes": 1742,
+    "local_path": "/Users/yangcong/Downloads/shuttl-preservation-20261011/validation/pytest.log"
+  },
+  {
+    "file": "xcodebuild.log",
+    "sha256": "582abab6996ea5a6e9e8370864e0c293a27e875fe6c152b6508aced0c98d0af7",
+    "bytes": 9509547,
+    "local_path": "/Users/yangcong/Downloads/shuttl-preservation-20261011/validation/xcodebuild.log"
+  }
+]

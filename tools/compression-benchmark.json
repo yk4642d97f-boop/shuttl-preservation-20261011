@@ -1,0 +1,86 @@
+{
+  "source": "/Users/yangcong/Downloads/claude/autodl_backup/shuttl-20261008/payload/gpu-project.tar.gz",
+  "repeats": 2,
+  "results": [
+    {
+      "label": "actual-tar-gz-first-64MiB",
+      "raw_bytes": 67108864,
+      "selected_level": 0,
+      "sample_ratio": 1.0003280639648438,
+      "level1_seconds": [
+        0.899437417,
+        0.8858162919999999
+      ],
+      "adaptive_seconds_including_sample": [
+        0.018716500000000025,
+        0.013169125000000115
+      ],
+      "median_speedup": 55.98929639923922,
+      "level1_stored_bytes": 67129270,
+      "adaptive_stored_bytes": 67113995,
+      "adaptive_MiB_per_second": 4014.348158456967,
+      "raw_sha256": "c2c3d30e10568fc044f838795056c629337bb4ffb8dad629885f39b52283989e",
+      "roundtrip_verified": true
+    },
+    {
+      "label": "actual-tar-gz-middle-64MiB",
+      "raw_bytes": 67108864,
+      "selected_level": 0,
+      "sample_ratio": 1.0003280639648438,
+      "level1_seconds": [
+        0.8949057920000003,
+        0.8834199159999998
+      ],
+      "adaptive_seconds_including_sample": [
+        0.013919500000000085,
+        0.012971582999999676
+      ],
+      "median_speedup": 66.13068384043945,
+      "level1_stored_bytes": 67129270,
+      "adaptive_stored_bytes": 67113995,
+      "adaptive_MiB_per_second": 4759.942171165108,
+      "raw_sha256": "f20d7d24769746b01de027b98ecd5985c2fb344b53b9f131c5088a795085072d",
+      "roundtrip_verified": true
+    },
+    {
+      "label": "random-64MiB",
+      "raw_bytes": 67108864,
+      "selected_level": 0,
+      "sample_ratio": 1.0003280639648438,
+      "level1_seconds": [
+        0.8901844159999994,
+        0.8895067919999997
+      ],
+      "adaptive_seconds_including_sample": [
+        0.013821625000000282,
+        0.013118041999999441
+      ],
+      "median_speedup": 66.06210863705248,
+      "level1_stored_bytes": 67129275,
+      "adaptive_stored_bytes": 67113995,
+      "adaptive_MiB_per_second": 4751.3579139638705,
+      "raw_sha256": "6f529dd7610f963733286ac9518e43781b62e404163f974722cb5ef7fc31c63e",
+      "roundtrip_verified": true
+    },
+    {
+      "label": "compressible-64MiB",
+      "raw_bytes": 67108864,
+      "selected_level": 1,
+      "sample_ratio": 0.006671905517578125,
+      "level1_seconds": [
+        0.05273724999999985,
+        0.05279641699999971
+      ],
+      "adaptive_seconds_including_sample": [
+        0.05283416700000032,
+        0.052830458000000746
+      ],
+      "median_speedup": 0.9987606258953599,
+      "level1_stored_bytes": 422941,
+      "adaptive_stored_bytes": 422941,
+      "adaptive_MiB_per_second": 1211.3798728760803,
+      "raw_sha256": "a2960ef107f40e5d95c916526a7cc7e73ee4c3bb641aea77a5188adb73696ca3",
+      "roundtrip_verified": true
+    }
+  ]
+}

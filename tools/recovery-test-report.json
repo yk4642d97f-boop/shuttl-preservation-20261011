@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "checks": [
+    "trusted index found relative to cloned helper; exact gh asset requests; standalone videos skipped; download-only needs no key",
+    "SHA256-matching ciphertext cache reused without additional gh requests",
+    "real age decryption and plaintext hashes; full archive verify then selective restoration; key never copied",
+    "verified plaintext reused for subsequent full restoration",
+    "existing destination and unmanaged nonempty workdir rejected without touching originals",
+    "corrupt remote download rejected before ciphertext promotion",
+    "wrong age key fails explicitly before restore; exact command log retained",
+    "valid age ciphertext cannot bypass trusted plaintext SHA256 verification"
+  ],
+  "python": "3.9.6",
+  "network_used": false,
+  "gh": "isolated fake CLI with exact argument assertions",
+  "age": "real installed age and temporary external keys"
+}

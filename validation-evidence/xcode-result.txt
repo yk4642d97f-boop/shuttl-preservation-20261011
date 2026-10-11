@@ -1,0 +1,9 @@
+Xcode 16.2, Build version 16C5032a
+iPhoneSimulator18.2 SDK
+Configuration: Debug, generic iOS Simulator
+CODE_SIGNING_ALLOWED=NO
+** BUILD SUCCEEDED **
+Exit code: 0
+Product: Shuttl.app
+Architectures: x86_64 arm64
+Compiled models: TrackNetV3, RTMPoseM, ShuttleTracker, BSTStroke, HitNetDetector

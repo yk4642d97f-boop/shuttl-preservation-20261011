@@ -1,0 +1,4220 @@
+[
+  {
+    "path": "tools/robustness/corpus/h264_rot90.mov",
+    "bytes": 6479,
+    "sha256": "cdf964ea8c49812e95e3dfbefa4d29807bd822b0df7b605129c4ecd136d8a849",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/hevc_rot0.mov",
+    "bytes": 6322,
+    "sha256": "a903345c011e4f5749998456978a6145ebc26bd41152139d07801cce4b20dbe8",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/real_jump.mov",
+    "bytes": 5096114,
+    "sha256": "df2b8984e1a6fc3d8075d0eba58e8b642eab56058eff01896d8c9483c5ed59e9",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/h264_rot180.mov",
+    "bytes": 6479,
+    "sha256": "c07204b7c5057128f296df1aba44a313f351829c0f5a1da985584e9a31224240",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/hevc_rot90.mov",
+    "bytes": 6322,
+    "sha256": "3f9c997471a53db1d58ea4d323fb9a6ad3c850d228dd81bc2c6ba9feba3d0e59",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/hevc_rot180.mov",
+    "bytes": 6322,
+    "sha256": "80f4d581d51bbce7cb9985d864171c4c97c4fa8a979abb54a655a7a4a0d9a183",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/real_rot90.mov",
+    "bytes": 2849264,
+    "sha256": "49fb4e73ab922602b82fdfdf6aa3d7b67de894a3e8486178de2c2a8861aa4d4a",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/hevc_rot270.mov",
+    "bytes": 6322,
+    "sha256": "f4401696313caaaf5fee88e4b743fd313bd708f2e48592d63592c550266c06e3",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/h264_rot0.mov",
+    "bytes": 6479,
+    "sha256": "0e2acdc85bd3f7d1aba6402fc0842e14008762d3030feed2f5cde66db8e27838",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/h264_rot270.mov",
+    "bytes": 6527,
+    "sha256": "288fd56e3bf22af86c03370d0bc552799e91d2af60f01ea7768556ac4807d970",
+    "identical_to_original": true
+  },
+  {
+    "path": "tools/robustness/corpus/real_drop.mov",
+    "bytes": 2768272,
+    "sha256": "8db15d23d00d242cf32280740be58808974db37636169cd8c95d411d5a44d450",
+    "identical_to_original": true
+  },
+  {
+    "path": "backend/ml/data/raw/shuttlecock_trajectory/TrackNetV2/Test/match1/video/1_05_02.mp4",
+    "bytes": 9182905,
+    "sha256": "e8c8fd00dead44dfee36bfbcaa555bc630f04cb043cafae45dab24b292b886b4",
+    "identical_to_original": true
+  },
+  {
+    "path": "backend/ml/data/raw/shuttlecock_trajectory/TrackNetV2/Test/match1/video/1_07_04.mp4",
+    "bytes": 3614116,
+    "sha256": "5652297ff377bc64185aaf51917779c0c3e4f1925cb2b7fe5b895ab328a6b242",
+    "identical_to_original": true
+  },
+  {
+    "path": "backend/ml/data/raw/shuttlecock_trajectory/TrackNetV2/Test/match1/video/1_07_03.mp4",
+    "bytes": 12729800,
+    "sha256": "cebf0ea9223c32f4208c1dff395fe88fcfcae5924ad09d9d15f4fe04891d4cf1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/project.yml",
+    "bytes": 4704,
+    "sha256": "eef70d7be8390dc97937d2d14c311c045f2dd7a0649701a0c7abe88416ab2c93",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/UITests/ShuttlUITests.swift",
+    "bytes": 2663,
+    "sha256": "21b6c0508eb98b1f1522434e825e3d4b34d9cf64a042c1eb03703307f394c7a0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Shuttl.entitlements",
+    "bytes": 248,
+    "sha256": "f33da738c94e5873dd4bc0227609488741141ce7b1968d9ab8042f00db94c637",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/PrivacyInfo.xcprivacy",
+    "bytes": 1452,
+    "sha256": "2f75ce51a0151fd9bcb751b6909258a8279b9064f6fac749ae550d5062788a72",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Info.plist",
+    "bytes": 1927,
+    "sha256": "23e836bb7ec5cbd19e94473a0863b6d829b44d21f4c7ab32dde2e4aa27c94749",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Assets.xcassets/Contents.json",
+    "bytes": 53,
+    "sha256": "f23266b9672263c92ced1d26fe4dafa75a14d530eb9bc5fc1f599034d597ab48",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-Dark.png",
+    "bytes": 837656,
+    "sha256": "f617f34cac9404dd6be5fd01938c71f7181ace9bd9cd867f832c29fec28cdb2e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-Tinted.png",
+    "bytes": 517208,
+    "sha256": "c7e8125e297d93bf49e5f3e26c3240a86ca88ccd197d811fb88953d31c0daf54",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json",
+    "bytes": 549,
+    "sha256": "200da4ac7a53bbcee01c14a579c307815111f7191591c2eecdce5ddd36ebb2bd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-Light.png",
+    "bytes": 1343719,
+    "sha256": "f218791ebe211f4e01f6853c7383efe0d60ccdf4347e5791f4ad9413d5d363e4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Models/ShuttleTracker.mlpackage/Manifest.json",
+    "bytes": 617,
+    "sha256": "ec9b0606f697c3b731d6429f21bf711d6429652ed683e83d309d82a6d3a76369",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Models/ShuttleTracker.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+    "bytes": 93362,
+    "sha256": "dd324850fc37b320248cc5f260cd181c92c29af5dc08e5fef4e98c9cf69c6e1b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Models/ShuttleTracker.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+    "bytes": 2579296,
+    "sha256": "91464683dc2e5c7486a4036d5e31e11606522f747641320d7db7a88d96b53e68",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/OpenCV-legacy-BSD-3-Clause-headers.txt",
+    "bytes": 17868,
+    "sha256": "c0ff0914c878fe380929b75199226610c8169e26ba1791ca91d55b0ff5c698fc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/MIT-TrackNetV3.txt",
+    "bytes": 1097,
+    "sha256": "1eeb31683deba741bce99f5f33bb813293a23b4e6c8302d6f056a587a30cd497",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/MIT-WASB-SBDT.txt",
+    "bytes": 1087,
+    "sha256": "baacee1457206bea9c07ee9e515c2e56b0d6d06773f070718bd019c2e11db652",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/OpenCV-COPYRIGHT.txt",
+    "bytes": 790,
+    "sha256": "854538f426422b0f989a5e5b7641e5943753d10ef29ea54901dcd36039e43f58",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/MIT-HigherHRNet.txt",
+    "bytes": 1062,
+    "sha256": "93165db82077e1f1153fa882a6502688eb39cd0db951529fd4600c2f962de5ad",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/BSD-3-Clause-SciPy.txt",
+    "bytes": 1536,
+    "sha256": "c29fb8e5936f33237a8b15256b4c6e93037f05bbf58c3d7b5755aede4c200173",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/NOTICE.txt",
+    "bytes": 18302,
+    "sha256": "c7d8219dd23b05376e7e8a7eda3a4666e5b7cf3d4a4b25bea41684bb77fb6037",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/MIT-ShuttleSet.txt",
+    "bytes": 1069,
+    "sha256": "2ff939aee5c1dbce2051c009933dc0ca17f75e75b26c844b73780f2498b33164",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/LAPACK-modified-BSD.txt",
+    "bytes": 2266,
+    "sha256": "a1e742e31b6793e83cd36a98ed2db993ec291d0e4be79e9c0520c4d8aef7aa3a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/BSD-3-Clause-NumPy.txt",
+    "bytes": 1543,
+    "sha256": "263223390c43a9d4a0841e0209265fd927a198f8e89c8eee809b7437d7e5e8c2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/MIT-HRNet-deep-high-resolution-net.txt",
+    "bytes": 1065,
+    "sha256": "d7b0aeb0a10043c326941ec9399ca9cf24240e17b5fa5eb00b5552d7cacd0e42",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Resources/Legal/Apache-2.0.txt",
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/StrokeClassifierParityTests.swift",
+    "bytes": 21637,
+    "sha256": "9d14bad893f2a61f4c79ad3ac4d473a933454cb448f2e17b6e695fd10d1800a6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/PipelineDebugInboxTests.swift",
+    "bytes": 9276,
+    "sha256": "daac5da03ce4cbdb3c5e7ad4b4a6cdf2cc1368f9920427127461d09ea2caa55d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/BackgroundUploadTransportTests.swift",
+    "bytes": 6086,
+    "sha256": "d8588b64b1a98b4cee3279a96dd10e2f1162e81092a9fd0bd152e00f4b6839ab",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/RemoteAPITests.swift",
+    "bytes": 11426,
+    "sha256": "4ad1a9695d28e0a0768124ee8e59fb1deba0ba318f7401363e100428c47f6ad3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/VideoStoreTests.swift",
+    "bytes": 2761,
+    "sha256": "b9f8130b25dc88d8bb91cd3e0af7159fe06a32cd9f2912fc19edc2bcd13ae5a3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/OnDevicePipelineTests.swift",
+    "bytes": 8383,
+    "sha256": "add0caa4156c58656b9df0f45820c74796ca476f4563d8c209bc6bb7cae4e07a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/CourtCalibrationTests.swift",
+    "bytes": 9734,
+    "sha256": "a309c59a753fc472c7a89a4099140e995310a6eee2b581913456751bd7b630c6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/RTMPoseParityTests.swift",
+    "bytes": 18071,
+    "sha256": "67c08c2f9bea1ec373b4399b133fc66d4339bf20c32065ea7f7e320b12f82e48",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/HeatmapDecoderTests.swift",
+    "bytes": 7860,
+    "sha256": "64420806fe368959d8d59fc27bc24b54e7183d069ed8748390dd586c7a7b28ca",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/DisplayRulesTests.swift",
+    "bytes": 2294,
+    "sha256": "1a62b92d59de6d10a76f8429bbd8ea6cf488a44d7ddf502de49b1b69b6ff8876",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/PipelineCorrectionsTests.swift",
+    "bytes": 19855,
+    "sha256": "f6316c3bad5bf4232a7a1737eec09c64350ef5be97a912053f609969e9faae06",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/CaptureFormatSelectorTests.swift",
+    "bytes": 3483,
+    "sha256": "14a70b67ad53936d0c0d39fb04d42e03d1f914a8b664164613ed6f3df9410669",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/TrajectoryTrackerTests.swift",
+    "bytes": 9269,
+    "sha256": "7929463b674608ba139a233fcc30662e31175646fb46e0fe6e8c4208aa23f40f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/PipelineOutcomeTests.swift",
+    "bytes": 19585,
+    "sha256": "b7e221a06bf673f942f4de9db1bae13e36ae9e49bed83e90d034023b05429d33",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/VideoUploadServiceTests.swift",
+    "bytes": 13415,
+    "sha256": "8c5493d9ebfea25270f35b2cddc9809b631241edb605719341ab7033a0483d81",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/MLInferenceEngineTests.swift",
+    "bytes": 10422,
+    "sha256": "4755b8ccbef38dc27d3c523fd763787a9a04a0c3d7616ff592857431c722a58a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/RemoteLifecycleTests.swift",
+    "bytes": 13698,
+    "sha256": "f640c5223ebef45b5f636011f71716c2e8cdfc05eac56b86cc5e0e2529a485c8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/RemoteLegacySchemaFixture.swift",
+    "bytes": 6340,
+    "sha256": "eea54f29c4b357ec0314173cd1f670b4f14f5719077a974fb413afa65e9ccb25",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/MatchPipelineTests.swift",
+    "bytes": 35678,
+    "sha256": "7d09bafd25c165053eb1cd64f4e0d2013a74bf1a81fae3d2e209539246e6d820",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/ShuttlTests.swift",
+    "bytes": 1883,
+    "sha256": "b4a5761b4f0f2a45f85eb0bf646c17b6ce4a563bb4a001ad2e234299f3bed39e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/CalibrationAdviceTests.swift",
+    "bytes": 4109,
+    "sha256": "004c84ebeee4882ad232be602395d11cc383b86ef28ca83de3cc2faa78593bfd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/HitNetParityTests.swift",
+    "bytes": 17689,
+    "sha256": "2c682353cf0e51d6f40de93ea7d7dd36fbba667688b166e8cfdaa3a36ab0931f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/LivePipelineSmokeTests.swift",
+    "bytes": 3483,
+    "sha256": "43a2f0217607793ee2926730de7f12bae970938564f77322b269b9471e5565f7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/cloud_archive.json",
+    "bytes": 12183,
+    "sha256": "25e08dab278892471c5b3d838011c2013e3947b0929f02c54f68a2d30f150f37",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/bststroke/parity.json",
+    "bytes": 589991,
+    "sha256": "035c26b20a1c5f4b054f7ca6f8ad2e768a87eaaaa9366619765aa5bf7c8e1787",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/bststroke/generate_fixture.py",
+    "bytes": 14085,
+    "sha256": "6bfbe9ebaf96756a0ea3cc1613f6d44487b0e87c7929063e7cf4cb5166684bf6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_07_warp.ppm",
+    "bytes": 147471,
+    "sha256": "3cd80307521462599744f31d942008db01452d277de997f42123cba5059ab53d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_06_warp.ppm",
+    "bytes": 147471,
+    "sha256": "4d46d1cd9ab6e6ca82df307acdc2b8ff7c42fb4b583bf25d397fd7dc5f3c602b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/parity.json",
+    "bytes": 339276,
+    "sha256": "16917a1e514148652bc4da4b1320ce0d9c6cffe5527a779ad245845488c42bc2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_01.ppm",
+    "bytes": 921615,
+    "sha256": "bb6f740fdf9afec35743c6f199088394c05336e63d8039731ef7a2cdcced3ca3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_00.ppm",
+    "bytes": 921615,
+    "sha256": "799e9c6d8a3b9a1275738d01f5feb9df96343ee0b7774fa18318956cff5b1dd4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_02.ppm",
+    "bytes": 921615,
+    "sha256": "e86ee057c192c2fa48308461a953d39440ce6fcac151ac96c412826046dfc196",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_03.ppm",
+    "bytes": 921615,
+    "sha256": "45cfb3c6759d3d89249b49b9e5bee33ddca31d0bfb42612ca6381e0a27c88d36",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_07.ppm",
+    "bytes": 921615,
+    "sha256": "b1597935bf0516d58611dc00f1cf4d029e67cee0e07aa746a969def419b9ed01",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_00_warp.ppm",
+    "bytes": 147471,
+    "sha256": "945b323788875754664ff4620590f01899aa0dfc0d51d9c2999285e3ad065a07",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_06.ppm",
+    "bytes": 921615,
+    "sha256": "3bbcbb7e2a6f04f3220caeaeca39065729256e7fbfd2aeaca113956648f80af6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_01_warp.ppm",
+    "bytes": 147471,
+    "sha256": "d82c00188654369d448ced9f9d93d07d7d2a38ca7711eefdf2f2590eb1db9b26",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_04.ppm",
+    "bytes": 921615,
+    "sha256": "e73070c8025abfe4266220b7971902a2fd3c1fe9e04a2a46ba39a2dfd5001417",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_05.ppm",
+    "bytes": 921615,
+    "sha256": "7c9ab390dbb86e570b6f08e7cc07dc62d2699654db965f34e2bbf78a382bb06b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/generate_fixture.py",
+    "bytes": 10812,
+    "sha256": "80e0c972e2bbb719e2d9bb8dcbedb3c30eb28e3c05d593b800f62a909bdaa4cf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_04_warp.ppm",
+    "bytes": 147471,
+    "sha256": "8b03ed1884e7f3a2e1e7fb07f91ea5c9d8e4142e44d3c33aa492e64157f914b2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_05_warp.ppm",
+    "bytes": 147471,
+    "sha256": "d4c7701e401704048a4b33d283b716618643886ebea359b1edce58f99139c79d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_03_warp.ppm",
+    "bytes": 147471,
+    "sha256": "6494ef3d2861bf4ccfe7cf8cfd222d06bba85c3b01952df2d7398ed3709734f5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/rtmpose/frame_02_warp.ppm",
+    "bytes": 147471,
+    "sha256": "429444206759c1b6dd4924a23b1c3ee1527d40d04939571bb7b2866abba0cf55",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/hitnet/parity.json",
+    "bytes": 2689658,
+    "sha256": "e24fb57829a169f152f0782c779047ac50365a12bf12087acbac57f01284f2bd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Tests/Fixtures/hitnet/generate_fixture.py",
+    "bytes": 8954,
+    "sha256": "1018edb84bce6689150f1a111f9676606e78ea504f06591a19381bcbeea6f8ed",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Shuttl.xcodeproj/project.pbxproj",
+    "bytes": 73145,
+    "sha256": "5734a120ebb798b8d5d8c3ca99a77324eb39bb53c381144fa71d1fab096dcda5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Shuttl.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+    "bytes": 135,
+    "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Shuttl.xcodeproj/xcshareddata/xcschemes/Shuttl.xcscheme",
+    "bytes": 4434,
+    "sha256": "ecbe31c7ee81377ec6ac68bade25833fe2b88d8d8dd3eb4489512b4ce692c761",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Package.swift",
+    "bytes": 623,
+    "sha256": "45b179eff88c1aab42bc8f575c3f73912643616c531b446eb41687590c805cc5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/DuplicatePTSTests.swift",
+    "bytes": 4795,
+    "sha256": "ecba62f1f709f69ac8c1122a58576da40122ba001121fd7e85dc941eac16e1b9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/MP4Patch.swift",
+    "bytes": 3853,
+    "sha256": "fd5efd56dbe018378e2230e0aa30744e66d2c7659d81b63830d768aaf3fbbdc0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/SampleFramesErrorTests.swift",
+    "bytes": 3268,
+    "sha256": "f92fd6ee6cb315c2f6a1147c53df634b34d0b68abee772576c2a5046d1bdd4cd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/ParityTests.swift",
+    "bytes": 7313,
+    "sha256": "a0c8de19875d54218d7475e0e5a09bef1d3bf64a4fd967d749b6bdb5be4466fa",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/CameraDecodeTests.swift",
+    "bytes": 1979,
+    "sha256": "117bbd4b13c30f17c311b04ce91888e28b571070f964d6468f68ec09ad4f3b5f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/FixtureSupport.swift",
+    "bytes": 2065,
+    "sha256": "3086b90731062eee26b8edad0d03079b34db42b210c4a988b47eee9e1b3a96ff",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/VideoIOTests.swift",
+    "bytes": 5818,
+    "sha256": "e8ba654b91f38b0ad098d5cadf16c5d9e730a72f0501808f5620dec7d2badbf7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/VideoRotationGapTests.swift",
+    "bytes": 4510,
+    "sha256": "5eca06896e2e4dc743ffc950583b422e2f39f80044711ab0a993444c3fa5ed03",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/DecodeWatchdogTests.swift",
+    "bytes": 2499,
+    "sha256": "d4192519e079a5e97b82524b19b6b67fe044fca60dc064ab72b7dd5bac35c8ac",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/HitSourceTests.swift",
+    "bytes": 1292,
+    "sha256": "a57f2d97854ef12bc00c3b41abc31f0b1ccba20c15c9c6aca1e7e398059832ad",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/Fixtures/camera.json",
+    "bytes": 11361,
+    "sha256": "02a5b18c17906346c6b2a916566cb5232cf3ceb3c84578036c9293c3ed4d38ac",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/Fixtures/physics.json",
+    "bytes": 4192,
+    "sha256": "f91d0b9989f2788aee31fd4226ef93cb094f084b3637fe6e384954a18ee38377",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/Fixtures/video_rotation.json",
+    "bytes": 176972,
+    "sha256": "ef25d9962d5de8e7f0eb4756f5f36b9e4c8b5a5e983ffa36ce0205900e7b75ab",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/Fixtures/video.json",
+    "bytes": 244484,
+    "sha256": "c2e30396647dd777d5d605c080bb9b6111fe1caea9bb550e75bdf603abfb8123",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/Fixtures/numerics.json",
+    "bytes": 5949,
+    "sha256": "5f8bee07f4ee656c9c25aa3493c5ef27f6d0ee73175d8c4b9e9077c566107c77",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Tests/ShuttlCoreTests/Fixtures/court.json",
+    "bytes": 1777,
+    "sha256": "c724818d0e38f800b2ad975da381dd119a34d00cd80db81e06337fbf088282eb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/VideoIO.swift",
+    "bytes": 16915,
+    "sha256": "b31d39b9597e83d778170980abc0538707cadf6317a43201c9567737615c432b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/Physics.swift",
+    "bytes": 3671,
+    "sha256": "2223f3923957aab1aa3038fe20b0d25b06fcfc8db2c43ded8cddb12fdf42200b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/CourtModel.swift",
+    "bytes": 5056,
+    "sha256": "fd743bc5210f4f692c05f4077cd7363995707d65be961fd13148e79b1eefb93d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/LinearAlgebra.swift",
+    "bytes": 12965,
+    "sha256": "730a2b16ce18be460d851f1c0b7210750c3cc1b06cf977790d689a2b4d402d97",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/Image.swift",
+    "bytes": 8821,
+    "sha256": "60fa6b73cb21ea80ca6efa88afcec53e6a64b35c8911bdb5aed59ff02906e158",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/StageStalled.swift",
+    "bytes": 737,
+    "sha256": "3083fbaaf66a2904b4390dda14500bdd0e78bdc188d4f51de20ed74153ceee6f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/Numerics.swift",
+    "bytes": 4264,
+    "sha256": "e8fe3bc573b207331316dba6596c947e87620b31a49543fe403783adb54a1d9c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/Camera.swift",
+    "bytes": 7379,
+    "sha256": "4f8dda3152346b437e2e8c361d0323ea80e155c29a175d093185fa4655c046b3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/DataTypes.swift",
+    "bytes": 26578,
+    "sha256": "33037f297a43b4157f63b26543cc46277e9a05c06c6bbd6fe83a8f5af4c9deb0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCore/Sources/ShuttlCore/JSONSupport.swift",
+    "bytes": 4802,
+    "sha256": "a924a5cb1bac498b0926bea1787a800cb4eda080b5b2f3286dc6637030b78cb5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Package.swift",
+    "bytes": 1102,
+    "sha256": "79516c1c96b4510bc89de8ceac314ccf1c4edd52bc343ffca1a035721e8cca4d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Tests/ShuttlCalibrationUITests/CalibrationTests.swift",
+    "bytes": 14327,
+    "sha256": "a9318114649448a8ea28273178780b9783c783f5dfd0e6196f50a7cf2a54778b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Sources/ShuttlCalibrationUI/CalibrationData.swift",
+    "bytes": 5962,
+    "sha256": "1f6b1e96a44c08c9fb85281d906870a9462d1fb038071e2a65c2032c6cc8da00",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Sources/ShuttlCalibrationUI/CalibrationMarks.swift",
+    "bytes": 12276,
+    "sha256": "9e719fb65edec95fd473f0db1d1231d264e137d9972727508a7b09c35bee7fb9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Sources/ShuttlCalibrationUI/CalibrationStage.swift",
+    "bytes": 14744,
+    "sha256": "a5611ad6b597254a7a6cd2959d8cb1284015515faec01cd5cbc3f22101a67e1a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Sources/ShuttlCalibrationUI/CourtCalibrationStore.swift",
+    "bytes": 2138,
+    "sha256": "5a6ef8472767ecded652d5f05dc94dcbfb38f9fdc921601b9dd9bd658db3a271",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Sources/ShuttlCalibrationUI/CourtCalibrationView.swift",
+    "bytes": 14872,
+    "sha256": "857bae47f81cbd8e3057650acbfb01c7a4676a427201ba4b214099419f2ffa4b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCalibrationUI/Sources/ShuttlCalibrationUI/CourtGeometry.swift",
+    "bytes": 7822,
+    "sha256": "0493a72d2480feee0538dbf970ecf359a0df7cebce744343e943b0d7248ab009",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlStrokeModel/Package.swift",
+    "bytes": 760,
+    "sha256": "7ff6955113a143532cf3e67ffe50a77c17809b1dec1c4522c22876ac9328253b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlStrokeModel/Sources/ShuttlStrokeModel/StrokeModelResource.swift",
+    "bytes": 904,
+    "sha256": "c5ff73f07d91f3a13cc8339c9fd60b152e5e5dbae30353789e812893de0c5f25",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlStrokeModel/Sources/ShuttlStrokeModel/Models/BSTStroke.mlpackage/Manifest.json",
+    "bytes": 617,
+    "sha256": "6c5261dc07db351802b73ea6101ffca0b325a5728e36c8e353feeb4046ef0fee",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlStrokeModel/Sources/ShuttlStrokeModel/Models/BSTStroke.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+    "bytes": 777601,
+    "sha256": "5169e391674a84422946e9edad44cc82482ae260de19d478e4eb5bc58880b15a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlStrokeModel/Sources/ShuttlStrokeModel/Models/BSTStroke.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+    "bytes": 73891536,
+    "sha256": "e225f119a1ca68f953f79c419859d55173f015bb5ff0e9eef9eb8eeb4cb72669",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Package.swift",
+    "bytes": 1066,
+    "sha256": "8abf1f2bc1c2bc5ce25cce26b90254e7402b89787546b36af9ffd77ab88dc8ce",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/BWFConformanceTests.swift",
+    "bytes": 8339,
+    "sha256": "ea7b99f42add588694768f1067e863f84fb1de08d64e660dc3c21fe4d4d31b55",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/RallyParityTests.swift",
+    "bytes": 8147,
+    "sha256": "4dbc22822f996c4b44569d9bb74d2d51fa339dffe597b9b06e02ac42062c73fc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/FixtureSupport.swift",
+    "bytes": 8303,
+    "sha256": "5125d27d15c326dfe5145dad8c6e99e5c6a5743832d11f461460ad6d77dc5cb1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/ScoreAndShotsTests.swift",
+    "bytes": 16771,
+    "sha256": "3c9059b3c5bdb04a9fce2543725a63c9ad29df3b1afc043d062fc8b5b7c758a9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/score.json.zz",
+    "bytes": 35344,
+    "sha256": "5181593e53ca60192236f066366d13a6ff12c9199938a1516f980e744aa04136",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/sim_match.json.zz",
+    "bytes": 476018,
+    "sha256": "da209166c429cfc1bace1c268a90ac0521149df5893f8bcec5bddab874d70af8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/codec.json.zz",
+    "bytes": 1082722,
+    "sha256": "9b41dca4f7b70ffe255150649dc2dda8f003cddc826cffd3658eead72efd56fa",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/sim_e2e.json.zz",
+    "bytes": 888133,
+    "sha256": "385a70f7648951c3223e88d7fe88d34d3f9422badaf4959c2c26346fe9b6d632",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/world.json.zz",
+    "bytes": 421593,
+    "sha256": "2e1deb8460aa03814ac496d42d0e5b95c4bde1f23afce1309cc81b1ab4396229",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/shots_cases.json.zz",
+    "bytes": 192668,
+    "sha256": "e5cedc35a226cade7ae91a45e952bc92bdbdfb55077ab4a0dff7e0461f096e02",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/real.json.zz",
+    "bytes": 787390,
+    "sha256": "49cce28a5d7bcda3780dea755e4cf1ba593bb316a67549b0a6d15a097a12d400",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/bwf_conformance.json.zz",
+    "bytes": 336942,
+    "sha256": "523545216bd8d7767b43677bd9c70b27fae175f25f527a15e021dcc5cefbb7d4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Tests/ShuttlRallyTests/Fixtures/sim_corrupt.json.zz",
+    "bytes": 298708,
+    "sha256": "cc5ca4f5757cfd209478df1f48b85847d1073f11431a68d8602c1b064aff1ee2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/Serialize.swift",
+    "bytes": 9607,
+    "sha256": "1efb939af51a4c67f3981d0f5023ac6b7b55510aae675d6d58c603c17b2fc12a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/Score.swift",
+    "bytes": 11681,
+    "sha256": "d4f40c4484495c7601893d3581fe7e8336675e472f717ad566c1f1655f486450",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/RallyMotion.swift",
+    "bytes": 11335,
+    "sha256": "c68ff2c3c2d0f82ce3f041c16eabe311c9df97112795bd41845fb41c260321fe",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/BSTStrokeModel.swift",
+    "bytes": 12912,
+    "sha256": "0dbd1d1490318e029b93c664a0cb899ad573b317b7d5c204f788309672b4fefe",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/StrokeClassifier.swift",
+    "bytes": 7558,
+    "sha256": "eb74507a1a6dbede1e9ba3d23c85691711401d5869dddee38c80f25ad727e89d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/StrokeFeatures.swift",
+    "bytes": 11080,
+    "sha256": "a0669d0263f1d2d67fff5bb6ffb318cbf7225471508f9ae1177ece47d2933375",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/ShuttlRally.swift",
+    "bytes": 962,
+    "sha256": "6053d6ab6a359cbf59c31fe50258c2ab19b13e9c8cd31e693f0a815d0d3330cf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/Rally.swift",
+    "bytes": 52075,
+    "sha256": "efbc323c60da7a63bc56e018a3337664c66f9da04c98c779aca91bf46e833c2a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/Shots.swift",
+    "bytes": 23708,
+    "sha256": "c8e3de5a973e8634f6ac16104901da31c8aef734cb75fe82bff9fe5c9a20f8bc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/PyCompat.swift",
+    "bytes": 4471,
+    "sha256": "10f786c9e42828f4bb338c5ea54a027a0c68bb1fb9e30028184a53f244828d71",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRally/Sources/ShuttlRally/PyMath.swift",
+    "bytes": 3042,
+    "sha256": "0a1c3fc699e47ba23618bbfbe1596e5397f155617af725477ba20f1efb63a650",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Package.swift",
+    "bytes": 849,
+    "sha256": "f6bff899ee8e17fc9b181d9b1ed85043e2c21f41ab538b6ba0492ad729bcf731",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/StreamingTests.swift",
+    "bytes": 15466,
+    "sha256": "e770cc38b5613cf23262fde40d5e4622612c4b3b78a948c4b64a0ba37ecde96f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/FixtureSupport.swift",
+    "bytes": 4056,
+    "sha256": "ece561e58e04bae10703507037434cf89e2afdd1e8ba14577f999983de05d6dd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/DecodeTests.swift",
+    "bytes": 5708,
+    "sha256": "21e0d06816a29b2da85027d8819a4c3a3f623ddfbdc6130320b9f7eea4a1e637",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/GeometryImageTests.swift",
+    "bytes": 6976,
+    "sha256": "449d84b95a9ed639028c0fd261a6c9f1598d382c771dcbe3b9310da9710f501d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/BenchTests.swift",
+    "bytes": 6490,
+    "sha256": "479311dd66022e87214382356fd39e2c6ea36cca81072f0db57b5c8eaa80a82f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/RealClipTests.swift",
+    "bytes": 14360,
+    "sha256": "b9aa60cd42fc91b516d3ece591fa20b43ded364ecf4fc671623ac1294e3394c9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/ResumeTests.swift",
+    "bytes": 19182,
+    "sha256": "42f8964da725969ca57833af20048a980c125c6102e15d2635257c03778a5ad7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/Fixtures/geometry.json",
+    "bytes": 19670,
+    "sha256": "f67322631630b8138f8bc71b8548a8668b61faddc7074baedd0eb03fd336e362",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/Fixtures/background.json",
+    "bytes": 32735,
+    "sha256": "1224888d1ffbe8414208f7573d83358e75430642b91d7dfb370ba66db0f33c7e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/Fixtures/fusion.json",
+    "bytes": 4843,
+    "sha256": "3ce442fa883d0f14b98763778f84b4d78b9371ac11853330f9783d5198871184",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/Fixtures/images.json",
+    "bytes": 138626,
+    "sha256": "5bedfe48c547d9c49600639644292b13c8efdfe14e83f89d8399b5f3f1ae20b5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/Fixtures/real.json",
+    "bytes": 1220566,
+    "sha256": "d9661bf4d8558fbef2e1140215a08551b0e3b397d67ff981ebc62eabf82eef67",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Tests/ShuttlDetectorTests/Fixtures/decode.json",
+    "bytes": 297929,
+    "sha256": "efbb3b814259ce075e608496fc3311ffbe9f394cb9d2f57f5f93c318de687a24",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Models/TrackNetV3.mlpackage/Manifest.json",
+    "bytes": 617,
+    "sha256": "5a62567e7668a397746ebfeee7e476345dc168b83b81d3f37265f8f13d0ef24c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Models/TrackNetV3.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+    "bytes": 29087,
+    "sha256": "39ab55da46d15ac7c0feabc563c1f67c9ef4d2e834e8700a2d65d5b30e43c11c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Models/TrackNetV3.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+    "bytes": 22676608,
+    "sha256": "ca8842fb770ea40ab6a19d9253aa37e5e23c071cf0df48f7ac0a53a4460fc834",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Models/WASB.mlpackage/Manifest.json",
+    "bytes": 617,
+    "sha256": "83458ac289ff4f0d2d674b97adde6838328691dafb0f1b0dd7590a932db58c69",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Models/WASB.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+    "bytes": 93362,
+    "sha256": "e3274d1e2035d932f95d814e20062425d368788c7452c9e3b9942712715fb1d1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Models/WASB.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+    "bytes": 2579296,
+    "sha256": "91464683dc2e5c7486a4036d5e31e11606522f747641320d7db7a88d96b53e68",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/ShuttlDetector.swift",
+    "bytes": 631,
+    "sha256": "17afbfaf3737f8f1a936dc2ae4971fcfa8b215fc7cb394248eb38433976bb806",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/Resume.swift",
+    "bytes": 8400,
+    "sha256": "d7fd156a430f3f4fb47d74ad9d2357181e9b213f7f771f6634f1539b26689d61",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/CoreMLNetwork.swift",
+    "bytes": 13124,
+    "sha256": "1ecc6f61dc41b94bcbfd73246178dd35825c3fca0db395f8f6aa494e50a2d3af",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/Background.swift",
+    "bytes": 6833,
+    "sha256": "8b6178a919505c358ff3c79ee6db4552c5092d2c4406e028c0256fec12d3c119",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/NetSpec.swift",
+    "bytes": 5539,
+    "sha256": "f19d7c148fc9068e647639d51438afd962ad982a431ad072717a41475353e975",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/FrameGeometry.swift",
+    "bytes": 4024,
+    "sha256": "705ddc7e8eeac2cc97b1ffe6924e874632c53a54ac0ac30fba25d0ff86118b16",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/HeatmapDecoder.swift",
+    "bytes": 11345,
+    "sha256": "c13c13a808724f50a54dcd568b54f6e42f1b676b3d353d81c3db5cca90940b58",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/FrameSources.swift",
+    "bytes": 3717,
+    "sha256": "e659ce4031ce9bada882ab0eb1a8ba521cff12cda18de6f7feb01a009ffbcdeb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/HeatmapDetector.swift",
+    "bytes": 20688,
+    "sha256": "dd2f45977f428b6fc3e81926dd10584d412446b192e2b174c557034671bd3001",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDetector/Sources/ShuttlDetector/ImageOps.swift",
+    "bytes": 27146,
+    "sha256": "f8f2b92dc032d6526fc111c13507f936378dbdce619196949cf33018b29ad393",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Package.swift",
+    "bytes": 1060,
+    "sha256": "2b4b59a81bbc0c188f66fa03c049542a5a53923ad3356ddb8c77cbad1b35ff3c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Tests/ShuttlExportTests/OverlayDesignTests.swift",
+    "bytes": 13246,
+    "sha256": "e8d35a553d954b3ee19180adbef8fd3e31d0d5a2c28dd8cd77f794a4bac64451",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Tests/ShuttlExportTests/OverlayExporterTests.swift",
+    "bytes": 18242,
+    "sha256": "6732b02f428997c39f280a079b465d51e8c927a1477360093a0577ed9cf89a13",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/OverlayRenderer.swift",
+    "bytes": 23638,
+    "sha256": "06df5681d8b598035df1512ec3a522f736a3b0136e5eccd7507baa7acb3780bf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/ExportFrameSequence.swift",
+    "bytes": 5153,
+    "sha256": "3cef35a9b8ed64e8c31ce45cee9ec3a793bbaa90a19a66d80a649a50517b63fb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/ExportTheme.swift",
+    "bytes": 2943,
+    "sha256": "dd440844ff677104f551e75793471ca408bca77be3417ee4229bc883026fbd75",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/OverlayExporter.swift",
+    "bytes": 16391,
+    "sha256": "d6692dbd42ec05073c50f29cc41e0be0f512e3dabaa5dfc1fcbfc0d2a0549cd5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/ExportTypes.swift",
+    "bytes": 2118,
+    "sha256": "33d66ee551cc702717ead1ee569a9353d98907d9a6522e583f7121fd37fac7a6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/AudioPump.swift",
+    "bytes": 5459,
+    "sha256": "3baa6b217a0bd97faee4f175900e948a715f5306bc1975c715b6a220ba0645b6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/OverlayPrimitives.swift",
+    "bytes": 3942,
+    "sha256": "37eeaa0d2938d4e4ef23a0bfc2e66743e0837a3319f525985949ffdaa8ba1f26",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/ExportButton.swift",
+    "bytes": 3413,
+    "sha256": "eaf342ddf9fdeb16babe02a10973a61e729a4f44db384940d42f0cf8a9af1ad3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlExport/Sources/ShuttlExport/ExportPanel.swift",
+    "bytes": 5542,
+    "sha256": "ed4334a15ba671cca362706ae14a254fdff2b099f805e4fcee6de6cbc776f9dd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Package.swift",
+    "bytes": 914,
+    "sha256": "f33572f86f51c2f1af51ba7c97991e46c49b8855176b0fbf60d18f0dcf83042e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/PTSGapTests.swift",
+    "bytes": 2565,
+    "sha256": "1a181655fb777daf8adaba3d1374e9c8ace3810244a5ed988a5df0f37ac43413",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/RallyParityTests.swift",
+    "bytes": 12684,
+    "sha256": "e38cbea73f0a071033bdf8ef3cb91a27d877716247e7e3ab63477a998c400378",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/KernelParityTests.swift",
+    "bytes": 5716,
+    "sha256": "3ed49da4d8e2223d5602ed6324e5f78deccc5c368877db5bebafa1c1c99425d6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/FixtureSupport.swift",
+    "bytes": 9803,
+    "sha256": "ff0ee6b23e2977799f61edeb67fec3933d7f9d7bb09b8261ee9e4586cca6fd06",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/FlightParityTests.swift",
+    "bytes": 8313,
+    "sha256": "3d3af9077f34fa46a69dc770cc9dce763305e980ac30d345d591b62539ababca",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/RealClipTests.swift",
+    "bytes": 3771,
+    "sha256": "040814812b7c221a9f76f4b7e4e40847b57a06fa1ed4f706b8069fb6bb458d0e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/ReferenceKernelTests.swift",
+    "bytes": 3467,
+    "sha256": "c97ee55044fedb6b3ad8252422e2caf524288e94b48fcd97b7fca8f116eea8b1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/EndToEndTests.swift",
+    "bytes": 3482,
+    "sha256": "ebe1385daffefdfe194d8c1a9a24bc93ef1b4bba0d89516cb2313dd7a9acdfd2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/PerfTests.swift",
+    "bytes": 3527,
+    "sha256": "972b3cf94b011c9adad9bf50afaaf75e6b463ab6d2eeb07806a980e6360c4e63",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/Fixtures/rallies.json",
+    "bytes": 342844,
+    "sha256": "11d3ae3283faf47cf21cd307f1fc5c13d3566e5ae5581f5ac5b7abed124bb5d5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/Fixtures/kernels.json",
+    "bytes": 347264,
+    "sha256": "707d1cdacd3fe872a94517b88babd329e498182ebd080c14961e9b5c28bf47d2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/Fixtures/gaps.json",
+    "bytes": 535054,
+    "sha256": "09757f2076f67b3198b30d11302a8a0e874c98526d9878e290c1ce78f75d59d5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/Fixtures/flights.json",
+    "bytes": 891416,
+    "sha256": "4e4b87c1af94e9157d3af98815012138aaddd21268482437387498249a419fff",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/Fixtures/real.json.deflate",
+    "bytes": 136571,
+    "sha256": "ed9756ebedbe9b8a2d7682fb0a713f02237e2a8b1f8b9ae61c375d5f055dcc08",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Tests/ShuttlReconstructTests/Fixtures/e2e.json.deflate",
+    "bytes": 456835,
+    "sha256": "239be80f7eaf4d07cc9c4a006fb5a893dc5f80d53438a1a7148255c559f5edb4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/Reconstruct3D.swift",
+    "bytes": 9012,
+    "sha256": "d44324fc0cd954be310dd727ac7d8520fe903ddd094dd3bde4b9f45bfecd8ef6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/RallyReconstruct.swift",
+    "bytes": 23053,
+    "sha256": "30a0fd31a4b0d2461f0ca2450ff9153d31bc339e5089de97821177feef244c1a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/Residuals.swift",
+    "bytes": 22550,
+    "sha256": "f5e6e8309d94e58e33eb3b6aae58cc8948d7ad96c7ee32eb5e5a3e2cb5672750",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/Finalize.swift",
+    "bytes": 11187,
+    "sha256": "77a93117204c4e6de0cd3622c47fd914730f785e169e019b682b01e9c96c220e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/Initialisation.swift",
+    "bytes": 15225,
+    "sha256": "e4f791f12ad06648932a1573209656432c2e8c1dd6a6896bb38174bfa3941d1f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/SegmentFit.swift",
+    "bytes": 12788,
+    "sha256": "c9890661d3abdb02ebc63c21dd9ec85fd9b3f819fe8b0ba63330f156fcc8a458",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/Types.swift",
+    "bytes": 4971,
+    "sha256": "fcdecb745d7e5e39593e245e800e0507e3f70449610947da69182944b2aac0dd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlReconstruct/Sources/ShuttlReconstruct/ODESolver.swift",
+    "bytes": 11230,
+    "sha256": "35f016e0c861adfde4119ce015c01f519896d6faef342ac025862065994a56e6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Package.swift",
+    "bytes": 2220,
+    "sha256": "8d415603e2e252d0b5fee9956573924f76031c587cb7456478155bcf12cf1efa",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/PlayersWatchdogTests.swift",
+    "bytes": 11310,
+    "sha256": "4d135da55900dc662f5c084b3e969b9979ca59fe2ae615365141d9e4d22ef1c3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/PortedStagesTests.swift",
+    "bytes": 3208,
+    "sha256": "8b902d6f5402a4d9d34b7f1932052d0940a4fcf27a82d35cc79eb233ca269036",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/LiveEndToEndTests.swift",
+    "bytes": 9946,
+    "sha256": "e5a588499db78ab9a62f1c50beff918595df83f3af7ebce251e722bd484d1578",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/CalibrationAttemptTests.swift",
+    "bytes": 5937,
+    "sha256": "15d1b7d7aab4e4f70131e404614892995e3543051f3205f79d200cb089b405dc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/TrackConsistencyTests.swift",
+    "bytes": 3919,
+    "sha256": "0977f063214cdf9e69e09ffb77472a4eeb089ba92ac21aabcf4dad000d2b4c80",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/DetectPartialAliasTests.swift",
+    "bytes": 4573,
+    "sha256": "0803cb047867cc1e9f121041a3942e9c892a869ff668b895cb67a0fee28d646a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/ConcurrencyTests.swift",
+    "bytes": 4312,
+    "sha256": "56b3839ea56603f23104863169c853b35dfef4a4082fa695d4cb52e5d39ff5b0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/FocalHintTests.swift",
+    "bytes": 2457,
+    "sha256": "ff972faf61d0b541bd8d3463d462be7accc6238e55780d9fb50ce51d54610557",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/PlayersResumeLiveTests.swift",
+    "bytes": 10405,
+    "sha256": "eac2652cfe31dfc9ad55902cdea8606449a2afdfe669c7426147fc145e990ced",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/PipelineResumeTests.swift",
+    "bytes": 8646,
+    "sha256": "e2fa7249af7e5471fb2430cbff220db81df37eb6981b2a6f4cbd0f6153ec3f74",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/DetectResumeTests.swift",
+    "bytes": 5237,
+    "sha256": "db56f3b32c12916b32fe847740cb19246029bd0332c3afd017c75ac9d8ba8887",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/Fixtures/calibration_attempt.json",
+    "bytes": 1412,
+    "sha256": "ff5a6c1c87b469188c90759282c40062b5d2163288b5d78572bc716f2ea9fbc0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Tests/ShuttlLiveTests/Fixtures/live_e2e.json",
+    "bytes": 6713,
+    "sha256": "e37c3a3ed2a33bc8989e29115e788cc535913e43cf8c40a1bb8f3120bc8041f7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Sources/ShuttlLive/PortedStages.swift",
+    "bytes": 2582,
+    "sha256": "b98fa0c387525512b4c24c4a9c5b3e59dd67c6dda6183529a078c64e653e9ca5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Sources/ShuttlLive/StageWatchdog.swift",
+    "bytes": 6727,
+    "sha256": "6ee57617d0b6d03d90f892deaf3909ffac0449b33f99d7f3ab20665b81399781",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Sources/ShuttlLive/Concurrency.swift",
+    "bytes": 1745,
+    "sha256": "8dfabd1492e16550b430b286a8f93395be92e0bd42f5f09db8b39c0a6a7f522b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Sources/ShuttlLive/StageMetrics.swift",
+    "bytes": 7112,
+    "sha256": "e264f960f29cbdbe2987461f08b265a11163595ccd510744336c796797a468ed",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Sources/ShuttlLive/LiveStages.swift",
+    "bytes": 22313,
+    "sha256": "bdc86ae93b734fb2b2b4a53b40db7a9bccf1d38d4dbf4455659011b99c3ef1e6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLive/Sources/ShuttlLive/VideoStages.swift",
+    "bytes": 1398,
+    "sha256": "1acdbaf943760ab766bf6dceddc779766ad1f196dee9644dbb4e9d01d5663cfd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Package.swift",
+    "bytes": 840,
+    "sha256": "42db5c1e86dd5d2d87221b86be5c0805a24543e179e71f1ad61fad8e17ef10d0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/RetryableDetectErrorTests.swift",
+    "bytes": 8473,
+    "sha256": "a6d07be1d5dedfe96bfc30cc563a6a322390c9f57aa67cad2df054e2b5c2fe0f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/CalibrationDiagnosticsTests.swift",
+    "bytes": 8818,
+    "sha256": "ec2a9b930dbf872942fddb25bf44dc52b6bdd06ccc48dd5d1813799138eb1dec",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/OutcomeAndCheckpointTests.swift",
+    "bytes": 20067,
+    "sha256": "29963b405e8e4e1ebf041ed3e17335c123872e307a1181e54490000022916520",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/DetectPartialStoreTests.swift",
+    "bytes": 4590,
+    "sha256": "c186469c4ce0f85da7e4707dd85792dd93bf674cecd64c4c45b531dc4503e5bf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/ResumableDetectPipelineTests.swift",
+    "bytes": 8848,
+    "sha256": "e7ebd49011045aacf7f01f775b9cc0b0231912a574b8cacaaa7fb319e1ae628d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/CameraSteadinessTests.swift",
+    "bytes": 4470,
+    "sha256": "e65073b93bddb8155a0cf7f670fafd45cffa4edddcf18a7a9e0dba1e283d6562",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/HardeningSupport.swift",
+    "bytes": 8777,
+    "sha256": "da9201dce2e7b55b3fa021a04f3032ae1060d62f0890e5ac10c2b9d41313db0b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/AnalysisPipelineTests.swift",
+    "bytes": 15596,
+    "sha256": "927e050559ef0cb2224e8a4f66cf4618174abed4f0751caccbbc5233b8bb8c4f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/CheckpointIntegrityTests.swift",
+    "bytes": 7796,
+    "sha256": "dd919bb5bca5046460d5114c7f97d202fcb0a92547454111155980e2f436757f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/PlayersCodecTests.swift",
+    "bytes": 12395,
+    "sha256": "fdfc25597195f7e0cd65a2d49ee1e990b8c88ead6a08c290007a4e12bf973f11",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/ResumableDetectTests.swift",
+    "bytes": 8101,
+    "sha256": "8dd70347f1f343467efc26917364f74eb5e41978decef1fc82c7ef30a64dd24c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/ResumablePlayersPipelineTests.swift",
+    "bytes": 14615,
+    "sha256": "c22a5ff2255ab55f9f1e7b1d461b760de271ab93c7fabdfc16083b9360d36617",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Tests/ShuttlAnalysisTests/Fixtures/players_real_sample.json",
+    "bytes": 91314,
+    "sha256": "e44ba0dd55e5118c40df0e52ee6bb059b45cfe774cc0d9d0270b3863e0903f98",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/LandingGuard.swift",
+    "bytes": 2577,
+    "sha256": "f39479a290fcbd8a3c42f299217bd2274e9357f07f559eb80ecbb3dd75605154",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/CameraSteadiness.swift",
+    "bytes": 8955,
+    "sha256": "f9fe12314fe664c2561063aac7f6d314bafec6e35050d09c71ba9790bea209c9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/AnalysisStages.swift",
+    "bytes": 14383,
+    "sha256": "91867ca629505821a3b8322580f4b98bcc1f94c9397a9d9f40445d97148c9768",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/PipelineOptions.swift",
+    "bytes": 1976,
+    "sha256": "f59180407d0ca223a1142684f18c625fe70889f96c928a4373f4c91210986183",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/CheckpointFingerprint.swift",
+    "bytes": 2764,
+    "sha256": "be9e1384eb22bab4de6c4540078175a1b9d1187ac113f58db20c074c4e5cce62",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/BinaryIO.swift",
+    "bytes": 5371,
+    "sha256": "a27630546378cc9562eee97249c00fa665730c61a3aa2c006c9e999acbcddb97",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/PlayersPartial.swift",
+    "bytes": 13066,
+    "sha256": "a88ca69089eee93d0c4184c57e5ae61b0e0d237d647d8679e9ee209206d596bd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/PlayersCodec.swift",
+    "bytes": 8930,
+    "sha256": "24b8c5aa5ae837ed11629d0f599d7a3db1af1a920b1f908bd8d55df47183d7c7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/AnalysisOutcome.swift",
+    "bytes": 8409,
+    "sha256": "5e5717515c83004251b0f5a3e86695ce9c148d84174eaa1a9b7ff1be4a0f2f82",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/DetectPartial.swift",
+    "bytes": 12671,
+    "sha256": "74c80ecb405c5d7272679eb2e9df5461f68d36ff7d5afbc6609f85ea76e5782e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/StageObserver.swift",
+    "bytes": 1054,
+    "sha256": "70955ad9c021e5f51b9c82cebd6a8a492300bf26eb9e6117d0a6123c5799894f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/AnalysisPipeline.swift",
+    "bytes": 20888,
+    "sha256": "c80c796f7d3dbbcda6b74d443d4d9d006af3115f1cb80dcb79fc825738ddf6e6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlAnalysis/Sources/ShuttlAnalysis/StageFailure.swift",
+    "bytes": 5539,
+    "sha256": "b602f1782e786945cf2d1fcecc64ac29079df1724d9b975037659eb7f5f95f58",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Package.swift",
+    "bytes": 846,
+    "sha256": "9c6309930451baca3cc89df7b2e8c5f76506a581bba0c0ed538bcc0659a18c76",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Tests/ShuttlDesignTests/DesignTests.swift",
+    "bytes": 1842,
+    "sha256": "0d4495940110a856521fa6d60cd62c1e99f57747bbd33576f0f3c4af95345698",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Signature/CourtPlan.swift",
+    "bytes": 5274,
+    "sha256": "9982f881e61374d94d4e13fd6fdc8f9cc1a9b891a5ef9b14caf669164f6d6629",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Signature/ShotGlyph.swift",
+    "bytes": 6388,
+    "sha256": "34a6359afaa94c1c72ba2c6d36374ec260d5c6364564227edfc99f1257b3804e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Signature/Overprint.swift",
+    "bytes": 2451,
+    "sha256": "70e4ccec410ec9b9367d7a3370dd574f79650eb4cb27f403928ef654ee25f637",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Components/Buttons.swift",
+    "bytes": 6121,
+    "sha256": "cb52a16a42d5adb520785f1a79da1a86074f7dd1931ed5e06f6f77b840771204",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Components/Stickers.swift",
+    "bytes": 5713,
+    "sha256": "62967f543db747ff62ef77620386a064037cbcb00d61c7b2617de641d576d526",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Components/Stats.swift",
+    "bytes": 3841,
+    "sha256": "aefe9fba0faaa1991c6137aefcda30bd222942a20e55a663b249aaecced0ce42",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Components/Cards.swift",
+    "bytes": 7598,
+    "sha256": "42140153fb1ddb5f756cdafa683e93748527d978334887abb600aeefdc42cb69",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Components/InkProgressBar.swift",
+    "bytes": 1439,
+    "sha256": "cda31a01ba28603f9d91415007e9160139ccc6767a58586e011dd2815800d22a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Components/ShuttlecockMark.swift",
+    "bytes": 2980,
+    "sha256": "8235a6c4b7271326bc9feb9730574273ca332454c26f6d8490589f5f90db7fee",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Surfaces/Paper.swift",
+    "bytes": 5319,
+    "sha256": "1b8f266322f7b19cb67f7178f2746d6376d6e11bf6f96d2cc66c7a7abadc3d61",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Surfaces/Shapes.swift",
+    "bytes": 4496,
+    "sha256": "90be59252ad17145028ad41324a91c330409714373ce088f6effaf41331ca1dc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Tokens/Typography.swift",
+    "bytes": 4259,
+    "sha256": "ef27c12b4e8fe61538dd01f4e290689e3d00c123e24d9dd33b6c118fc02362f5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Tokens/Colors.swift",
+    "bytes": 5910,
+    "sha256": "f36998e55088e775ce736575239c3b5a0246aaa75f1147d3178b5d233a743527",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlDesign/Sources/ShuttlDesign/Tokens/Metrics.swift",
+    "bytes": 3273,
+    "sha256": "b1653a87a38fa56e8daa92463e7410b911261f81ea9ff94f87b383ba47df2534",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Package.swift",
+    "bytes": 1255,
+    "sha256": "1cdf3966785118dc466e1f1abb55a63db776335b80a81f478146548f873df536",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/CourtLock/CourtProjectionTests.swift",
+    "bytes": 6693,
+    "sha256": "740e4d9b563ed5c63103832ca6e5b31ada932d623bdbad989c7aeadafc619c8e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/CourtLock/CourtLockTestSupport.swift",
+    "bytes": 4538,
+    "sha256": "83b611a71870f223e7a3aeba8ccedfcd064914663ae9819f6f570ac0a25a18aa",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/CourtLock/CourtLockCoreTests.swift",
+    "bytes": 9263,
+    "sha256": "abddeeddbbde9862cc6c337dc2944b911728a859b4bf56b867393333a060e361",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/CourtLock/CourtLockEngineTests.swift",
+    "bytes": 8936,
+    "sha256": "e3d143395c30423715672f53e67bd736f080708e038ffdd6a6f5b06506a513c5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/RealClip/DownscaleProbeTests.swift",
+    "bytes": 4101,
+    "sha256": "336e1ae29407ccbaf02d8104d386b1342134ccdbb596946bb369a145cb79d3d3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/RealClip/RealClipLockTests.swift",
+    "bytes": 7947,
+    "sha256": "7c39c736427879a45f80baee706dbab146aaf815ca817c3d323d7985774da6b3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/RealClip/CalibPerfProbeTests.swift",
+    "bytes": 2327,
+    "sha256": "1a4807c55ca747a7e84d1ceb5e2e9489c794c3c294fddd24894d7fb8c34071c9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Tests/ShuttlPresentTests/Support/TestSupport.swift",
+    "bytes": 2688,
+    "sha256": "c9ffa6025c5e0fd95c2911e566e4741763afef0fb91e8377ab13bef3761bc540",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/ManualCorners.swift",
+    "bytes": 1958,
+    "sha256": "6c8cb945f46d6ab52b355666c6ad59478f5225f5765263abae5122f92fcc7d03",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/CourtLockCalibrator.swift",
+    "bytes": 4965,
+    "sha256": "c517ecd77edefa752c3e6bf637eb1deeffd0fa2b11e5a986355f2ee21411048d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/CameraScaling.swift",
+    "bytes": 4405,
+    "sha256": "4c1694104de28fea4fb3bffa717d816486724f412d9775e092c7ea696b2e49d9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/CourtProjection.swift",
+    "bytes": 11453,
+    "sha256": "b4846651073ae7c617fbb652327f506081a9f10525ffe9351eb133a4b217d0fe",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/CourtLockEngine.swift",
+    "bytes": 7777,
+    "sha256": "a394ff0682abaf765e1327f9b8b2420ae5833c8957c1f44a3dc287466ab777b2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/CourtLockTypes.swift",
+    "bytes": 6450,
+    "sha256": "b78c1c4bd743f6ac131521d8a5d11d051ab0ed5042aeae435ad98c51cfa9527e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/MotionDetector.swift",
+    "bytes": 3208,
+    "sha256": "84cfbda781058cb14039a85589b94993d0f7096faa2cdaf059a844800af51d22",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/CourtLockCore.swift",
+    "bytes": 13727,
+    "sha256": "fdf13c8a7a89bfbd3f4ae5b708ab4294be407a58e9064327e3c2bab04b0ea16b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/TemporalMedian.swift",
+    "bytes": 2825,
+    "sha256": "d7f4db2e388936a712aabb37557f34c51cfc78cc5d00dffb413648903699414e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPresent/Sources/ShuttlPresent/CourtLock/FrameDownsampler.swift",
+    "bytes": 15577,
+    "sha256": "82e96959dc028a319dd8affcf16e3f2b0ecc2d72d064f9e99e59e0ddfc6585ac",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Package.swift",
+    "bytes": 784,
+    "sha256": "d1349de3fb40f6e86f60d87847cf68a3460cb3bf14b4d48e02270c6c81960894",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/PTSGapTests.swift",
+    "bytes": 3106,
+    "sha256": "5b3e0c2a927869502534dbf6d914158f603ffc41d4198390f27c73187c6ff561",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/RetimeTests.swift",
+    "bytes": 4042,
+    "sha256": "342b45b4110972147294f56b1de0197676441633ed9f4664a5c66846396a08c2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/DegenerateSupport.swift",
+    "bytes": 4304,
+    "sha256": "9aa882dbd377f8fd0d52effbc843c8f4496abfc6fc3573455cac829d10640398",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/ParityTests.swift",
+    "bytes": 5658,
+    "sha256": "dcd384bc88e51dc7f3a74f2c3d48e1df00a12eac3e7f1b9ff54401efc53bd519",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/DegenerateTests.swift",
+    "bytes": 6072,
+    "sha256": "c2f87b7b3fa1ee315ede0b51d798f95ccb58c51af4a59e046239dff62221958d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/FixtureSupport.swift",
+    "bytes": 7524,
+    "sha256": "a4c444122f9fd6b00306b7558796b530cb43c4dc95e9832c8ed18a1da3df5d12",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/EdgeParityTests.swift",
+    "bytes": 3440,
+    "sha256": "966c6df86ecfeebedcbbd8b8b0b5b3626908f14ad8d6da5e7db855d5c83c24f2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/PerformanceTests.swift",
+    "bytes": 1892,
+    "sha256": "be6438dce76ce4e3e4eed253ee2784622e4ac535c436c1c453bb17460c452063",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/BehaviourTests.swift",
+    "bytes": 6575,
+    "sha256": "4cbb108315625a3588db01017d8aafd15cdd0a758bd07d599908da6c321f018e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/Fixtures/linker_real.json",
+    "bytes": 1189846,
+    "sha256": "909d565f1fb2f25c0cffbb7f2a2520f5bea490e9a9dee5b11d9879fbf738407d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/Fixtures/linker_edge.json",
+    "bytes": 2446692,
+    "sha256": "2927d05e045124cec714814fb62875e03bc1d24f1e2b1ca86f6591154220ca06",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/Fixtures/linker_sim.json",
+    "bytes": 2231279,
+    "sha256": "2b803f41393ddc8c1a64d0f1688565b8c2dfd3b415c6a50a17c9df266eaf3613",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Tests/ShuttlLinkerTests/Fixtures/linker_gaps.json",
+    "bytes": 2174546,
+    "sha256": "f4555475785e61cc1e2bce2ef25823a3cf7ff7a9210cca9d1715af5099cb045a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Kinks.swift",
+    "bytes": 13882,
+    "sha256": "c7b834b4d690348f47b71ddc80bf714371535aab10f7c7c9c1ec422a9deb6dc3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Safety.swift",
+    "bytes": 4168,
+    "sha256": "2027546fea68eb463b2074ce42d4546bf5056c5367483d401555f82ebaa07d12",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Viterbi.swift",
+    "bytes": 8790,
+    "sha256": "97edf81174177191d4ac5b31aa0a295b201ff2a61844ee6315b7c4c530dda745",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Smooth.swift",
+    "bytes": 10702,
+    "sha256": "3ac49ceb9aa7fff85c49673b435f07ec832e0deb12b7d46d51522fbb7a1b66e9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Repeats.swift",
+    "bytes": 12827,
+    "sha256": "315e5090990879743064e9a7f6705b33a1ad147acb35132c690fa5f467cff5bd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/LinkerConfig.swift",
+    "bytes": 5293,
+    "sha256": "cccac70ff5d601b03e9733bd303b6b8e04bc9f632095c9865656216d6aef3d84",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Prep.swift",
+    "bytes": 10539,
+    "sha256": "bb8793675c3b26ea05070139da89c75ee76d2be82503cc31a898226da07ba5e1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/Associate.swift",
+    "bytes": 10068,
+    "sha256": "f3f4876872e00c231d65d3b44b42c1777638375d7bbe596cd4bea1c7e5427e8f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/NumPyish.swift",
+    "bytes": 5195,
+    "sha256": "855301184093de9930d9b45274a1129770387e78982c3d9071c1ba30769a2b2f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlLinker/Sources/ShuttlLinker/ShuttlLinker.swift",
+    "bytes": 16326,
+    "sha256": "e6319b92ae3c736362d227af97db09374af13e9e7c44d9280edd4a31a98ec941",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Package.swift",
+    "bytes": 778,
+    "sha256": "6bedadf08bc8237baaba9b7d1c4c1715208174bccc37bf5fd1d112fdd0217ab5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2042.deflate",
+    "bytes": 953277,
+    "sha256": "68d02382f957cec3ff9fdf42e0187cab18ed1260ed19d8ed408bc79bbe4d6238",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2052.deflate",
+    "bytes": 1913420,
+    "sha256": "fd921e44696e5c1cde7ee98991e937b0df75e1d18177d7435399eb16161d8137",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_66.deflate",
+    "bytes": 798768,
+    "sha256": "9efe22432aba294dbece48626acf8088080bf6288a4da09556b8a7358a80014c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_400.deflate",
+    "bytes": 906596,
+    "sha256": "9c6f56cf40eac950d7d305b1bb3d8470c9b649d6c67aafef8d106e49310d489c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_384.deflate",
+    "bytes": 1105250,
+    "sha256": "460c7d73191b5ea0dd0c896e71b5d9aaff79490d21a4a555cdd0aef557d993b3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/r7_hard_lights_s23.deflate",
+    "bytes": 2608829,
+    "sha256": "38baad76b3df1069e1698e8b197bf6d68401b3aa96964ed89534351dd6cd1490",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1923.deflate",
+    "bytes": 1559839,
+    "sha256": "f353386a31ab3849403d98875fd2be830a75094a396ef9b08d5d3d5280a4536a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_59.deflate",
+    "bytes": 1317100,
+    "sha256": "95a81789886c313f494b40c7e577ebfeb1189dc88804f2fe3dadfd0ed71c9309",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_749.deflate",
+    "bytes": 969910,
+    "sha256": "c5af03e3411452801f41e3e57d200f9b9c6d8f1a02863a367da6abb3d738bb5c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2141.deflate",
+    "bytes": 1686187,
+    "sha256": "531ce14ba41331ece56559377d36c81088934d8db46cdf68f4f835d90ee0c8e4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1967.deflate",
+    "bytes": 1281027,
+    "sha256": "71525b56ae7e3cbcaa6954dbe058e4f80af02c0c47fcb1b222c13fd48eef8f00",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2016.deflate",
+    "bytes": 1813456,
+    "sha256": "dbbe413fe8c60b21b40e382cacb7db7581c377d3f4afa06c60a7a87a0e08a155",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_732.deflate",
+    "bytes": 1421297,
+    "sha256": "c4cf14a79306ba5a54922efc4b50abf9080a9c67e3584661dcd718dece35e68d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_996.deflate",
+    "bytes": 1732890,
+    "sha256": "ea69b1ab840e0f8c39ab409345288cedecf2ca4d063045bb3d886a5b327c6623",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1694.deflate",
+    "bytes": 1629370,
+    "sha256": "514b30c9c2ff74a6e4eb2d044082720d02495e187c22ab5bce7122a86d8ec16c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1276.deflate",
+    "bytes": 1288232,
+    "sha256": "6a53ae5a43b4cd773449caa5f3766a8dc884cf277f2e21c0b13ddc0b68264298",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1283.deflate",
+    "bytes": 979374,
+    "sha256": "62fb0a34528b091a1f215a80ee3d5c78851067e79005a2cb8ba0839fa5098be3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1959.deflate",
+    "bytes": 764216,
+    "sha256": "a468bca6d2cafb232ee7612ca9bb9bc42f8ac2cc02758ea83a95875b05bdc9c7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1695.deflate",
+    "bytes": 1813204,
+    "sha256": "421cdd985ba08d52b8da9788dbbd339f0205a73049bb81d96cc01e51bb4716a6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_908.deflate",
+    "bytes": 1140672,
+    "sha256": "f7ea38111590d254b8e0d05206421ba72d8992adbae2feb7fe525ffd14cf1cb8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/r7_doubles_s16.deflate",
+    "bytes": 2167905,
+    "sha256": "22b280175b7894a06180e11962c715696ed7f722f2f4598dee6a12753bfcc1c9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_395.deflate",
+    "bytes": 747014,
+    "sha256": "9463c0d648e63392b559199be2f71b5141a4750684df0e7d3145a64ce58817f8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_122.deflate",
+    "bytes": 1624415,
+    "sha256": "fec9b76e3ce1bce9922386e4f08d92bdd7f562dcc16569e2df92e591380be97a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1950.deflate",
+    "bytes": 1190689,
+    "sha256": "eeb0c7038089c7fb2af8ae7f55eb0309394b6188c88cf30882021504f22227ee",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1922.deflate",
+    "bytes": 1467416,
+    "sha256": "d055c527c9d83de0d099b22b6d5dc5a7b8165986e374defaf1a26f322ce0ce87",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_884.deflate",
+    "bytes": 1995882,
+    "sha256": "11cd10021ae777608b9646cfb3aa6dfb92c07ab7ba1d47c8a43d889d48d9f335",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_894.deflate",
+    "bytes": 875186,
+    "sha256": "aa1c75132fe094fc074c732c1703d400d78272b967696baedaf8b101d5b75503",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_8.deflate",
+    "bytes": 690870,
+    "sha256": "4331072997b9a4a4e243a5d38e43d1989e982fdf4b3c0b1277a164587852732c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2083.deflate",
+    "bytes": 1312507,
+    "sha256": "5c8cc1fbf178522cc40f1c89eece72f7dfbdddb0f580186d5359169c223e2812",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1275.deflate",
+    "bytes": 978725,
+    "sha256": "1fe9faa3257a57e6777bd98b6bf5771df9938cd2c7172e4a3e98a6e194b5037f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_995.deflate",
+    "bytes": 1106611,
+    "sha256": "76677f25170780c76037c8683fd8098c95288d5ce7e8a79d77741dc27aeb4b32",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2033.deflate",
+    "bytes": 1726670,
+    "sha256": "675decc71e633fed5d1470e29e21e30bf5031abf74306863bb32a939d67dba51",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_413.deflate",
+    "bytes": 1211227,
+    "sha256": "02b1a85dec436bd105d394318efc13eae035c4fe6acc7d8f8dd187b2149fb71a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_471.deflate",
+    "bytes": 520848,
+    "sha256": "05c1e7ff7319566b70b4c9dbaae5fb0b94931e75fef094f972cffa479aa97024",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_886.deflate",
+    "bytes": 1427838,
+    "sha256": "c78227aae9ab42b0da1fd5c18292d4c5d594753e6b8b218a6996d8b6fb0fa441",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_935.deflate",
+    "bytes": 983551,
+    "sha256": "4f67e654886b35e9d11e01e647569a44c85079e847bbff2b9aef3b3dceb91d95",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_412.deflate",
+    "bytes": 1230144,
+    "sha256": "00d77a296141e16876dc8d2df0a1d99ae48bcede7c17e25d19b08b2c010f1f40",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_508.deflate",
+    "bytes": 1348513,
+    "sha256": "be3ca99b7e1e8936bd9267f44f2d25fb884c3376284378245930937ab98ea76f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1921.deflate",
+    "bytes": 1390645,
+    "sha256": "a616a6996993c4e99e2dcd9a8cf533d4c84b7ea7d55bbc90c36f132234aac5a8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_934.deflate",
+    "bytes": 982188,
+    "sha256": "21e91a659a2c0fcf58e94125b6af7ded08c2c9e049d1bc5a050f2875e077e128",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_9.deflate",
+    "bytes": 1298536,
+    "sha256": "d5a4d246a57f9efa9c419117592ac1feeffcab839012054e5579cdc6de1a3b7f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_128.deflate",
+    "bytes": 1235668,
+    "sha256": "160649e394a50c979ba25b2ac0e3974524db310f4c028d1f8084c15c59e584f4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2143.deflate",
+    "bytes": 1408025,
+    "sha256": "422af7d6beb0e1847b2540ae6fa1da16f161b9f964c350b37d9ccafed1f1283a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_443.deflate",
+    "bytes": 1006958,
+    "sha256": "f0dec90fd07b3daa7360634e97134e439a60783aece2ffe044f2e34b85ad0e1e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_453.deflate",
+    "bytes": 984739,
+    "sha256": "f9d6651e7e1c0136c327d56f71cf5f2c83fdfefaf314fb7ec364a81c8baa5f8b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_216.deflate",
+    "bytes": 1282506,
+    "sha256": "7e9b013d2b7ca61b154cd977ec48ebd777bed3e9c3392da922d41ab09aca9eb0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2063.deflate",
+    "bytes": 480541,
+    "sha256": "df3a162de0e6acd2d7a483cd70fc64de27f73d5f9e00305cfa54fdca869bf88c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2073.deflate",
+    "bytes": 1052138,
+    "sha256": "9b5a6069e36b38cdf3ac1f35e75bc6b0180a725197183ad626282785c3328644",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_696.deflate",
+    "bytes": 1584115,
+    "sha256": "66d37b16316b4ae2b4e5a3a9f20be62965f0f8ab0d82f2325e7e03b3ef1e6311",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_421.deflate",
+    "bytes": 604998,
+    "sha256": "8f8731a212439ae6ef8641db1538249b014167f150538b0e690d536e71ac1abf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_431.deflate",
+    "bytes": 1074134,
+    "sha256": "86b44d8495ab6bbe1a218ba2d0a5c1ab9cb2afb86c8123aad8a179fdb88c48a1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_57.deflate",
+    "bytes": 1085785,
+    "sha256": "c62f69c9509684ae1f9c8e30c649488854872ae68dadd10e8076e6938c19d758",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_747.deflate",
+    "bytes": 1628646,
+    "sha256": "a3d2e5af5a4e56aafba28291139d609e2bb77299bf9c449a95130ea679eb95a8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_907.deflate",
+    "bytes": 1066995,
+    "sha256": "47ec7892b1e53c63566f845adfaf5b3725582ec85871467c29f48a455e0f00e7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_576.deflate",
+    "bytes": 969267,
+    "sha256": "23064c81422edf31ca766dcba9be8bf04ae151384bed67a2e4d80d0d9ce54c24",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2018.deflate",
+    "bytes": 1237563,
+    "sha256": "6b7b99701780ab49d71fedf9c74c79ec09d8a02af9355ab9f6595c4ba2bb897e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1494.deflate",
+    "bytes": 693385,
+    "sha256": "c6008d1234a45fa1662760df761e26b8b0590dd48f7eaba62cc39b18e6c74291",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_71.deflate",
+    "bytes": 1270336,
+    "sha256": "1af1d2b3cf0d05d5e8b6df5a570ec2bb7d68a9f21fa7a8235dcb28c50ba3ab76",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2045.deflate",
+    "bytes": 527863,
+    "sha256": "58ae94c0a1312b5be2c477943ca2a6daf9214e5948eb44652008f4cb796a282d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1131.deflate",
+    "bytes": 1146286,
+    "sha256": "d3ba0cd0cda6a02808baf343816a7f1a33ded0377ba0315b7232544751c5e254",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_429.deflate",
+    "bytes": 1327348,
+    "sha256": "f77052c8e3c3e3646575e0398325561909f33d8143a7b75efa684dd708b81e51",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_893.deflate",
+    "bytes": 1738527,
+    "sha256": "9ff5a97d7be0782ffc0981099a40efeccaa903238d43be82a90d9afa39efdea1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1886.deflate",
+    "bytes": 794908,
+    "sha256": "b0d9623a38e15cea4f9b2851d541c1524912da687ea56388d42af2eb49383eab",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/r7_closeup_s43.deflate",
+    "bytes": 2217941,
+    "sha256": "c56f4c091a23e9d4d6e0fd46c40f48f74bcfafd5f4a27587b929d76c305a88f3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_376.deflate",
+    "bytes": 1168894,
+    "sha256": "082cb0bfad2d01f82389c2ba8a83650cee91a7ad2173eeb43dc40ba9753cae45",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2036.deflate",
+    "bytes": 1532556,
+    "sha256": "841d91870ddb85a9659eaaf5fc15661971f89dcca850e34341d06afb5903f237",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_406.deflate",
+    "bytes": 996332,
+    "sha256": "7775350b16f6ea7c321f05248b5d55f982d33c286e1a587320bd1e54293a97d1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/r7_doubles_s11.deflate",
+    "bytes": 2216516,
+    "sha256": "eb4a5d9fbabe9fba4f8f369db85c40a1e3cc99c5c33fae9a74b29f4460930eb6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1130.deflate",
+    "bytes": 981575,
+    "sha256": "ca2186e06be92a204e95cd3561701937a16505cd8fde1af0c31f41d591101b57",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/r7_batch_013.deflate",
+    "bytes": 2470692,
+    "sha256": "760edeeb6368eea034f8bc6989ca7809502cacc740e5f79abcbfe31e4a5e941e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/manifest.json",
+    "bytes": 75437,
+    "sha256": "18ccb7e0f64ff0f015c85d8e30ebab9c0d80d923675b534ef271407d971341c6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_430.deflate",
+    "bytes": 1634220,
+    "sha256": "6a486df0e5c03f12bc166f36faa7e88c50abba8619b8ed5d729b807e96fe2770",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1854.deflate",
+    "bytes": 1587862,
+    "sha256": "4d61019acc8a4a465c0db0596daa5018244297258bc43ab8becf08839aaaba89",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_56.deflate",
+    "bytes": 535388,
+    "sha256": "63b97f981902039b815bb092df271c0cfc367407872934f30bb4d7e13ab0a945",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_697.deflate",
+    "bytes": 518947,
+    "sha256": "a6fa5e3e7e4889fcbc402a37e8aaee05dbe72401a31ec03d2223ec5e725b586d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_687.deflate",
+    "bytes": 1487503,
+    "sha256": "f9ecb6ec714267ef94e732095152bec450fb972269791471a1d38c37d007e4c2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_69.deflate",
+    "bytes": 1448484,
+    "sha256": "c830e7273b02ae60ed3f63704d89c03691a7424d1b27a410580ecec55546b924",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1937.deflate",
+    "bytes": 864623,
+    "sha256": "9696e1cf9e771484606961bdcf2407e18bbc97c5f9018671a5af16dd1f881279",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1209.deflate",
+    "bytes": 988885,
+    "sha256": "3e967f1ace09f70c44ce520dc3c439c444cad11b7d8e074c049fe08d76634b7d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2046.deflate",
+    "bytes": 1158623,
+    "sha256": "509bc6fff2ef7266c0f4f5561bed56cd3d9a186bb9da51718751773ab2e2057d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2056.deflate",
+    "bytes": 482919,
+    "sha256": "0906095b70deeaee51c06d3d55bf02a144f1a6e4a00135c3fb5cc7668cf253f6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2034.deflate",
+    "bytes": 1468067,
+    "sha256": "ff5a0606b4ca22e14aa66dd289cb1304e31f1a2f90c6caa448516ac5c9b1186b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2145.deflate",
+    "bytes": 1258665,
+    "sha256": "43e2e75b0aacb0d9125f968ed9070fa310ae26966cc802684b9da3bc35e150a4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1296.deflate",
+    "bytes": 994512,
+    "sha256": "15fd4d375ebf5c86f753575e944ac146c1594ebf6fb1372c4d050c23297a605e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_507.deflate",
+    "bytes": 483648,
+    "sha256": "575631c45a370153391ba75e3d86a322d4ff87f3264278bc1855c579c7c72f06",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1192.deflate",
+    "bytes": 1396042,
+    "sha256": "900a809723af1e2f701216174622c1a240c5bb41f2821f65a4283330dad39eb2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2127.deflate",
+    "bytes": 1067183,
+    "sha256": "60ede4547fbc492a3a8bde4015e05d0c77226b4b99dd82afa97c3ce560f49da9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2109.deflate",
+    "bytes": 1210407,
+    "sha256": "41733c17c5185cb22830dac499a1944d4f3f3eff75e39afd503bf88e2fcb8ae2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1426.deflate",
+    "bytes": 682514,
+    "sha256": "978bf65a0f5d29d8399575e4bae81a83db1f54835f49974668ac7b4da6cf3ab4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1297.deflate",
+    "bytes": 788370,
+    "sha256": "8a39a255e54b0be480a279228457e533120f8f3c1fadccfb155cd3a0b859bbfb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_448.deflate",
+    "bytes": 1196392,
+    "sha256": "92a050a84acc6c108965e7efd013b2afae5e257d8cdbb31aba178be140d2c92b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_646.deflate",
+    "bytes": 1560951,
+    "sha256": "ce63d61d6d055ff973145b44c90d8cda28b9a90b94f6da10dc6daf91095d0161",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_1208.deflate",
+    "bytes": 1320366,
+    "sha256": "e14f41b6c176a0f9e21d8099764b00e07caf5002af737327c072d54275edcdf6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2057.deflate",
+    "bytes": 819730,
+    "sha256": "91ca2fe960ca2ac51f4ff2d3bd561f3d8c79a627371414a339b7ad2d06dbc383",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/r7_multicourt_s31.deflate",
+    "bytes": 1537810,
+    "sha256": "62ca3e6c54c6b1e1b08bd7e685d057feacb0c5721007e123a76da4a1afc690c4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_415.deflate",
+    "bytes": 1392706,
+    "sha256": "630831a53c2ef93dabd9c042de746da3f9f355b630a2ddc1c013c8f744a5820f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2035.deflate",
+    "bytes": 1567549,
+    "sha256": "a493cdc7c8a2c7c1af1c09d3651a221334abd54a4454d704ed0e05812e98d0bc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/sweep2/s2_2025.deflate",
+    "bytes": 1119164,
+    "sha256": "9037709857faaf697fe7c20a09c9cbf1cac894c1d7b673a0e80a8312a447586d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2217_red.deflate",
+    "bytes": 1125604,
+    "sha256": "788acb56d6dd6288e5817bae2b7bc1c20e2a33844b8e06fa9c67ec4e4dcfdc42",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/r7_batch_014.deflate",
+    "bytes": 2421119,
+    "sha256": "7b36baec8cbc2705d7bf0324a2db1bfcc2adb3ad6bd2c70e7e69c2661b02bed3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2186_light_blue.deflate",
+    "bytes": 1759227,
+    "sha256": "f0344626cef7a0b2a78321e1a015013d5aa9f86c37a41f26b79ad484bd131837",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/r7_batch_016.deflate",
+    "bytes": 2042996,
+    "sha256": "6ccdde70921d32589b1f7c18eca0b892182415cec94bbe448bee769d31c5405e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/r7_batch_006.deflate",
+    "bytes": 1998677,
+    "sha256": "d32ea75f004e3844ee45cdfc15f083c1032045f6a3253fb2b846d0b16e3c3e85",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/r7_default_s7.deflate",
+    "bytes": 3299095,
+    "sha256": "db8367bb8075a30152dceb4bafc55e4bcf131e4a6543792287adca5677479869",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2187_light_blue.deflate",
+    "bytes": 2036607,
+    "sha256": "ca11622a460f7c90910c85a45014f088ea180a2050b86abe7857cc5b6b517558",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/r7_batch_013.deflate",
+    "bytes": 3462131,
+    "sha256": "1b502dc387e3f24965d886f10c56c4ef2ee46ac541b81d1ef54a6ec9ab7f14f7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/manifest.json",
+    "bytes": 46947,
+    "sha256": "39154814b41eeaea6f0c8ec30ee139da6bb37986b9e8eec4371a9f2415cc482d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2216_red.deflate",
+    "bytes": 1206634,
+    "sha256": "f749235bbd0fa9f562481bb8338cb074a91f091224960aaa2382edad08c67f31",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/r7_batch_018.deflate",
+    "bytes": 2401885,
+    "sha256": "033541d515f1e557ddad30aea9412ae4abc5547f0f0119e26ae67ec738bc2117",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2157_yellow.deflate",
+    "bytes": 3236365,
+    "sha256": "7ac6785b2ca8fdd2bf949f2da52fdd27bb4865247a5d607fa80c212cf708906c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2247_orange.deflate",
+    "bytes": 1600742,
+    "sha256": "7f0d6788240157df5d4eb434a8b59a5b8658940171cffa3d2185a51cb7d65f47",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2246_orange.deflate",
+    "bytes": 1679687,
+    "sha256": "3cb863968ef55d71493acb6e459f4075c4b0a9a74b676a63810b0274fdc06c1e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/TestData/colour/s2_2156_yellow.deflate",
+    "bytes": 1337212,
+    "sha256": "385455341b6fc81457f06525f9fb8efa9db927e71cd0d0f666cb8604218a7333",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Sweep2ParityTests.swift",
+    "bytes": 3642,
+    "sha256": "a4375da227e5417a47c11fc35a78379ad7a3eaf3f768b82b253180ff0e988f51",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/RefineCameraTests.swift",
+    "bytes": 2167,
+    "sha256": "8b5916713819c8b45890c3eb91232c0eb01c1ef5bd857b0cf89f9456aee09607",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/ImageFixtureSupport.swift",
+    "bytes": 2603,
+    "sha256": "e3f6d769b62674be76a4744ac216bc0a789a142db8a34d72ebb2dc2189a28e14",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/FallbackTests.swift",
+    "bytes": 4238,
+    "sha256": "15e28ceb13bbc380dfb16f19f9eaba3af24d9dec3bc173b14cd2644c2bd11f10",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/PrimitiveTests.swift",
+    "bytes": 4973,
+    "sha256": "b02f1eddf49ea23c0d106dd596305680a9cf1ae44aed5d63eb8128e875084f42",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/GateTests.swift",
+    "bytes": 5501,
+    "sha256": "7f6385647514e86bbba2ca9c0c7f5fa60ed459a817ea5585bc954a4ca1d098fc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/FixtureSupport.swift",
+    "bytes": 3772,
+    "sha256": "cce9bbfc279874ae3cbd76e8737d3547640bbf1d4be6db33fce6f27d0b0115a1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/RealClipTests.swift",
+    "bytes": 4707,
+    "sha256": "de60a49931c2e0e287fce17270ab7bb9d728009bdaba7df5ffa00eda35753a7a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/TimingTests.swift",
+    "bytes": 2189,
+    "sha256": "ccf9058143abf64a1838f64aa102dab8b2c3b93afef96cf1e07d3377121aa6de",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/ManualCalibrationTests.swift",
+    "bytes": 3537,
+    "sha256": "95481fa1a4e985a56efb7f6397627d23cf1f8f885bc3f1e1f7e560e732bf63b2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/AutoTraceTests.swift",
+    "bytes": 8410,
+    "sha256": "5dd89a303b7fb71f620b5b3bff39b4defed340d80596d5572a215743bfc159ff",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/ColourLineTests.swift",
+    "bytes": 6544,
+    "sha256": "a9e757e165353c8b8421b2e022b1bcff439ebe7a680343812b655497afc1408c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_4_20_f3.deflate",
+    "bytes": 2187963,
+    "sha256": "05ac26645d2f17ccfd1edffc27d7251490a39ee7162859d4f88eaef329e3023f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/gate_blank.deflate",
+    "bytes": 4035,
+    "sha256": "312d05b7b78c975b0be14697ab89429942a92e3c2b2b268b95fd2aa6452ba1b5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_all_median.deflate",
+    "bytes": 1635115,
+    "sha256": "1d8ac1de5d6e7d977580eefea819ce0624c835dbc948e4a5264ad2114e159d76",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_case3_forced_f2.deflate",
+    "bytes": 893301,
+    "sha256": "d583e61968470cb869f64a10fa3b1d908369c7e05a7e453eaecc8ba9b2fd6c36",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/primitives.json",
+    "bytes": 402076,
+    "sha256": "a3ae4b7422eddd633433db1bed2f09cec85be7f24b4c919c6fdfdc7d13e012e1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/sim_301.deflate",
+    "bytes": 979187,
+    "sha256": "e6dc8832132b158355a427412b2a4d77e2e507e55a75fb6b25f4e161f399d99c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/gate_sweep1.deflate",
+    "bytes": 930533,
+    "sha256": "c69770d6a4759789113c6f239b9359f20927a28be4015b8cd4a64bae1585f6ee",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_4_20_f12.deflate",
+    "bytes": 2213652,
+    "sha256": "d99a7fc12b12375b3392e2cd2c3542a09e2ed0cd5606686745043d3aa50f8ae8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_all_f21.deflate",
+    "bytes": 2208356,
+    "sha256": "2348e5b90ef3e2509bfffefc4b370b7f59d98c9fc9be712da58cead9fd5969b6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/manual.json",
+    "bytes": 62369,
+    "sha256": "ab02da2392c0d58cbf6dba878c6fc79f6e5f8dee57b1851d75a21f0be91b87fb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/sim_300.deflate",
+    "bytes": 289660,
+    "sha256": "e62722ff01f933e29f60198c5004ad81536b0bd7e70bf1fc36075008188c241d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_4_20_median.deflate",
+    "bytes": 1672242,
+    "sha256": "406d621903f24ae62df093b1b071abdc2962ea794840c5a15589c2134f5d59a9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_all_f6.deflate",
+    "bytes": 2216029,
+    "sha256": "27517fa77b37d813ac632207e4df4ffec059c71e14a62662c0fe9473b82d6d08",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_case3_forced_f3.deflate",
+    "bytes": 889358,
+    "sha256": "cda8a60eece2045ceab909896faf09a0fe4de9cdf83e3e9b04b4ca3d88852f06",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_4_20_f18.deflate",
+    "bytes": 2214428,
+    "sha256": "0254b17150387351d5c79665e9098534ed4f603b087fbfe2acce9ec864f75734",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fallback.json",
+    "bytes": 5406,
+    "sha256": "8cf8b017a1f5422b698726857cd4e99b4a4159eb4812b486ba1c68b75f22f065",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_case3_forced_f1.deflate",
+    "bytes": 882829,
+    "sha256": "cc0422e3670f8ffacec2ee80f9810b64ccf314766a524522c47b89cfdfdd2d76",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/images.json",
+    "bytes": 188456,
+    "sha256": "af781c3d24b394b96008295b0db0bda43f402d679115553e1ddbc4858d9bf779",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_case3_forced_f0.deflate",
+    "bytes": 885047,
+    "sha256": "0841b0f4d148d87b758d97fae782559877c507814ffcef2bbae6f4e6bb182757",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/real.json",
+    "bytes": 35513,
+    "sha256": "6bc04a93d1dbd394984b48e64cff02b2eec8ddd840fc8e3f674a9ce7318be306",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/gate_sweep3.deflate",
+    "bytes": 978690,
+    "sha256": "1487e6657788b035f4d613aa6d7055f47322372203653d7c33c9083b13f38dc7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/gate_grid.deflate",
+    "bytes": 1647183,
+    "sha256": "6970cacc15328899389edf8f6f9be039873ef8ad2d22c37ec9e1f1c90f8d60b4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_case3_forced_f4.deflate",
+    "bytes": 891483,
+    "sha256": "a3ca8a01ac8092a958302ab2a0524777bd4679dc16d602b9b38ae3841b8f0675",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/real_match1.deflate",
+    "bytes": 750903,
+    "sha256": "5e40cdbc5bda4db606a2624294742285fb82ec497e719a1b78d1c68b1c7fb57f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/gates.json",
+    "bytes": 90275,
+    "sha256": "ebbd7350a2a1f3e77726b418f4cece12ccbd2eed54aafc6005c11289e3452420",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_all_f18.deflate",
+    "bytes": 2196832,
+    "sha256": "787f79870948248739572a076bcfb49ad75601970f9b3eb01387046d3269a33e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_all_f3.deflate",
+    "bytes": 2215100,
+    "sha256": "f1ccdef6af727ac0af81862deea0e74861c05bc789269d9e314889b46c269ee1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/real_match3.deflate",
+    "bytes": 636458,
+    "sha256": "79c31c344a758e46fc621bfd1ce1546da6039f0c10cc3c277aadca5640a2f7ca",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/sim_304.deflate",
+    "bytes": 568247,
+    "sha256": "fd7b018f3de26dd49a93924c1b7d806901765b7c0e8efba9a7f4c9a132fd1d43",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_4_20_f6.deflate",
+    "bytes": 2206291,
+    "sha256": "27e3f18b86a4e301fbec00b092ff861c553ef73aabef5274281b78cebc1b1b89",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_all_f12.deflate",
+    "bytes": 2222010,
+    "sha256": "c9e3f8ef5448a0435b7de9d66c6b511443d3a320e723edffd28488202c20b314",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/real_match2.deflate",
+    "bytes": 708696,
+    "sha256": "d3ce0c3176a6e635a5a09e3bd099467550a9661d1b681df7040fe6b7ef6ecae9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_case3_forced_median.deflate",
+    "bytes": 978690,
+    "sha256": "1487e6657788b035f4d613aa6d7055f47322372203653d7c33c9083b13f38dc7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Tests/ShuttlCourtTests/Fixtures/fb_still_4_20_f21.deflate",
+    "bytes": 2188680,
+    "sha256": "80e45af2a4984f8abf66cc44860c7a8dce49e6978dc5e490191fa373a591b496",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Hough.swift",
+    "bytes": 6470,
+    "sha256": "cd5e1ff788eb449b6c84fb1d24b458663826a09ba1a0943f8a33a6e644dd8b1d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/HypothesisScore.swift",
+    "bytes": 5445,
+    "sha256": "9292396ae5152cb0f0bcf52d8cc4e82c609e4581a7af9ba64754dd56719f0cd4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/VPFamilies.swift",
+    "bytes": 3870,
+    "sha256": "8554ca7a04a1db966ed92bf9abc9ae8b18799c8f5fcd094345d64a94aa828313",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Homography.swift",
+    "bytes": 6429,
+    "sha256": "d07f20716922707f11c9c924097ee71fdc4d5a60c5a587754fb760edfd241b26",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/ManualCalibration.swift",
+    "bytes": 3998,
+    "sha256": "2d0083cffb25fb289e0afa144be7b73b4fe7d82c5b522a22c4a91200d2156627",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/CourtCalibration.swift",
+    "bytes": 5603,
+    "sha256": "b4bca0da6fc267a41096d3994a302590578164a7f67e3e5c40c98645a02d7b29",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/TRF.swift",
+    "bytes": 8423,
+    "sha256": "ff470185789b2af864b29bc03706da6947edd0ce756bc343a2e99924a41a1416",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Matching.swift",
+    "bytes": 14240,
+    "sha256": "0c6d5b9815effeb173a33784c577c0044cd64bdb1523ff3409595dbe0ff8fc37",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/ModelCombos.swift",
+    "bytes": 4051,
+    "sha256": "42cd8ae6a7fee01a5a12e04998e8d357043c718bb81ea3019727723701661782",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/AutoFallback.swift",
+    "bytes": 5249,
+    "sha256": "47cabd5689f930403f0f2f636658c68be8d3f04cb282e8850682a99735616a83",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Lines.swift",
+    "bytes": 4002,
+    "sha256": "ae0c55cb3df82658dfc35345322e3337dbcf840cb188438cf2ba0f207026e5f8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/NumpyCompat.swift",
+    "bytes": 6736,
+    "sha256": "83f981277cba72adeca62ad9fd827c71d745da4f6410c4aa4bb44edda1558ca8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/AutoCalibration.swift",
+    "bytes": 25330,
+    "sha256": "d8c3f9bd5d8ca4dd512a59f8fa6b9b7bec276c50d0c6b282f11dfcc221c41997",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Features.swift",
+    "bytes": 7118,
+    "sha256": "a6565989537f48bde2025707f586670041c265bb43acb0fe3324e973d946745a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Hypotheses.swift",
+    "bytes": 3435,
+    "sha256": "8b26ff3908a10ad210e6e44c384cd8fb534caf522348fb0373cebcf579adaad3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/CalibCommon.swift",
+    "bytes": 5252,
+    "sha256": "0b3b46553a3bcb713301dbdbe1d41e167fdb05c22b75c1faedcd510f257f1b99",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/Lapack.swift",
+    "bytes": 2840,
+    "sha256": "c38d954cc0520a917efc6e7be0593c64ed2905014f5112ea3b8a00056e9b6d81",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/LeastSquares.swift",
+    "bytes": 4732,
+    "sha256": "57f117650154f192ba45c565e0f762a01194f57cbf86af31f242749f4d8492e5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlCourt/Sources/ShuttlCourt/ImageOps.swift",
+    "bytes": 15229,
+    "sha256": "36ff9d47b34a7a2010ca30004f06b4dcfd4e2a25ead3ca613d5b092d2c580dc6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Package.swift",
+    "bytes": 1620,
+    "sha256": "303fd24a55963366e4d664f0774d0470e705efb835eb325fe2930b3ebf3d1140",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Tests/ShuttlHitModelTests/PlayerOrderTests.swift",
+    "bytes": 2079,
+    "sha256": "b875b32803210a226343e89462be521bbc004dea7c395e784fb72d7c172d3ddf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/HitDecoder.swift",
+    "bytes": 7144,
+    "sha256": "7167d147f99f817e856f8fcfa8d90933c9a64224f085bd97cac6dd6e05a5e181",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/HitNetModel.swift",
+    "bytes": 12915,
+    "sha256": "f983d8a6df469926042cc88731809f73bd93524c3340aaa3e9d4ab9a163eb280",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/HitStage.swift",
+    "bytes": 8246,
+    "sha256": "b04097a3b75274d801130c035e4589aefaca73c148b387c376e451112c368b2b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/HitFeatures.swift",
+    "bytes": 10554,
+    "sha256": "1411d292eab3b5831284246d95e968554091c5de1e1869bec28bb4162d257102",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/Models/HitNetDetector.mlpackage/Manifest.json",
+    "bytes": 617,
+    "sha256": "fe700817619644a3d93cf9c10cf6e676f00547bcfd217983fe08840a86368360",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/Models/HitNetDetector.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+    "bytes": 106872,
+    "sha256": "30eaf46ff8f5ef498eafd89f0e85a62132029ec742e055eefae7bdfa00f67453",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHitModel/Sources/ShuttlHitModel/Models/HitNetDetector.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+    "bytes": 5408128,
+    "sha256": "b7d60980e0ef10e7152c82593751f7bcd512472598dd22e9a10794e94f422410",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Package.swift",
+    "bytes": 1233,
+    "sha256": "aa4e5b355ed97a12949e4d44ad397494794709ba2124bb75b1120ba8f0c0a48a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Tests/ShuttlRuntimeTests/RuntimeTestSupport.swift",
+    "bytes": 4601,
+    "sha256": "c5c4897126b1d6fdcd1cf1569bcaf7bcd8c722a76d79773192b2338302bafa53",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Tests/ShuttlRuntimeTests/AnalysisQueueTests.swift",
+    "bytes": 9643,
+    "sha256": "01e8d4976b67e4f933f4ddc0043dfc6c8bd1d2cae08b201035e54fe0903c79ed",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Tests/ShuttlRuntimeTests/BackgroundPolicyTests.swift",
+    "bytes": 3919,
+    "sha256": "a457750ed65383f21afe2086149e6e04aed9fb3951016e100efa4100f76c0f00",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Tests/ShuttlRuntimeTests/AnalysisArchiveTests.swift",
+    "bytes": 10363,
+    "sha256": "404655344ad4498566dbb521ae84649ff5652632ea906bf0ad064a2c9e810d6e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Tests/ShuttlRuntimeTests/PolicyTests.swift",
+    "bytes": 6946,
+    "sha256": "81553aaa68d60acf9317d90cbda4dfd06d49bd258922bd17019ab202e42d2409",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Tests/ShuttlRuntimeTests/DiagnosticsTests.swift",
+    "bytes": 5292,
+    "sha256": "64e2edae9ded65c40be61cd1d16c9ed3c7e547326d39a0e49aa981b7d4c5d193",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/ShuttlLog.swift",
+    "bytes": 635,
+    "sha256": "f9e359bf7d1997fe77ffc4186b6cede61e7c4988d867487783fab01103ab44dd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/BackgroundPolicy.swift",
+    "bytes": 5328,
+    "sha256": "a24978feeeda1f56edeb0b825a540b7e05749b83f6834ca9f6553fddba1123ba",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/MetricKitSink.swift",
+    "bytes": 1538,
+    "sha256": "44a8e8197ce01162098fcaf72d62d820c22f451b0e9b86f787a9022ebfefea00",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/AnalysisQueue.swift",
+    "bytes": 10825,
+    "sha256": "c2b690d71c873f027520619882906699e336769ded7ca9c4b3d9a85377c2dbef",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/AnalysisJobState.swift",
+    "bytes": 6343,
+    "sha256": "f38f2612da13f8a2ef9d73a0ef675918bd7d4af23bc261a4ddd532434e5623ff",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/ResourceSampler.swift",
+    "bytes": 5029,
+    "sha256": "55ce63c42b0c977520d9a759233fe6e772f3c30db778aa7f6de0ae1f7efabe83",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/AnalysisArchive.swift",
+    "bytes": 7259,
+    "sha256": "09cbfcab17d7990cf7a9cd7e567ee80aecf9fc44f3b18a5fe82144340c818cde",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/ThermalGovernor.swift",
+    "bytes": 5959,
+    "sha256": "8e2283fc21e788e0a83f159bd54f5c7a8783f8b02b9b803d311ea377dd982881",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/StorageGuard.swift",
+    "bytes": 4711,
+    "sha256": "1dbed7849b0af17ae5eda1d1a1398311b83cb9c1551b960c5179ebffe770baae",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlRuntime/Sources/ShuttlRuntime/DiagnosticsFileStore.swift",
+    "bytes": 2927,
+    "sha256": "8b69f415b1ab0f95a2a976fe08c4d030c5fdfde6cea5446faed126c9f27bc521",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Package.swift",
+    "bytes": 1029,
+    "sha256": "dd7aacd4e70072a727bbd121b2918c75e996765fa1f9dadbc90b6057ca6fa4d6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/ResultsTests.swift",
+    "bytes": 16181,
+    "sha256": "8985992886e228322104fa1aa2e28d9db4441ccaba9eb6f3b5f7ab3dba1efbc5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/FixtureSupport.swift",
+    "bytes": 1242,
+    "sha256": "3a566ab9b342969e0fc82de2e2167f5dd6ee91888af0cb6da3d9c9b9fcf433fb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_04_04_movement_far.json",
+    "bytes": 1495,
+    "sha256": "c3b17fb08d20a60362df46ba5e955c22abe8fa760857f1cfc2046bf8b8710dbe",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_03_03_movement_near.json",
+    "bytes": 1455,
+    "sha256": "67af57e37f3b0302b9af3b3532a73cee2d132c2e2f51b16d9d1203250909fc1b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_04_04_movement_near.json",
+    "bytes": 1403,
+    "sha256": "feae9421bb6204ccc6a6aff51f716711978e8d6f3bb5b815dc2a41368c14fb0f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_03_03_analysis.json",
+    "bytes": 173506,
+    "sha256": "6dcac067194851d46ca63726d8641700d7988f51f45168425be70e481a954b11",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_04_04_analysis.json",
+    "bytes": 113664,
+    "sha256": "75c6536dda19697ee9f5dc1b37eac8e19029fcf3d58a15c182c4f09558abbc13",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_03_03_summary.json",
+    "bytes": 266,
+    "sha256": "d9a24700068b82416938089236dd9493c50e1ea6ddecdb10721bea00ad889b92",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_03_03_movement_far.json",
+    "bytes": 1459,
+    "sha256": "9f4d041b6011081f5a3e6549005af7d67559d88040e4cca5df778a6c12ae5a26",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Tests/ShuttlResultsUITests/Fixtures/results_match2_1_04_04_summary.json",
+    "bytes": 239,
+    "sha256": "3b39b32b7c55b82f6f84fc1b3d0ff9be518a8b8aa48886dafb7da06910b4d07c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Sources/ShuttlResultsUI/ResultsViews.swift",
+    "bytes": 30880,
+    "sha256": "d828995ae37a68ecc55582f4ea6c8500111089e37cab1332f1a302a9f3db10a7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Sources/ShuttlResultsUI/ResultsDesign.swift",
+    "bytes": 6386,
+    "sha256": "bd356aa71410e3f667cbb759f4553f94d24ad363055dac88d4a4d751e9ff1a84",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Sources/ShuttlResultsUI/RallyCorrection.swift",
+    "bytes": 6751,
+    "sha256": "261aad5abb19d69d6216ddfd7e8cea90e9028ecda917b6b0b5a07210d24660c0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Sources/ShuttlResultsUI/ResultsCharts.swift",
+    "bytes": 11983,
+    "sha256": "8d2b01fb28df68a0348f6352ee3964c94bd49df862c1a154224241724b9e3e63",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlResultsUI/Sources/ShuttlResultsUI/ResultsModels.swift",
+    "bytes": 32770,
+    "sha256": "f9e1bd5f429e6543d85851a62b4fd699e4bfc688de0487571834b2e3bfbb299c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Package.swift",
+    "bytes": 1188,
+    "sha256": "e61bcc7f5e59073bff555208832109c81158d54749324c4ee4414c64ab60a676",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/FarCropsTests.swift",
+    "bytes": 3610,
+    "sha256": "73b56da1eeea99a8b96c5cdeb813689f653f7bda39c6d569d6af59cb54c3adfd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/TrackPlayersVisionTests.swift",
+    "bytes": 2703,
+    "sha256": "598e86c050e9e0cf4812465b838844b76e58a67420392081ea8bd9367b2df5df",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/FixtureSupport.swift",
+    "bytes": 4474,
+    "sha256": "570920a7b3f5861ef953487cc03b2c3c536d051ed5128c5f7a75f4812e77eedd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/VideoTests.swift",
+    "bytes": 4948,
+    "sha256": "4b309fc76e40f915da5eaf8f2ee3bf01d9f13595d3afc5b8d68483c3d1cc27bd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/PlayersResumeTests.swift",
+    "bytes": 11674,
+    "sha256": "f0c910d0f33e456f56162f4f696726a89d5b7affc9ab45ca4827595c2d9e4507",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/UnitParityTests.swift",
+    "bytes": 7332,
+    "sha256": "d6c336bfccf3dd3b5a673f3ff0bbf4294da221676646121e9f1dc346b166a5f6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/BehaviourTests.swift",
+    "bytes": 14616,
+    "sha256": "9f0a76345d60701aa94eac13d38001ee3dff987839a78896eeb6b16ec0623267",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/TrackingParityTests.swift",
+    "bytes": 7079,
+    "sha256": "7842063c9ed145a4446c16540b8346e77dc20bbaaa2e448b2aeb2c7dd9482648",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/Fixtures/synthetic.json",
+    "bytes": 3462989,
+    "sha256": "f9ebe227b0eb5fcd095a86591c57263b92e88e7a5ced199e833601ae36b69a1d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/Fixtures/misc.json",
+    "bytes": 67950,
+    "sha256": "4be3335c61e17d116c12674db5ea7916881ee516beeace481aac7a12cbf3e629",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/Fixtures/real.json",
+    "bytes": 926904,
+    "sha256": "65a2cbcaf5ab8b18f38b5e63655a520570ef98ac405b90958626268fd8608f11",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Tests/ShuttlPlayersTests/Fixtures/appearance.json",
+    "bytes": 179460,
+    "sha256": "350d251da5c8e1ef231fcd94e65ff3de250da9c8b367cb09ae444e91f3a24a99",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Models/RTMPoseM.mlpackage/Manifest.json",
+    "bytes": 617,
+    "sha256": "25687ec8646c4ebc40943e2c627b03cf48df55fa72a58cb1498095f481f9f4f8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Models/RTMPoseM.mlpackage/Data/com.apple.CoreML/model.mlmodel",
+    "bytes": 104669,
+    "sha256": "bfffa421d81ac179ddaec4d102a0630053bce59960bc74b8a5cb718ffe5a1462",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Models/RTMPoseM.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+    "bytes": 54322112,
+    "sha256": "69c613401452282d4503bc1c9a83b036e99701fd5205d10f56c760b974a4aa1c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/Emulate.swift",
+    "bytes": 4314,
+    "sha256": "fdb54d6d674d54a27fdbbd54b719fb9b3a657be986aed2b5b9fefbf87e51ec57",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/Dump.swift",
+    "bytes": 2489,
+    "sha256": "239ea7b86cea633a876499046e31d5b88aec19cb7bd77c525cc6697ffb2e4e9e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/LayoutReport.swift",
+    "bytes": 2479,
+    "sha256": "d37ce846c5f0919d70f9988d69039e4d5b9cf15d3ba2e66233178b0af4f3bd28",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/RefClip.swift",
+    "bytes": 3084,
+    "sha256": "c6fe4d057711de6131f32ae98aeca09ccc64705d9e10885e42939db8a5abc869",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/Layouts.swift",
+    "bytes": 5552,
+    "sha256": "e6f291caa5eb0aad686eddac93756b430d055759193ace3f40d478047ca920c8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/main.swift",
+    "bytes": 22236,
+    "sha256": "70a9f29e4e960dbe70460b726642570fdf723d0e5a0c47e8c4882dde3633ab3c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayersBench/Warp.swift",
+    "bytes": 3357,
+    "sha256": "c2f7b9568c4d840e6799efcf6f0f9f568ac67b93e2f5e540475d2685002c02d6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Geometry.swift",
+    "bytes": 6193,
+    "sha256": "dbe9dce8d3e9f4b325aa6a686b04c9d3d0e084ca92fc2f863c53f5e7f37c9cf4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Detector.swift",
+    "bytes": 5892,
+    "sha256": "82245d5ec613edc0352d88f9c2d41258cd63b0e9669dbf5aab8e4476543e4820",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Resume.swift",
+    "bytes": 8367,
+    "sha256": "4d67dd9c707a28e42b76f138fb84cbeeff8d79d59804bb077e955772c0fa64bf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/RTMPoseGeometry.swift",
+    "bytes": 12576,
+    "sha256": "ef7f516e5881dad6bcf41b7dc799df8b7b700acfa79c785e377ffc972c290c86",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/RTMPoseDetector.swift",
+    "bytes": 6405,
+    "sha256": "41698dec4c38dc7d5c0ac43a9b67122a540cac250d3eb53eb5174ed900d6b035",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Viterbi.swift",
+    "bytes": 8582,
+    "sha256": "fdd327d3df48749f3c41e8bf63102616ab703c2139260f5079694c8868db6ea2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Assemble.swift",
+    "bytes": 13221,
+    "sha256": "1beab60bf8044ef52164118d59cb219ee837fccaa018d8dac645bdb61c318aff",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/FarCrops.swift",
+    "bytes": 4705,
+    "sha256": "900911c70cb47916a092b49ad756052be5811e478b6815898bf75259ffb257cf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Config.swift",
+    "bytes": 2824,
+    "sha256": "47605a0e606ee6bce6173c986f90eaeec307eb6d6d0fb9c00e6f5767b5ce4d95",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/TrackPlayers.swift",
+    "bytes": 9510,
+    "sha256": "c3372a341fd4055d4ef2008f205e424f4df51ee9d643ca431cb8602989bcc4fe",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/NumpyCompat.swift",
+    "bytes": 7413,
+    "sha256": "e0802b46aca156952844f1ef16016fb8f8b6696d783aa2a881835c6fad9b5907",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/RTMPoseCoreML.swift",
+    "bytes": 9729,
+    "sha256": "14bebe9f6ac904c5201e2f3335c9724d11df89765a0a469076c96899308fdc3c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/VisionPoseDetector.swift",
+    "bytes": 15657,
+    "sha256": "9ef2513ff3f208622150b5c6792abda8394867318d3cc6b54c473280bf78679f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Doubles.swift",
+    "bytes": 12819,
+    "sha256": "68e6d1c0683138ac7613b62937776945f93d492ef7d7f3cb5b02522ae185d6a3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Candidates.swift",
+    "bytes": 9472,
+    "sha256": "2401bf1be8bdcb7cae44c17a9fc7fa30bce98268765ba01f83200bb96889f15d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/MovementStats.swift",
+    "bytes": 8290,
+    "sha256": "d352766080169ca452aee77cf6d09019db05fa843503102e8cb84acffd247a29",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlPlayers/Sources/ShuttlPlayers/Appearance.swift",
+    "bytes": 9006,
+    "sha256": "ecd255e34e4f9d50cd124d2233cae6cbacd90c83b69de305cf27a6434879d92c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Package.swift",
+    "bytes": 1399,
+    "sha256": "2a449a8e3f6abcb7de7fea0d33512755fa1b8d168b360f6fc03ba88b5b3195bf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/MetricsTests.swift",
+    "bytes": 9143,
+    "sha256": "e29b4f6368f93370d34164bdd4e6f31f50e64183b8082813d37a3841fdbeb64c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/MetricsParityTests.swift",
+    "bytes": 7686,
+    "sha256": "51d2631ebb0526c283f25d154564747ede9bf4879bbac52b980593f53f4de30c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/FixtureSupport.swift",
+    "bytes": 3446,
+    "sha256": "2794c716087bbfda2f68cec3754f6f0d8531e34d7d72a606a5f98275b0742939",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/BenchTests.swift",
+    "bytes": 8560,
+    "sha256": "80701947612ee013fdad1bdfee4719c76a44d68d2aeabe71a2404dd0b983bc71",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/SimReplayTests.swift",
+    "bytes": 14085,
+    "sha256": "e25cb652cfbf7285b3ae6e0b95ed885da708c55d79600c3db7bb4f62ce8f40e6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/SimNativeTests.swift",
+    "bytes": 14587,
+    "sha256": "f36de156012139e7811585ff93c06afe95caa03d2aad5a548638963ac342be45",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/metrics.json",
+    "bytes": 1595528,
+    "sha256": "07d47e55b85d5b34e9023a2dc094594cb8bb8a07596869ebf294f0822407c48d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/sim_replay.json",
+    "bytes": 1503968,
+    "sha256": "5b76d6316962de58ac1e6a63f329b4181028ac3562f313e642d6788185c1eda6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/bench_oracle.json",
+    "bytes": 99654,
+    "sha256": "4322c9ec5a0c5368259cfe1515380d3e7ca82d6065d20945b03121acad8c487b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/bench_e2e.json",
+    "bytes": 99173,
+    "sha256": "af1ecaf5a62a999def63149dd0b4438a9243530615022c39e11d411e7f2bca0e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/bench_real.json",
+    "bytes": 253348,
+    "sha256": "7c347541122363ccf1d605786f7ba79cab9be68f8ac7326f6623fa435dad1544",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/analysis_real/match1_1_06_03.candidates.json",
+    "bytes": 33236,
+    "sha256": "85003062e9521c6959ecf6fde37ad0594cae93935d5474f01d1b1916ef6888d9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/analysis_real/match1_1_05_03.candidates.json",
+    "bytes": 29547,
+    "sha256": "6f85eecf89fd114837825952a7146dda731c2cc700f48b0ca68c47987268a04a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/analysis_real/match1_1_05_02.candidates.json",
+    "bytes": 30964,
+    "sha256": "bd35067782f238456a065ae6852fdc81ce93f21154e5959db3ad5f1d14285c07",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/analysis_real/match1_1_05_02.json",
+    "bytes": 27125,
+    "sha256": "df00c511c6a886c31508652cdabb9615d0e0eb0490ec223c524c179c4e9bcb5a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/analysis_real/match1_1_05_03.json",
+    "bytes": 25472,
+    "sha256": "1819f2c6c46a1afd9343caf88c1f4b3fda086b3fd1fab4767f7b42d6056fc640",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Tests/ShuttlEvalTests/Fixtures/analysis_real/match1_1_06_03.json",
+    "bytes": 26527,
+    "sha256": "2c7153cd0a0e0af631b963db192a46e6739bbdfd2711bf22a1d85a408dab6ca3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/shuttl-bench/main.swift",
+    "bytes": 1296,
+    "sha256": "22432a20b56fd17b7ea344554c88ea91fb3a8aa10dbdf5bb8dc842a2e9faa32f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimCameras.swift",
+    "bytes": 5658,
+    "sha256": "abaef839ce46aec214ee6d58bc9668349b3ecd95fcc9ee72e7a1158b580f4e4c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/BenchData.swift",
+    "bytes": 20853,
+    "sha256": "948b6f4636720a68370737894f53ec2e41d0e9fc8ff9e28177ea49e163be9d8c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/BenchStages.swift",
+    "bytes": 14543,
+    "sha256": "653953ad1ef01490d11b5bb09396c802f7cb32f834a2103706829ef1c1500a6e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimNoise.swift",
+    "bytes": 8536,
+    "sha256": "a91d1a2ec14b460bce7f23dd087743e2432f958f117b8e611fb602c4e456053d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/BenchRunner.swift",
+    "bytes": 22828,
+    "sha256": "1005b46e6642cb61cbaea7347de7bebc0959fc00cde0c100530efe68f6cabd8a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimScenario.swift",
+    "bytes": 13812,
+    "sha256": "383538ebdca888c186cb8ed1fd995760c05d2eaed5a96808ace1d113964da7ef",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimRandom.swift",
+    "bytes": 12363,
+    "sha256": "d1bfa66800cf0142b502fcd7ad0c8cff76e30cee3c380ab5edd0221c483c1007",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/BenchCLI.swift",
+    "bytes": 16682,
+    "sha256": "cd437210e3025069f97d180bc248a222fdd735e385e3ae5b333385e4cf85f56b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimTruth.swift",
+    "bytes": 7532,
+    "sha256": "f536f31a2766bab71592750bc2246edafea449936a12662f2f8861794c3a23c5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/NumPy.swift",
+    "bytes": 9347,
+    "sha256": "e5985fc7e7c498ec8b3dfa141379391e5646703331f7542bb71e3107af6188cb",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimShots.swift",
+    "bytes": 9775,
+    "sha256": "192737dcd23d6d903941afa26b0b1afc3b01aed61922073205ea465ec8e9c31e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimEngine.swift",
+    "bytes": 21044,
+    "sha256": "294b0f058ac80bc3027d13f4946ced850025b1b71f38eca06c1d6f313fef25cc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/BenchPool.swift",
+    "bytes": 11081,
+    "sha256": "2cf4a0f703d36b24607feb744c3ac267a2dcedaaa0fde1ff04ac5aa5bd5b8499",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/SimFlight.swift",
+    "bytes": 15209,
+    "sha256": "df2ccdb48cbd1ffdf2cca5e43477a2b4db931188e475cf25d37591b5a4249dc0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/Metrics.swift",
+    "bytes": 29956,
+    "sha256": "b53f483b3c78499f28296d4a6bddaa98e70c0624a13d39cc4202fe3d8fd032c1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlEval/Sources/ShuttlEval/PyValue.swift",
+    "bytes": 15425,
+    "sha256": "b7685840e1633cdcf2d711bdd4fd38464faacdfe5b02f532668fc75cab7d2c28",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Package.swift",
+    "bytes": 772,
+    "sha256": "a3635e07000b81de92debbdead6b97fcdc513e265c8e2fa118d65ae98ad8a31a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/ParityTests.swift",
+    "bytes": 9751,
+    "sha256": "d1aca2d19662755691d3c4e9d089a01e9a4b0e2f268785170ae08d0224a16018",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/FixtureSupport.swift",
+    "bytes": 6067,
+    "sha256": "c21926aaa5a1f3f891aa049942047a488477be054e23e94941147a6cb637fac9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/TimingTests.swift",
+    "bytes": 1208,
+    "sha256": "18abc0e526580b32d94fd5610439f238d037e80c5daa97a8a9f5fa0bd32d23e1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Compare.swift",
+    "bytes": 5785,
+    "sha256": "67030dd5c832dcc0e5e7e3da01dfe8145b99a038cc59c4ee3e47066dd465e2fd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/BehaviourTests.swift",
+    "bytes": 9113,
+    "sha256": "e2e5542b5b032116a32be764a9bb8c92cd3cecda7f6a9a249de2f21cce51624c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_real.json",
+    "bytes": 835888,
+    "sha256": "f209f8fedd4b407cef1cc5ff6b896307cf506a7232985cddb86e2496b5641ef1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_learned.json",
+    "bytes": 111608,
+    "sha256": "b70dea8af105d6413464af9de3b182e7a0aa5b793998aa6847a11330304b8625",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_behind.json",
+    "bytes": 2033749,
+    "sha256": "2e231639bf15973532cb1941a6ddc0c6b9e2eb8175ebe06b1e84720f77e0a022",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_scen.json",
+    "bytes": 1567692,
+    "sha256": "df1e63aeb58e67bd1d16d61de9f06a0282754dbddc54a4092f96ddc77c0d7165",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_unit.json",
+    "bytes": 136294,
+    "sha256": "a59cb36f961aa41e845c89186be1ce1854e06f8c3bca1ced0abfc3e18fd3eea9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_model.json",
+    "bytes": 1138,
+    "sha256": "230eadf053e229df5d3c613b710263e6102b5a7fd5b10d9e56c3b4914b111310",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_sim_e2e.json",
+    "bytes": 946541,
+    "sha256": "6e6016e5427b6fac5fbd5b2e0b3439804d85b41c5e0a55e9dd3f64169ce9c294",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Tests/ShuttlHitsTests/Fixtures/hits_gap.json",
+    "bytes": 85264,
+    "sha256": "e22dc38ed6fa08ef7f7481338fd0e1921b7bd6132492e0dc93c2a194f05323b7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/HitConfig.swift",
+    "bytes": 9036,
+    "sha256": "7766b7cfb8ee5ce6dedec6cfef960dd3e39de6267f74ddf8a97c28bceb85ca21",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/Decoder.swift",
+    "bytes": 5721,
+    "sha256": "71e723c63859d171b2bb2bde7c002242ebe2e5b907cf9aa764bbd7dd1119df26",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/Observations.swift",
+    "bytes": 8032,
+    "sha256": "10a8a60393d68d50d7e312a3eea3d9059c30af95620536b1dbc9ffc1fee82af1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/NumpyCompat.swift",
+    "bytes": 7132,
+    "sha256": "c26d64a9da9445eed8df0725c425910bccc82356f7f23fa130b1f214c31f7151",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/Evidence.swift",
+    "bytes": 6550,
+    "sha256": "7726a2034368c823411fc7a0ad5b3df0e9c36ed2d29a8b8461424957385651bf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/LearnedModel.swift",
+    "bytes": 5773,
+    "sha256": "fce4bb46c029d3c36539113576b52236974b6d46009e498b5f30f294521e601f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/Candidates.swift",
+    "bytes": 12235,
+    "sha256": "8cb80340ccfeefcbe804d383532a46e4702816fb7e911b0982ada69fafd6bbc1",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/Scan.swift",
+    "bytes": 13688,
+    "sha256": "4e36040fc2f1cda269b45080ad7972697157e4ea673b6fb3f3a01746b954cdce",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Packages/ShuttlHits/Sources/ShuttlHits/Hits.swift",
+    "bytes": 10264,
+    "sha256": "22fb16c5cba494103cab375b94ad351e177907c225ea2d62179c041d8af2f280",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Design/AppTheme.swift",
+    "bytes": 2179,
+    "sha256": "e403b6b198dbe96b9500c2145f107b1c437359fbc12c5ded0368a3cbafd2a04f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Design/Components/ShuttlBadge.swift",
+    "bytes": 5390,
+    "sha256": "c463d1d8637ba98101b4add7e3bf57d277a9dc60282be97379f3996a800e518a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Platform/IdleTimerGuard.swift",
+    "bytes": 726,
+    "sha256": "9468faf018ce8bec23e88fbfb0c033b94c05c31e0fa2527941114d3ec2e523db",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Storage/Models.swift",
+    "bytes": 5880,
+    "sha256": "bd727a664529a1050347220ddc69409fdce52ca8341822db120bccf888157d16",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Storage/VideoStore.swift",
+    "bytes": 2897,
+    "sha256": "324d1f34a85bccb8967b7753684202cb7fbef60945d76c627ae8ce714bc99cd9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/ML/ShuttleModelSpec.swift",
+    "bytes": 4530,
+    "sha256": "7b05f41a1ee37705bf67c5d42e8ff9d91244a8b6abaa8d037fd8c7f338f02acc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/ML/MLInferenceEngine.swift",
+    "bytes": 15342,
+    "sha256": "00f4d1340dcc0e7633a9fd90dc5d7dfa8507b4bfceee25c3e2e1b552f2a9001c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/ML/HeatmapDecoder.swift",
+    "bytes": 8878,
+    "sha256": "d2b810c07ee7337dd9a925567b9d07a4dcfdb9f31caa321cb34b50bdcdb1e9c4",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/ML/ShuttleDetection.swift",
+    "bytes": 2072,
+    "sha256": "bf428e5ccfc18af6f6e6c5bed105782837d5a91c6e46751dfbdeec8ad06ebf2f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/ML/FramePreprocessor.swift",
+    "bytes": 8639,
+    "sha256": "6938d52c720e16219f03d0691c3d7f8dc4107fadf3bde7476ec91653eb5c88f3",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/CourtCalibration.swift",
+    "bytes": 15884,
+    "sha256": "d28a82e614143142ef9b8e8891d7360ec0c1e00047be8b59c395e0a45bc0b2d2",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/LiveTrackingPipeline.swift",
+    "bytes": 2896,
+    "sha256": "1d9e0779218989c03b36322e0fcb12cdb9dfa1ed1b90d59be0ddf650b3d4a87a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/DenseLinearAlgebra.swift",
+    "bytes": 6084,
+    "sha256": "4a87a45f64e8fa0f4db04536c03306046f1c3f41880f859f00b2f33e914bd9c5",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/CourtMapper.swift",
+    "bytes": 1808,
+    "sha256": "40ded6c977dc3b1ee93976cbd83f5e130500d2271d1b7ad43ba9cf9c8ef8047a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/FlightSpeedEstimator.swift",
+    "bytes": 6460,
+    "sha256": "27af8a02211d1c4bf2eabd8e2389616185c4780bf51f9d5db91566bde842cd0f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/TrackerPrimitives.swift",
+    "bytes": 5789,
+    "sha256": "a8efcce1a506adac7e7df1b15627ae8b04a37ec104231dc3fe16ae439323c9c8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/TrajectoryTracker+Flights.swift",
+    "bytes": 7595,
+    "sha256": "241ce2ae9e7476f525f502f385a433c38557009ef15fe5a6ed122beedad5b4f0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/TrajectoryTracker.swift",
+    "bytes": 5793,
+    "sha256": "c2eb101e215ba836632c9dd9aa7c042aad33e75d2858b0fe9b81d9b3d574382d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/TrackerTypes.swift",
+    "bytes": 4219,
+    "sha256": "3e16d5b82072b65b0625dc98be81d2b39d6beb08f12c242c441bdeba9025cb89",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/TrajectoryTracker+Step.swift",
+    "bytes": 6544,
+    "sha256": "8edb96b7400e953a13ccaa808016a4a9bef531f564c2713740dbd2db213d5507",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Tracking/CourtGeometry.swift",
+    "bytes": 2898,
+    "sha256": "5d669280b100f681d8e2fa8fcf5712874d011a2ef9b0e19f79794795049dc88d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Core/Rendering/TrajectoryRenderer.swift",
+    "bytes": 5787,
+    "sha256": "2af18ac9aeb1ce83840b681a1b3aaefce722357178b76e60d6ba3cee3d0f832a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/App/DemoAnalysis.swift",
+    "bytes": 9966,
+    "sha256": "4439ebb15ed0a32777a59330976f6b0fcb50cd1cae494aefb657e90e48681b81",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/App/DemoMode.swift",
+    "bytes": 18424,
+    "sha256": "b04e8f4da839f2fb322972c0982ebc83dd038d7f50968e3f5a1f1f2940884062",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/App/Orientation.swift",
+    "bytes": 2162,
+    "sha256": "69fcbeb1f9579f3887c6ec9ae12995ab22d95e88dabc8fed3eceda5546630f63",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/App/ContentView.swift",
+    "bytes": 10940,
+    "sha256": "7f1e4e060be75fc0b428bfabee6ad4ade18de1a98978322b5c86a0a29099f3e6",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/App/ShuttlApp.swift",
+    "bytes": 1430,
+    "sha256": "7d945a0dc77a7eea0a84b26d556f7dea6ab68a42e4a081a35daf4f69580ea61a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/App/AppIcon/GenerateIcon.swift",
+    "bytes": 2264,
+    "sha256": "41849142b3f49ac40bf79649593ee82b3f089f5a1a137e046976a622cabe821b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Statistics/StatisticsView.swift",
+    "bytes": 18155,
+    "sha256": "4222ffd186eed4a0d32b936f41cc9e61fb0368cc514ada745e68bd745805f5fc",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Auth/LoginView.swift",
+    "bytes": 15852,
+    "sha256": "3b4ef4246764a8892d7cdf5a073e158a986d7c0fb315919585c6c3c62150b147",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Match/CourtCalibrationFlow.swift",
+    "bytes": 5841,
+    "sha256": "46683b1bdad4c75b7092979bf094b2e0b787e0127f84865104e8229bc93836d7",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Match/Match+Display.swift",
+    "bytes": 6643,
+    "sha256": "fe1571dba49cce0b2cf8ffc7f515a75c92ef618306c5e21802b39e77d716054e",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Match/MatchProgressCards.swift",
+    "bytes": 8910,
+    "sha256": "03b9e939545ea7a214e81cbe94dd53ecd0a92df2aec260a886b7c814e0157e3b",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Match/MatchDetailView.swift",
+    "bytes": 27439,
+    "sha256": "89121e9e1657f2bfb639be89c42374fa9fa8920391513380ec636b711fd53333",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Match/MatchListView.swift",
+    "bytes": 13154,
+    "sha256": "96cb31ce7757cd1e6c01e9b912dad9747e34bbded8eea4a52951fe5715546bae",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Match/OnDeviceResults.swift",
+    "bytes": 4694,
+    "sha256": "71346e9db1e913655c40ec6a2c0fd33575943de1adc67850b7c2d1ec17bbba29",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Camera/CameraFraming.swift",
+    "bytes": 27917,
+    "sha256": "cb4132fe377355dc4665de1fe1db6d798864378edb5bf4d7a516f8b4601b9f5c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Camera/RecordingView.swift",
+    "bytes": 26426,
+    "sha256": "6371750d9c4172957505fe32b1817ffabf8f493050d0b0e4a25bbea4f6ebe59d",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Camera/RecordingViewModel.swift",
+    "bytes": 18708,
+    "sha256": "4533d57593703b36de70415309ca45300a6f95502dfbcdd6f645d7b94cd7ca70",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Camera/CaptureFormatSelector.swift",
+    "bytes": 3008,
+    "sha256": "9e4a1d9966a4ec5a6e5a896d2f3bdd4502f0edc28619715ed1f7de7fb2491390",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Camera/CameraSession.swift",
+    "bytes": 19940,
+    "sha256": "bc286da1dc76787415e8a383b033741af72ffaf4ce0b9792690080bd78584231",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/About/AcknowledgementsView.swift",
+    "bytes": 14077,
+    "sha256": "a45a0cbb749348c638e1d7eafe8d0b144b50fbf2d44ee9fe29d392b4faef4be8",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Replay/ReplayView.swift",
+    "bytes": 19049,
+    "sha256": "fae6e9353bafec3cc1c00b50590331b4d32870c585a4e956098f3375bce2a979",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Features/Replay/ReplayViewModel.swift",
+    "bytes": 10126,
+    "sha256": "4521506f66c0851103bc6623e3159ac0c15f0099d03783f09ce7e5bf18846dcd",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/MatchBackend.swift",
+    "bytes": 6279,
+    "sha256": "855e73d48e75a4f4ee014b38b08db248523815d64fe48694aa23ac03da03d4bf",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/DebugInbox.swift",
+    "bytes": 7199,
+    "sha256": "14ac9190c58b8bd07924a49e654871572ec09ebbfba954e37c9c9faa08ca1924",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/CourtLockBridge.swift",
+    "bytes": 791,
+    "sha256": "2be424f0b10af6ec69bae096cfdc8c556f1fe3e47cbe44610b409ffbdaa88c7c",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/MatchPipeline.swift",
+    "bytes": 57882,
+    "sha256": "228b0fabff4801f960ab33a62919be9c96b8c8fcbd3d22a4eeb043c94633dc80",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/OnDevice/OnDeviceAnalysis.swift",
+    "bytes": 9228,
+    "sha256": "ebee69591025dd8b98a34ccd7f733a469e84365a011275af3778a9fff655157f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/OnDevice/CalibrationAdvice.swift",
+    "bytes": 4026,
+    "sha256": "930ec3b2eaf6b2ad582ef47c4a3b5a523496431442fc7d8878068bd5ac2220d0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/OnDevice/MatchSidecars.swift",
+    "bytes": 5368,
+    "sha256": "7d4c66522348bb072856c824be94840837c1144c955159f350a929ed2312bf66",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/OnDevice/AdmissionLog.swift",
+    "bytes": 3183,
+    "sha256": "da8bc481f42e0a5539d24a16dfc5df7547b1ce75725053140608d3f516fc0835",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Auth/AuthService.swift",
+    "bytes": 3244,
+    "sha256": "65d1bf8e31af03c2766b30dde7ff29c936a8f5dfa128596051bec8e96425cd02",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Network/JobPollingService.swift",
+    "bytes": 9381,
+    "sha256": "3f17b8a78566df1280e027537ad33d3fdeead6d407c8cc4b6b4f80364d867ef9",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Network/UploadTransport.swift",
+    "bytes": 4040,
+    "sha256": "66ce839345ebfea6f936865c4fc7b3f761d195a80c4857e5b7111cc4402e06b0",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Network/RemoteCommandQueue.swift",
+    "bytes": 4459,
+    "sha256": "2891dbc8c985204de81e568edfe75f268cd1213da502f4917ddb76d68a2abd5f",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Network/APIClient.swift",
+    "bytes": 17840,
+    "sha256": "376bb57aab6d5eb8745bda28e6323b18d37f6aff48b7b6c436b0812225f4da3a",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Network/VideoUploadService.swift",
+    "bytes": 16114,
+    "sha256": "ef8120dab54ac53f73a6d9e1191664303c6f9fe93bf2acc2dae39681b0e74118",
+    "identical_to_original": true
+  },
+  {
+    "path": "iOS/Sources/Services/Network/CloudConfiguration.swift",
+    "bytes": 1092,
+    "sha256": "01eb0ba4b4269fa0526a278cf165fdf9f294eaacbe1d1b0709e90e4bb15d34e8",
+    "identical_to_original": true
+  }
+]

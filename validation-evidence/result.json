@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-11 Asia/Shanghai",
+  "xcodebuild": {
+    "exit_code": 0,
+    "result": "BUILD SUCCEEDED",
+    "configuration": "Debug",
+    "sdk": "iphonesimulator18.2",
+    "architectures": [
+      "x86_64",
+      "arm64"
+    ],
+    "signed": false,
+    "launched": false
+  },
+  "swift_tests": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "backend_tests": {
+    "passed": 34,
+    "failed": 0,
+    "warnings": 2,
+    "exit_code": 0
+  },
+  "source_input_check": {
+    "files": 703,
+    "bytes": 438468113,
+    "different": 0
+  },
+  "original_project_modified": false,
+  "full_clean_machine_restore_tested": false,
+  "phone_install_tested": false,
+  "gpu_training_tested": false,
+  "live_database_restore_tested": false
+}
