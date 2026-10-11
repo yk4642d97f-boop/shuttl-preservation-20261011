@@ -1,0 +1,29 @@
+{
+  "tool": "fragment_delivery.py",
+  "generated_at": "2026-10-11T09:09:20.324197+00:00",
+  "verified": true,
+  "tests_run": 18,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    "test_fragment_delivery.FragmentDeliveryTests.test_both_existing_backup_locks_block_without_index_mutation",
+    "test_fragment_delivery.FragmentDeliveryTests.test_committed_part_corruption_is_refused_even_with_good_parent",
+    "test_fragment_delivery.FragmentDeliveryTests.test_complete_true_is_published_only_after_durable_checksums",
+    "test_fragment_delivery.FragmentDeliveryTests.test_completed_conversion_is_idempotent_after_parent_reclaimed",
+    "test_fragment_delivery.FragmentDeliveryTests.test_concatenation_metadata_checksums_and_small_video_untouched",
+    "test_fragment_delivery.FragmentDeliveryTests.test_corrupt_parent_never_reclaimed",
+    "test_fragment_delivery.FragmentDeliveryTests.test_failed_full_metadata_write_keeps_parent",
+    "test_fragment_delivery.FragmentDeliveryTests.test_individual_valid_parts_with_wrong_concatenation_are_refused",
+    "test_fragment_delivery.FragmentDeliveryTests.test_interrupted_after_durable_part_before_index_save_resumes",
+    "test_fragment_delivery.FragmentDeliveryTests.test_interrupted_after_reclaim_before_checksums_resumes_without_parent",
+    "test_fragment_delivery.FragmentDeliveryTests.test_missing_parent_with_incomplete_metadata_is_refused",
+    "test_fragment_delivery.FragmentDeliveryTests.test_part_name_collision_and_unsafe_names_rejected_before_mutation",
+    "test_fragment_delivery.FragmentDeliveryTests.test_partial_file_from_interrupted_own_write_is_safely_recreated",
+    "test_fragment_delivery.FragmentDeliveryTests.test_reclaim_occurs_only_after_complete_durable_metadata_and_stored_hash",
+    "test_fragment_delivery.FragmentDeliveryTests.test_symlink_delivery_index_and_lock_are_refused",
+    "test_fragment_delivery.FragmentDeliveryTests.test_symlink_directory_refused",
+    "test_fragment_delivery.FragmentDeliveryTests.test_symlink_part_refused_without_touching_target",
+    "test_fragment_delivery.FragmentDeliveryTests.test_unknown_existing_part_is_verified_and_never_overwritten"
+  ],
+  "scope": "Temporary synthetic ciphertext only; no production conversion performed."
+}

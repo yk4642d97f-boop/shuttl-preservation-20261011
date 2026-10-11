@@ -21,7 +21,7 @@
 
 ## 在新电脑恢复
 
-先安装 GitHub CLI、age 和 Python 3.9+（macOS 可使用 Homebrew），登录拥有仓库访问权的 GitHub 账号。默认完整恢复会同时保留约 103 GB 密文、103 GB 解密归档与约 186 GB 原始文件；建议目标磁盘预留至少 **450 GB 可用空间**，可使用外置磁盘。不要把私有恢复密钥提交到本仓库。
+先安装 GitHub CLI、age 和 Python 3.9+（macOS 可使用 Homebrew），登录拥有仓库访问权的 GitHub 账号。大密文通过 **128 MiB 分片**传输，恢复工具会逐片校验、按序重组并再次核对原完整密文哈希。默认完整恢复会同时保留约 103 GB 密文分片、103 GB 解密归档与约 186 GB 原始文件；建议目标磁盘预留至少 **450 GB 可用空间**，可使用外置磁盘。工具每次只临时拼接一个父密文，解密结束后清理，不永久保存额外一整套合并密文。不要把私有恢复密钥提交到本仓库。
 
 ```sh
 brew install gh age python
@@ -42,9 +42,9 @@ python3 tools/recover_from_github.py \
 
 ## 宣传视频
 
-- `Shuttl-promo-v1.mp4`：竖屏宣传片，76 秒。
-- `Shuttl-promo-v2.mp4`：横屏宣传片，60 秒。
-- `Shuttl-demo-competition.mp4`：创意与程序演示，约 128 秒。
+- [Shuttl-promo-v1.mp4](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/download/backup-20261011/Shuttl-promo-v1.mp4)：竖屏宣传片，76 秒。
+- [Shuttl-promo-v2.mp4](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/download/backup-20261011/Shuttl-promo-v2.mp4)：横屏宣传片，60 秒。
+- [Shuttl-demo-competition.mp4](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/download/backup-20261011/Shuttl-demo-competition.mp4)：创意与程序演示，约 128 秒。
 
 它们作为普通视频资产保存在私有 Release 中，完整可编辑制作工程、音乐、分镜、截图和中间文件同时保存在加密归档中。
 

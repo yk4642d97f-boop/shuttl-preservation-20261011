@@ -18,6 +18,7 @@ DEFAULT_REPOSITORY = "yk4642d97f-boop/shuttl-preservation-20261011"
 DEFAULT_TAG = "backup-20261011"
 META_FILES = {"manifest.sqlite3", "create-report.json", "verify-report.json", "SEALED.json"}
 HEX = re.compile(r"[0-9a-f]{64}\Z")
+SAFE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*\Z")
 
 
 def emit(**value):
@@ -84,10 +85,22 @@ def read_index(path):
         raise ValueError("unsupported payload index format")
     if index.get("complete") is not True or index.get("private_key_included") is not False:
         raise ValueError("payload index must describe a complete delivery without a private key")
+    if index.get("transport") not in (None, "ciphertext-parts-v1"):
+        raise ValueError("unsupported payload transport")
     assets, names, paths = [], set(), set()
     ignored = []
     for item in index.get("assets", []):
+        if not isinstance(item, dict):
+            raise ValueError("payload asset must be an object")
+        name = item.get("name")
+        if not isinstance(name, str) or not SAFE_NAME.fullmatch(name):
+            raise ValueError("unsafe payload asset name")
+        if name in names:
+            raise ValueError("duplicate payload or part name in trusted index")
+        names.add(name)
         if item.get("standalone_video"):
+            if "parts" in item:
+                raise ValueError("standalone videos cannot declare encrypted archive parts")
             ignored.append(item.get("name", "unnamed-video"))
             continue
         name, relative = item.get("name"), item.get("restore_path")
@@ -97,13 +110,33 @@ def read_index(path):
             raise ValueError("unexpected or unsafe archive restore_path: " + relative)
         if name != PurePosixPath(relative).name + ".age":
             raise ValueError("encrypted asset name does not match its restore_path")
-        if name in names or relative in paths:
+        if relative in paths:
             raise ValueError("duplicate encrypted asset in trusted index")
         if not HEX.fullmatch(str(item.get("sha256", ""))) or not HEX.fullmatch(str(item.get("plaintext_sha256", ""))):
             raise ValueError("asset hashes must be lowercase SHA256 hex")
         if type(item.get("bytes")) is not int or item["bytes"] <= 0:
             raise ValueError("encrypted asset has invalid byte length")
-        names.add(name)
+        if "parts" in item:
+            parts = item["parts"]
+            if index.get("transport") != "ciphertext-parts-v1":
+                raise ValueError("parts require ciphertext-parts-v1 transport")
+            if not isinstance(parts, list) or not 1 <= len(parts) <= 999999:
+                raise ValueError("encrypted asset parts must be a nonempty bounded list")
+            total = 0
+            for ordinal, part in enumerate(parts, 1):
+                expected_name = name[:-4] + ".part-%06d.age" % ordinal
+                if not isinstance(part, dict) or part.get("name") != expected_name:
+                    raise ValueError("unsafe or nonconsecutive encrypted part name")
+                if part["name"] in names:
+                    raise ValueError("duplicate payload or part name in trusted index")
+                if not HEX.fullmatch(str(part.get("sha256", ""))):
+                    raise ValueError("part hash must be lowercase SHA256 hex")
+                if type(part.get("bytes")) is not int or part["bytes"] <= 0:
+                    raise ValueError("part has invalid byte length")
+                names.add(part["name"])
+                total += part["bytes"]
+            if total != item["bytes"]:
+                raise ValueError("part byte lengths do not sum to parent ciphertext length")
         paths.add(relative)
         assets.append(item)
     if not META_FILES.issubset(paths):
@@ -218,6 +251,52 @@ def decrypt_asset(asset, cipher, args, workdir, runner):
     emit(event="plaintext_decrypted_verified", asset=asset["name"])
 
 
+def verify_parts(asset, paths, output=None):
+    """Authenticate concatenated ciphertext without retaining another full copy."""
+    parent_hash, total = hashlib.sha256(), 0
+    for part, path in zip(asset["parts"], paths):
+        part_hash, part_bytes = hashlib.sha256(), 0
+        with path.open("rb") as source:
+            for block in iter(lambda: source.read(8 * 1024 * 1024), b""):
+                part_hash.update(block)
+                parent_hash.update(block)
+                part_bytes += len(block)
+                total += len(block)
+                if output is not None:
+                    output.write(block)
+        if part_bytes != part["bytes"] or part_hash.hexdigest() != part["sha256"]:
+            raise ValueError("Cached ciphertext part SHA256/size mismatch: " + part["name"])
+    if total != asset["bytes"] or parent_hash.hexdigest() != asset["sha256"]:
+        raise ValueError("Combined ciphertext SHA256/size mismatch: " + asset["name"])
+    emit(event="cipher_parts_verified", asset=asset["name"], parts=len(paths), bytes=total)
+
+
+def recover_asset(asset, args, workdir, runner):
+    if "parts" not in asset:
+        cipher = download_asset(asset, args, workdir, runner)
+        if not args.download_only:
+            decrypt_asset(asset, cipher, args, workdir, runner)
+        return
+    paths = [download_asset(part, args, workdir, runner) for part in asset["parts"]]
+    target = workdir / "archive" / asset["restore_path"]
+    plaintext_ready = not args.download_only and checked_file(target, asset["plaintext_sha256"])
+    if args.download_only or plaintext_ready:
+        # Download-only and resumed plaintext need a streaming hash, no merged file.
+        verify_parts(asset, paths)
+        if plaintext_ready:
+            emit(event="plaintext_reused", asset=asset["name"])
+        return
+    # Only one parent ciphertext exists transiently. Parts remain the durable
+    # resume cache; TemporaryDirectory also removes the merged file on failure.
+    with tempfile.TemporaryDirectory(prefix="assemble-", dir=workdir / "staging") as folder:
+        cipher = Path(folder) / asset["name"]
+        with cipher.open("xb") as output:
+            verify_parts(asset, paths, output)
+            output.flush()
+            os.fsync(output.fileno())
+        decrypt_asset(asset, cipher, args, workdir, runner)
+
+
 def validate_archive_metadata(workdir, assets):
     archive = workdir / "archive"
     created = json.loads((archive / "create-report.json").read_text())
@@ -281,12 +360,11 @@ def main():
             raise ValueError("another recovery process is using this workdir")
         runner = Runner(workdir)
         report.update(trusted_index_sha256=digest(args.index), archive_assets=len(assets),
+                      transport_assets=sum(len(a.get("parts", [a])) for a in assets),
                       ignored_standalone_videos=ignored, workdir=str(workdir))
         durable_json(workdir / "recovery-report.json", report)
         for asset in assets:
-            cipher = download_asset(asset, args, workdir, runner)
-            if not args.download_only:
-                decrypt_asset(asset, cipher, args, workdir, runner)
+            recover_asset(asset, args, workdir, runner)
         report["ciphertexts_verified"] = True
         if args.download_only:
             report.update(complete=True, restored=False, full_archive_restored=False)

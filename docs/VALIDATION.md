@@ -8,4 +8,8 @@
 
 首次补充恢复发现两个微信 ZIP 的原始权限是 0444；旧工具先恢复只读权限，导致 macOS 拒绝后续写入扩展属性。已修复为先恢复扩展属性，再应用最终权限与时间戳，并处理共享硬链接已变只读的情况。新增只读文件及硬链接回归在旧实现上复现失败、修复后通过；18 组归档工具检查与 8 组下载/解密/恢复检查全部通过。两份真实 ZIP 的权限、纳秒修改时间和 quarantine 属性回读均与原件一致；一份 ZIP 的系统管理属性 `com.apple.provenance` 在系统接受写入后仍变成新的值，不能声称恢复后该属性也逐字节相同。原始扩展属性字节已在只读归档清单中逐项核对保存，见 [只读元数据核对](../validation-evidence/supplement-readonly-metadata-check.json)。原失败目录及失败报告保留在本机保全目录，归档原始内容未因修复改变。
 
-完整归档已通过全量校验并封存：825,653 个普通文件、609,438 个数据块逐项验证成功，0 错误。报告见 `validation-evidence/verify-report.json`。加密交付共 209 个资产、103,733,079,102 字节；206 个加密资产全部通过实际解密和明文 SHA-256 回读，另有 3 个独立视频。见 `validation-evidence/encryption-report.json`。GitHub 远端下载回读由上传流程执行；以 Release 中 `github-verification.json` 的 complete=true 为完整上传成功条件。
+完整归档已通过全量校验并封存：825,653 个普通文件、609,438 个数据块逐项验证成功，0 错误。报告见 `validation-evidence/verify-report.json`。加密交付有 209 个逻辑资产、103,733,079,102 字节；其中 206 个完整加密资产全部通过实际解密和明文 SHA-256 回读，另有 3 个独立视频，见 `validation-evidence/encryption-report.json`。
+
+为支持不稳定网络，大密文改用 128 MiB 传输分片。原 206 个逻辑加密资产、原密文哈希和明文哈希不变，网络资产数量以最终 `payload-index.json` 的 `parts` 展开结果为准。分片恢复工具的真实 age + 模拟 gh 检查扩展到 **15 组并全部通过**，覆盖旧格式兼容、多片实际恢复及重跑、缺片、远端/缓存损坏、错误父密文哈希、序号/路径/名称冲突、临时合并文件清理和不复制私钥；见 `tools/recovery-test-report.json`。这些本地验证不代表分片已经上传。GitHub 远端下载回读由上传流程执行；以 Release 中 `github-verification.json` 的 complete=true 为完整上传成功条件。
+
+实际传输分片转换已经完成：203 个大密文文件拆分后，209 个逻辑资产对应 855 个实际载荷文件，总字节仍为 103,733,079,102。所有分片已按顺序串流重组校验，原始逻辑资产元数据完全未变；生产索引通过恢复工具解析。见 [分片转换报告](../validation-evidence/fragmentation-report.json)。网络上传、完整索引与 SHA256SUMS 共需验证 857 个资产；最终 GitHub 验证报告本身另外回读。

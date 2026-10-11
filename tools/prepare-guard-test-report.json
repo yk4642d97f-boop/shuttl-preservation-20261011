@@ -1,0 +1,16 @@
+{
+  "tool": "prepare_delivery.py",
+  "generated_at": "2026-10-11T09:12:16.410363+00:00",
+  "verified": true,
+  "tests_run": 5,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    "completed fragmented delivery refused with index, checksums and all part bytes unchanged",
+    "transport marker blocks interrupted conversion before first part metadata",
+    "parts metadata protected even without transport marker",
+    "empty parts metadata protected",
+    "legacy unsplit index continues to prior archive validation"
+  ],
+  "scope": "Temporary synthetic delivery fixtures only; no production delivery/source/key access."
+}

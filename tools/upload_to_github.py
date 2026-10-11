@@ -17,6 +17,8 @@ OWNER = 'yk4642d97f-boop'
 REPO = OWNER + '/shuttl-preservation-20261011'
 TAG = 'backup-20261011'
 GH_ENV = dict(os.environ, GH_HOST='github.com')
+PART_LIMIT = 128 * 1024 * 1024
+RESERVED_ASSETS = {'payload-index.json', 'SHA256SUMS', 'github-verification.json'}
 
 
 def run(args, **kwargs):
@@ -63,6 +65,90 @@ def local_asset(path, expected=None):
     if expected and (actual['sha256'] != expected['sha256'] or actual['bytes'] != expected['bytes']):
         raise RuntimeError('Local asset mismatch: ' + path.name)
     return actual
+
+
+def asset_metadata(asset):
+    if not isinstance(asset, dict):
+        raise RuntimeError('Asset metadata must be an object.')
+    name = asset.get('name')
+    if (not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', name)
+            or name in RESERVED_ASSETS):
+        raise RuntimeError('Unsafe or reserved asset name: ' + str(name))
+    if not isinstance(asset.get('sha256'), str) or not re.fullmatch(r'[0-9a-f]{64}', asset['sha256']):
+        raise RuntimeError('Invalid asset SHA256: ' + name)
+    if type(asset.get('bytes')) is not int or asset['bytes'] <= 0:
+        raise RuntimeError('Invalid asset byte length: ' + name)
+    return name
+
+
+def delivery_assets(index, delivery):
+    """Validate logical assets and return the actual files to transfer."""
+    if (not isinstance(index, dict) or index.get('format') != 'shuttl-delivery-v1'
+            or index.get('complete') is not True or index.get('private_key_included') is not False):
+        raise RuntimeError('A complete encrypted delivery index without the recovery private key is required.')
+    if 'transport' in index and index['transport'] != 'ciphertext-parts-v1':
+        raise RuntimeError('Unsupported delivery transport.')
+    assets = index.get('assets')
+    if not isinstance(assets, list) or not assets:
+        raise RuntimeError('Delivery must contain an asset list.')
+    logical_names = set()
+    for asset in assets:
+        name = asset_metadata(asset)
+        if name in logical_names:
+            raise RuntimeError('Duplicate logical asset name: ' + name)
+        logical_names.add(name)
+        if 'standalone_video' in asset and type(asset['standalone_video']) is not bool:
+            raise RuntimeError('standalone_video must be a boolean: ' + name)
+        if asset.get('standalone_video'):
+            if not name.endswith('.mp4') or 'parts' in asset:
+                raise RuntimeError('Standalone video must be an unsplit MP4: ' + name)
+        elif not name.endswith('.age'):
+            raise RuntimeError('Unencrypted non-video payload is forbidden: ' + name)
+
+    expected = {}
+    for asset in assets:
+        name = asset['name']
+        if 'parts' not in asset:
+            expected[name] = asset
+            local_asset(delivery / name, asset)
+            continue
+        if index.get('transport') != 'ciphertext-parts-v1':
+            raise RuntimeError('Split assets require ciphertext-parts-v1 transport.')
+        parts = asset['parts']
+        if not isinstance(parts, list) or not parts or len(parts) > 999999:
+            raise RuntimeError('Split asset must contain a nonempty ordered part list: ' + name)
+        combined, combined_size = hashlib.sha256(), 0
+        for number, part in enumerate(parts, 1):
+            part_name = asset_metadata(part)
+            if set(part) != {'name', 'bytes', 'sha256'}:
+                raise RuntimeError('Unexpected fields in ciphertext part: ' + part_name)
+            if part_name != name[:-4] + '.part-' + f'{number:06d}' + '.age':
+                raise RuntimeError('Part name or sequence differs from parent: ' + part_name)
+            if part_name in logical_names or part_name in expected:
+                raise RuntimeError('Duplicate or colliding transfer asset name: ' + part_name)
+            if part['bytes'] > PART_LIMIT:
+                raise RuntimeError('Ciphertext part exceeds 128 MiB: ' + part_name)
+            path = delivery / part_name
+            before = path.lstat()
+            if not stat.S_ISREG(before.st_mode):
+                raise RuntimeError('Part must be a regular file, not a symlink: ' + part_name)
+            part_hash, part_size = hashlib.sha256(), 0
+            with path.open('rb') as stream:
+                for block in iter(lambda: stream.read(8 * 1024 * 1024), b''):
+                    combined.update(block)
+                    part_hash.update(block)
+                    part_size += len(block)
+            after = path.lstat()
+            if (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns) != (
+                    after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns):
+                raise RuntimeError('Part changed while validating: ' + part_name)
+            if part_hash.hexdigest() != part['sha256'] or part_size != part['bytes']:
+                raise RuntimeError('Local ciphertext part mismatch: ' + part_name)
+            combined_size += part_size
+            expected[part_name] = part
+        if combined_size != asset['bytes'] or combined.hexdigest() != asset['sha256']:
+            raise RuntimeError('Reassembled ciphertext hash or size mismatch: ' + name)
+    return expected
 
 
 class RemoteDownloadError(RuntimeError):
@@ -123,23 +209,7 @@ def publish(base, workers=4):
     index_path = delivery / 'payload-index.json'
     local_asset(index_path)
     index = json.loads(index_path.read_text())
-    if (index.get('format') != 'shuttl-delivery-v1' or not index.get('complete')
-            or index.get('private_key_included') is not False):
-        raise RuntimeError('A complete encrypted delivery index without the recovery private key is required.')
-    expected = {}
-    for asset in index['assets']:
-        name = asset['name']
-        if (not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', name) or name in expected
-                or name in ['payload-index.json', 'SHA256SUMS', 'github-verification.json']):
-            raise RuntimeError('Unsafe, duplicate or reserved asset name: ' + name)
-        if not name.endswith('.age') and not (asset.get('standalone_video') and name.endswith('.mp4')):
-            raise RuntimeError('Unencrypted non-video payload is forbidden: ' + name)
-        if not re.fullmatch(r'[0-9a-f]{64}', asset['sha256']):
-            raise RuntimeError('Invalid asset SHA256: ' + name)
-        expected[name] = asset
-        local_asset(delivery / name, asset)
-    if not expected:
-        raise RuntimeError('Delivery must contain assets.')
+    expected = delivery_assets(index, delivery)
     for name in ['payload-index.json', 'SHA256SUMS']:
         expected[name] = local_asset(delivery / name)
     # Check the checksum file against the index, not merely against itself.

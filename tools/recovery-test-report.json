@@ -8,7 +8,14 @@
     "existing destination and unmanaged nonempty workdir rejected without touching originals",
     "corrupt remote download rejected before ciphertext promotion",
     "wrong age key fails explicitly before restore; exact command log retained",
-    "valid age ciphertext cannot bypass trusted plaintext SHA256 verification"
+    "valid age ciphertext cannot bypass trusted plaintext SHA256 verification",
+    "multipart download-only verifies each part and concatenated parent without writing merged ciphertext or requesting parents",
+    "real age multipart full restore and rerun preserve original bytes, reuse verified parts/plaintext, discard merged parents, and never copy key",
+    "damaged cached part is preserved, only that exact part redownloads, and parent ciphertext is reverified",
+    "corrupt remote part fails its own hash/size check before cache promotion",
+    "missing remote part fails explicitly and recovery resumes from verified earlier parts when it becomes available",
+    "correct individual parts cannot bypass the original parent ciphertext SHA256",
+    "multipart schema rejects omitted parts, unsafe/duplicate/conflicting names, invalid SHA256/sizes, sequence gaps/reordering, and missing transport before downloading"
   ],
   "python": "3.9.6",
   "network_used": false,

@@ -1,0 +1,32 @@
+{
+  "passed": 24,
+  "checks": [
+    "legacy v1 delivery uploads and reads every original asset back",
+    "split index without parent file validates joined hash, transfers actual parts, counts physical assets, and reuses existing small/video assets by readback",
+    "split resume preserves verified part checkpoints and reads final report back",
+    "corrupted part fails before any remote mutation",
+    "individually valid replacement part still fails parent concatenation SHA256",
+    "missing part fails even though the old whole asset exists remotely",
+    "symlink part is rejected",
+    "unsupported transport is rejected",
+    "parts without transport declaration are rejected",
+    "empty parts list is rejected",
+    "unsafe part path is rejected",
+    "nonconsecutive part numbering is rejected",
+    "invalid part hash is rejected",
+    "boolean part byte length is rejected",
+    "oversized part metadata is rejected",
+    "parent total byte mismatch is rejected",
+    "duplicate logical asset is rejected",
+    "part and logical asset name collision is rejected",
+    "unexpected fields in part record are rejected",
+    "split standalone video is rejected",
+    "incomplete index is rejected",
+    "checksum list missing one physical part is rejected",
+    "checksum list containing obsolete unsplit parent is rejected",
+    "part readback failure retries three times without reupload; resume completes every physical asset and final report"
+  ],
+  "network_used": false,
+  "formal_archive_touched": false,
+  "actual_fake_cli_processes": true
+}

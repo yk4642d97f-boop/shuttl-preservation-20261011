@@ -73,6 +73,23 @@ def decrypt_digest(path, identity):
 
 
 def prepare(base, identity, reclaim=False):
+    # Inspect the existing transport before accessing archive/key material or
+    # creating output. Fragmentation may have safely reclaimed logical parent
+    # ciphertexts; rebuilding the old index would discard their only part map.
+    delivery = base / 'delivery'
+    if delivery.is_symlink():
+        raise RuntimeError('Delivery directory must not be a symlink.')
+    index_path = delivery / 'payload-index.json'
+    if index_path.is_symlink():
+        raise RuntimeError('Delivery index must not be a symlink.')
+    previous = json.loads(index_path.read_text()) if index_path.exists() else {}
+    if (previous.get('transport') == 'ciphertext-parts-v1'
+            or any(isinstance(asset, dict) and 'parts' in asset for asset in previous.get('assets', []))):
+        raise RuntimeError(
+            'This delivery already uses ciphertext parts. Do not rerun prepare_delivery.py here; '
+            'continue with fragment_delivery.py, or prepare a new delivery in a new base directory. '
+            'The existing index and ciphertext parts have not been changed.')
+
     archive = base / 'archive'
     if archive.is_symlink() or not archive.is_dir():
         raise RuntimeError('Expected a generated archive directory, not a symlink.')
@@ -104,9 +121,6 @@ def prepare(base, identity, reclaim=False):
     if 'manifest.sqlite3' not in sealed_assets:
         raise RuntimeError('Sealed archive does not contain its manifest.')
 
-    delivery = base / 'delivery'
-    if delivery.is_symlink():
-        raise RuntimeError('Delivery directory must not be a symlink.')
     delivery.mkdir(exist_ok=True)
     sync_directory(base)
     recipient = subprocess.check_output(['age-keygen', '-y', str(identity)], text=True).strip()
@@ -114,10 +128,6 @@ def prepare(base, identity, reclaim=False):
     sources = [archive / n for n in ['manifest.sqlite3', 'create-report.json', 'verify-report.json', 'SEALED.json']]
     sources += [archive / p for p in sorted(sealed_assets) if p.startswith('volumes/')]
     expected_names = {p.name + '.age' for p in sources} | {name for name, _ in VIDEO_SOURCES}
-    index_path = delivery / 'payload-index.json'
-    if index_path.is_symlink():
-        raise RuntimeError('Delivery index must not be a symlink.')
-    previous = json.loads(index_path.read_text()) if index_path.exists() else {}
     if previous and (previous.get('format') != 'shuttl-delivery-v1' or previous.get('recipient') != recipient):
         raise RuntimeError('Existing delivery belongs to a different format or recovery key.')
     if previous.get('archive_seal_sha256', seal_hash) != seal_hash:

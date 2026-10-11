@@ -76,7 +76,7 @@ name=a[a.index('--pattern')+1]
 assert '*' not in name and '?' not in name and '/' not in name
 out=Path(a[a.index('--dir')+1])/name
 with Path(os.environ['TEST_GH_CALLS']).open('a') as f:f.write(name+'\\n')
-if os.environ.get('TEST_GH_CORRUPT')=='1':out.write_bytes(b'corrupted download')
+if os.environ.get('TEST_GH_CORRUPT')=='1' or os.environ.get('TEST_GH_CORRUPT_NAME')==name:out.write_bytes(b'corrupted download')
 else:shutil.copyfile(Path(os.environ['TEST_GH_REMOTE'])/name,out)
 ''')
         fakegh.chmod(0o700)
@@ -139,6 +139,134 @@ else:shutil.copyfile(Path(os.environ['TEST_GH_REMOTE'])/name,out)
                       "--identity", key, "--destination", base / "bad-plaintext-destination"], env, expected=2)
         assert "plaintext SHA256 mismatch" in result.stdout
         checks.append("valid age ciphertext cannot bypass trusted plaintext SHA256 verification")
+
+        # The real age ciphertext remains unchanged; only its transport is split.
+        split_remote = base / "remote-parts"
+        shutil.copytree(remote, split_remote)
+        split_index = json.loads(json.dumps(index))
+        split_index["transport"] = "ciphertext-parts-v1"
+        split_parents = []
+        for item in split_index["assets"]:
+            if item.get("restore_path") != "manifest.sqlite3" and not item.get("restore_path", "").startswith("volumes/"):
+                continue
+            payload = (remote / item["name"]).read_bytes()
+            width = max(1, len(payload) // 3)
+            item["parts"] = []
+            for ordinal, offset in enumerate(range(0, len(payload), width), 1):
+                part_name = item["name"][:-4] + ".part-%06d.age" % ordinal
+                part = split_remote / part_name
+                part.write_bytes(payload[offset:offset + width])
+                item["parts"].append({"name": part_name, "bytes": part.stat().st_size, "sha256": sha(part)})
+            assert len(item["parts"]) >= 3
+            split_parents.append(item)
+            (split_remote / item["name"]).unlink()
+        split_index_path = base / "split-index.json"
+        split_index_path.write_text(json.dumps(split_index))
+        split_calls_path = base / "split-gh-calls.txt"
+        split_env = dict(env, TEST_GH_REMOTE=str(split_remote), TEST_GH_CALLS=str(split_calls_path))
+        split_cache = base / "split-cache"
+        split_command = [sys.executable, helper, "--index", split_index_path, "--workdir", split_cache]
+        result = run(split_command + ["--download-only"], split_env)
+        split_report = json.loads(result.stdout.splitlines()[-1])
+        assert split_report["complete"] and split_report["ciphertexts_verified"]
+        expected_names = sorted(part["name"] for a in split_index["assets"] if not a.get("standalone_video")
+                                for part in a.get("parts", [a]))
+        split_calls = split_calls_path.read_text().splitlines()
+        assert sorted(split_calls) == expected_names
+        assert not list((split_cache / "staging").iterdir())
+        assert all(not (split_cache / "cipher" / a["name"]).exists() for a in split_parents)
+        checks.append("multipart download-only verifies each part and concatenated parent without writing merged ciphertext or requesting parents")
+        split_destination = base / "split-restored"
+        run(split_command + ["--identity", key, "--source-prefix", source, "--destination", split_destination], split_env)
+        assert sha(split_destination / "nested" / "keep.bin") == sha(source / "nested" / "keep.bin")
+        assert (split_destination / "omit.txt").read_text() == (source / "omit.txt").read_text()
+        split_commands_before = json.loads((split_cache / "commands.json").read_text())
+        run(split_command + ["--identity", key, "--source-prefix", source, "--destination", base / "split-restored-again"], split_env)
+        split_commands_after = json.loads((split_cache / "commands.json").read_text())
+        assert split_calls_path.read_text().splitlines() == split_calls
+        assert sum(c["purpose"].startswith("decrypt-") for c in split_commands_before) == sum(c["purpose"].startswith("decrypt-") for c in split_commands_after)
+        assert not list((split_cache / "staging").iterdir())
+        assert all(not (split_cache / "cipher" / a["name"]).exists() for a in split_parents)
+        key_bytes = key.read_bytes()
+        assert all(p.read_bytes() != key_bytes for p in split_cache.rglob("*") if p.is_file())
+        checks.append("real age multipart full restore and rerun preserve original bytes, reuse verified parts/plaintext, discard merged parents, and never copy key")
+
+        # Corrupt local data is retained under .invalid-* and redownloaded alone.
+        damaged = split_parents[0]["parts"][0]
+        (split_cache / "cipher" / damaged["name"]).write_bytes(b"preserve this corrupt cache")
+        run(split_command + ["--download-only"], split_env)
+        assert split_calls_path.read_text().splitlines()[len(split_calls):] == [damaged["name"]]
+        invalid = list((split_cache / "cipher").glob(damaged["name"] + ".invalid-*"))
+        assert len(invalid) == 1 and invalid[0].read_bytes() == b"preserve this corrupt cache"
+        checks.append("damaged cached part is preserved, only that exact part redownloads, and parent ciphertext is reverified")
+
+        corrupt_part_env = dict(split_env, TEST_GH_CORRUPT_NAME=damaged["name"])
+        corrupt_part_cache = base / "corrupt-part-cache"
+        result = run([sys.executable, helper, "--index", split_index_path, "--workdir", corrupt_part_cache,
+                      "--download-only"], corrupt_part_env, expected=2)
+        assert "SHA256/size mismatch" in result.stdout
+        assert not (corrupt_part_cache / "cipher" / damaged["name"]).exists()
+        checks.append("corrupt remote part fails its own hash/size check before cache promotion")
+
+        missing = split_parents[0]["parts"][1]
+        missing_path = split_remote / missing["name"]
+        missing_bytes = missing_path.read_bytes()
+        missing_path.unlink()
+        missing_cache = base / "missing-part-cache"
+        missing_command = [sys.executable, helper, "--index", split_index_path, "--workdir", missing_cache, "--download-only"]
+        result = run(missing_command, split_env, expected=2)
+        assert "Command failed" in result.stdout
+        assert (missing_cache / "cipher" / damaged["name"]).is_file()
+        assert not (missing_cache / "cipher" / missing["name"]).exists()
+        missing_path.write_bytes(missing_bytes)
+        calls_before_resume = split_calls_path.read_text().splitlines()
+        run(missing_command, split_env)
+        assert damaged["name"] not in split_calls_path.read_text().splitlines()[len(calls_before_resume):]
+        checks.append("missing remote part fails explicitly and recovery resumes from verified earlier parts when it becomes available")
+
+        wrong_parent = json.loads(json.dumps(split_index))
+        next(a for a in wrong_parent["assets"] if "parts" in a)["sha256"] = "f" * 64
+        wrong_parent_path = base / "wrong-parent-index.json"
+        wrong_parent_path.write_text(json.dumps(wrong_parent))
+        wrong_parent_cache = base / "wrong-parent-cache"
+        result = run([sys.executable, helper, "--index", wrong_parent_path, "--workdir", wrong_parent_cache,
+                      "--download-only"], split_env, expected=2)
+        assert "Combined ciphertext SHA256/size mismatch" in result.stdout
+        assert not list((wrong_parent_cache / "staging").iterdir())
+        result = run([sys.executable, helper, "--index", wrong_parent_path, "--workdir", wrong_parent_cache,
+                      "--identity", key, "--destination", base / "wrong-parent-restored"], split_env, expected=2)
+        assert "Combined ciphertext SHA256/size mismatch" in result.stdout
+        assert not list((wrong_parent_cache / "staging").iterdir())
+        assert not (base / "wrong-parent-restored").exists()
+        checks.append("correct individual parts cannot bypass the original parent ciphertext SHA256")
+
+        # Reject malformed or conflicting trusted manifests before any download.
+        invalid_variants = []
+        def invalid_variant(label, mutate):
+            value = json.loads(json.dumps(split_index))
+            parent = next(a for a in value["assets"] if "parts" in a)
+            mutate(value, parent)
+            invalid_variants.append((label, value))
+        invalid_variant("missing-part", lambda value, parent: parent["parts"].pop())
+        invalid_variant("unsafe-name", lambda value, parent: parent["parts"][0].update(name="../escape.age"))
+        invalid_variant("duplicate-part", lambda value, parent: parent["parts"].append(dict(parent["parts"][0])))
+        invalid_variant("bad-hash", lambda value, parent: parent["parts"][0].update(sha256="X" * 64))
+        invalid_variant("boolean-size", lambda value, parent: parent["parts"][0].update(bytes=True))
+        invalid_variant("zero-size", lambda value, parent: parent["parts"][0].update(bytes=0))
+        invalid_variant("sequence-gap", lambda value, parent: parent["parts"][0].update(name=parent["name"][:-4] + ".part-000002.age"))
+        invalid_variant("reordered-parts", lambda value, parent: parent["parts"].reverse())
+        invalid_variant("missing-transport", lambda value, parent: value.pop("transport"))
+        invalid_variant("ordinary-name-conflict", lambda value, parent: value["assets"].append({"name": parent["parts"][0]["name"], "standalone_video": True}))
+        invalid_variant("early-ordinary-conflict", lambda value, parent: value["assets"].insert(0, {"name": parent["parts"][0]["name"], "standalone_video": True}))
+        calls_before_invalid = split_calls_path.read_text()
+        for label, value in invalid_variants:
+            invalid_index = base / (label + "-index.json")
+            invalid_index.write_text(json.dumps(value))
+            invalid_cache = base / ("invalid-schema-" + label + "-cache")
+            run([sys.executable, helper, "--index", invalid_index, "--workdir", invalid_cache, "--download-only"], split_env, expected=2)
+            assert not invalid_cache.exists()
+        assert split_calls_path.read_text() == calls_before_invalid
+        checks.append("multipart schema rejects omitted parts, unsafe/duplicate/conflicting names, invalid SHA256/sizes, sequence gaps/reordering, and missing transport before downloading")
     report = {"passed": True, "checks": checks, "python": sys.version.split()[0], "network_used": False,
               "gh": "isolated fake CLI with exact argument assertions", "age": "real installed age and temporary external keys"}
     (HERE / "recovery-test-report.json").write_text(json.dumps(report, indent=2) + "\n")

@@ -15,7 +15,9 @@ python3 tools/recover_from_github.py --identity /secure/location/shuttl-recovery
 
 仓库和 release tag 默认分别是 `yk4642d97f-boop/shuttl-preservation-20261011`、`backup-20261011`，可通过 `--repository`、`--tag` 指定。可信清单默认读取克隆目录中的 `recovery/payload-index.json`，不会从网络下载未固定的清单来替代它。此文件将由交付流程在加密完成后写入仓库；缺失或 `complete` 不为 true 时恢复会停止。
 
-`recover_from_github.py` 按清单中的每个确切名称执行 `gh release download`，验证密文字节数及 SHA-256，再使用外部私钥 `age --decrypt` 解密每个资产，并验证明文 SHA-256。它核对封存资产列表，执行完整 `shuttl_backup.py verify`，最后恢复到指定新目录。不会重新 seal。GitHub token 和私钥内容不写入命令日志，不复制私钥。
+`recover_from_github.py` 按清单中的每个确切名称执行 `gh release download`。本次大密文采用 **128 MiB 传输分片**：先验证每片的字节数和 SHA-256，再按序串流验证原完整密文的 SHA-256，使用外部私钥 `age --decrypt` 解密后验证明文 SHA-256。它核对封存资产列表，执行完整 `shuttl_backup.py verify`，最后恢复到指定新目录。不会重新 seal。GitHub token 和私钥内容不写入命令日志，不复制私钥。
+
+索引仍使用 `shuttl-delivery-v1`，分片运输标记为 `transport: "ciphertext-parts-v1"`。每个逻辑资产保留原 `name`、密文 `bytes`/`sha256`、`plaintext_sha256` 和 `restore_path`；大资产另有有序 `parts` 数组，每项包含 `name`、`bytes`、`sha256`。片名为原 `.age` 名去掉后缀，再加 `.part-000001.age`，序号从 1 连续递增。所有片的长度之和必须等于原密文长度。分片不是可独立解密的 age 文件，需按清单顺序拼回原密文。旧版没有 `parts` 的索引仍可恢复。
 
 只下载并验证密文，可不提供私钥和恢复目录：
 
@@ -23,7 +25,7 @@ python3 tools/recover_from_github.py --identity /secure/location/shuttl-recovery
 python3 tools/recover_from_github.py --workdir /new/disk/shuttl-recovery-cache --download-only
 ```
 
-支持断点重跑：工作目录绑定同一仓库、tag 和可信清单哈希；已经存在且校验一致的密文/明文直接复用。损坏的缓存会改名保留为 `.invalid-*`，随后重新下载或解密。已存在的非空普通目录没有恢复标记时拒绝作为缓存目录。恢复目的目录必须不存在；失败后留下的目的目录不能直接覆盖，应排查后选择另一新目录。
+支持断点重跑：工作目录绑定同一仓库、tag 和可信清单哈希；已经存在且校验一致的密文分片/明文直接复用。损坏的缓存会改名保留为 `.invalid-*`，随后仅重新下载受损分片或重新解密。`--download-only` 逐片和串流校验完整密文，不落盘保存合并后的父密文。实际解密每次只临时拼接一个逻辑资产，解密结束后清理临时父密文；持久缓存仅保留分片、未分片小密文与明文归档。已存在的非空普通目录没有恢复标记时拒绝作为缓存目录。恢复目的目录必须不存在；失败后留下的目的目录不能直接覆盖，应排查后选择另一新目录。
 
 只恢复若干目录/文件时添加可重复 `--include-prefix`，值必须使用清单中的原电脑绝对路径：
 
@@ -31,7 +33,7 @@ python3 tools/recover_from_github.py --workdir /new/disk/shuttl-recovery-cache -
 python3 tools/recover_from_github.py --identity /secure/location/shuttl-recovery-key.txt --workdir /new/disk/shuttl-recovery-cache --destination /new/disk/shuttl-media-sample --include-prefix /Users/yangcong/Downloads/华北五省/promo2 --include-prefix /Users/yangcong/Downloads/shuttl.mp4
 ```
 
-范围选择只限制最后恢复出的文件；为了验证完整归档，helper 仍会下载、解密并验证全部归档资产。磁盘需要容纳密文缓存、明文归档以及选定恢复结果。`recovery-report.json` 记录 `full_archive_restored`；抽样恢复不会被标成完整恢复。完整命令与退出码保存在缓存的 `commands.json`，归档/恢复详细报告也保存在缓存。失败返回退出码 2，不会报告成功。
+范围选择只限制最后恢复出的文件；为了验证完整归档，helper 仍会下载、解密并验证全部归档资产。完整恢复需容纳约 103 GB 密文分片、103 GB 明文归档与 186 GB 原始文件，建议至少 **450 GB 可用空间**；该估算依赖每次仅临时拼接一个父密文并及时清理，不额外永久保留全部合并密文。损坏缓存和重复恢复目录会额外占用空间。`recovery-report.json` 记录 `full_archive_restored`；抽样恢复不会被标成完整恢复。完整命令与退出码保存在缓存的 `commands.json`，归档/恢复详细报告也保存在缓存。失败返回退出码 2，不会报告成功。
 
 单独宣传视频 `standalone_video` 不属于加密归档资产，helper 会明确跳过；原件仍包含在完整备份中。也可以直接下载 release 中的三个独立可播放 MP4：
 
@@ -138,4 +140,20 @@ SQLite `chunks` 表映射哈希到卷名、帧偏移和长度；`files` 保存�
 
 `python3 tools/test_backup.py` 创建隔离临时夹具，测试真实超过 64 MiB 的文件、重复文件与去重、二进制、空文件、嵌套中文路径、排除前缀、硬链、相对/绝对/悬空软链、权限/纳秒mtime/xattr、rootfs 映射、恢复逐文件 SHA-256、前缀抽样恢复及硬链原件在范围外时的独立恢复、拒绝覆盖、残帧恢复、丢失 SQLite 提交恢复、坏块检出、源文件消失/读取中变化报错、恶意路径拒绝、封存前非空WAL安全checkpoint及无WAL恢复、缩小阈值下的卷切换。结果见 `test-report.json`。测试只创建/删除自己的临时文件，不碰项目来源。
 
-`python3 tools/test_recovery.py` 使用隔离的模拟 gh CLI 和真实 age 加密/解密，不访问网络。验证从克隆目录自动定位可信清单、确切资产名、跳过独立视频、download-only、下载复用、全新解密目录首次只读校验、部分与完整恢复、拒绝覆盖、错误密文、错误私钥与错误明文哈希；结果见 `recovery-test-report.json`。
+`python3 tools/test_recovery.py` 使用隔离的模拟 gh CLI 和真实 age 加密/解密，不访问网络。验证旧版与分片索引、确切资产名、安全路径/序号/名称冲突/大小和、跳过独立视频、download-only 串流父哈希、缺片/损片/错误父哈希、缓存保留与重跑、临时父密文清理、全新解密目录首次只读校验、部分与完整恢复、拒绝覆盖、错误私钥与明文哈希、不复制私钥；结果见 `recovery-test-report.json`。
+
+## 在原电脑继续生成传输分片
+
+本次备份已完成完整归档验证与 age 加密回读验证。以下命令用于在原电脑的现有交付目录中生成 128 MiB 传输分片；新电脑直接使用前面的 GitHub 恢复命令。
+
+```sh
+python3 -B /Users/yangcong/Downloads/shuttl-preservation-20261011/tools/fragment_delivery.py --base /Users/yangcong/Downloads/shuttl-preservation-20261011 --reclaim-parent-ciphertexts
+```
+
+`fragment_delivery.py` 只读取生成的 `delivery` 密文，不读取工程来源、明文归档或恢复私钥。它按原密文顺序分片，验证每片及所有片拼接后的完整 SHA-256，持久化每个文件和包含完整分片信息的索引。指定 `--reclaim-parent-ciphertexts` 后，只有完成上述检查和持久化的原大密文才被删除，以控制磁盘占用；小密文与三个独立宣传/演示 MP4 不拆分、不回收。原逻辑资产的名称、大小、密文/明文哈希与恢复路径保持不变。
+
+**中断后重新执行完全相同的 fragment 命令即可继续。** 已写完但尚未记录的分片会先与父密文切片核对再复用；已回收父密文的资产按完整分片索引重新校验。已记录分片损坏或索引不完整且父密文缺失时明确失败，不覆盖损坏证据。转换期间 `payload-index.json` 为 `complete=false`，全部分片校验结束且新的 `SHA256SUMS` 持久化后，才最后发布 `complete=true`。校验表列出实际传输分片、未拆分文件及最终索引，不列已回收的父密文。
+
+**分片开始后不要在同一目录重跑 `prepare_delivery.py`。** 工具会在访问归档/私钥或写入前识别传输标记或任何 `parts` 字段，明确拒绝，并提示继续运行 `fragment_delivery.py`；需要重新准备交付时，应使用新的 base 目录。分片转换按固定顺序同时持有 `.prepare.lock` 和 `.upload.lock`，与准备、上传互斥，避免索引在上传中变化。
+
+`python3 tools/test_fragment_delivery.py` 的 18 项隔离测试覆盖完整拼接哈希、逐字节元数据保留、断点恢复、父文件回收时序、损坏拒绝、最终校验表、锁与软链安全；结果见 `fragmentation-test-report.json`。`python3 tools/test_prepare_delivery.py` 的 5 项回归测试证明已分片或刚开始分片的交付会被旧准备流程拒绝，索引、校验表和全部分片字节保持原样，旧版未分片索引仍进入原有验证流程；结果见 `prepare-guard-test-report.json`。这些测试只操作临时夹具。

@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "transport": "ciphertext-parts-v1",
+  "logical_assets": 209,
+  "transport_assets": 855,
+  "fragmented_assets": 203,
+  "reclaimed_parent_ciphertexts": 203,
+  "transport_bytes": 103733079102,
+  "logical_asset_metadata_unchanged": true,
+  "production_recovery_index_parse_passed": true,
+  "delivery_index_sha256": "1630a0770b735082975ec733fc5a7daa4c56723d8627eb042226888690775530"
+}
