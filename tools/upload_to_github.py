@@ -198,6 +198,13 @@ def checked_query(arguments):
     return result
 
 
+def remote_asset_uploaded(asset):
+    # An interrupted GitHub upload can retain the intended full size while its
+    # state is "starter" and its download returns 404. Older metadata fixtures
+    # omit state; when GitHub supplies it, require successful completion.
+    return 'state' not in asset or asset['state'] == 'uploaded'
+
+
 def publish(base, workers=4):
     if not isinstance(workers, int) or not 1 <= workers <= 8:
         raise ValueError('Upload workers must be an integer between 1 and 8.')
@@ -304,13 +311,16 @@ def publish(base, workers=4):
         for attempt in range(3):
             private_destination()
             try:
-                if (force_upload or not asset or asset['size'] != meta['bytes']
+                if (force_upload or not asset or not remote_asset_uploaded(asset)
+                        or asset['size'] != meta['bytes']
                         or (asset.get('digest') and asset['digest'] != 'sha256:' + meta['sha256'])):
                     local_asset(path, meta)
                     run(['gh', 'release', 'upload', TAG, str(path), '--repo', REPO, '--clobber'])
                     asset = get_assets().get(path.name)
                     if not asset:
                         raise RuntimeError('Uploaded asset not found: ' + path.name)
+                    if not remote_asset_uploaded(asset):
+                        raise RuntimeError('Remote upload is incomplete: ' + path.name)
                 downloaded, size = remote_sha(asset['id'])
                 if downloaded != meta['sha256'] or size != meta['bytes']:
                     raise RuntimeError('Remote round-trip mismatch: ' + path.name)
@@ -334,7 +344,7 @@ def publish(base, workers=4):
             asset = assets.get(name)
         with report_lock:
             saved = report['assets'].get(name)
-        if (asset and saved and saved.get('downloaded_sha256') == meta['sha256']
+        if (asset and remote_asset_uploaded(asset) and saved and saved.get('downloaded_sha256') == meta['sha256']
                 and saved.get('asset_id') == asset['id'] and saved.get('bytes') == meta['bytes']
                 and asset['size'] == meta['bytes']
                 and (not asset.get('digest') or asset['digest'] == 'sha256:' + meta['sha256'])):
@@ -378,7 +388,8 @@ def publish(base, workers=4):
     final_assets = get_assets()
     for name, meta in expected.items():
         asset = final_assets.get(name)
-        if not asset or asset['id'] != report['assets'][name]['asset_id'] or asset['size'] != meta['bytes']:
+        if (not asset or not remote_asset_uploaded(asset)
+                or asset['id'] != report['assets'][name]['asset_id'] or asset['size'] != meta['bytes']):
             raise RuntimeError('Remote asset changed after verification: ' + name)
     report.update(complete=True, git_commit=local_head, asset_count=len(expected),
                   verified_at_unix=time.time(), repository_url='https://github.com/' + REPO)

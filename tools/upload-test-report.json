@@ -1,9 +1,14 @@
 {
-  "passed": 24,
+  "passed": 29,
   "checks": [
     "legacy v1 delivery uploads and reads every original asset back",
     "split index without parent file validates joined hash, transfers actual parts, counts physical assets, and reuses existing small/video assets by readback",
     "split resume preserves verified part checkpoints and reads final report back",
+    "same-sized starter asset with saved proof is clobbered before readback and completes with a new verified uploaded asset",
+    "same-sized starter asset with no proof is clobbered before readback and completes with a new verified uploaded asset",
+    "new upload still marked starter retries upload three times without doomed downloads, fails incomplete, then resumes",
+    "final asset list changing a previously verified asset to starter blocks complete report and receipt, and next resume repairs it",
+    "legacy metadata without state remains compatible with saved proof reuse and final acceptance",
     "corrupted part fails before any remote mutation",
     "individually valid replacement part still fails parent concatenation SHA256",
     "missing part fails even though the old whole asset exists remotely",

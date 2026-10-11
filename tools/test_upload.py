@@ -53,9 +53,14 @@ if args[:1]==['api']:
  elif '/releases/tags/' in path:
   if not s['release_exists']:fail('HTTP 404')
   out({'id':11})
- elif '/releases/11/assets?' in path:out([list(s['assets'].values())])
+ elif '/releases/11/assets?' in path:
+  s['asset_list_calls']=s.get('asset_list_calls',0)+1
+  if s.get('starter_on_list_call')==s['asset_list_calls']:s['assets'][s['starter_on_list_name']]['state']='starter'
+  save();out([list(s['assets'].values())])
  elif '/releases/assets/' in path:
   ident=int(path.rsplit('/',1)[1]);asset=next(a for a in s['assets'].values() if a['id']==ident)
+  if 'state' in asset and asset['state']!='uploaded':
+   s.setdefault('starter_download_requests',[]).append(asset['name']);save();fail('HTTP 404 asset upload is incomplete')
   transfer('download',asset['name']);s['downloads'].append(asset['name']);save();sys.stdout.buffer.write((root/str(ident)).read_bytes())
  elif '/git/ref/heads/main' in path:out({'object':{'sha':s['remote_head']}})
  else:fail('unexpected api '+path)
@@ -67,7 +72,8 @@ elif args[:2]==['release','upload']:
  p=pathlib.Path(args[3])
  transfer('upload',p.name)
  s['next_id']+=1;ident=s['next_id'];b=p.read_bytes();(root/str(ident)).write_bytes(b)
- s['assets'][p.name]={'id':ident,'name':p.name,'size':len(b),'state':'uploaded','digest':'sha256:'+hashlib.sha256(b).hexdigest()};s['uploads'].append(p.name);save()
+ status='starter' if s.get('force_starter_upload_name')==p.name else 'uploaded'
+ s['assets'][p.name]={'id':ident,'name':p.name,'size':len(b),'state':status,'digest':None if status=='starter' else 'sha256:'+hashlib.sha256(b).hexdigest()};s['uploads'].append(p.name);save()
 elif args[:2]==['auth','setup-git']:pass
 else:fail('unexpected gh '+str(args))
 '''
@@ -181,6 +187,79 @@ def main():
         publish()
         assert state()['downloads'][before_downloads:] == ['github-verification.json']
         checks.append('split resume preserves verified part checkpoints and reads final report back')
+
+        # GitHub can preserve the full intended size for an interrupted starter
+        # upload. Its endpoint returns 404 despite the apparently matching size.
+        for with_saved_proof, item in zip((True, False), split['assets'][0]['parts'][:2]):
+            before = state()
+            asset = before['assets'][item['name']]
+            old_id = asset['id']
+            asset.update(state='starter', digest=None)
+            update(assets=before['assets'])
+            if not with_saved_proof:
+                report_path = base / 'github-verification.json'
+                saved_report = json.loads(report_path.read_text())
+                saved_report['assets'].pop(item['name'])
+                report_path.write_text(json.dumps(saved_report))
+            publish()
+            after = state()
+            assert after['assets'][item['name']]['id'] != old_id
+            assert after['assets'][item['name']]['state'] == 'uploaded'
+            assert after['upload_attempts'][item['name']] == before['upload_attempts'][item['name']] + 1
+            assert after['download_attempts'][item['name']] == before['download_attempts'][item['name']] + 1
+            assert not after.get('starter_download_requests')
+            assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+            checks.append('same-sized starter asset with ' + ('saved proof' if with_saved_proof else 'no proof')
+                          + ' is clobbered before readback and completes with a new verified uploaded asset')
+
+        item = split['assets'][0]['parts'][0]
+        before = state()
+        before['assets'][item['name']].update(state='starter', digest=None)
+        update(assets=before['assets'], force_starter_upload_name=item['name'])
+        try:
+            publish()
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError('New upload still marked starter was accepted')
+        after = state()
+        assert after['upload_attempts'][item['name']] == before['upload_attempts'][item['name']] + 3
+        assert after['download_attempts'][item['name']] == before['download_attempts'][item['name']]
+        assert not after.get('starter_download_requests')
+        assert not json.loads((base / 'github-verification.json').read_text())['complete']
+        assert not json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+        update(force_starter_upload_name=None)
+        publish()
+        assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+        checks.append('new upload still marked starter retries upload three times without doomed downloads, fails incomplete, then resumes')
+
+        # On a completed resume, the initial list is call one and the final
+        # acceptance list is call two. A state change must revoke acceptance.
+        before = state()
+        update(asset_list_calls=0, starter_on_list_call=2, starter_on_list_name=item['name'])
+        try:
+            publish()
+        except RuntimeError as error:
+            assert 'Remote asset changed after verification' in str(error)
+        else:
+            raise AssertionError('Final starter state was accepted')
+        after = state()
+        assert after['uploads'] == before['uploads']
+        assert not json.loads((base / 'github-verification.json').read_text())['complete']
+        assert not json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+        update(starter_on_list_call=None)
+        publish()
+        assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+        checks.append('final asset list changing a previously verified asset to starter blocks complete report and receipt, and next resume repairs it')
+
+        before = state()
+        for asset in before['assets'].values():
+            asset.pop('state', None)
+        update(assets=before['assets'])
+        publish()
+        assert state()['downloads'][len(before['downloads']):] == ['github-verification.json']
+        assert json.loads((base / 'github-upload-receipt.json').read_text())['complete']
+        checks.append('legacy metadata without state remains compatible with saved proof reuse and final acceptance')
 
         first = split['assets'][0]['parts'][0]
         first_path = delivery / first['name']
