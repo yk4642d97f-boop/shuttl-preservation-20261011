@@ -6,7 +6,9 @@
 
 ## 备份是否已经完成
 
-完整交付以 Release 中 `github-verification.json` 的 `complete: true` 为准，其中记录每个资产从 GitHub 实际下载后的 SHA-256。尚未出现该文件时，备份仍在进行，不能据此重置电脑。
+完整交付要求 Release 中的 `github-verification.json` 和上传流程生成的 `github-upload-receipt.json` 均为 `complete: true`。主报告记录每个资产从 GitHub 实际下载后的 SHA-256；回执中 `verification_report.downloaded_sha256` 和 `verification_report.bytes` 还必须分别与最终主报告文件自身的 SHA-256、字节数一致，证明报告本身也已从远端回读成功。
+
+主报告会在其自身上传、回读完成前先写入 `complete: true`，因此单看主报告不足以判定完成。缺少回执或上述校验不匹配时，不能据此重置电脑。
 
 ## 内容入口
 
