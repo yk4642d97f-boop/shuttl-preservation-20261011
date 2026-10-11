@@ -1,0 +1,47 @@
+@font-face{font-family:NY;src:url("file:///System/Library/Fonts/NewYork.ttf");font-weight:1 1000}
+@font-face{font-family:NY;src:url("file:///System/Library/Fonts/NewYorkItalic.ttf");font-style:italic;font-weight:1 1000}
+@font-face{font-family:SFMono;src:url("file:///System/Library/Fonts/SFNSMono.ttf");font-weight:1 1000}
+
+:root{
+  --paper:#F4EEE3; --paperDeep:#EAE1D1; --card:#FFFBF4;
+  --ink:#221B2E; --inkSoft:#5B5268; --inkFaint:#8C8397; --rule:rgba(34,27,46,.14);
+  --tomato:#F2542D; --cobalt:#2F4BDE; --pistachio:#B9D66A; --lilac:#C7B6F2;
+  --butter:#F7D95C; --flamingo:#FF7AB6; --tomatoText:#BE3417;
+  --night:#15121C; --nightRaised:#221D2B; --courtNight:#1F4A3A;
+}
+html,body{margin:0;padding:0;background:#000;overflow:hidden}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--paper);
+  color:var(--ink);font-family:"PingFang SC",-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+#world{position:absolute;inset:0}
+.scene{position:absolute;inset:0;display:none;overflow:hidden}
+#grain{position:absolute;inset:0;background:url(../assets/grain.png);mix-blend-mode:multiply;opacity:.6;pointer-events:none;z-index:900}
+#nightgrain{position:absolute;inset:0;background:url(../assets/grain.png);mix-blend-mode:screen;filter:invert(1);opacity:.18;pointer-events:none;z-index:899}
+
+.abs{position:absolute;left:0;top:0}
+.fill{position:absolute;inset:0}
+
+/* Display Chinese: PingFang at its heaviest, thickened with a stroke (as the app's black serif falls back to). */
+.zh{font-family:"PingFang SC";font-weight:600;line-height:1.02;letter-spacing:-.045em;white-space:nowrap;
+  -webkit-text-stroke:.03em currentColor}
+.zh .m{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .01em .04em}
+.zh .ch{display:inline-block;will-change:transform}
+.ny{font-family:NY;font-weight:900;font-variant-numeric:tabular-nums;line-height:.86;letter-spacing:-.03em;white-space:nowrap}
+.nyi{font-family:NY;font-style:italic;font-weight:900;white-space:nowrap}
+.mono{font-family:SFMono;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.body{font-family:"PingFang SC";font-weight:500}
+
+/* App UI pieces (ShuttlDesign) */
+.card{background:var(--card);border:2.5px solid var(--ink);border-radius:22px;box-shadow:0 4px 0 var(--ink)}
+.sticker{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1.25px solid var(--ink);border-radius:999px;
+  font-family:"PingFang SC";font-weight:600;font-size:12px;white-space:nowrap}
+.chipS{display:inline-block;font-family:"PingFang SC";font-weight:700;font-size:10px;padding:2px 6px;border:1px solid var(--ink);border-radius:99px;transform:rotate(-3deg);white-space:nowrap}
+.lab{font-family:SFMono;font-weight:600;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--inkSoft);white-space:nowrap}
+.ttl{font-family:NY;font-weight:900;white-space:nowrap}
+.bead{display:inline-block;width:11px;height:11px;border-radius:50%;border:1px solid var(--ink);box-sizing:border-box;margin-right:3px}
+
+/* Flat printed phone: an ink outline, no metal — the film stays in the riso world. */
+.phone{position:absolute;left:0;top:0;will-change:transform}
+.phone .body{position:absolute;inset:0;border-radius:96px;background:var(--ink)}
+.phone .scr{position:absolute;inset:16px;border-radius:82px;overflow:hidden;background:var(--paper)}
+.phone .island{position:absolute;left:50%;top:30px;width:150px;height:44px;margin-left:-75px;border-radius:30px;background:var(--ink);z-index:50}
+.phone .vp{position:absolute;left:0;top:0;width:393px;height:852px;transform-origin:0 0}

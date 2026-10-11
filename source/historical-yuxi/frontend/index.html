@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#131316">
+  <meta name="description" content="羽析：上传手机拍的羽毛球比赛视频，AI 逐帧追踪羽毛球，自动切出每个回合、认出每一拍，并像鹰眼一样判定落点。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="羽析">
+  <meta property="og:title" content="羽析 · 羽毛球比赛 AI 分析">
+  <meta property="og:description" content="拍一段球，看清每一拍：回合、击球、落点、跑动，一次分析全部生成。">
+  <title>羽析 · 羽毛球比赛 AI 分析</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preload" href="fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <div id="app"></div>
+  <noscript><p style="padding:40px;font:16px/1.7 sans-serif;color:#fff">羽析需要开启 JavaScript 才能运行。</p></noscript>
+  <script src="motion.js"></script>
+  <script src="court.js"></script>
+  <script src="core.js"></script>
+  <script src="home.js"></script>
+  <script src="match.js"></script>
+  <script src="challenge.js"></script>
+  <script src="flow.js"></script>
+  <script>route();</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environment / secrets
+.env
+*.env.local
+
+# ML model weights (large binaries — track with Git LFS if needed)
+backend/ml/**/*.pt
+backend/ml/**/*.pth
+backend/ml/**/*.onnx
+iOS/Resources/Models/*.mlpackage
+
+# Xcode
+*.xcworkspace/
+*.xcuserstate
+xcuserdata/
+DerivedData/
+*.ipa
+*.dSYM.zip
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Node (if scripts tooling is added later)
+node_modules/
+
+# Logs
+*.log

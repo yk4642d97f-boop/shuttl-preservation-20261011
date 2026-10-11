@@ -1,0 +1,27 @@
+{
+  "scan_date": "2026-10-11 Asia/Shanghai",
+  "scope": "source text browsing snapshot only; original encrypted archive audited separately",
+  "gitleaks_version": "8.30.1",
+  "gitleaks_default_rules": true,
+  "gitleaks_ignore_allow_comments": true,
+  "gitleaks_final_findings": 0,
+  "supplementary_candidates_reviewed": 30,
+  "supplementary_unresolved": 0,
+  "private_key_headers_found": 0,
+  "extra_signed_query_candidates_reviewed": 2,
+  "extra_signed_query_unresolved": 0,
+  "ios_swift_source_files": 412,
+  "ios_swift_missing_from_snapshot": 0,
+  "content_files": 1058,
+  "content_bytes": 8679496,
+  "files_changed_from_original": [],
+  "generated_files": [
+    "README.md",
+    "SANITIZATION.md",
+    "SOURCE-MANIFEST.json",
+    "SCAN-RESULT.json"
+  ],
+  "excluded_downloaded_third_party_html_files": 15,
+  "uploaded": false,
+  "build_or_runtime_restoration_tested": false
+}

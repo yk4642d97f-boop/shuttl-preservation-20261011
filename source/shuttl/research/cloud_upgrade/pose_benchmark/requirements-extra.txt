@@ -1,0 +1,9 @@
+# Research-only extras on top of the prepared backend/cloud model environment.
+# Keep torch 2.4.1 / torchvision 0.19.1 and exactly one ONNX Runtime variant.
+# These pins were exercised on macOS CPU, not yet on a fresh Linux/CUDA host.
+numpy==1.26.4
+transformers==4.51.3
+tokenizers==0.21.4
+safetensors==0.5.3
+huggingface-hub==0.30.2
+torchinfo==1.8.0

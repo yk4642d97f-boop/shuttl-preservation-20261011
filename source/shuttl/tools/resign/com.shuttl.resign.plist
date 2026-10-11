@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.shuttl.resign</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/yangcong/Library/Application Support/ShuttlResign/resign.sh</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SHUTTL_PROJECT_ROOT</key>
+        <string>/Users/yangcong/Downloads/华北五省</string>
+    </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StartInterval</key>
+    <integer>21600</integer>
+    <!-- StartInterval firings are dropped while the Mac sleeps; calendar firings are
+         coalesced and run on wake. A check that needs no refresh takes < 1 s. -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Hour</key><integer>0</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>3</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>12</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>15</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>23</integer></dict>
+        <dict><key>Hour</key><integer>21</integer><key>Minute</key><integer>23</integer></dict>
+    </array>
+    <key>Nice</key>
+    <integer>10</integer>
+    <key>LowPriorityIO</key>
+    <true/>
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>StandardOutPath</key>
+    <string>/Users/yangcong/Library/Logs/shuttl-resign-launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yangcong/Library/Logs/shuttl-resign-launchd.err.log</string>
+</dict>
+</plist>
