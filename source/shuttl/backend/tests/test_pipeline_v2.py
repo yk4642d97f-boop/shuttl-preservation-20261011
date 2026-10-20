@@ -49,6 +49,19 @@ def test_hitnet_failure_and_doubles_are_explicit(video, stubs, monkeypatch):
     assert 'hitnet' not in res.diagnostics['stages']
 
 
+def test_hitnet_requires_calibration(video, stubs, monkeypatch):
+    from app.services.tracking import hitnet
+    mods, _ = stubs
+    monkeypatch.setattr(mods["court_calibration"], "calibrate_from_frames",
+                        lambda frames, size, doubles_hint=None: None)
+    monkeypatch.setattr(hitnet, 'load', lambda *a: pytest.fail('HitNet must not run uncalibrated'))
+    res = analyze_video(video, PipelineOptions(hitnet_weights='candidate.pt'))
+    assert res.camera is None and res.hits
+    assert res.diagnostics['hit_model'] == {'requested': 'hitnet_single_v2', 'used': 'rules',
+                                            'fallback_reason': 'calibration_required'}
+    assert 'hitnet' not in res.diagnostics['stages']
+
+
 @pytest.fixture
 def video(tmp_path) -> str:
     path = str(tmp_path / "clip.mp4")

@@ -199,6 +199,11 @@ def _detect_hits(res: MatchAnalysis, opts: PipelineOptions, st: _Stages, rules):
         _, multiple = hitnet.player_index(res.players)
         if opts.doubles or multiple:
             diag["fallback_reason"] = "doubles_not_validated"
+        elif res.camera is None:
+            # Four of HitNet's inputs are the players' court positions, which only a
+            # calibrated camera provides. Without them the checkpoint is far below the rules
+            # (validation match 041: F1@±2 0.967 → 0.309 with foot positions removed).
+            diag["fallback_reason"] = "calibration_required"
         else:
             def learned():
                 model = hitnet.load(opts.hitnet_weights, opts.device or "cpu")
