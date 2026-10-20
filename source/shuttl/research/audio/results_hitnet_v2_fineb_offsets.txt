@@ -1,0 +1,14 @@
+rules_or_pipeline det − label, top offsets: [(7, 51), (8, 40), (6, 34), (4, 30), (9, 26), (10, 23)]  n 313
+   median 7.0  IQR [5. 9.]
+hitnet det − label, top offsets: [(8, 25), (6, 22), (7, 21), (5, 16), (9, 15), (4, 14)]  n 165
+   median 7.0  IQR [5. 9.]
+
+re-score with labels shifted by +7 frames (diagnostic only):
+0044 {'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 7, 'lag_ms': 0.0} | rules_or_pipeline F1 0.494 | hitnet F1 0.375 | hitnet_no_foot F1 0.282 | hitnet_audio F1 0.375
+0045 {'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 4, 'lag_ms': 0.0} | rules_or_pipeline F1 0.562 | hitnet F1 0.402 | hitnet_no_foot F1 0.242 | hitnet_audio F1 0.402
+0046 {'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 5, 'lag_ms': 0.0} | rules_or_pipeline F1 0.483 | hitnet F1 0.295 | hitnet_no_foot F1 0.266 | hitnet_audio F1 0.295
+0047 {'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 14, 'lag_ms': 0.0} | rules_or_pipeline F1 0.550 | hitnet F1 0.549 | hitnet_no_foot F1 0.289 | hitnet_audio F1 0.549
+pooled rules_or_pipeline  P 0.528 R 0.542 F1 0.535 (181/343/334)
+pooled hitnet             P 0.612 R 0.302 F1 0.405 (101/165/334)
+pooled hitnet_no_foot     P 0.314 R 0.222 F1 0.260 (74/236/334)
+pooled hitnet_audio       P 0.612 R 0.302 F1 0.405 (101/165/334)

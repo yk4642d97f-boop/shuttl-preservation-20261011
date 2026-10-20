@@ -37,7 +37,10 @@ class FusionParams:
     z_snap: float | None = 6.0    # None disables timing snap
     max_shift_frames: float = 2.0
     onset_z: float = 3.0          # onsets used for lag estimation
-    anchor_p: float = 0.9         # visual hits trusted as lag anchors
+    # Visual hits trusted as lag anchors. HitNet v2 peaks at true contacts have median 0.844
+    # (validation match 041): ≥0.8 keeps 76% of them and only 9% of its false peaks (anchors
+    # ≈99.7% true); 0.9 kept just 16% and left short recordings with no anchors at all.
+    anchor_p: float = 0.8
     min_anchors: int = 30         # fewer → the lag can jump between peaks (REPORT.md)
     min_excess: float = 0.10      # z-weighted lag peak above chance: noisy venue ≈0.05, clean ≥0.11
     max_lag_s: float = 0.25

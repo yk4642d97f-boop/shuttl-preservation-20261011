@@ -8,7 +8,7 @@
   "z_snap": 6.0,
   "max_shift_frames": 2.0,
   "onset_z": 3.0,
-  "anchor_p": 0.9,
+  "anchor_p": 0.8,
   "min_anchors": 30,
   "min_excess": 0.1,
   "max_lag_s": 0.25
@@ -324,8 +324,8 @@
       "used": false,
       "reason": "audio_not_informative",
       "excess": 0.034,
-      "match_rate": 0.26,
-      "anchors": 96,
+      "match_rate": 0.255,
+      "anchors": 102,
       "lag_ms": 116.0
      },
      "visual": {
@@ -359,9 +359,9 @@
      "gate": {
       "used": false,
       "reason": "audio_not_informative",
-      "excess": 0.079,
-      "match_rate": 0.454,
-      "anchors": 185,
+      "excess": 0.072,
+      "match_rate": 0.44,
+      "anchors": 193,
       "lag_ms": 58.0
      },
      "visual": {
@@ -395,9 +395,9 @@
      "gate": {
       "used": false,
       "reason": "audio_not_informative",
-      "excess": 0.072,
-      "match_rate": 0.514,
-      "anchors": 35,
+      "excess": 0.065,
+      "match_rate": 0.486,
+      "anchors": 37,
       "lag_ms": 95.0
      },
      "visual": {

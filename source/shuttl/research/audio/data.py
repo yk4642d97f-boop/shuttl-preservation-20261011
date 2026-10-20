@@ -3,8 +3,11 @@
 kwyoke/Badminton-hit-detection: amateur rally clips (30 fps) with per-frame hit labels
   (player_hit 1=near, 2=far). Audio present for am_doubles/{match_china,match_clementi}
   and am_singles/{match_china2,match_yewtee}.
-iLearn-Lab/Finebadminton-20K (Apache-2.0): broadcast singles; each hit's start_frame is
-  the contact frame (end_frame of hit i == start_frame of hit i+1), with hit types.
+iLearn-Lab/Finebadminton-20K (Apache-2.0): broadcast singles with hit types. A hit's
+  start_frame (== end_frame of the previous hit) marks the start of the stroke, not the contact:
+  on 0044-0047 both the rule detector and HitNet v2 put the contact FINEB_CONTACT_SHIFT = 7
+  frames later (median; IQR 5-9, n=313 and 165; research/audio/REPORT.md). Hit times below use
+  start_frame + FINEB_CONTACT_SHIFT.
 Hit times are taken from each video's own packet PTS (several broadcasts are VFR).
 """
 from __future__ import annotations
@@ -67,6 +70,9 @@ def kwyoke_clips():
     return clips
 
 
+FINEB_CONTACT_SHIFT = 7   # frames from FineBadminton's stroke start to the contact (measured)
+
+
 def fineb_clips():
     clips = []
     for ann in sorted(glob.glob(f"{DATA}/fineb/00*.json")):
@@ -83,7 +89,7 @@ def fineb_clips():
             if not hs:
                 continue
             for h in hs:
-                f = int(h["start_frame"])
+                f = int(h["start_frame"]) + FINEB_CONTACT_SHIFT
                 if f >= len(pts):
                     continue
                 fa = h.get("Foundational Actions Level", {})

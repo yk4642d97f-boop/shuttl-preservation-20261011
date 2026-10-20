@@ -29,6 +29,9 @@ TrackNetV3/WASB → 链接轨迹 → 球场/球员 → 新 HitNet → 3D/回合 
   `hit_model.fallback_reason = "calibration_required"`。HitNet 的 51 维输入里有球员脚点的场地坐标，
   只能由标定得到；验证场 041 去掉脚点后 F1@±2 从 0.967 降到 0.309（2026-10-20，云端 RTX 6000D 实测），
   kwyoke 业余低机位片段（标定全部失败）上 HitNet 0.05–0.21，规则 0.66–0.74。
+- 整段视频实测仍有差距：FineBadminton 0044–0047 转播单打（标定全部成功，标注按 +7 帧修正）上，
+  生产流水线的 HitNet F1@±2 0.405（P 0.612，R 0.302），规则 0.535。原因未拆分，详见 `research/audio/REPORT.md` 第 6 节。
+  上线默认用哪个检测器，应当先用标准机位的手机录像对比。
 - BST 的击球侧与已有几何结果不一致时，在诊断中保留该预测，避免事后改侧让已经拟合的轨迹自相矛盾。
 - short_serve/long_serve/cross_net 保留细分类；旧接口分别映射为 serve/serve/net。
 

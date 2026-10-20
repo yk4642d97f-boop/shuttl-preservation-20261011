@@ -1,0 +1,31 @@
+china_doubles            doubles clips= 4 hits=  37 gate={'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 2, 'lag_ms': 0.0}
+   hitnet_audio         P 0.074 R 0.108 F1@2 0.088 F1@1 0.044 serve_R 0.0 side 0.25 FP/min 50.53
+   hitnet               P 0.074 R 0.108 F1@2 0.088 F1@1 0.044 serve_R 0.0 side 0.25 FP/min 50.53
+   rules                P 0.676 R 0.676 F1@2 0.676 F1@1 0.541 serve_R 0.25 side 0.92 FP/min 12.13
+   hitnet_gap0.30       P 0.078 R 0.108 F1@2 0.091 F1@1 0.045 serve_R 0.0 side 0.25 FP/min 47.5
+   first_pairing_only   P 0.000 R 0.000 F1@2 0.000 F1@1 0.000 serve_R 0.0 side None FP/min 34.36
+china_singles            singles clips= 4 hits=  33 gate={'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 0, 'lag_ms': 0.0}
+   hitnet_audio         P 0.103 R 0.091 F1@2 0.097 F1@1 0.032 serve_R 0.0 side 0.333 FP/min 24.25
+   hitnet               P 0.103 R 0.091 F1@2 0.097 F1@1 0.032 serve_R 0.0 side 0.333 FP/min 24.25
+   rules                P 0.622 R 0.697 F1@2 0.657 F1@1 0.514 serve_R 0.5 side 0.826 FP/min 13.06
+clementi_doubles         doubles clips= 7 hits= 122 gate={'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 3, 'lag_ms': 0.0}
+   hitnet_audio         P 0.186 R 0.238 F1@2 0.209 F1@1 0.101 serve_R 0.143 side 0.828 FP/min 50.05
+   hitnet               P 0.186 R 0.238 F1@2 0.209 F1@1 0.101 serve_R 0.143 side 0.828 FP/min 50.05
+   rules                P 0.686 R 0.664 F1@2 0.675 F1@1 0.592 serve_R 0.143 side 0.642 FP/min 14.58
+   hitnet_gap0.30       P 0.186 R 0.221 F1@2 0.202 F1@1 0.105 serve_R 0.143 side 0.815 FP/min 46.51
+   first_pairing_only   P 0.159 R 0.090 F1@2 0.115 F1@1 0.052 serve_R 0.0 side 0.636 FP/min 22.86
+yewtee_singles           singles clips= 3 hits=  22 gate={'used': False, 'reason': 'too_few_anchors', 'excess': 0.0, 'match_rate': 0.0, 'anchors': 0, 'lag_ms': 0.0}
+   hitnet_audio         P 0.053 R 0.045 F1@2 0.049 F1@1 0.000 serve_R 0.0 side 0.0 FP/min 26.32
+   hitnet               P 0.053 R 0.045 F1@2 0.049 F1@1 0.000 serve_R 0.0 side 0.0 FP/min 26.32
+   rules                P 0.762 R 0.727 F1@2 0.744 F1@1 0.651 serve_R 0.333 side 0.562 FP/min 7.31
+[pooled doubles] first_pairing_only   P 0.107 R 0.069 F1@2 0.084 F1@1 0.038 serve_R 0.0 side 0.636
+[pooled doubles] hitnet               P 0.157 R 0.208 F1@2 0.179 F1@1 0.087 serve_R 0.091 side 0.758
+[pooled doubles] hitnet_audio         P 0.157 R 0.208 F1@2 0.179 F1@1 0.087 serve_R 0.091 side 0.758
+[pooled doubles] hitnet_gap0.30       P 0.158 R 0.195 F1@2 0.175 F1@1 0.090 serve_R 0.091 side 0.742
+[pooled doubles] rules                P 0.684 R 0.667 F1@2 0.675 F1@1 0.580 serve_R 0.182 side 0.708
+[pooled singles] hitnet               P 0.083 R 0.073 F1@2 0.078 F1@1 0.019 serve_R 0.0 side 0.25
+[pooled singles] hitnet_audio         P 0.083 R 0.073 F1@2 0.078 F1@1 0.019 serve_R 0.0 side 0.25
+[pooled singles] rules                P 0.672 R 0.709 F1@2 0.690 F1@1 0.566 serve_R 0.429 side 0.718
+[offsets doubles] HitNet − label (frames, matches within ±6): {-6: 6, -5: 6, -4: 8, -3: 6, -2: 6, -1: 4, 0: 6, 1: 6, 2: 11, 3: 5, 4: 10, 5: 5, 6: 4}
+[offsets singles] HitNet − label (frames, matches within ±6): {-6: 2, -5: 1, -4: 1, -3: 2, 0: 1, 2: 3, 3: 1, 4: 2, 5: 2, 6: 1}
+wrote <eval>/results_hitnet_v2_kwyoke_venue_p08.json
