@@ -14,6 +14,9 @@
 `pipeline_v2` 新增 hitnet_weights、bst_manifest、rtmpose_weights 三项显式配置。
 原后端环境需另装 `backend/requirements-cloud-models.txt`（CPU）或 `backend/requirements-cloud-models-cuda.txt`（CUDA）的可选依赖；按文件注释安装。
 Celery 对应环境变量为 SHUTTL_HITNET_WEIGHTS、SHUTTL_BST_MANIFEST、SHUTTL_RTMPOSE_WEIGHTS。
+实验开关（2026-10-20，默认关闭，验证前不要在演示服务上打开）：
+- SHUTTL_AUDIO_FUSION=1：手机录像的击球声辅助 HitNet，每段录像单独判断是否启用，见 research/audio/REPORT.md。镜像已加入 ffmpeg。
+- SHUTTL_HITNET_DOUBLES=1：双打时用单打 HitNet 跑 4 种搭档配对；可选 SHUTTL_DOUBLES_GAP_S，默认 0.25 s。见 research/doubles/REPORT.md。
 未设置时保持原后端规则路径。设置后按以下路径运行：
 
 TrackNetV3/WASB → 链接轨迹 → 球场/球员 → 新 HitNet → 3D/回合 → RTMPose-m → BST 十模型平均 logits。

@@ -62,6 +62,51 @@ def test_hitnet_requires_calibration(video, stubs, monkeypatch):
     assert 'hitnet' not in res.diagnostics['stages']
 
 
+def test_experimental_flags_reach_hitnet_and_are_reported(video, stubs, monkeypatch):
+    from app.services.tracking import audio_hits, hitnet
+    seen = {}
+    def detect(track, meta, players, **kw):
+        seen.update(kw)
+        kw['diagnostics']['audio'] = {'used': False, 'reason': 'audio_not_informative'}
+        kw['diagnostics']['doubles'] = {'pairings': [[2, 1]]}
+        return []
+    monkeypatch.setattr(hitnet, 'load', lambda *a: types.SimpleNamespace(sha256='m', detect=detect))
+    monkeypatch.setattr(audio_hits, 'impact_curve', lambda path: 'curve')
+    res = analyze_video(video, PipelineOptions(hitnet_weights='c.pt', doubles=True, hitnet_doubles=True,
+                                               audio_fusion=True, doubles_gap_s=.2,
+                                               bst_manifest='bst.json', rtmpose_weights='p.onnx'))
+    assert seen['experimental_doubles'] and seen['gap_s'] == .2 and seen['audio_curve'] == 'curve'
+    model = res.diagnostics['hit_model']
+    assert model['used'] == model['requested'] == 'hitnet_doubles_pairing_experimental'
+    assert 'unvalidated' in model['validation_scope'] and 'validation_scope' in model['audio']
+    assert res.diagnostics['stages']['audio']['ok'] and res.diagnostics['stages']['hitnet']['ok']
+    assert res.diagnostics['stroke_model']['fallback_reason'] == 'doubles_not_validated'
+    _strict_json(res)
+
+
+def test_audio_stage_failure_is_isolated(video, stubs, monkeypatch):
+    from app.services.tracking import audio_hits, hitnet
+    seen = {}
+    def detect(track, meta, players, **kw):
+        seen.update(kw)
+        return []
+    def broken(path):
+        raise RuntimeError('ffmpeg audio decode failed')
+    monkeypatch.setattr(hitnet, 'load', lambda *a: types.SimpleNamespace(sha256='m', detect=detect))
+    monkeypatch.setattr(audio_hits, 'impact_curve', broken)
+    res = analyze_video(video, PipelineOptions(hitnet_weights='c.pt', audio_fusion=True))
+    assert not res.diagnostics['stages']['audio']['ok'] and seen['audio_curve'] is None
+    model = res.diagnostics['hit_model']
+    assert model['used'] == 'hitnet_single_v2' and model['audio']['reason'] == 'no_audio'
+
+
+def test_default_options_keep_the_validated_call(video, stubs, monkeypatch):
+    from app.services.tracking import hitnet
+    monkeypatch.setattr(hitnet, 'load', lambda *a: types.SimpleNamespace(sha256='m', detect=lambda *a: []))
+    res = analyze_video(video, PipelineOptions(hitnet_weights='c.pt'))
+    assert 'audio' not in res.diagnostics['stages'] and 'audio' not in res.diagnostics['hit_model']
+
+
 @pytest.fixture
 def video(tmp_path) -> str:
     path = str(tmp_path / "clip.mp4")

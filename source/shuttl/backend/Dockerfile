@@ -1,8 +1,9 @@
 FROM python:3.12-slim AS base
 WORKDIR /app
 
+# ffmpeg: soundtrack decoding for the optional audio hit fusion (SHUTTL_AUDIO_FUSION=1)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev gcc \
+    libpq-dev gcc ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .

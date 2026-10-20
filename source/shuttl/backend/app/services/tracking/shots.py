@@ -420,9 +420,10 @@ class _PlayerIndex:
 
 
 def _pick_hitter(hit: HitEvent, contact: np.ndarray | None,
-                 cands: list[PlayerObservation]) -> PlayerObservation | None:
+                 cands: list[PlayerObservation], is_serve: bool = False) -> PlayerObservation | None:
     """Hitter = explicit track id, else the player on the hitting side whose
-    feet are closest to the 3-D contact point, else closest bbox in pixels."""
+    feet are closest to the 3-D contact point, else (doubles serve) the partner
+    nearer the net, else closest bbox in pixels."""
     if not cands:
         return None
     if hit.player_track_id is not None:
@@ -436,6 +437,11 @@ def _pick_hitter(hit: HitEvent, contact: np.ndarray | None,
     if contact is not None and all(o.foot_world is not None for o in pool):
         p = np.asarray(contact[:2], float)
         return min(pool, key=lambda o: float(np.linalg.norm(np.asarray(o.foot_world[:2]) - p)))
+    partners = [o for o in cands if o.side == side]
+    if is_serve and len(partners) > 1 and all(o.foot_world is not None for o in partners):
+        # Doubles serve without a 3-D contact: the server stands in front of the partner
+        # (S2Doubles 82.3 % vs 36-64 % for shuttle-image rules; research/doubles/REPORT.md).
+        return min(partners, key=lambda o: abs(float(o.foot_world[0])))
     u, v = hit.xy_px
 
     def dpx(o: PlayerObservation) -> float:
@@ -490,7 +496,8 @@ def classify_shots(rally: RallyV2, camera: CameraModel | None,
     contacts = [contact_state(s.segment, s.hit.t)[0] if _valid(s.segment) else None
                 for s in shots]
     idx = _PlayerIndex(players)
-    hitters = [_pick_hitter(s.hit, c, idx.at(s.hit.frame)) for s, c in zip(shots, contacts)]
+    hitters = [_pick_hitter(s.hit, c, idx.at(s.hit.frame), is_serve=(i == 0))
+               for i, (s, c) in enumerate(zip(shots, contacts))]
     poses = [wrist_above_head(h.keypoints if h is not None else None) for h in hitters]
 
     raised: dict[int, list[int]] = {}

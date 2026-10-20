@@ -403,6 +403,23 @@ def _fallback_rally() -> tuple[RallyV2, list[PlayerObservation]]:
     return RallyV2(0, 300, shots=shots), players
 
 
+def test_doubles_serve_without_contact_picks_the_front_partner():
+    """Two near partners, no 3-D flight: the shuttle pixel sits on the back partner's box,
+    yet the serve goes to the partner nearer the net; later shots keep the bbox rule."""
+    k = _pose(500, 400, wrist="right", up=False, facing_camera=False)
+    server = _obs(0, 1, "near", (-2.3, 0.4), k)
+    partner = _obs(0, 3, "near", (-4.6, -0.2), _pose(800, 420, wrist="right", up=False, facing_camera=False))
+    receivers = [_obs(0, 2, "far", (2.2, -0.4), k), _obs(0, 4, "far", (4.5, 0.6), k)]
+    x1, y1, x2, y2 = partner.bbox
+    serve = ShotEventV2(HitEvent(0, 0.0, ((x1 + x2) / 2, (y1 + y2) / 2), "near", 0.9), None)
+    later = ShotEventV2(HitEvent(60, 1.0, ((x1 + x2) / 2, (y1 + y2) / 2), "near", 0.9), None)
+    again = [replace(o, frame=60) for o in (server, partner, *receivers)]
+    out = S.classify_shots(RallyV2(0, 120, shots=[serve, later]), None,
+                           [server, partner, *receivers, *again])
+    assert np.allclose(out.shots[0].hitter_pos_world, server.foot_world)
+    assert np.allclose(out.shots[1].hitter_pos_world, partner.foot_world)
+
+
 def test_fallback_2d_plausible_labels():
     rally, players = _fallback_rally()
     out = S.classify_shots(rally, None, players)

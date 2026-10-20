@@ -48,6 +48,10 @@ class PipelineOptions:
     hitnet_weights: str | None = None
     bst_manifest: str | None = None
     rtmpose_weights: str | None = None
+    # Experimental HitNet extensions, off by default (research/audio, research/doubles):
+    audio_fusion: bool = False          # phone soundtrack refines HitNet hits (per-recording gate)
+    hitnet_doubles: bool = False        # doubles: singles HitNet over the 4 partner pairings
+    doubles_gap_s: float | None = None  # pairing-mode NMS gap; None = hitnet.DOUBLES_GAP_S
 
 
 # Pose sampling rate. step=2 was tuned on 30 fps footage; a fixed frame step would
@@ -147,7 +151,7 @@ def analyze_video(path: str, opts: PipelineOptions | None = None,
         res.processing_time_seconds = time.perf_counter() - t_start
         return res
 
-    res.hits = _detect_hits(res, opts, st, hits)
+    res.hits = _detect_hits(res, opts, st, hits, path)
     if res.camera is not None:
         res.segments = st.run("reconstruct3d", 85, lambda: reconstruct3d.reconstruct_segments(
             res.track, res.hits, res.camera, meta, res.players or None), default=[]) or []
@@ -169,7 +173,11 @@ def analyze_video(path: str, opts: PipelineOptions | None = None,
 
 def _refine_strokes(path: str, res: MatchAnalysis, opts: PipelineOptions, st: _Stages):
     diag = res.diagnostics.setdefault("stroke_model", {"requested": "BST_CG_AP_seq30", "used": "rules"})
-    if res.diagnostics.get("hit_model", {}).get("used") != "hitnet_single_v2":
+    hit_used = res.diagnostics.get("hit_model", {}).get("used")
+    if hit_used == HITNET_DOUBLES:
+        diag["fallback_reason"] = "doubles_not_validated"   # BST is a two-player model
+        return
+    if hit_used != "hitnet_single_v2":
         diag["fallback_reason"] = "validated_hitnet_required"
         return
     if not opts.rtmpose_weights or res.camera is None:
@@ -190,14 +198,23 @@ def _refine_strokes(path: str, res: MatchAnalysis, opts: PipelineOptions, st: _S
         diag.update(result)
 
 
-def _detect_hits(res: MatchAnalysis, opts: PipelineOptions, st: _Stages, rules):
-    """Use the configured singles candidate; report every rules fallback explicitly."""
+HITNET_DOUBLES = "hitnet_doubles_pairing_experimental"
+
+
+def _detect_hits(res: MatchAnalysis, opts: PipelineOptions, st: _Stages, rules, path: str | None = None):
+    """Use the configured HitNet candidate; report every rules fallback explicitly.
+
+    Singles is the validated path. Doubles needs `hitnet_doubles` (experimental pairing
+    mode) and `audio_fusion` adds the soundtrack; both record what they did in
+    diagnostics["hit_model"] ("doubles" / "audio").
+    """
     diag = res.diagnostics.setdefault("hit_model", {"requested": "rules", "used": "rules"})
     if opts.hitnet_weights:
         from app.services.tracking import hitnet
-        diag["requested"] = "hitnet_single_v2"
         _, multiple = hitnet.player_index(res.players)
-        if opts.doubles or multiple:
+        is_doubles = bool(opts.doubles) or multiple
+        diag["requested"] = HITNET_DOUBLES if is_doubles and opts.hitnet_doubles else "hitnet_single_v2"
+        if is_doubles and not opts.hitnet_doubles:
             diag["fallback_reason"] = "doubles_not_validated"
         elif res.camera is None:
             # Four of HitNet's inputs are the players' court positions, which only a
@@ -205,14 +222,39 @@ def _detect_hits(res: MatchAnalysis, opts: PipelineOptions, st: _Stages, rules):
             # (validation match 041: F1@±2 0.967 → 0.309 with foot positions removed).
             diag["fallback_reason"] = "calibration_required"
         else:
+            curve = None
+            if opts.audio_fusion and path:
+                from app.services.tracking import audio_hits
+                curve = st.run("audio", 78, lambda: audio_hits.impact_curve(path), default=None)
+
             def learned():
                 model = hitnet.load(opts.hitnet_weights, opts.device or "cpu")
                 diag["sha256"] = model.sha256
-                diag["validation_scope"] = "annotated singles rallies; continuous video pending"
-                return model.detect(res.track, res.meta, res.players)
+                kwargs: dict[str, Any] = {}
+                if is_doubles:
+                    kwargs["experimental_doubles"] = True
+                    if opts.doubles_gap_s is not None:
+                        kwargs["gap_s"] = opts.doubles_gap_s
+                if opts.audio_fusion:
+                    kwargs["audio_curve"] = curve
+                if not kwargs:
+                    diag["validation_scope"] = "annotated singles rallies; continuous video pending"
+                    return model.detect(res.track, res.meta, res.players)
+                extra: dict[str, Any] = {}
+                hits_out = model.detect(res.track, res.meta, res.players, diagnostics=extra, **kwargs)
+                diag.update(extra)
+                diag["validation_scope"] = (
+                    "experimental: singles checkpoint over partner pairings; doubles unvalidated"
+                    if is_doubles else "annotated singles rallies; continuous video pending")
+                if opts.audio_fusion:
+                    diag.setdefault("audio", {"used": False, "reason": "no_audio"})
+                    diag["audio"]["validation_scope"] = (
+                        "experimental: gate/defaults from amateur phone rallies with a proxy visual "
+                        "model; HitNet fusion unvalidated")
+                return hits_out
             detected = st.run("hitnet", 80, learned, default=None)
             if detected is not None:
-                diag["used"] = "hitnet_single_v2"
+                diag["used"] = diag["requested"]
                 return detected
             diag["fallback_reason"] = "hitnet_stage_failed"
     return st.run("hits", 80, lambda: rules.detect_hits(

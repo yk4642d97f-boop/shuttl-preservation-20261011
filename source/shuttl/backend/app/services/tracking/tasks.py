@@ -29,6 +29,15 @@ logger = logging.getLogger(__name__)
 psycopg2.extras.register_uuid()      # let psycopg2 bind uuid.UUID parameters
 
 
+def _env_flag(name: str) -> bool:
+    return os.environ.get(name, "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def _env_float(name: str) -> float | None:
+    value = os.environ.get(name, "").strip()
+    return float(value) if value else None
+
+
 def _options(calibration: dict | None) -> PipelineOptions:
     calibration = calibration or {}
     return PipelineOptions(
@@ -37,6 +46,10 @@ def _options(calibration: dict | None) -> PipelineOptions:
         hitnet_weights=os.environ.get("SHUTTL_HITNET_WEIGHTS") or None,
         bst_manifest=os.environ.get("SHUTTL_BST_MANIFEST") or None,
         rtmpose_weights=os.environ.get("SHUTTL_RTMPOSE_WEIGHTS") or None,
+        # Experimental, off unless the worker opts in (research/audio, research/doubles).
+        audio_fusion=_env_flag("SHUTTL_AUDIO_FUSION"),
+        hitnet_doubles=_env_flag("SHUTTL_HITNET_DOUBLES"),
+        doubles_gap_s=_env_float("SHUTTL_DOUBLES_GAP_S"),
         doubles=calibration.get("doubles"),
         manual_corners={k: tuple(v) for k, v in calibration.get("corners", {}).items()} or None,
         corners_normalized=calibration.get("corners_normalized", True),
