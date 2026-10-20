@@ -55,3 +55,15 @@ def test_no_shuttle_reason(monkeypatch, worker):
 def test_old_queue_message_cannot_write_unfenced_results():
     result = tasks.analyze_match.apply(args=("old-match", "videos/u/v.mov"))
     assert result.state == "FAILURE" and "旧版分析任务" in str(result.result)
+
+
+def test_experimental_hitnet_flags_come_from_the_environment(monkeypatch):
+    for name in ("SHUTTL_AUDIO_FUSION", "SHUTTL_HITNET_DOUBLES", "SHUTTL_DOUBLES_GAP_S"):
+        monkeypatch.delenv(name, raising=False)
+    off = tasks._options({"doubles": True})
+    assert (off.audio_fusion, off.hitnet_doubles, off.doubles_gap_s, off.doubles) == (False, False, None, True)
+    monkeypatch.setenv("SHUTTL_AUDIO_FUSION", "1")
+    monkeypatch.setenv("SHUTTL_HITNET_DOUBLES", "true")
+    monkeypatch.setenv("SHUTTL_DOUBLES_GAP_S", "0.2")
+    on = tasks._options(None)
+    assert (on.audio_fusion, on.hitnet_doubles, on.doubles_gap_s) == (True, True, 0.2)

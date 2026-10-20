@@ -9,6 +9,7 @@
 沿用后端 `PlayerObservation`，每帧可有同侧两个不同 track_id；身份不能折叠成 near/far 两个槽位。
 队伍侧（near/far）与球员身份分开：换边后队伍侧变化，球员/队伍身份不变。长遮挡后无法确认身份时记 unknown，
 不自动把新出现的框当原球员。当前 HitNet/BST 两人模型遇到同帧同侧多人会拒绝，流水线记录 rules 回退。
+2026-10-20 起可用 SHUTTL_HITNET_DOUBLES=1 打开实验性的 HitNet 配对模式（research/doubles/REPORT.md），BST 仍然跳过；默认行为不变。
 
 准备正式标注时，每个源比赛登记 source_match_id、视频 SHA256、来源/许可、视角、场地、分辨率、实际逐帧 PTS。
 片段记录原视频帧范围；训练/验证/测试按源比赛分组，来自同一比赛的剪辑和不同公开数据集副本不能跨组。

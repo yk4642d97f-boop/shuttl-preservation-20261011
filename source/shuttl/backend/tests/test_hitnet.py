@@ -91,3 +91,119 @@ def test_short_nonfinite_output_rejected():
     model.net = lambda x: torch.full((1,len(x[0]),2),float('nan'))
     with pytest.raises(ValueError,match='Non-finite'):
         model.logits(np.zeros((12,16),np.float32),30.)
+
+
+# ── experimental doubles pairing mode and audio fusion ──────────────────────────────────
+
+def four_players(n, frames_far=None):
+    """Partners far 2/4 (left/right), near 1/3; `frames_far` limits far observations."""
+    out = []
+    for f in range(n):
+        if frames_far is None or f in frames_far:
+            out += [observation(frame=f, side='far', tid=2, box=[10, 10, 30, 50]),
+                    observation(frame=f, side='far', tid=4, box=[200, 10, 220, 50])]
+        out += [observation(frame=f, side='near', tid=1, box=[10, 120, 40, 170]),
+                observation(frame=f, side='near', tid=3, box=[250, 120, 280, 170])]
+    return out
+
+
+def pairing_model(peaks):
+    """Fake HitTCN whose hit logit fires only when the named far partner is in the pairing."""
+    model = object.__new__(hitnet.HitNet)
+    model.decoder = {'thr': .4, 'gap_s': .3, 'lam': 0.}
+    calls = []
+    def logits(raw, fps):
+        calls.append(len(raw))
+        out = np.full((len(raw), 2), -10., np.float32)
+        for frame, far_cx in peaks.items():
+            if abs(raw[frame, 4] - far_cx) < 1e-6:
+                out[frame] = [10., 10.]
+        return out
+    model.logits = logits
+    return model, calls
+
+
+def test_doubles_needs_the_explicit_experimental_mode():
+    track, meta = sample(20)
+    model, _ = pairing_model({})
+    with pytest.raises(ValueError, match='two players'):
+        model.detect(track, meta, four_players(20))
+    with pytest.raises(ValueError, match='two players'):
+        model.detect(track, meta, four_players(20), doubles=True)
+    assert model.detect(track, meta, four_players(20), experimental_doubles=True) == []
+
+
+def test_pairings_keep_the_per_frame_maximum_and_leave_partners_to_geometry():
+    track, meta = sample(40)
+    model, calls = pairing_model({10: 20 / 320, 25: 210 / 320})   # far id 2, then far id 4
+    diag = {}
+    hits = model.detect(track, meta, four_players(40), experimental_doubles=True, diagnostics=diag)
+    assert [h.frame for h in hits] == [10, 25] and {h.hitter for h in hits} == {'far'}
+    assert [h.player_track_id for h in hits] == [None, None]
+    assert len(calls) == 4
+    assert diag['doubles']['pairings'] == [[2, 1], [2, 3], [4, 1], [4, 3]]
+    assert diag['doubles']['hitter_left_to_geometry'] == 2
+    assert diag['doubles']['gap_s'] == hitnet.DOUBLES_GAP_S
+
+
+def test_partner_is_named_when_only_one_is_observed():
+    track, meta = sample(40)
+    players = [o for o in four_players(40) if not (o.frame == 10 and o.track_id == 4)]
+    model, _ = pairing_model({10: 20 / 320})
+    hits = model.detect(track, meta, players, experimental_doubles=True)
+    assert [(h.frame, h.player_track_id) for h in hits] == [(10, 2)]
+
+
+def test_pairing_mode_gap_default_and_override():
+    track, meta = sample(40)
+    model, _ = pairing_model({10: 20 / 320, 18: 210 / 320})        # 8 frames = 0.267 s apart
+    assert [h.frame for h in model.detect(track, meta, four_players(40), experimental_doubles=True)] == [10, 18]
+    assert len(model.detect(track, meta, four_players(40), experimental_doubles=True, gap_s=.3)) == 1
+
+
+def test_partner_slots_ignore_rare_track_ids():
+    players = four_players(10) + [observation(frame=3, side='far', tid=9)]
+    assert hitnet.partner_slots(players) == {'far': [2, 4], 'near': [1, 3]}
+
+
+def test_audio_curve_threads_through_detect():
+    from app.services.tracking import audio_hits, hit_fusion
+    track, meta = sample(90)
+    model = object.__new__(hitnet.HitNet)
+    model.decoder = {'thr': .4, 'gap_s': .3, 'lam': 0.}
+    def logits(raw, fps):
+        out = np.full((len(raw), 2), -10., np.float32)
+        out[30] = [np.log(.3 / .7), -10.]        # quiet contact, below threshold alone
+        out[60] = [10., -10.]                    # confident anchor
+        return out
+    model.logits = logits
+    z = np.zeros(int(4 / .002), np.float32)
+    curve = audio_hits.ImpactCurve(t0=0., dt=.002, z=z)
+    for f in (30, 60):
+        curve.z[curve.index([track.t[f]])[0]] = 15.
+    diag = {}
+    params = hit_fusion.FusionParams(min_anchors=1, min_excess=0.)
+    hits = model.detect(track, meta, [], audio_curve=curve, fusion=params, diagnostics=diag)
+    assert [h.frame for h in hits] == [30, 60] and {h.hitter for h in hits} == {'near'}
+    assert diag['audio']['used'] and diag['audio']['hits_changed_by_audio'] == 1
+    assert [h.frame for h in model.detect(track, meta, [])] == [60]
+
+
+def test_singles_default_is_the_v2_decoder_exactly():
+    """Refactor guard: curves()+decode() must equal the original per-segment v2 loop."""
+    from app.services.tracking import hitnet_core as core
+    rng = np.random.default_rng(11)
+    track, meta = sample(240)
+    players = [observation(frame=f, side=s, tid=1 if s == 'near' else 2)
+               for f in range(240) for s in ('near', 'far')]
+    model = object.__new__(hitnet.HitNet)
+    model.decoder = {'thr': .4, 'gap_s': .3, 'lam': 0.}
+    table = rng.normal(-3, 3, (240, 2)).astype(np.float32)
+    model.logits = lambda raw, fps: table[:len(raw)]
+    expected = []
+    probability, top = core.sigmoid(table[:, 0]), core.sigmoid(table[:, 1])
+    for row in core.decode_nms(probability, meta.fps, .4, .3):
+        expected.append((row, 'far' if top[row] > .5 else 'near', float(probability[row])))
+    hits = model.detect(track, meta, players)
+    assert [(h.frame, h.hitter, h.confidence) for h in hits] == expected
+    assert all(h.player_track_id == (2 if h.hitter == 'far' else 1) for h in hits)

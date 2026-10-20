@@ -1,0 +1,8 @@
+# eval_hitnet_041.py, 2026-10-20, AutoDL RTX 6000D, hitnet_single_v2.pt (SHA256 c515a40b...), backend at feature/audio-doubles
+041 full     P 0.971 R 0.963 F1@2 0.967  (1156/1191/1200)
+041 no_foot  P 0.302 R 0.315 F1@2 0.309  (378/1250/1200)
+  peak p>=0.6: 0.981 of true detections, 0.600 of false ones
+  peak p>=0.7: 0.958 of true detections, 0.457 of false ones
+  peak p>=0.8: 0.763 of true detections, 0.086 of false ones
+  peak p>=0.9: 0.160 of true detections, 0.000 of false ones
+  true-detection peak p pct10/50/90: [0.76  0.844 0.912]  max 0.966

@@ -1,0 +1,156 @@
+{
+ "s2doubles": {
+  "rallies": 207,
+  "shots": 1907
+ },
+ "intervals": {
+  "s2doubles_pro_doubles": {
+   "n": 1700,
+   "median_s": 0.567,
+   "min_s": 0.133,
+   "lt_0.15s": 0.0006,
+   "lt_0.20s": 0.0006,
+   "lt_0.25s": 0.0018,
+   "lt_0.30s": 0.0182,
+   "lt_0.35s": 0.1071
+  },
+  "kwyoke_amateur_doubles": {
+   "n": 148,
+   "median_s": 0.867,
+   "min_s": 0.333,
+   "lt_0.15s": 0.0,
+   "lt_0.20s": 0.0,
+   "lt_0.25s": 0.0,
+   "lt_0.30s": 0.0,
+   "lt_0.35s": 0.0068
+  },
+  "kwyoke_amateur_singles": {
+   "n": 48,
+   "median_s": 1.067,
+   "min_s": 0.433,
+   "lt_0.15s": 0.0,
+   "lt_0.20s": 0.0,
+   "lt_0.25s": 0.0,
+   "lt_0.30s": 0.0,
+   "lt_0.35s": 0.0
+  },
+  "finebadminton_pro_singles": {
+   "n": 1456,
+   "median_s": 0.88,
+   "min_s": 0.24,
+   "lt_0.15s": 0.0,
+   "lt_0.20s": 0.0,
+   "lt_0.25s": 0.0007,
+   "lt_0.30s": 0.0021,
+   "lt_0.35s": 0.0076
+  }
+ },
+ "partner_attribution": {
+  "serve_front_player_px": {
+   "acc": 0.8232,
+   "n": 198
+  },
+  "serve_front_player_court": {
+   "acc": 0.8232,
+   "n": 198
+  },
+  "contact_projection_px": {
+   "acc": 0.8935,
+   "n": 1700
+  },
+  "contact_projection_court": {
+   "acc": 0.9676,
+   "n": 1700
+  },
+  "shuttle_dx_off-4": {
+   "acc": 0.8117,
+   "n": 1142
+  },
+  "shuttle_2d_off-4": {
+   "acc": 0.838,
+   "n": 1142
+  },
+  "shuttle_dx_off-10": {
+   "acc": 0.7827,
+   "n": 1077
+  },
+  "shuttle_2d_off-10": {
+   "acc": 0.7707,
+   "n": 1077
+  },
+  "shuttle_dx_off0": {
+   "acc": 0.7716,
+   "n": 797
+  },
+  "shuttle_2d_off0": {
+   "acc": 0.813,
+   "n": 797
+  }
+ },
+ "partner_attribution_by_phase": {
+  "serve_front_player_px|serve": {
+   "acc": 0.8232,
+   "n": 198
+  },
+  "serve_front_player_court|serve": {
+   "acc": 0.8232,
+   "n": 198
+  },
+  "contact_projection_px|rally": {
+   "acc": 0.8935,
+   "n": 1700
+  },
+  "contact_projection_court|rally": {
+   "acc": 0.9676,
+   "n": 1700
+  },
+  "shuttle_dx_off-4|rally": {
+   "acc": 0.815,
+   "n": 1135
+  },
+  "shuttle_2d_off-4|rally": {
+   "acc": 0.8388,
+   "n": 1135
+  },
+  "shuttle_dx_off-10|rally": {
+   "acc": 0.784,
+   "n": 1074
+  },
+  "shuttle_2d_off-10|rally": {
+   "acc": 0.77,
+   "n": 1074
+  },
+  "shuttle_dx_off0|rally": {
+   "acc": 0.7955,
+   "n": 753
+  },
+  "shuttle_2d_off0|rally": {
+   "acc": 0.8234,
+   "n": 753
+  },
+  "shuttle_dx_off0|serve": {
+   "acc": 0.3636,
+   "n": 44
+  },
+  "shuttle_2d_off0|serve": {
+   "acc": 0.6364,
+   "n": 44
+  },
+  "shuttle_dx_off-4|serve": {
+   "acc": 0.2857,
+   "n": 7
+  },
+  "shuttle_2d_off-4|serve": {
+   "acc": 0.7143,
+   "n": 7
+  },
+  "shuttle_dx_off-10|serve": {
+   "acc": 0.3333,
+   "n": 3
+  },
+  "shuttle_2d_off-10|serve": {
+   "acc": 1.0,
+   "n": 3
+  }
+ }
+}

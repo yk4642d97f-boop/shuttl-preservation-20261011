@@ -1,0 +1,25 @@
+{
+ "common_operating_point": {
+  "shift": 9,
+  "thr": 0.97
+ },
+ "am_singles": {
+  "clips": 7,
+  "hits": 55,
+  "P": 0.366,
+  "R": 0.473,
+  "F1": 0.413
+ },
+ "am_doubles": {
+  "clips": 11,
+  "hits": 159,
+  "P": 0.473,
+  "R": 0.616,
+  "F1": 0.536
+ },
+ "am_doubles_first_pairing_only": {
+  "P": 0.528,
+  "R": 0.409,
+  "F1": 0.461
+ }
+}
