@@ -22,6 +22,10 @@ TrackNetV3/WASB → 链接轨迹 → 球场/球员 → 新 HitNet → 3D/回合 
 - BST 使用已冻结的无帧偏移窗口和原始追踪框归一化。RTMPose 的扩大框只用于裁剪，不能代替归一化框。
 - 两人模型遇到四人输入拒绝；pipeline 在 diagnostics 中记录规则回退，不伪装成双打学习模型。
 - 缺少校准、RTMPose、可靠姿态或模型输出时，保留原规则结果并记录原因。
+- HitNet 需要球场标定：没有相机（自动标定失败且没有手点角点）时直接用规则检测击球，
+  `hit_model.fallback_reason = "calibration_required"`。HitNet 的 51 维输入里有球员脚点的场地坐标，
+  只能由标定得到；验证场 041 去掉脚点后 F1@±2 从 0.967 降到 0.309（2026-10-20，云端 RTX 6000D 实测），
+  kwyoke 业余低机位片段（标定全部失败）上 HitNet 0.05–0.21，规则 0.66–0.74。
 - BST 的击球侧与已有几何结果不一致时，在诊断中保留该预测，避免事后改侧让已经拟合的轨迹自相矛盾。
 - short_serve/long_serve/cross_net 保留细分类；旧接口分别映射为 serve/serve/net。
 
