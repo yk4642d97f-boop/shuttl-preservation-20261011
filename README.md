@@ -1,4 +1,20 @@
-# Shuttl 开发与恢复备份
+# Shuttl
+
+羽毛球视频分析 App 的源码与开发记录。`main` 分支始终是最新版本。
+
+## 当前版本(2026-11-18)
+
+| 内容 | 位置 |
+|---|---|
+| iOS 界面改版:毛绒羽毛球登录页、回放控制、字体系统、精简文字与动效 | [source/shuttl/iOS/](source/shuttl/iOS/) |
+| 模型升级(候选,未部署):击球检测与球种分类的记录、脚本和冻结评测 | [source/shuttl/research/model_upgrade_20261118/](source/shuttl/research/model_upgrade_20261118/README.md) · [Release](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/tag/model-upgrade-20261118) |
+
+## 开发与恢复备份
+
+> 2026-11-18 起,备份 Release `backup-20261011` 设为草稿,不对外显示;归档文件都还在。
+> 恢复前(以及要用下面的 Release 链接和宣传视频链接前),先用仓库所有者账号把它改回公开:
+> `gh release edit backup-20261011 --draft=false`。
+> 不要删除 Git 标签 `backup-20261011`,否则改回公开时标签会落到当时的 `main` 上。
 
 这是 2026-10-11 为电脑重置准备的 **私有** 开发保全仓库。主工程原位置是 `/Users/yangcong/Downloads/华北五省`。
 
@@ -20,7 +36,6 @@
 | 原始文件归档与三部独立宣传/演示视频 | [备份 Release](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/tag/backup-20261011) |
 | 标准库备份读取器及格式文档 | [tools/README.md](tools/README.md) |
 | 加密分卷资产索引 | `recovery/payload-index.json` |
-| 2026-11-18 模型升级(击球检测 + 球种分类候选,未部署):记录、脚本和冻结评测 | [source/shuttl/research/model_upgrade_20261118/](source/shuttl/research/model_upgrade_20261118/README.md) · [Release](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/tag/model-upgrade-20261118) |
 
 ## 在新电脑恢复
 
