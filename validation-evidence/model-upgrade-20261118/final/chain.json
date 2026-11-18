@@ -1,0 +1,186 @@
+{
+ "rules+released": {
+  "vb_development": {
+   "hit_f1": 0.4068,
+   "hit_precision": 0.3606,
+   "hit_recall": 0.4665,
+   "type_accuracy_on_detected": 0.4639,
+   "joint_precision": 0.1068,
+   "joint_recall": 0.1935,
+   "joint_f1": 0.1376,
+   "typed_hits": 398,
+   "joint_correct": 77
+  },
+  "bfmd_dev": {
+   "hit_f1": 0.7122,
+   "hit_precision": 0.6764,
+   "hit_recall": 0.7522,
+   "type_accuracy_on_detected": 0.7865,
+   "joint_precision": 0.532,
+   "joint_recall": 0.5916,
+   "joint_f1": 0.5602,
+   "typed_hits": 928,
+   "joint_correct": 549
+  },
+  "vb_holdout": {
+   "hit_f1": 0.5963,
+   "hit_precision": 0.6315,
+   "hit_recall": 0.5648,
+   "type_accuracy_on_detected": 0.4205,
+   "joint_precision": 0.2563,
+   "joint_recall": 0.2406,
+   "joint_f1": 0.2482,
+   "typed_hits": 715,
+   "joint_correct": 172
+  },
+  "bfmd_test": {
+   "hit_f1": 0.7856,
+   "hit_precision": 0.7559,
+   "hit_recall": 0.8178,
+   "type_accuracy_on_detected": 0.7149,
+   "joint_precision": 0.5387,
+   "joint_recall": 0.5848,
+   "joint_f1": 0.5608,
+   "typed_hits": 2967,
+   "joint_correct": 1735
+  }
+ },
+ "hitnet_v2+released": {
+  "vb_development": {
+   "hit_f1": 0.1157,
+   "hit_precision": 0.1065,
+   "hit_recall": 0.1267,
+   "type_accuracy_on_detected": 0.3469,
+   "joint_precision": 0.0223,
+   "joint_recall": 0.0427,
+   "joint_f1": 0.0293,
+   "typed_hits": 398,
+   "joint_correct": 17
+  },
+  "bfmd_dev": {
+   "hit_f1": 0.7658,
+   "hit_precision": 0.7601,
+   "hit_recall": 0.7716,
+   "type_accuracy_on_detected": 0.8226,
+   "joint_precision": 0.6253,
+   "joint_recall": 0.6347,
+   "joint_f1": 0.6299,
+   "typed_hits": 928,
+   "joint_correct": 589
+  },
+  "vb_holdout": {
+   "hit_f1": 0.216,
+   "hit_precision": 0.2195,
+   "hit_recall": 0.2126,
+   "type_accuracy_on_detected": 0.3333,
+   "joint_precision": 0.0633,
+   "joint_recall": 0.0657,
+   "joint_f1": 0.0645,
+   "typed_hits": 715,
+   "joint_correct": 47
+  },
+  "bfmd_test": {
+   "hit_f1": 0.8308,
+   "hit_precision": 0.8658,
+   "hit_recall": 0.7985,
+   "type_accuracy_on_detected": 0.7515,
+   "joint_precision": 0.6495,
+   "joint_recall": 0.6003,
+   "joint_f1": 0.6239,
+   "typed_hits": 2967,
+   "joint_correct": 1781
+  }
+ },
+ "rules+control17": {
+  "vb_development": {
+   "hit_f1": 0.4068,
+   "hit_precision": 0.3606,
+   "hit_recall": 0.4665,
+   "type_accuracy_on_detected": 0.6928,
+   "joint_precision": 0.1595,
+   "joint_recall": 0.2889,
+   "joint_f1": 0.2055,
+   "typed_hits": 398,
+   "joint_correct": 115
+  },
+  "bfmd_dev": {
+   "hit_f1": 0.7122,
+   "hit_precision": 0.6764,
+   "hit_recall": 0.7522,
+   "type_accuracy_on_detected": 0.7937,
+   "joint_precision": 0.5368,
+   "joint_recall": 0.597,
+   "joint_f1": 0.5653,
+   "typed_hits": 928,
+   "joint_correct": 554
+  },
+  "vb_holdout": {
+   "hit_f1": 0.5963,
+   "hit_precision": 0.6315,
+   "hit_recall": 0.5648,
+   "type_accuracy_on_detected": 0.7066,
+   "joint_precision": 0.4307,
+   "joint_recall": 0.4042,
+   "joint_f1": 0.417,
+   "typed_hits": 715,
+   "joint_correct": 289
+  },
+  "bfmd_test": {
+   "hit_f1": 0.7856,
+   "hit_precision": 0.7559,
+   "hit_recall": 0.8178,
+   "type_accuracy_on_detected": 0.6963,
+   "joint_precision": 0.5247,
+   "joint_recall": 0.5696,
+   "joint_f1": 0.5462,
+   "typed_hits": 2967,
+   "joint_correct": 1690
+  }
+ },
+ "new": {
+  "vb_development": {
+   "hit_f1": 0.5481,
+   "hit_precision": 0.505,
+   "hit_recall": 0.5991,
+   "type_accuracy_on_detected": 0.8009,
+   "joint_precision": 0.2919,
+   "joint_recall": 0.4548,
+   "joint_f1": 0.3556,
+   "typed_hits": 398,
+   "joint_correct": 181
+  },
+  "bfmd_dev": {
+   "hit_f1": 0.9215,
+   "hit_precision": 0.9195,
+   "hit_recall": 0.9235,
+   "type_accuracy_on_detected": 0.8296,
+   "joint_precision": 0.7629,
+   "joint_recall": 0.7662,
+   "joint_f1": 0.7645,
+   "typed_hits": 928,
+   "joint_correct": 711
+  },
+  "vb_holdout": {
+   "hit_f1": 0.8012,
+   "hit_precision": 0.7753,
+   "hit_recall": 0.8289,
+   "type_accuracy_on_detected": 0.7876,
+   "joint_precision": 0.597,
+   "joint_recall": 0.6587,
+   "joint_f1": 0.6263,
+   "typed_hits": 715,
+   "joint_correct": 471
+  },
+  "bfmd_test": {
+   "hit_f1": 0.9516,
+   "hit_precision": 0.9623,
+   "hit_recall": 0.9411,
+   "type_accuracy_on_detected": 0.7917,
+   "joint_precision": 0.7614,
+   "joint_recall": 0.7455,
+   "joint_f1": 0.7534,
+   "typed_hits": 2967,
+   "joint_correct": 2212
+  }
+ }
+}

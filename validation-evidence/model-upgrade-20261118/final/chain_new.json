@@ -1,0 +1,48 @@
+{
+ "new": {
+  "vb_development": {
+   "hit_f1": 0.5481,
+   "hit_precision": 0.505,
+   "hit_recall": 0.5991,
+   "type_accuracy_on_detected": 0.8009,
+   "joint_precision": 0.2919,
+   "joint_recall": 0.4548,
+   "joint_f1": 0.3556,
+   "typed_hits": 398,
+   "joint_correct": 181
+  },
+  "bfmd_dev": {
+   "hit_f1": 0.9215,
+   "hit_precision": 0.9195,
+   "hit_recall": 0.9235,
+   "type_accuracy_on_detected": 0.8296,
+   "joint_precision": 0.7629,
+   "joint_recall": 0.7662,
+   "joint_f1": 0.7645,
+   "typed_hits": 928,
+   "joint_correct": 711
+  },
+  "vb_holdout": {
+   "hit_f1": 0.8012,
+   "hit_precision": 0.7753,
+   "hit_recall": 0.8289,
+   "type_accuracy_on_detected": 0.7876,
+   "joint_precision": 0.597,
+   "joint_recall": 0.6587,
+   "joint_f1": 0.6263,
+   "typed_hits": 715,
+   "joint_correct": 471
+  },
+  "bfmd_test": {
+   "hit_f1": 0.9516,
+   "hit_precision": 0.9623,
+   "hit_recall": 0.9411,
+   "type_accuracy_on_detected": 0.7917,
+   "joint_precision": 0.7614,
+   "joint_recall": 0.7455,
+   "joint_f1": 0.7534,
+   "typed_hits": 2967,
+   "joint_correct": 2212
+  }
+ }
+}

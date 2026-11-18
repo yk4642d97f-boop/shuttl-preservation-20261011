@@ -1,0 +1,2 @@
+control17        prior strength 0.25 start 0.9 | pro_val 0.8774->0.8845 pro_val_nopos 0.8668->0.8774 vb_development 0.5719->0.6492 vb_holdout 0.5652->0.6226 vb_holdout2 0.0023->0.0023
+new              prior strength 0.25 start 0.5 | pro_val 0.8570->0.8588 pro_val_nopos 0.8526->0.8535 vb_development 0.7451->0.7658 vb_holdout 0.8113->0.8341 vb_holdout2 0.0205->0.0091

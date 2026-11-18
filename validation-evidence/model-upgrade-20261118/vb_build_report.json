@@ -1,0 +1,190 @@
+{
+ "report": {
+  "clip/development": {
+   "n": 1291,
+   "gate_prod": 0.9976762199845082,
+   "gate_strict": 0.8861347792408986,
+   "types": {
+    "net": 98,
+    "block": 16,
+    "smash": 108,
+    "lift": 118,
+    "clear": 38,
+    "drive": 16,
+    "drop": 36,
+    "push": 45,
+    "kill": 1,
+    "cross_net": 39,
+    "short_serve": 269,
+    "long_serve": 134
+   },
+   "typed": 918,
+   "near_share": 0.4632068164213788,
+   "side_known": 0.9326103795507359,
+   "sessions": 11
+  },
+  "clip/holdout": {
+   "n": 1203,
+   "gate_prod": 0.9975062344139651,
+   "gate_strict": 0.8827930174563591,
+   "types": {
+    "net": 142,
+    "block": 49,
+    "smash": 118,
+    "lift": 109,
+    "clear": 178,
+    "drive": 14,
+    "drop": 126,
+    "push": 41,
+    "kill": 4,
+    "cross_net": 18,
+    "short_serve": 59,
+    "long_serve": 239
+   },
+   "typed": 1097,
+   "near_share": 0.48794679966749793,
+   "side_known": 0.9775561097256857,
+   "sessions": 8
+  },
+  "clip/holdout2": {
+   "n": 438,
+   "gate_prod": 0.9931506849315068,
+   "gate_strict": 0.9383561643835616,
+   "types": {
+    "net": 0,
+    "block": 0,
+    "smash": 26,
+    "lift": 32,
+    "clear": 0,
+    "drive": 290,
+    "drop": 0,
+    "push": 0,
+    "kill": 90,
+    "cross_net": 0,
+    "short_serve": 0,
+    "long_serve": 0
+   },
+   "typed": 438,
+   "near_share": 0.5525114155251142,
+   "side_known": 0.7328767123287672,
+   "sessions": 28
+  },
+  "clip/train": {
+   "n": 4846,
+   "gate_prod": 0.9952538175815105,
+   "gate_strict": 0.8885678910441601,
+   "types": {
+    "net": 572,
+    "block": 248,
+    "smash": 572,
+    "lift": 603,
+    "clear": 594,
+    "drive": 83,
+    "drop": 521,
+    "push": 315,
+    "kill": 18,
+    "cross_net": 109,
+    "short_serve": 552,
+    "long_serve": 616
+   },
+   "typed": 4803,
+   "near_share": 0.48968221213371854,
+   "side_known": 0.9770945109368552,
+   "sessions": 32
+  },
+  "hit/development": {
+   "n": 1291,
+   "gate_prod": 0.994577846630519,
+   "gate_strict": 0.9054996127033308,
+   "types": {
+    "net": 98,
+    "block": 16,
+    "smash": 108,
+    "lift": 118,
+    "clear": 38,
+    "drive": 16,
+    "drop": 36,
+    "push": 45,
+    "kill": 1,
+    "cross_net": 39,
+    "short_serve": 269,
+    "long_serve": 134
+   },
+   "typed": 918,
+   "near_share": 0.4632068164213788,
+   "side_known": 0.9326103795507359,
+   "sessions": 11
+  },
+  "hit/holdout": {
+   "n": 1203,
+   "gate_prod": 0.9966749792186201,
+   "gate_strict": 0.9160432252701579,
+   "types": {
+    "net": 142,
+    "block": 49,
+    "smash": 118,
+    "lift": 109,
+    "clear": 178,
+    "drive": 14,
+    "drop": 126,
+    "push": 41,
+    "kill": 4,
+    "cross_net": 18,
+    "short_serve": 59,
+    "long_serve": 239
+   },
+   "typed": 1097,
+   "near_share": 0.48794679966749793,
+   "side_known": 0.9775561097256857,
+   "sessions": 8
+  },
+  "hit/holdout2": {
+   "n": 438,
+   "gate_prod": 0.9840182648401826,
+   "gate_strict": 0.9383561643835616,
+   "types": {
+    "net": 0,
+    "block": 0,
+    "smash": 26,
+    "lift": 32,
+    "clear": 0,
+    "drive": 290,
+    "drop": 0,
+    "push": 0,
+    "kill": 90,
+    "cross_net": 0,
+    "short_serve": 0,
+    "long_serve": 0
+   },
+   "typed": 438,
+   "near_share": 0.5525114155251142,
+   "side_known": 0.7328767123287672,
+   "sessions": 28
+  },
+  "hit/train": {
+   "n": 4846,
+   "gate_prod": 0.9954601733388362,
+   "gate_strict": 0.914775072224515,
+   "types": {
+    "net": 572,
+    "block": 248,
+    "smash": 572,
+    "lift": 603,
+    "clear": 594,
+    "drive": 83,
+    "drop": 521,
+    "push": 315,
+    "kill": 18,
+    "cross_net": 109,
+    "short_serve": 552,
+    "long_serve": 616
+   },
+   "typed": 4803,
+   "near_share": 0.48968221213371854,
+   "side_known": 0.9770945109368552,
+   "sessions": 32
+  }
+ },
+ "strokes": 7778,
+ "side_decided": 7436
+}

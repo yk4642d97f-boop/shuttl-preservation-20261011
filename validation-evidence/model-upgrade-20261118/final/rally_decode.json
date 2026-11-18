@@ -1,0 +1,50 @@
+{
+ "control17": {
+  "pro_val": {
+   "argmax": 0.8774422735346359,
+   "rally_decoded": 0.8845470692717584
+  },
+  "pro_val_nopos": {
+   "argmax": 0.866785079928952,
+   "rally_decoded": 0.8774422735346359
+  },
+  "vb_development": {
+   "argmax": 0.5718954248366013,
+   "rally_decoded": 0.6492374727668845
+  },
+  "vb_holdout": {
+   "argmax": 0.5651777575205105,
+   "rally_decoded": 0.6226071103008204
+  },
+  "vb_holdout2": {
+   "argmax": 0.00228310502283105,
+   "rally_decoded": 0.00228310502283105
+  },
+  "lam": 0.25,
+  "rho": 0.9
+ },
+ "new": {
+  "pro_val": {
+   "argmax": 0.8570159857904085,
+   "rally_decoded": 0.8587921847246892
+  },
+  "pro_val_nopos": {
+   "argmax": 0.8525754884547069,
+   "rally_decoded": 0.8534635879218473
+  },
+  "vb_development": {
+   "argmax": 0.7450980392156863,
+   "rally_decoded": 0.7657952069716776
+  },
+  "vb_holdout": {
+   "argmax": 0.8113035551504102,
+   "rally_decoded": 0.8340929808568824
+  },
+  "vb_holdout2": {
+   "argmax": 0.02054794520547945,
+   "rally_decoded": 0.0091324200913242
+  },
+  "lam": 0.25,
+  "rho": 0.5
+ }
+}

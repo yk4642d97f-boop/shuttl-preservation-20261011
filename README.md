@@ -20,6 +20,7 @@
 | 原始文件归档与三部独立宣传/演示视频 | [备份 Release](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/tag/backup-20261011) |
 | 标准库备份读取器及格式文档 | [tools/README.md](tools/README.md) |
 | 加密分卷资产索引 | `recovery/payload-index.json` |
+| 2026-11-18 模型升级(击球检测 + 球种分类候选,未部署):记录、脚本和冻结评测 | [source/shuttl/research/model_upgrade_20261118/](source/shuttl/research/model_upgrade_20261118/README.md) · [Release](https://github.com/yk4642d97f-boop/shuttl-preservation-20261011/releases/tag/model-upgrade-20261118) |
 
 ## 在新电脑恢复
 

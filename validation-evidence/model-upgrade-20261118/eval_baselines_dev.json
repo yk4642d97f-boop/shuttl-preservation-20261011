@@ -1,0 +1,209 @@
+{
+ "released": {
+  "members": 10,
+  "pro_clean": 0.873001754283905,
+  "pro_nopos": 0.5666074752807617,
+  "pro_clean_shift-2": 0.8641207814216614,
+  "pro_clean_shift+2": 0.8650088906288147,
+  "vb_development": {
+   "n": 918,
+   "accuracy": 0.15904139433551198,
+   "macro_recall": 0.17308292911026266,
+   "macro_f1": 0.18711096128893853,
+   "answered": 488,
+   "per_class": {
+    "net": 0.6327,
+    "block": 0.375,
+    "smash": 0.287,
+    "lift": 0.2119,
+    "clear": 0.2895,
+    "drive": 0.0,
+    "drop": 0.2222,
+    "push": 0.0,
+    "kill": 0.0,
+    "cross_net": 0.0513,
+    "short_serve": 0.0,
+    "long_serve": 0.0075
+   },
+   "acc25": 0.12857142857142856,
+   "side_accuracy": 0.6970338983050848,
+   "gate_prod_rate": 0.9945533769063181,
+   "accuracy_inside_gate": 0.15991237677984665,
+   "end_to_end_with_gate": 0.15904139433551198,
+   "accuracy_shift-2": 0.1840958605664488,
+   "accuracy_shift+2": 0.14596949891067537,
+   "delta_vs_control17": {
+    "delta": -0.41285403050108926,
+    "ci95": [
+     -0.5436338456472685,
+     -0.3285247080744742
+    ],
+    "groups": 11
+   }
+  }
+ },
+ "control17": {
+  "members": 10,
+  "pro_clean": 0.8774423003196716,
+  "pro_nopos": 0.8667851090431213,
+  "pro_clean_shift-2": 0.8721137046813965,
+  "pro_clean_shift+2": 0.8641207814216614,
+  "vb_development": {
+   "n": 918,
+   "accuracy": 0.5718954248366013,
+   "macro_recall": 0.42927664834417173,
+   "macro_f1": 0.4051906609135129,
+   "answered": 849,
+   "per_class": {
+    "net": 0.7041,
+    "block": 0.9375,
+    "smash": 0.6481,
+    "lift": 0.4068,
+    "clear": 0.6316,
+    "drive": 0.125,
+    "drop": 0.3056,
+    "push": 0.1111,
+    "kill": 0.0,
+    "cross_net": 0.1282,
+    "short_serve": 0.8996,
+    "long_serve": 0.2537
+   },
+   "acc25": 0.5214285714285715,
+   "side_accuracy": 0.8792884371029225,
+   "gate_prod_rate": 0.9945533769063181,
+   "accuracy_inside_gate": 0.5750273822562979,
+   "end_to_end_with_gate": 0.5718954248366013,
+   "accuracy_shift-2": 0.6122004357298475,
+   "accuracy_shift+2": 0.5163398692810458
+  }
+ },
+ "aux17": {
+  "members": 10,
+  "pro_clean": 0.873001754283905,
+  "pro_nopos": 0.8623445630073547,
+  "pro_clean_shift-2": 0.8632326722145081,
+  "pro_clean_shift+2": 0.8623445630073547,
+  "vb_development": {
+   "n": 918,
+   "accuracy": 0.5631808278867102,
+   "macro_recall": 0.413103277728406,
+   "macro_f1": 0.3909025988001334,
+   "answered": 907,
+   "per_class": {
+    "net": 0.2959,
+    "block": 0.75,
+    "smash": 0.6204,
+    "lift": 0.4153,
+    "clear": 0.7368,
+    "drive": 0.1875,
+    "drop": 0.3056,
+    "push": 0.1778,
+    "kill": 0.0,
+    "cross_net": 0.1282,
+    "short_serve": 0.9294,
+    "long_serve": 0.4104
+   },
+   "acc25": 0.5202380952380953,
+   "side_accuracy": 0.8373205741626795,
+   "gate_prod_rate": 0.9945533769063181,
+   "accuracy_inside_gate": 0.5662650602409639,
+   "end_to_end_with_gate": 0.5631808278867102,
+   "accuracy_shift-2": 0.5958605664488017,
+   "accuracy_shift+2": 0.5087145969498911,
+   "delta_vs_control17": {
+    "delta": -0.008714596949891074,
+    "ci95": [
+     -0.057314142892737015,
+     0.052498625418858184
+    ],
+    "groups": 11
+   }
+  }
+ },
+ "v4_vb_w1": {
+  "members": 3,
+  "pro_clean": 0.8543516993522644,
+  "pro_nopos": 0.845470666885376,
+  "pro_clean_shift-2": 0.8499112129211426,
+  "pro_clean_shift+2": 0.838365912437439,
+  "vb_development": {
+   "n": 918,
+   "accuracy": 0.7058823529411765,
+   "macro_recall": 0.5553985410730408,
+   "macro_f1": 0.5237266591554524,
+   "answered": 918,
+   "per_class": {
+    "net": 0.7653,
+    "block": 0.9375,
+    "smash": 0.6574,
+    "lift": 0.4322,
+    "clear": 0.8684,
+    "drive": 0.125,
+    "drop": 0.5556,
+    "push": 0.2889,
+    "kill": 0.0,
+    "cross_net": 0.359,
+    "short_serve": 0.9591,
+    "long_serve": 0.7164
+   },
+   "acc25": 0.6857142857142857,
+   "side_accuracy": 0.9321428571428572,
+   "gate_prod_rate": 0.9945533769063181,
+   "accuracy_inside_gate": 0.7097480832420592,
+   "end_to_end_with_gate": 0.7058823529411765,
+   "accuracy_shift-2": 0.7113289760348583,
+   "accuracy_shift+2": 0.6775599128540305,
+   "delta_vs_control17": {
+    "delta": 0.13398692810457524,
+    "ci95": [
+     0.07828690052533469,
+     0.2000077041602465
+    ],
+    "groups": 11
+   }
+  }
+ },
+ "v9_vb_lr3": {
+  "members": 3,
+  "pro_clean": 0.8507992625236511,
+  "pro_nopos": 0.8472468852996826,
+  "pro_clean_shift-2": 0.8490231037139893,
+  "pro_clean_shift+2": 0.845470666885376,
+  "vb_development": {
+   "n": 918,
+   "accuracy": 0.7461873638344226,
+   "macro_recall": 0.6038182883085976,
+   "macro_f1": 0.581300240784636,
+   "answered": 918,
+   "per_class": {
+    "net": 0.8163,
+    "block": 0.9375,
+    "smash": 0.6759,
+    "lift": 0.4831,
+    "clear": 0.8684,
+    "drive": 0.1875,
+    "drop": 0.6389,
+    "push": 0.4222,
+    "kill": 0.0,
+    "cross_net": 0.4359,
+    "short_serve": 0.9368,
+    "long_serve": 0.8433
+   },
+   "acc25": 0.7238095238095238,
+   "side_accuracy": 0.9392857142857143,
+   "gate_prod_rate": 0.9945533769063181,
+   "accuracy_inside_gate": 0.7502738225629791,
+   "end_to_end_with_gate": 0.7461873638344226,
+   "accuracy_shift-2": 0.7483660130718954,
+   "accuracy_shift+2": 0.7156862745098039,
+   "delta_vs_control17": {
+    "delta": 0.17429193899782136,
+    "ci95": [
+     0.10979605461005547,
+     0.24405305372926994
+    ],
+    "groups": 11
+   }
+  }
+ }
+}

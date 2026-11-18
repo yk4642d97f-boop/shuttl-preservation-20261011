@@ -1,0 +1,29 @@
+{
+  "release_tag": "model-upgrade-20261118",
+  "asset": "shuttl-models-20261118.tar.age",
+  "asset_sha256": "d912f8a6436add796196a5b8a16fa8d3c575d7bfc1542014ef8d1a67f2dee5dc",
+  "asset_bytes": 76085576,
+  "plaintext_tar_sha256": "6b16495c5dc24e5deea8fe31a920b064bd40e89943c538c40eff5a46efa4ce2a",
+  "plaintext_tar_bytes": 76066816,
+  "age_recipient": "age1vtqpea67rxdplj38myatryhc5u7jda2tfty0ljqtnujzacadqslsmq9rv9",
+  "age_recipient_source": "recovery/payload-index.json",
+  "decryption_verified": false,
+  "decryption_note": "The recovery key is not on the machine that produced this archive.",
+  "files_inside": {
+    "SHA256SUMS": "7bb42fce8dba2cf146b8cba58cd476497f8d4ab7d399680501640f5bb5cd4c4b",
+    "bst_seq30_20261118/LICENSE": "2c42235c975d942f9b3d95028aea579a876b6870181a1086e6edbcb31890f918",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m0.pt": "1065152689e32dd43c30684eec02f68f6d990fdab2c5a0ef24e2d8afa15d0105",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m1.pt": "ae10405e496a7cda0ffffd301104e81df6b730ff1bcd081ca724c58633be9087",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m2.pt": "5ccf698100e113a3d474844f3cf44410e3319c3bbf889fe106e2e677a95a443d",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m3.pt": "8914d94b2d95ab719b7c401bd83cde349bc2deb4ee5e3c79e6ae5c272b319bb3",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m4.pt": "79209e0708de400e302d8d2f3dbdbdfe1ad7baaf84e340beb357e9954b54b53d",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m5.pt": "2ab0ae29478c67bd2f92a71dbd8fa9e41d5c80565cac8ba591040802ac588e99",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m6.pt": "72b1cb5162118689ede922de06b3706be2d0038daf3ee9d8cdf5266caf810185",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m7.pt": "05bf939690ad875f60d855a7618ae8415ab8c243fba1c7d99388b64db9acf6f7",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m8.pt": "e96a6d6400546ae4c5f3173453836e6947b519b7b90d3f76f98503ea9b51b805",
+    "bst_seq30_20261118/bst_CG_AP_seq30_20261118_m9.pt": "207c934b4212664d250ca7c9858a3ec2a107ede22dcdfca232d98dd83e04a448",
+    "bst_seq30_20261118/manifest.json": "592ef70357090757d1cff3d2e2d1ae1afe052457b83de4943114faa78ea25725",
+    "hitnet_20261118/hitnet_single_v3_20261118.json": "ae1dc19c5a6c05f0a3452605a39d61bfda10e750d9cc2830c77499efc2437d10",
+    "hitnet_20261118/hitnet_single_v3_20261118.pt": "f2808c2dd9c11a9fd4fcb3e0556b5fe121ba30e52ab8264ec6525bfae8789258"
+  }
+}

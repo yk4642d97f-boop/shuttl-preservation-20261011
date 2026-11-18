@@ -1,0 +1,7 @@
+{
+  "frozen_on": "2026-11-18",
+  "bst": "final_A (10 members; professional 001-006 + VideoBadminton train + BFMD train, lr 3e-4, 30 epochs)",
+  "hitnet": "hit_final (hitnet_single_v2 fine-tuned on VideoBadminton train rallies + 8 BFMD matches, 80 epochs)",
+  "rule": "final_B (adds FineBadminton, lr 2e-4) replaces final_A only if development results improve; they did not (VB dev 0.7418 vs 0.7451, BFMD dev 0.8190 vs 0.8211, pro val 0.8517 vs 0.8570)",
+  "holdouts_read_before_freeze": false
+}

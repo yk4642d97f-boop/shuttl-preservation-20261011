@@ -1,0 +1,16 @@
+rules+released         vb_development  hit F1 0.4068  type acc on detected 0.4639  JOINT F1 0.1376 (P 0.107 R 0.194) correct 77/398
+rules+released         bfmd_dev        hit F1 0.7122  type acc on detected 0.7865  JOINT F1 0.5602 (P 0.532 R 0.592) correct 549/928
+rules+released         vb_holdout      hit F1 0.5963  type acc on detected 0.4205  JOINT F1 0.2482 (P 0.256 R 0.241) correct 172/715
+rules+released         bfmd_test       hit F1 0.7856  type acc on detected 0.7149  JOINT F1 0.5608 (P 0.539 R 0.585) correct 1735/2967
+hitnet_v2+released     vb_development  hit F1 0.1157  type acc on detected 0.3469  JOINT F1 0.0293 (P 0.022 R 0.043) correct 17/398
+hitnet_v2+released     bfmd_dev        hit F1 0.7658  type acc on detected 0.8226  JOINT F1 0.6299 (P 0.625 R 0.635) correct 589/928
+hitnet_v2+released     vb_holdout      hit F1 0.2160  type acc on detected 0.3333  JOINT F1 0.0645 (P 0.063 R 0.066) correct 47/715
+hitnet_v2+released     bfmd_test       hit F1 0.8308  type acc on detected 0.7515  JOINT F1 0.6239 (P 0.649 R 0.600) correct 1781/2967
+rules+control17        vb_development  hit F1 0.4068  type acc on detected 0.6928  JOINT F1 0.2055 (P 0.160 R 0.289) correct 115/398
+rules+control17        bfmd_dev        hit F1 0.7122  type acc on detected 0.7937  JOINT F1 0.5653 (P 0.537 R 0.597) correct 554/928
+rules+control17        vb_holdout      hit F1 0.5963  type acc on detected 0.7066  JOINT F1 0.4170 (P 0.431 R 0.404) correct 289/715
+rules+control17        bfmd_test       hit F1 0.7856  type acc on detected 0.6963  JOINT F1 0.5462 (P 0.525 R 0.570) correct 1690/2967
+new                    vb_development  hit F1 0.5481  type acc on detected 0.8009  JOINT F1 0.3556 (P 0.292 R 0.455) correct 181/398
+new                    bfmd_dev        hit F1 0.9215  type acc on detected 0.8296  JOINT F1 0.7645 (P 0.763 R 0.766) correct 711/928
+new                    vb_holdout      hit F1 0.8012  type acc on detected 0.7876  JOINT F1 0.6263 (P 0.597 R 0.659) correct 471/715
+new                    bfmd_test       hit F1 0.9516  type acc on detected 0.7917  JOINT F1 0.7534 (P 0.761 R 0.746) correct 2212/2967
