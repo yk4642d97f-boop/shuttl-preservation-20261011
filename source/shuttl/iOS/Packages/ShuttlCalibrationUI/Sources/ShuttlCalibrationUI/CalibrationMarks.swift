@@ -233,7 +233,7 @@ struct QuadIssueChip: View {
                 .font(.system(size: 17, weight: .black))
             VStack(alignment: .leading, spacing: 1) {
                 Text("四角位置无效")
-                    .font(DisplayFace.font(19, relativeTo: .headline))
+                    .font(AppFont.title(16))
                 Text(issue.hint)
                     .font(.system(.footnote).weight(.semibold))
                     .fixedSize(horizontal: false, vertical: true)
@@ -277,7 +277,7 @@ struct StageHint: View {
             Image(systemName: zoom > 1.01 ? "plus.magnifyingglass" : "hand.draw")
                 .font(.system(size: 10, weight: .bold))
             Text(text)
-                .font(.system(.caption2, design: .monospaced).weight(.semibold))
+                .font(AppFont.labelSmall)
                 .lineLimit(1)
         }
         .foregroundStyle(Color.paper.opacity(0.82))

@@ -25,6 +25,7 @@ struct OverlayRenderer {
     private let sourceHeight: CGFloat
     private let labelFont: CTFont
     private let numeralFont: CTFont
+    private let unitFont: CTFont
     private let stampFont: CTFont
     private let scoreFont: CTFont
     private let tagFont: CTFont
@@ -46,11 +47,12 @@ struct OverlayRenderer {
         shots = Self.collectShots(analysis)
         DisplayFace.register()
         labelFont = ExportTheme.displayFont(28 * u)
-        numeralFont = ExportTheme.displayFont(37 * u)
+        numeralFont = ExportTheme.figureFont(38 * u)
+        unitFont = ExportTheme.unitFont(28 * u)
         stampFont = ExportTheme.displayFont(30 * u)
-        scoreFont = ExportTheme.displayFont(46 * u)
-        tagFont = ExportTheme.monoFont(16 * u)
-        markFont = ExportTheme.displayFont(42 * u)
+        scoreFont = ExportTheme.figureFont(48 * u)
+        tagFont = ExportTheme.tagFont(17 * u)
+        markFont = ExportTheme.wordmarkFont(46 * u)
     }
 
     func draw(frame: Int, pixelBuffer: CVPixelBuffer) {
@@ -241,7 +243,7 @@ struct OverlayRenderer {
            segment.speed0Kmh.isFinite, segment.speed0Kmh > 0 {
             if !parts.isEmpty { parts.append(("  ", labelFont, ink)) }
             parts.append(("\(Int(segment.speed0Kmh.rounded()))", numeralFont, ink))
-            parts.append((" km/h", labelFont, ink))
+            parts.append((" km/h", unitFont, ink))
         }
         guard !parts.isEmpty else { return nil }
         return StickerMark(text: TextRun(parts), fill: ExportTheme.shotColor(shot.shotType.rawValue),
@@ -357,8 +359,8 @@ struct OverlayRenderer {
     }
 
     // MARK: Score card
-    // A paper card with an ink outline and an offset ink print shadow: a mono game tag
-    // and two display-face scores on spot-ink chips, cobalt for near and pink for far.
+    // A paper card with an ink outline and an offset ink print shadow: a small game tag
+    // and two New York scores on spot-ink chips, cobalt for near and pink for far.
 
     private func drawScore(frame: Int, in context: CGContext) {
         guard options.showScore, !analysis.score.isEmpty else { return }
@@ -420,7 +422,7 @@ struct OverlayRenderer {
     }
 
     // MARK: Watermark
-    // "Shuttl." in the display face, card white with a tomato full stop over an
+    // "Shuttl." in the wordmark face, card white with a tomato full stop over an
     // offset ink plate, bottom-right at ~70 % so it signs the clip without shouting.
 
     private func drawWatermark(in context: CGContext) {

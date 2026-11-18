@@ -42,7 +42,7 @@ struct ResultsScrollView<Content: View>: View {
     }
 }
 
-/// A stat in the results voice: display numeral, mono unit and caption,
+/// A stat in the results voice: the figure, its unit and what it counts,
 /// optionally printed on a spot-ink tile.
 struct ResultsStat: View {
     let value: String
@@ -51,7 +51,7 @@ struct ResultsStat: View {
     var fill: Color?
 
     var body: some View {
-        StatBubble(value: value, label: label, unit: unit, fill: fill, numeralFont: AppFont.numeral(30, relativeTo: .title2))
+        StatBubble(value: value, label: label, unit: unit, fill: fill, numeralFont: AppFont.figure(24))
     }
 }
 

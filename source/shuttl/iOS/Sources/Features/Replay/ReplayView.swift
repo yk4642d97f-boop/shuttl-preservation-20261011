@@ -43,6 +43,12 @@ struct ReplayView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(AppChrome.self) private var chrome: AppChrome?
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    /// A finger is down on the scrubber.
+    @GestureState private var scrubbing = false
+    /// Counts ⏮ / ⏭ taps: the trigger for their haptic and for sliding the playhead.
+    @State private var jumps = 0
+    /// Counts taps on the picture: the trigger for the play / pause flash.
+    @State private var pictureTaps = 0
 
     /// On its side the picture gets the height; controls fold into one strip.
     private var landscape: Bool { verticalSizeClass == .compact }
@@ -61,7 +67,17 @@ struct ReplayView: View {
             #endif
 
             if let player = viewModel.player {
-                AVPlayerView(player: player).ignoresSafeArea()
+                AVPlayerView(player: player)
+                    .ignoresSafeArea()
+                    // Tap the picture to play/pause, like every other video app.
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        viewModel.togglePlayback()
+                        pictureTaps += 1
+                    }
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityLabel(viewModel.isPlaying ? "暂停播放" : "继续播放")
+                    .accessibilityHint("轻点画面切换播放和暂停")
             } else if viewModel.videoMissing {
                 VStack(spacing: AppSpacing.sm) {
                     Image(systemName: "film.stack")
@@ -94,6 +110,8 @@ struct ReplayView: View {
             }
             .ignoresSafeArea()
 
+            PlaybackFlash(isPlaying: viewModel.isPlaying, trigger: pictureTaps)
+
             VStack {
                 topBar
                 Spacer()
@@ -104,6 +122,8 @@ struct ReplayView: View {
                 .padding(.bottom, landscape ? AppSpacing.xs : AppSpacing.sm)
             }
         }
+        .sensoryFeedback(.impact(weight: .light), trigger: pictureTaps)
+        .sensoryFeedback(.impact(weight: .light), trigger: jumps)
         .toolbar(.hidden, for: .navigationBar)
         .statusBarHidden(true)
         .onAppear {
@@ -138,118 +158,150 @@ struct ReplayView: View {
 
     // MARK: - Top bar
 
+    /// How much of the title slip the row has room for. Nothing in the row wraps or truncates:
+    /// when it runs out of width the title gives way first, since the score and the
+    /// rallies-only switch are what you came here to use. A phone held upright drops it, and
+    /// on the narrowest screens (Display Zoom, large type) the switch keeps only its glyph, so
+    /// the back button and the switch can never be pushed off the edges.
+    private enum TopBarTitle { case dated, plain, hidden, compact }
+
     private var topBar: some View {
+        ViewThatFits(in: .horizontal) {
+            topBarRow(.dated)
+            topBarRow(.plain)
+            topBarRow(.hidden)
+            topBarRow(.compact)
+        }
+        .padding(.horizontal, AppSpacing.md)
+        .padding(.top, landscape ? AppSpacing.xs : AppSpacing.sm)
+    }
+
+    private func topBarRow(_ title: TopBarTitle) -> some View {
         HStack(spacing: AppSpacing.sm) {
             IconButton(systemName: "chevron.left", style: .filled, label: "返回") { dismiss() }
+            if title == .dated || title == .plain { titleSlip(dated: title == .dated) }
+            if let chip = rallyChip { scoreSlip(chip, shrinks: title == .compact) }
+            Spacer(minLength: 0)
+            if !viewModel.rallyWindows.isEmpty { ralliesOnlySwitch(glyphOnly: title == .compact) }
+        }
+    }
 
-            VStack(alignment: .leading, spacing: 0) {
-                Text("回放")
-                    .font(AppFont.title3)
-                    .foregroundStyle(Color.ink)
-                    .padding(.top, 2)
+    private func titleSlip(dated: Bool) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 6) {
+            Text("回放")
+                .font(AppFont.title3)
+                .foregroundStyle(Color.ink)
+            if dated {
                 Text(match.createdAt.formatted(date: .abbreviated, time: .shortened))
                     .font(AppFont.labelSmall)
                     .foregroundStyle(Color.inkSoft)
             }
-            .padding(.horizontal, AppSpacing.md)
-            .frame(height: 44)
-            .background(Color.paper, in: Capsule())
-            .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 1.5))
-
-            if let chip = rallyChip {
-                HStack(spacing: 6) {
-                    Text("回合 \(chip.label)").font(AppFont.labelSmall).foregroundStyle(Color.inkSoft)
-                    Text("近 \(chip.near)").font(DisplayFace.fixed(16)).foregroundStyle(Color.cobalt)
-                    Text(":").font(DisplayFace.fixed(14)).foregroundStyle(Color.inkFaint)
-                    Text("远 \(chip.far)").font(DisplayFace.fixed(16)).foregroundStyle(Color.ink)
-                }
-                .padding(.horizontal, 10)
-                .frame(height: 32)
-                .background(Color.paper, in: Capsule())
-                .overlay(Capsule().strokeBorder(Color.ink, lineWidth: AppStroke.fine))
-                .contentTransition(.numericText())
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel("第 \(chip.label) 回合，近端 \(chip.near) 比远端 \(chip.far)")
-            }
-
-            Spacer()
-
-            if !viewModel.rallyWindows.isEmpty {
-                Button {
-                    withAnimation(AppAnimation.bouncy) { viewModel.ralliesOnly.toggle() }
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: viewModel.ralliesOnly ? "scissors" : "film")
-                            .font(.system(size: 13, weight: .black))
-                        Text(viewModel.ralliesOnly ? "只看回合 · 开" : "只看回合")
-                            .font(DisplayFace.font(17, relativeTo: .subheadline))
-                    }
-                    .foregroundStyle(Color.ink)
-                    .padding(.horizontal, 14)
-                    .frame(height: 38)
-                    .background(viewModel.ralliesOnly ? Color.butter : Color.paper, in: Capsule())
-                    .overlay(Capsule().strokeBorder(Color.ink, lineWidth: AppStroke.ink))
-                    .rotationEffect(.degrees(viewModel.ralliesOnly ? 3 : 0))
-                }
-                .buttonStyle(ScaleButtonStyle())
-                .sensoryFeedback(.selection, trigger: viewModel.ralliesOnly)
-                .accessibilityLabel("只看回合")
-                .accessibilityValue(viewModel.ralliesOnly ? "开，自动跳过捡球时间" : "关")
-            }
         }
-        .padding(.horizontal, AppSpacing.md)
-        .padding(.top, landscape ? AppSpacing.xs : AppSpacing.sm)
+        .lineLimit(1)
+        .fixedSize()
+        .padding(.horizontal, AppSpacing.md - 2)
+        .frame(height: 44)
+        .background(Color.paper, in: Capsule())
+        .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 1.5))
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isHeader)
+    }
+
+    /// Rally number and the score after it, on one line. Near is cobalt, as everywhere else.
+    /// `shrinks` is the last-resort row: the slip may scale its type down, never the buttons.
+    private func scoreSlip(_ chip: (label: String, near: Int, far: Int), shrinks: Bool) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 5) {
+            Text("回合 \(chip.label)")
+                .font(AppFont.labelSmall)
+                .foregroundStyle(Color.inkSoft)
+                .padding(.trailing, 2)
+            Text("近").font(AppFont.labelSmall).foregroundStyle(Color.cobalt)
+            Text("\(chip.near)").font(AppFont.figure(17)).foregroundStyle(Color.cobalt)
+            Text(":").font(AppFont.figure(14)).foregroundStyle(Color.inkFaint)
+            Text("\(chip.far)").font(AppFont.figure(17)).foregroundStyle(Color.ink)
+            Text("远").font(AppFont.labelSmall).foregroundStyle(Color.inkSoft)
+        }
+        .lineLimit(1)
+        .minimumScaleFactor(shrinks ? 0.6 : 1)
+        .fixedSize(horizontal: !shrinks, vertical: true)
+        .contentTransition(.numericText())
+        .animation(AppAnimation.standard, value: chip.label)
+        .padding(.horizontal, 12)
+        .frame(height: 36)
+        .background(Color.paper, in: Capsule())
+        .overlay(Capsule().strokeBorder(Color.ink, lineWidth: AppStroke.fine))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("第 \(chip.label) 回合，近端 \(chip.near) 比远端 \(chip.far)")
+    }
+
+    /// A sticker switch. Its label never changes, so the row doesn't shift when it flips;
+    /// butter and a slight tilt say "on".
+    private func ralliesOnlySwitch(glyphOnly: Bool) -> some View {
+        let on = viewModel.ralliesOnly
+        return Button {
+            withAnimation(AppAnimation.bouncy) { viewModel.ralliesOnly.toggle() }
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: on ? "scissors" : "film")
+                    .font(.system(size: 13, weight: .black))
+                    .contentTransition(.symbolEffect(.replace))
+                    .frame(width: 16)
+                if !glyphOnly {
+                    Text("只看回合")
+                        .font(AppFont.title(15))
+                }
+            }
+            .foregroundStyle(Color.ink)
+            .lineLimit(1)
+            .fixedSize()
+            .padding(.horizontal, 14)
+            .frame(height: 40)
+            .background(on ? Color.butter : Color.paper, in: Capsule())
+            .overlay(Capsule().strokeBorder(Color.ink, lineWidth: AppStroke.ink))
+            .rotationEffect(.degrees(on ? 3 : 0))
+        }
+        .buttonStyle(ScaleButtonStyle())
+        .sensoryFeedback(.selection, trigger: on)
+        .accessibilityLabel("只看回合")
+        .accessibilityValue(on ? "开，自动跳过捡球时间" : "关")
     }
 
     // MARK: - Control deck
 
     private var controlBar: some View {
         let shape = RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
-        return VStack(spacing: AppSpacing.md) {
-            scrubber
-
-            HStack(spacing: AppSpacing.sm) {
+        return VStack(spacing: AppSpacing.sm) {
+            // Where the playhead is, and how long the take runs.
+            HStack(alignment: .firstTextBaseline) {
                 Text(viewModel.replayTimeText)
                     .font(AppFont.timer)
                     .foregroundStyle(Color.ink)
                     .contentTransition(.numericText())
-                    .frame(minWidth: 60, alignment: .leading)
+                Spacer(minLength: AppSpacing.sm)
+                Text(ReplayViewModel.clock(timelineSeconds))
+                    .font(AppFont.labelSmall)
+                    .foregroundStyle(Color.inkSoft)
+                    .accessibilityLabel("总时长 \(ReplayViewModel.clock(timelineSeconds))")
+            }
+            .monospacedDigit()
 
-                Spacer(minLength: 0)
+            scrubber
+                .padding(.bottom, AppSpacing.xs)
 
-                HStack(spacing: 4) {
-                    ForEach(viewModel.availableRates, id: \.self) { rate in
-                        let active = abs(viewModel.playbackRate - rate) < 0.01
-                        Button { withAnimation(AppAnimation.bouncy) { viewModel.setRate(rate) } } label: {
-                            Text(rateText(rate))
-                                .font(AppFont.labelSmall)
-                                .foregroundStyle(active ? Color.paper : Color.inkSoft)
-                                .frame(minWidth: 40, minHeight: 32)
-                                .background(active ? Color.ink : Color.clear, in: Capsule())
-                                .contentShape(Capsule())
-                        }
-                        .buttonStyle(ScaleButtonStyle())
-                        .accessibilityLabel("\(rateText(rate)) 速")
-                        .accessibilityAddTraits(active ? [.isSelected] : [])
-                    }
+            // Speeds on the left, transport on the right under the thumb. The row never grows
+            // past the deck: on a narrow phone, or with large type, the four speed chips fold
+            // into one menu chip.
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 0) {
+                    rateChips.padding(.bottom, Self.plateDepth)
+                    Spacer(minLength: AppSpacing.xs)
+                    transport
                 }
-                .padding(3)
-                .background(Color.paperDeep, in: Capsule())
-                .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 1.25))
-
-                Spacer(minLength: 0)
-
-                Button { viewModel.togglePlayback() } label: {
-                    Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: 20, weight: .black))
-                        .foregroundStyle(Color.onCobalt)
-                        .contentTransition(.symbolEffect(.replace))
-                        .frame(width: 56, height: 56)
-                        .background(Color.cobalt, in: Circle())
-                        .overlay(Circle().strokeBorder(Color.ink, lineWidth: 1.5))
+                HStack(spacing: 0) {
+                    rateMenu.padding(.bottom, Self.plateDepth)
+                    Spacer(minLength: AppSpacing.xs)
+                    transport
                 }
-                .buttonStyle(PrintButtonStyle(shape: Circle(), plate: .ink, depth: 4))
-                .accessibilityLabel(viewModel.isPlaying ? "暂停" : "播放")
             }
         }
         .padding(AppSpacing.md)
@@ -257,11 +309,42 @@ struct ReplayView: View {
         .overlay(shape.strokeBorder(Color.ink, lineWidth: 1.5))
     }
 
-    /// Landscape: play · time · scrubber · speed, on one paper strip.
+    /// The play button's printed plate sits this far below its face; its neighbours lift by
+    /// the same amount so they centre on the face, not on face plus plate.
+    private static let plateDepth: CGFloat = 4
+
+    /// ⏮ ▶ ⏭. The step buttons exist only when the match has rallies to step through.
+    private var transport: some View {
+        HStack(spacing: 0) {
+            if !viewModel.rallyWindows.isEmpty {
+                rallyJumpButton(forward: false).padding(.bottom, Self.plateDepth)
+            }
+            Button { viewModel.togglePlayback() } label: {
+                Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
+                    .font(.system(size: 20, weight: .black))
+                    .foregroundStyle(Color.onCobalt)
+                    .contentTransition(.symbolEffect(.replace))
+                    .frame(width: 56, height: 56)
+                    .background(Color.cobalt, in: Circle())
+                    .overlay(Circle().strokeBorder(Color.ink, lineWidth: 1.5))
+            }
+            .buttonStyle(PrintButtonStyle(shape: Circle(), plate: .ink, depth: Self.plateDepth))
+            .accessibilityLabel(viewModel.isPlaying ? "暂停" : "播放")
+            if !viewModel.rallyWindows.isEmpty {
+                rallyJumpButton(forward: true).padding(.bottom, Self.plateDepth)
+            }
+        }
+    }
+
+    /// Landscape: transport · time · scrubber · speed, on one paper strip.
     private var compactControlBar: some View {
         let shape = Capsule()
         return HStack(spacing: AppSpacing.md) {
-            playButton(size: 46)
+            HStack(spacing: 0) {
+                if !viewModel.rallyWindows.isEmpty { rallyJumpButton(forward: false) }
+                playButton(size: 46)
+                if !viewModel.rallyWindows.isEmpty { rallyJumpButton(forward: true) }
+            }
             Text(viewModel.replayTimeText)
                 .font(AppFont.timer)
                 .foregroundStyle(Color.ink)
@@ -301,6 +384,53 @@ struct ReplayView: View {
         .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 1.25))
     }
 
+    /// One chip that opens the four speeds, for widths the row of chips doesn't fit.
+    private var rateMenu: some View {
+        Menu {
+            Picker("播放速度", selection: Binding(get: { viewModel.playbackRate },
+                                              set: { viewModel.setRate($0) })) {
+                ForEach(viewModel.availableRates, id: \.self) { rate in
+                    Text(rateText(rate)).tag(rate)
+                }
+            }
+        } label: {
+            HStack(spacing: 5) {
+                Image(systemName: "speedometer").font(.system(size: 12, weight: .bold))
+                Text(rateText(viewModel.playbackRate)).font(AppFont.labelSmall)
+            }
+            .foregroundStyle(Color.ink)
+            .lineLimit(1)
+            .fixedSize()
+            .padding(.horizontal, 12)
+            .frame(height: 38)
+            .background(Color.paperDeep, in: Capsule())
+            .overlay(Capsule().strokeBorder(Color.ink, lineWidth: 1.25))
+        }
+        .accessibilityLabel("播放速度")
+        .accessibilityValue("\(rateText(viewModel.playbackRate)) 速")
+    }
+
+    /// A step button on card stock: quieter than play. 44 pt to touch, 38 pt to look at.
+    private func rallyJumpButton(forward: Bool) -> some View {
+        let enabled = forward ? viewModel.canJumpForward : viewModel.canJumpBack
+        return Button {
+            viewModel.jumpRally(forward: forward)
+            jumps += 1
+        } label: {
+            Image(systemName: forward ? "forward.end.fill" : "backward.end.fill")
+                .font(.system(size: 13, weight: .black))
+                .foregroundStyle(enabled ? Color.ink : Color.inkFaint)
+                .frame(width: 38, height: 38)
+                .background(Color.card, in: Circle())
+                .overlay(Circle().strokeBorder(enabled ? Color.ink : Color.rule, lineWidth: 1.25))
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ScaleButtonStyle())
+        .disabled(!enabled)
+        .accessibilityLabel(forward ? "下一分" : "上一分")
+    }
+
     private func playButton(size: CGFloat) -> some View {
         Button { viewModel.togglePlayback() } label: {
             Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
@@ -330,9 +460,15 @@ struct ReplayView: View {
                     .fill(Color.butter)
                     .overlay(Circle().strokeBorder(Color.ink, lineWidth: 1.5))
                     .frame(width: 24, height: 24)
+                    // Swells under the finger, so you can tell you have hold of it.
+                    .scaleEffect(scrubbing ? 1.3 : 1)
+                    .animation(AppAnimation.springFast, value: scrubbing)
                     .offset(x: min(max(0, x - 12), w - 24))
             }
             .frame(height: 24)
+            // ⏮ / ⏭ slide the playhead to the rally instead of teleporting it. Keyed on the
+            // tap count, so playback and drags stay un-animated (they are already continuous).
+            .animation(AppAnimation.spring, value: jumps)
             // Where the play is, under the track: a full-width ink hairline, a 3 pt pistachio
             // segment per rally, and an ink tick at every hit.
             .overlay(alignment: .bottomLeading) {
@@ -354,19 +490,31 @@ struct ReplayView: View {
                 .allowsHitTesting(false)
             }
             .contentShape(Rectangle())
-            .gesture(DragGesture(minimumDistance: 0).onChanged { val in
-                let p = max(0, min(1, val.location.x / w))
-                viewModel.seek(to: p * timelineSeconds)
-            })
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .updating($scrubbing) { _, held, _ in held = true }
+                    .onChanged { val in
+                        let p = max(0, min(1, val.location.x / w))
+                        viewModel.seek(to: p * timelineSeconds)
+                    }
+            )
         }
         .frame(height: 34)
+        // `scrubbing` also falls back to false when the system cancels the drag, which
+        // `onEnded` would miss; playback must not stay held after that.
+        .onChange(of: scrubbing) { _, held in
+            if held { viewModel.beginScrubbing() } else { viewModel.endScrubbing() }
+        }
+        .sensoryFeedback(.impact(flexibility: .soft, intensity: 0.6), trigger: scrubbing) { _, held in held }
+        // A tick each time the drag crosses into another rally.
+        .sensoryFeedback(.selection, trigger: viewModel.currentRallyIndex) { _, _ in scrubbing }
         .accessibilityElement()
         .accessibilityLabel("播放进度")
         .accessibilityValue(viewModel.replayTimeText)
         .accessibilityAdjustableAction { dir in
-            let step = max(1, viewModel.duration / 20)
+            let step = max(1, timelineSeconds / 20)
             switch dir {
-            case .increment: viewModel.seek(to: min(viewModel.duration, viewModel.currentTime + step))
+            case .increment: viewModel.seek(to: min(timelineSeconds, viewModel.currentTime + step))
             case .decrement: viewModel.seek(to: max(0, viewModel.currentTime - step))
             @unknown default: break
             }
@@ -411,9 +559,9 @@ struct ReplayView: View {
     private func shotTypeLabel(_ shot: ShotPoint) -> some View {
         HStack(spacing: 5) {
             ShotGlyph(shot.shotType.glyphKind).frame(width: 16, height: 16)
-            Text(shot.shotType.displayName).font(DisplayFace.font(16, relativeTo: .subheadline))
+            Text(shot.shotType.displayName).font(AppFont.title(14))
             if shot.speedKmh > 0 {
-                Text("\(Int(shot.speedKmh))").font(AppFont.labelSmall)
+                Text("\(Int(shot.speedKmh))").font(AppFont.figure(14))
             }
         }
         .foregroundStyle(Color.ink)
@@ -429,13 +577,49 @@ struct ReplayView: View {
     }
 }
 
+// MARK: - Play / pause flash
+// The glyph that blinks over the picture when a tap toggles playback: it shows what the tap
+// just did, on a paper disc like every other control, and is gone in half a second.
+
+private struct PlaybackFlash: View {
+    let isPlaying: Bool
+    let trigger: Int
+
+    private enum Phase { case rest, shown, gone }
+
+    var body: some View {
+        Image(systemName: isPlaying ? "play.fill" : "pause.fill")
+            .font(.system(size: 26, weight: .black))
+            .foregroundStyle(Color.ink)
+            .frame(width: 72, height: 72)
+            .background(Color.paper, in: Circle())
+            .overlay(Circle().strokeBorder(Color.ink, lineWidth: AppStroke.ink))
+            .phaseAnimator([Phase.rest, .shown, .gone], trigger: trigger) { disc, phase in
+                disc
+                    .opacity(phase == .shown ? 1 : 0)
+                    .scaleEffect(phase == .rest ? 0.8 : phase == .shown ? 1 : 1.2)
+            } animation: { phase in
+                switch phase {
+                case .rest:  nil                        // back to the start, unseen
+                case .shown: .easeOut(duration: 0.12)
+                case .gone:  .easeIn(duration: 0.4)
+                }
+            }
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+    }
+}
+
 // MARK: - ReplayViewModel convenience extensions
 
 extension ReplayViewModel {
-    var replayTimeText: String {
-        let t = currentTime.isFinite ? currentTime : 0
+    /// m:ss, for the playhead and for the length of the take.
+    nonisolated static func clock(_ seconds: Double) -> String {
+        let t = seconds.isFinite ? max(0, seconds) : 0
         return String(format: "%d:%02d", Int(t) / 60, Int(t) % 60)
     }
+
+    var replayTimeText: String { Self.clock(currentTime) }
 
     var replayProgress: Double {
         guard duration > 0, duration.isFinite else { return 0 }

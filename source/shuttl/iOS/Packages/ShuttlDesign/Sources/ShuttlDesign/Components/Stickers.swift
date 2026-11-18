@@ -31,7 +31,7 @@ public struct Sticker: View {
 }
 
 // MARK: - Seal
-// A rubber-stamp rosette: a big display figure over a small caption.
+// A rosette: a figure over a small caption.
 
 public struct Seal: View {
     public var value: String
@@ -64,8 +64,7 @@ public struct Seal: View {
                 }
                 if !value.isEmpty {
                     Text(value)
-                        .font(DisplayFace.fixed(size * 0.4))
-                        .monospacedDigit()
+                        .font(AppFont.figure(size * 0.34))
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
                 }
@@ -81,7 +80,7 @@ public struct Seal: View {
     }
 
     private func captionText(_ s: String) -> some View {
-        Text(s).font(.system(size: max(9, size * 0.14), weight: .heavy)).lineLimit(1).minimumScaleFactor(0.7)
+        Text(s).font(.system(size: max(10, size * 0.15), weight: .bold)).lineLimit(1).minimumScaleFactor(0.7)
     }
 }
 
@@ -110,7 +109,7 @@ public struct InkSegmented<Value: Hashable>: View {
                     withAnimation(AppAnimation.bouncy) { selection = value }
                 } label: {
                     Text(title(value))
-                        .font(DisplayFace.font(17, relativeTo: .subheadline))
+                        .font(AppFont.title(15))
                         .foregroundStyle(selected ? onInk : Color.paper.opacity(0.7))
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
@@ -129,6 +128,9 @@ public struct InkSegmented<Value: Hashable>: View {
         .padding(3)
         .background(Color.ink, in: Capsule())
         .sensoryFeedback(.selection, trigger: selection)
+        // A label given at the call site names the group. Without this it lands on every
+        // segment instead, and all of them read out the same.
+        .accessibilityElement(children: .contain)
     }
 }
 

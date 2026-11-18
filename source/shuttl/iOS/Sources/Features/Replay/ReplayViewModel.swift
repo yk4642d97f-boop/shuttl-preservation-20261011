@@ -26,6 +26,7 @@ final class ReplayViewModel {
     // MARK: Private
     private var periodicObserver: Any?
     private var statusObserver: NSKeyValueObservation?
+    private var endObserver: NSObjectProtocol?
     private var allShotPoints: [ShotPoint] = []
     private var videoFPS: Double = 60.0
     private let playbackRates: [Float] = [0.25, 0.5, 1.0, 2.0]
@@ -99,6 +100,14 @@ final class ReplayViewModel {
             let seconds = item.duration.seconds
             let presentation = item.presentationSize
             Task { @MainActor in await self?.itemReady(seconds: seconds, presentation: presentation, url: videoURL) }
+        }
+
+        // Nothing else tells us the take ran out: without this the button keeps saying "pause"
+        // over a stopped picture and the first tap does nothing.
+        endObserver = NotificationCenter.default.addObserver(
+            forName: AVPlayerItem.didPlayToEndTimeNotification, object: item, queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.isPlaying = false }
         }
 
         startPeriodicObserver(player: newPlayer)
@@ -183,16 +192,21 @@ final class ReplayViewModel {
             // Delivered on the main queue (asked for above); checked at run time.
             MainActor.assumeIsolated {
                 guard let self else { return }
-                self.currentTime = time.seconds
-                self.updateTrajectoryWindow(for: time)
-                self.updateNearbyShot(for: time)
-                self.skipDeadTimeIfNeeded(at: time)
+                // Mid-seek the player still reports where it was. The playhead already shows
+                // where it is going, so nothing here may act on the stale time: not the
+                // playhead, not the trail, and above all not the rallies-only skip, which
+                // would otherwise seek away from the spot a finger has just let go of.
+                if !self.isSeeking { self.currentTime = time.seconds }
+                let shown = self.currentTime
+                self.updateTrajectoryWindow(at: shown)
+                self.updateNearbyShot(at: shown)
+                if !self.isSeeking { self.skipDeadTimeIfNeeded(at: shown) }
             }
         }
     }
 
-    private func updateTrajectoryWindow(for time: CMTime) {
-        let currentFrame = Int((time.seconds * videoFPS).rounded())
+    private func updateTrajectoryWindow(at seconds: Double) {
+        let currentFrame = Int((seconds * videoFPS).rounded())
         if !trackFrames.isEmpty {
             currentTrajectoryWindow = trackWindow(endingAt: currentFrame)
             return
@@ -204,20 +218,22 @@ final class ReplayViewModel {
     }
 
     /// With "只看回合" on, jump from the end of one rally to the start of the next.
-    private func skipDeadTimeIfNeeded(at time: CMTime) {
-        guard ralliesOnly, isPlaying, !rallyWindows.isEmpty, Date().timeIntervalSince(lastSkip) > 0.6 else { return }
-        let frame = Int(time.seconds * videoFPS)
+    private func skipDeadTimeIfNeeded(at seconds: Double) {
+        // Not under a finger: a drag into the gap between rallies must stay where it was put.
+        guard ralliesOnly, isPlaying, !isScrubbing, !rallyWindows.isEmpty,
+              Date().timeIntervalSince(lastSkip) > 0.6 else { return }
+        let frame = Int(seconds * videoFPS)
         guard !rallyWindows.contains(where: { $0.contains(frame) }) else { return }
         if let next = rallyWindows.first(where: { $0.lowerBound > frame }) {
             lastSkip = Date()
             seek(to: Double(next.lowerBound) / videoFPS)
-        } else if frame > rallyWindows.last!.upperBound {
+        } else if let last = rallyWindows.last, frame > last.upperBound {
             togglePlayback()
         }
     }
 
-    private func updateNearbyShot(for time: CMTime) {
-        let currentFrame = Int(time.seconds * videoFPS)
+    private func updateNearbyShot(at seconds: Double) {
+        let currentFrame = Int(seconds * videoFPS)
         nearbyShot = allShotPoints.first { abs($0.frameIndex - currentFrame) <= 5 }
     }
 
@@ -229,15 +245,116 @@ final class ReplayViewModel {
             player.pause()
             isPlaying = false
         } else {
+            // At the end (or past the last rally with 只看回合 on) there is nothing left to
+            // play: start over from the top instead of pressing play on a finished take.
+            if let restart = Self.restartTime(current: currentTime, duration: duration,
+                                              lastRallyEnd: ralliesOnly ? rallyWindows.last.map { Double($0.upperBound) / videoFPS } : nil,
+                                              firstRallyStart: ralliesOnly ? rallyWindows.first.map { Double($0.lowerBound) / videoFPS } : nil) {
+                seek(to: restart)
+            }
             player.rate = playbackRate
             isPlaying = true
         }
     }
 
+    /// Where pressing play should start from when the playhead has run out of things to play,
+    /// or nil when it can simply carry on from where it is.
+    nonisolated static func restartTime(current: Double, duration: Double,
+                                        lastRallyEnd: Double?, firstRallyStart: Double?) -> Double? {
+        if duration.isFinite, duration > 0, current >= duration - 0.05 { return firstRallyStart ?? 0 }
+        if let lastRallyEnd, let firstRallyStart, current > lastRallyEnd { return firstRallyStart }
+        return nil
+    }
+
+    // MARK: Seeking
+    //
+    // A drag on the scrubber asks for a new time on every touch move, and each frame-accurate
+    // seek decodes forward from a keyframe. Queued one behind another they make the picture
+    // trail the thumb. So one seek runs at a time and only the newest request waits behind it;
+    // the ones in between are dropped. The playhead on screen moves at once and the picture
+    // catches up, still on the exact frame.
+
+    /// The newest time asked for while a seek is in flight.
+    private var pendingSeek: Double?
+    private var isSeeking = false
+
     func seek(to time: Double) {
-        guard let player else { return }
-        let cmTime = CMTime(seconds: time, preferredTimescale: 600)
-        player.seek(to: cmTime, toleranceBefore: .zero, toleranceAfter: .zero)
+        let end = duration > 0 && duration.isFinite ? duration : Double.greatestFiniteMagnitude
+        let target = min(max(0, time), end)
+        currentTime = target
+        guard player != nil else { return }
+        pendingSeek = target
+        if !isSeeking { performPendingSeek() }
+    }
+
+    private func performPendingSeek() {
+        guard let player, let target = pendingSeek else { isSeeking = false; return }
+        pendingSeek = nil
+        isSeeking = true
+        player.seek(to: CMTime(seconds: target, preferredTimescale: 600),
+                    toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] _ in
+            Task { @MainActor in self?.performPendingSeek() }
+        }
+    }
+
+    // MARK: Scrubbing
+
+    /// A finger is on the scrubber.
+    private(set) var isScrubbing = false
+
+    /// Hold the picture still under the finger; `isPlaying` stays as it was, so the play
+    /// button doesn't flip and playback picks up again on release.
+    func beginScrubbing() {
+        guard !isScrubbing else { return }
+        isScrubbing = true
+        player?.pause()
+    }
+
+    func endScrubbing() {
+        guard isScrubbing else { return }
+        isScrubbing = false
+        if isPlaying { player?.rate = playbackRate }
+    }
+
+    // MARK: Rally jumps
+
+    /// The rally the playhead is in or has just passed; nil before the first one starts.
+    var currentRallyIndex: Int? {
+        let frame = currentFrame
+        return rallyWindows.lastIndex { $0.lowerBound <= frame }
+    }
+
+    private var currentFrame: Int { Int(currentTime * videoFPS) }
+
+    /// Which rally ⏮ / ⏭ goes to from `frame`, as an index into `starts` (ascending start
+    /// frames), or nil when there is none that way. ⏭ is the next rally to start. ⏮ replays the
+    /// current rally when the playhead is more than `restartMargin` frames into it, like a music
+    /// player's back button, and otherwise goes to the one before.
+    nonisolated static func rallyJumpTarget(starts: [Int], frame: Int, forward: Bool, restartMargin: Int) -> Int? {
+        let current = starts.lastIndex { $0 <= frame }
+        if forward {
+            let next = (current ?? -1) + 1
+            return next < starts.count ? next : nil
+        }
+        guard let current else { return nil }
+        if frame - starts[current] > restartMargin { return current }
+        return current > 0 ? current - 1 : nil
+    }
+
+    private func jumpTarget(forward: Bool) -> Int? {
+        Self.rallyJumpTarget(starts: rallyWindows.map(\.lowerBound), frame: currentFrame,
+                             forward: forward, restartMargin: Int(2 * videoFPS))
+    }
+
+    var canJumpBack: Bool { jumpTarget(forward: false) != nil }
+    var canJumpForward: Bool { jumpTarget(forward: true) != nil }
+
+    /// Go to the start of the previous / next rally. A rally window opens half a second before
+    /// the serve, so the serve is on screen and not only the first contact.
+    func jumpRally(forward: Bool) {
+        guard videoFPS > 0, let target = jumpTarget(forward: forward) else { return }
+        // Mid-frame: truncating back to a frame index then lands in this rally, not the one before.
+        seek(to: (Double(rallyWindows[target].lowerBound) + 0.5) / videoFPS)
     }
 
     func setRate(_ rate: Float) {
@@ -249,8 +366,17 @@ final class ReplayViewModel {
         if let observer = periodicObserver {
             player?.removeTimeObserver(observer)
         }
+        periodicObserver = nil
         statusObserver?.invalidate()
+        statusObserver = nil
+        if let endObserver { NotificationCenter.default.removeObserver(endObserver) }
+        endObserver = nil
         player?.pause()
         player = nil
+        // A seek that was in flight will never report back to this player's successor.
+        isSeeking = false
+        pendingSeek = nil
+        isScrubbing = false
+        isPlaying = false
     }
 }

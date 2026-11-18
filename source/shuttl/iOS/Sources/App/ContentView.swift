@@ -37,6 +37,9 @@ struct ContentView: View {
             }
         }
         .animation(AppAnimation.standard, value: canUseApp)
+        // Behind the cross-fade from sign-in to the tabs, for the same reason as in `mainTabs`:
+        // paper, not the window's white.
+        .background { Color.paper.ignoresSafeArea() }
         .appTheme()
         // Pick up uploads/analyses left behind (app killed, suspended mid-upload, just signed in).
         .task(id: canUseApp) {
@@ -88,15 +91,28 @@ struct ContentView: View {
         }
     }
 
+    private static let sectionChange = AnyTransition.opacity.combined(with: .scale(scale: 0.985))
+
     private var mainTabs: some View {
         @Bindable var bindableChrome = chrome
-        return Group {
+        return ZStack {
             switch chrome.selectedTab {
-            case .record:     RecordingView()
-            case .matches:    MatchListView()
-            case .statistics: StatisticsView()
+            case .record:     RecordingView().transition(Self.sectionChange)
+            case .matches:    MatchListView().transition(Self.sectionChange)
+            case .statistics: StatisticsView().transition(Self.sectionChange)
             }
         }
+        // A page that is being swapped in or out does not reach under the status bar or the
+        // tab bar until its transition is over; for those frames the strips show whatever is
+        // behind. So the room itself changes colour with the section, on the same curve: paper
+        // for the two paper pages, night for the camera. Without it, going to or from the
+        // camera flashed white bands above and below the picture.
+        .background {
+            (chrome.selectedTab == .record ? Color.night : Color.paper).ignoresSafeArea()
+        }
+        // The pill in the tab bar bounces; the page under it must not. It comes forward a
+        // hair as it fades in, on its own short curve.
+        .animation(.smooth(duration: 0.26), value: chrome.selectedTab)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .environment(chrome)
         // An inset (not an overlay) so scroll content and the camera controls
@@ -139,6 +155,26 @@ extension View {
     func tabBarClearance() -> some View {
         contentMargins(.bottom, ShuttlTabBar.height + AppSpacing.md + AppSpacing.lg, for: .scrollContent)
     }
+
+    /// For a root page that hides its navigation bar: a paper strip over the status bar with a
+    /// short fade under it, so the scrolled page slides out beneath the clock instead of
+    /// running through it. It belongs to the page, not the tab container: a pushed page has a
+    /// navigation bar of its own there, and the fade would wash out the tops of its buttons.
+    func statusBarScrim() -> some View {
+        overlay(alignment: .top) {
+            GeometryReader { proxy in
+                VStack(spacing: 0) {
+                    Color.paper.frame(height: proxy.safeAreaInsets.top)
+                    LinearGradient(colors: [Color.paper, Color.paper.opacity(0)],
+                                   startPoint: .top, endPoint: .bottom)
+                        .frame(height: 10)
+                }
+                .ignoresSafeArea(edges: .top)
+            }
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+        }
+    }
 }
 
 // MARK: - Chrome state shared with pushed screens
@@ -180,6 +216,16 @@ enum AppTab: CaseIterable {
     }
 
     var icon: String {
+        switch self {
+        case .record:     return "record.circle"
+        case .matches:    return "rectangle.stack"
+        case .statistics: return "chart.pie"
+        }
+    }
+
+    /// The filled glyph, for the selected pill only. Unselected tabs show the outline
+    /// (`icon`), so fill is one more thing that says which tab is on.
+    var selectedIcon: String {
         switch self {
         case .record:     return "record.circle.fill"
         case .matches:    return "rectangle.stack.fill"
@@ -247,17 +293,19 @@ struct TabBarItem: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 6) {
-                Image(systemName: tab.icon)
-                    .font(.system(size: 17, weight: .bold))
+                Image(systemName: isSelected ? tab.selectedIcon : tab.icon)
+                    .font(.system(size: 18, weight: .bold))
                     .symbolEffect(.bounce, value: isSelected)
                 if isSelected {
                     Text(tab.label)
-                        .font(DisplayFace.font(19, relativeTo: .subheadline))
+                        .font(AppFont.title(16))
                         .fixedSize()
                         .transition(.opacity.combined(with: .scale(scale: 0.6, anchor: .leading)))
                 }
             }
-            .foregroundStyle(isSelected ? tab.onInk : Color.paper.opacity(0.62))
+            // Unselected glyphs are thin outlines, so they need 74 % paper to stay legible on
+            // the ink capsule; still clearly quieter than the filled, labelled pill.
+            .foregroundStyle(isSelected ? tab.onInk : Color.paper.opacity(0.74))
             .frame(maxWidth: .infinity, minHeight: 48)
             .background {
                 if isSelected {

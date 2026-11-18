@@ -53,7 +53,7 @@ public struct OverprintText: View {
 
 #Preview("Overprint") {
     VStack(alignment: .leading, spacing: 18) {
-        OverprintText("比赛", font: AppFont.numeral(64, relativeTo: .largeTitle), plate: .cobalt)
+        OverprintText("比赛", font: AppFont.title1, plate: .cobalt)
         OverprintText("Shuttl.", font: AppFont.brand, ink: .cobalt, plate: .tomato,
                       offset: CGSize(width: 4, height: 3), blend: .multiply)
         OverprintText("341", font: AppFont.hero, plate: .butter, offset: CGSize(width: 5, height: 4))

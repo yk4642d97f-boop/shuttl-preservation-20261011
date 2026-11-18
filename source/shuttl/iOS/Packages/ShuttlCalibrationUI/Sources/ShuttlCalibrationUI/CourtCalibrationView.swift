@@ -101,7 +101,7 @@ public struct CourtCalibrationView: View {
         HStack(alignment: .center, spacing: AppSpacing.md) {
             IconButton(systemName: "xmark", size: 40, iconSize: 15, style: .filled, label: "取消标定", action: onCancel)
             VStack(alignment: .leading, spacing: compact ? 0 : AppSpacing.xxs) {
-                OverprintText("标定球场", font: DisplayFace.font(compact ? 24 : 30, relativeTo: .title2),
+                OverprintText("标定球场", font: AppFont.title(compact ? 19 : 24),
                               plate: .butter, offset: CGSize(width: 2.5, height: 2), registers: false)
                     .accessibilityAddTraits(.isHeader)
                 Text(taps.cornerSet == .baseline ? "把四个圆点拖到球场最外圈边线的四个角"

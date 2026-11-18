@@ -13,6 +13,19 @@ final class DesignTests: XCTestCase {
         // The system face (with its CJK fallback cascade) renders everything, so nothing to check beyond a size.
         XCTAssertEqual(CTFontGetSize(font), 20, accuracy: 0.01)
         _ = CTFontGetGlyphsForCharacters(font, utf16, &glyphs, utf16.count)
+
+        // Chinese falls back to the Simplified face whatever language the machine is set to.
+        let fallback = CTFontCreateForString(font, "追" as CFString, CFRange(location: 0, length: 1))
+        let name = CTFontCopyPostScriptName(fallback) as String
+        XCTAssertTrue(name.contains("SC"), "追 was set in \(name)")
+    }
+
+    func testExportFacesAreNewYork() {
+        func name(_ font: CTFont) -> String { CTFontCopyPostScriptName(font) as String }
+        XCTAssertEqual(name(DisplayFace.figure(size: 30)), ".NewYork-Black")
+        XCTAssertEqual(name(DisplayFace.unit(size: 20)), ".NewYork-BoldItalic")
+        XCTAssertEqual(name(DisplayFace.wordmark(size: 40)), ".NewYork-BlackItalic")
+        XCTAssertEqual(CTFontGetSize(DisplayFace.figure(size: 30)), 30, accuracy: 0.01)
     }
 
     func testCourtGeometryMapsCornersAndNet() {

@@ -159,7 +159,7 @@ final class OnDevicePipelineTests: XCTestCase {
     func testLocalProgressIsReportedWithChineseStage() {
         let m = Match(status: .analyzing, pipelineStep: .local)
         let a = PipelineActivity(phase: .analyzingOnDevice, localFraction: 0.423, localStage: "players")
-        XCTAssertEqual(m.progressText(a), "手机分析中 42% · 追踪球员")
+        XCTAssertEqual(m.progressText(a), "42% · 追踪球员")
         XCTAssertEqual(m.progressFraction(a), 0.423)
         XCTAssertEqual(m.progressText(nil), "等待在手机上分析…")
     }

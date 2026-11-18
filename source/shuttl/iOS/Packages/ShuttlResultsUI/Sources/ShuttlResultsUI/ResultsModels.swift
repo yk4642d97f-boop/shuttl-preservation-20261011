@@ -559,17 +559,17 @@ public struct MatchResultViewModel: Sendable {
         var notices: [ResultsNotice] = []
         if analysis.camera == nil {
             notices.append(ResultsNotice(id: "calibration", kind: .calibration, title: "球场尚未标定",
-                                         message: "这场没有可靠的球场标定，因此不显示球速、落点和米制移动数据。"))
+                                         message: "没有球速、落点和移动数据。"))
         }
         let lowRally = analysis.rallies.contains { $0.confidence > 0 && $0.confidence < 0.55 }
         let lowOutcome = analysis.rallies.contains { $0.outcomeConfidence > 0 && $0.outcomeConfidence < 0.55 }
         if lowRally || lowOutcome {
             notices.append(ResultsNotice(id: "confidence", kind: .confidence, title: "部分判定信心较低",
-                                         message: "低信心的回合或落点已保留，但比分和结束方式可能需要你回看确认。"))
+                                         message: "比分和结束方式可能要你回看确认。"))
         }
         if analysis.rallies.isEmpty {
             notices.append(ResultsNotice(id: "empty", kind: .empty, title: "还没有识别到回合",
-                                         message: "可以回看原视频，或确认画面包含完整球场和羽毛球。"))
+                                         message: "确认画面里有完整的球场和羽毛球。"))
         }
         _ = summary
         return notices

@@ -67,8 +67,9 @@ extension Match {
                     return AnalysisStageName.display(activity?.localStage ?? "")
                 }
                 let stage = AnalysisStageName.display(activity?.localStage ?? "")
-                guard let f = activity?.localFraction else { return "手机分析中 · \(stage)" }
-                return "手机分析中 \(Int((f * 100).rounded(.down)))% · \(stage)"
+                // The badge and the hero title already say it is being analysed on the phone.
+                guard let f = activity?.localFraction else { return stage }
+                return "\(Int((f * 100).rounded(.down)))% · \(stage)"
             }
             if pipelineStep == .local { return "等待在手机上分析…" }
             if activity?.phase == .fetching { return "分析完成，正在取回结果…" }

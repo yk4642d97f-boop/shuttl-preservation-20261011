@@ -226,8 +226,8 @@ struct ScoreProgressionCanvas: View {
     /// The final score for one side, labelled so the side never depends on colour alone.
     private func finalTag(_ side: String, _ value: Int, ink: Color, text: Color) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
-            Text(side).font(.system(size: 10, weight: .heavy))
-            Text("\(value)").font(DisplayFace.fixed(18))
+            Text(side).font(.system(size: 11, weight: .bold))
+            Text("\(value)").font(AppFont.figure(16))
         }
         .foregroundStyle(text)
         .padding(.horizontal, 7)

@@ -74,11 +74,13 @@ private struct RecordingHUDView: View {
     let viewModel: RecordingViewModel
 
     var body: some View {
-        HStack(spacing: AppSpacing.sm) {
-            if viewModel.isRecording {
+        // Only while a take is running. Idle, the viewfinder is left clear: the capture
+        // format never changes, and a sleeping camera has its own card.
+        if viewModel.isRecording {
+            HStack(spacing: AppSpacing.sm) {
                 HStack(spacing: 6) {
                     Circle().fill(Color.ink).frame(width: 8, height: 8).pulse(maxScale: 1.3)
-                    Text("REC").font(AppFont.labelSmall).kerning(1.5)
+                    Text("REC").font(AppFont.labelSmall).kerning(0.6)
                 }
                 .foregroundStyle(Color.ink)
                 .padding(.horizontal, 10)
@@ -95,25 +97,18 @@ private struct RecordingHUDView: View {
                 // Monocular estimate of the last flight; only exists when calibrated.
                 if let kmh = viewModel.approxSpeedKmh {
                     Text("≈\(Int(kmh.rounded())) km/h")
-                        .font(AppFont.labelSmall).kerning(1)
+                        .font(AppFont.label)
                         .foregroundStyle(Color.paper.opacity(0.75))
                         .transition(.opacity)
                         .accessibilityLabel("上一拍球速约 \(Int(kmh.rounded())) 公里每小时，估算值")
                 }
-            } else {
-                (Text("Shuttl").foregroundColor(.paper) + Text(".").foregroundColor(.tomato))
-                    .font(DisplayFace.fixed(17))
-                Rectangle().fill(Color.paper.opacity(0.3)).frame(width: 1, height: 12)
-                Text(viewModel.sleep == nil ? "待机 · 1080p · 60fps" : "相机休息中")
-                    .font(AppFont.labelSmall).kerning(1)
-                    .foregroundStyle(Color.paper.opacity(0.75))
             }
+            .padding(.horizontal, AppSpacing.md - 2)
+            .padding(.vertical, AppSpacing.sm)
+            .background(Color.night.opacity(0.62), in: Capsule())
+            .overlay(Capsule().strokeBorder(Color.paper.opacity(0.18), lineWidth: 1))
+            .transition(.scale(scale: 0.85).combined(with: .opacity))
         }
-        .padding(.horizontal, AppSpacing.md - 2)
-        .padding(.vertical, AppSpacing.sm)
-        .background(Color.night.opacity(0.62), in: Capsule())
-        .overlay(Capsule().strokeBorder(Color.paper.opacity(0.18), lineWidth: 1))
-        .animation(AppAnimation.spring, value: viewModel.isRecording)
     }
 }
 
@@ -142,7 +137,7 @@ private struct MatchTypeSelectorView: View {
             withAnimation(AppAnimation.bouncy) { courtType = type }
         } label: {
             Text(label)
-                .font(DisplayFace.font(17, relativeTo: .subheadline))
+                .font(AppFont.title(15))
                 .foregroundStyle(active ? Color.paper : Color.inkSoft)
                 .fixedSize()
                 .rotationEffect(glyphAngle)
@@ -313,13 +308,18 @@ private struct SaveNoticeCard: View {
         HStack(spacing: AppSpacing.md) {
             badge
             VStack(alignment: .leading, spacing: 2) {
+                // One line beside the button: a second line would be a single orphaned word.
                 Text(title)
                     .font(AppFont.headline)
                     .foregroundStyle(Color.ink)
-                Text(subtitle)
-                    .font(AppFont.caption)
-                    .foregroundStyle(Color.inkSoft)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(subtitle == nil ? 1 : 2)
+                    .minimumScaleFactor(0.8)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(AppFont.caption)
+                        .foregroundStyle(Color.inkSoft)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .accessibilityElement(children: .combine)
@@ -335,17 +335,15 @@ private struct SaveNoticeCard: View {
     private var title: String {
         switch notice {
         case .finishing: return "正在保存视频…"
-        case .saved:     return onDevice ? "已保存，正在手机上分析" : "已保存，正在上传分析"
+        case .saved:     return onDevice ? "已保存，手机分析中" : "已保存，上传分析中"
         case .failed:    return "这段录像没有保存成功"
         }
     }
 
-    private var subtitle: String {
-        switch notice {
-        case .finishing:          return onDevice ? "请稍等，文件写完后自动开始分析" : "请稍等，文件写完后自动上传"
-        case .saved:              return onDevice ? "可以在「比赛」里看分析进度" : "可以在「比赛」里看上传和分析进度"
-        case .failed(let reason): return reason
-        }
+    /// Only a failure needs a second line: its reason.
+    private var subtitle: String? {
+        if case .failed(let reason) = notice { return reason }
+        return nil
     }
 
     @ViewBuilder
@@ -382,7 +380,7 @@ private struct SaveNoticeCard: View {
         case .saved:
             Button(action: onOpenMatches) {
                 Text("查看进度")
-                    .font(DisplayFace.font(17, relativeTo: .subheadline))
+                    .font(AppFont.title(15))
                     .foregroundStyle(Color.onCobalt)
                     .padding(.horizontal, AppSpacing.md - 2)
                     .frame(minHeight: 40)
@@ -537,9 +535,11 @@ struct RecordingView: View {
                             thermal: demoSystemItem(pipeline?.thermalChip, "手机有点热，先歇一会儿", .serious))
                     .padding(.top, 4)
                 Spacer()
+                // Above the deck and the tab bar, like the framing guide. With less room than
+                // this the slip sat half under the deck, and 查看进度 could not be tapped.
                 saveNotice
                     .frame(maxWidth: 440)
-                    .padding(.bottom, tilt.isLandscape ? AppSpacing.md : 150)
+                    .padding(.bottom, tilt.isLandscape ? AppSpacing.md : Self.portraitDeckClearance + AppSpacing.sm)
             }
             .padding(.top, tilt.isLandscape ? AppSpacing.md : 60)
             .padding(.leading, tilt.isLandscape ? leading + AppSpacing.sm : AppSpacing.md)
