@@ -10,19 +10,8 @@ struct AnalysisStageLadder: View {
     let activity: PipelineActivity?
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private struct Step {
-        let title: String
-        let note: String
-    }
-
     /// Pipeline stages folded into five things a player understands.
-    private static let steps: [Step] = [
-        Step(title: "找羽毛球", note: "每一帧里找到球，连成飞行轨迹"),
-        Step(title: "认球场", note: "找四条边线，算出相机在哪儿"),
-        Step(title: "看人", note: "追踪两边球员的站位和跑动"),
-        Step(title: "判每一拍", note: "谁击的球、什么球路、多快、落在哪"),
-        Step(title: "记分", note: "分回合，算比分"),
-    ]
+    private static let steps = ["找羽毛球", "认球场", "看人", "判每一拍", "记分"]
 
     private static func index(forStage stage: String) -> Int {
         switch stage {
@@ -52,10 +41,9 @@ struct AnalysisStageLadder: View {
         }
     }
 
-    private var waiting: String? { Self.waitingLine(status: match.status, activity: activity) }
-
-    /// The ladder's note above the steps. While a match waits, the hero already says why in full,
-    /// so the card shows only the short reason (等相机 / 排队中 / 降温中 / 等录完).
+    /// The short reason a match isn't being analysed yet (等相机 / 排队中 / 降温中 / 等录完).
+    /// The card no longer prints it: the hero above carries the reason, and with no step lit
+    /// the ladder already reads as "not started".
     static func waitingLine(status: MatchStatus, activity: PipelineActivity?) -> String? {
         if status == .uploading { return "上传完成后从第一步开始" }
         return MatchWaiting(localStage: activity?.localStage)?.label
@@ -64,12 +52,6 @@ struct AnalysisStageLadder: View {
     var body: some View {
         AppCard(style: .print(.ink), padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "分析进度", folio: "01")
-                if let waiting {
-                    Label(waiting, systemImage: MatchWaiting(localStage: activity?.localStage)?.symbol ?? "hourglass")
-                        .font(AppFont.callout.weight(.semibold))
-                        .foregroundStyle(Color.inkSoft)
-                }
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(Self.steps.indices, id: \.self) { i in
                         row(i)
@@ -91,24 +73,14 @@ struct AnalysisStageLadder: View {
                         .frame(width: 2, height: 26)
                 }
             }
-            VStack(alignment: .leading, spacing: 2) {
-                Text(Self.steps[i].title)
-                    .font(AppFont.numeral(20, relativeTo: .headline))
-                    .foregroundStyle(state == .later ? Color.inkFaint : Color.ink)
-                if state == .now {
-                    Text(Self.steps[i].note)
-                        .font(AppFont.caption)
-                        .foregroundStyle(Color.inkSoft)
-                        .transition(.opacity)
-                }
-            }
-            .padding(.top, 1)
+            Text(Self.steps[i])
+                .font(AppFont.title(17))
+                .foregroundStyle(state == .later ? Color.inkFaint : Color.ink)
+                .padding(.top, 1)
             Spacer(minLength: 0)
-            if state == .done {
-                Text("好了").instrumentLabel(AppFont.labelSmall, color: .pistachioText)
-            }
         }
-        .accessibilityLabel("\(Self.steps[i].title)，\(state == .done ? "已完成" : state == .now ? "进行中" : "未开始")")
+        .animation(AppAnimation.spring, value: state)
+        .accessibilityLabel("\(Self.steps[i])，\(state == .done ? "已完成" : state == .now ? "进行中" : "未开始")")
     }
 
     private enum RowState { case done, now, later }
@@ -154,15 +126,13 @@ struct WhileYouWaitCard: View {
                     .background(Color.card, in: Circle())
                     .overlay(Circle().strokeBorder(Color.ink, lineWidth: AppStroke.fine))
                     .rotationEffect(.degrees(-6))
-                VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                    Text("等的时候").font(AppFont.title3).foregroundStyle(Color.ink)
-                    Text(onDevice
-                         ? "可以接着录下一场，分析会一场接一场排队。别锁屏、别切走 Shuttl，回来后会从断点接着算。"
-                         : "可以接着录下一场。上传时让 Shuttl 留在前台，分析在服务器上进行。")
-                        .font(AppFont.callout)
-                        .foregroundStyle(Color.inkSoft)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                // The one thing to know while waiting. On the phone, analysis stops when the
+                // app is left, so that has to be said; on the server it doesn't.
+                Text(onDevice ? "可以接着录下一场。别锁屏、别切走，回来会接着算。" : "可以接着录下一场。")
+                    .font(AppFont.callout.weight(.medium))
+                    .foregroundStyle(Color.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxHeight: .infinity, alignment: .center)
             }
         }
     }
@@ -181,7 +151,7 @@ struct ShootingTipsCard: View {
     var body: some View {
         AppCard(style: .print(.ink), padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "下次这样拍", folio: "01")
+                SectionHeader(title: "下次这样拍")
                 ForEach(tips.indices, id: \.self) { i in
                     HStack(alignment: .top, spacing: AppSpacing.sm) {
                         Image(systemName: tips[i].0)

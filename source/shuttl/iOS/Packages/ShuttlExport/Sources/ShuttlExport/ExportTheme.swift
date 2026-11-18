@@ -11,7 +11,8 @@ import SwiftUI
 /// `ShuttlDesign/Tokens/Colors.swift` (`Color.resolve(in:)`, iOS 17 / macOS 14) and
 /// re-encoded in sRGB, so the burnt-in overlay prints exactly the hex values the app
 /// shows. The renderer draws into an sRGB context, so no colour conversion happens.
-/// Type is the bundled display face (Smiley Sans Oblique 得意黑) via `DisplayFace`.
+/// Type follows the app (`ShuttlDesign/Tokens/Typography.swift`): New York for figures, units
+/// and the wordmark, the system face for words, all through `DisplayFace`.
 enum ExportTheme {
     static let sRGB = CGColorSpace(name: CGColorSpace.sRGB) ?? CGColorSpaceCreateDeviceRGB()
 
@@ -56,13 +57,17 @@ enum ExportTheme {
         return kind == .unknown ? nil : kind.chineseName
     }
 
+    /// Words: shot names, stamps.
     static func displayFont(_ size: CGFloat) -> CTFont { DisplayFace.ctFont(size: size) }
 
-    /// Mono label voice (`AppFont.label`), for the small tags on the score card.
-    static func monoFont(_ size: CGFloat) -> CTFont {
-        CTFontCreateUIFontForLanguage(.userFixedPitch, size, nil)
-            ?? CTFontCreateWithName("Menlo-Bold" as CFString, size, nil)
-    }
+    /// Numbers a viewer came to read (speed, score), their units, and the wordmark: the
+    /// same New York faces the app uses on screen.
+    static func figureFont(_ size: CGFloat) -> CTFont { DisplayFace.figure(size: size) }
+    static func unitFont(_ size: CGFloat) -> CTFont { DisplayFace.unit(size: size) }
+    static func wordmarkFont(_ size: CGFloat) -> CTFont { DisplayFace.wordmark(size: size) }
+
+    /// The small tags on the score card: the same face, told apart by size and soft ink.
+    static func tagFont(_ size: CGFloat) -> CTFont { DisplayFace.ctFont(size: size) }
 }
 
 extension CGColor {

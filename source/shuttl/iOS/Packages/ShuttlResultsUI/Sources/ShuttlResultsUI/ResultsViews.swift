@@ -31,13 +31,9 @@ public struct MatchResultView: View {
         ResultsScrollView {
             VStack(alignment: .leading, spacing: AppSpacing.lg) {
                 VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                    Text("SHUTTL · 比赛档案").instrumentLabel(AppFont.labelSmall)
-                    OverprintText("比赛结果", font: AppFont.numeral(52, relativeTo: .largeTitle),
+                    OverprintText("比赛结果", font: AppFont.title(34),
                                   plate: .tomato, offset: CGSize(width: 3.5, height: 3), blend: .multiply)
                         .accessibilityAddTraits(.isHeader)
-                    Text("从第一拍到最后一分，全部在这里。")
-                        .font(AppFont.callout)
-                        .foregroundStyle(Color.inkSoft)
                 }
                 .padding(.top, AppSpacing.md)
                 MatchResultSections(viewModel: viewModel, onReplay: onReplay)
@@ -61,6 +57,8 @@ public struct MatchResultSections: View {
     private let initialCorrection: Int?
     private let initialDetail: Int?
     @State private var tab: MatchResultTab = .overview
+    /// The tab just chosen sits to the right of the one before it.
+    @State private var forward = true
 
     public init(viewModel: MatchResultViewModel, showsHero: Bool = true, initialTab: MatchResultTab = .overview,
                 initialCorrection: Int? = nil, initialDetail: Int? = nil,
@@ -77,7 +75,11 @@ public struct MatchResultSections: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.lg) {
-            InkSegmented(MatchResultTab.allCases, selection: $tab) { $0.title }
+            InkSegmented(MatchResultTab.allCases, selection: Binding(get: { tab }, set: { chosen in
+                let order = MatchResultTab.allCases
+                forward = (order.firstIndex(of: chosen) ?? 0) >= (order.firstIndex(of: tab) ?? 0)
+                tab = chosen
+            })) { $0.title }
                 .accessibilityLabel("结果视图")
             Group {
                 switch tab {
@@ -89,9 +91,12 @@ public struct MatchResultSections: View {
                 case .movement: PlayerMovementView(viewModel: viewModel)
                 }
             }
-            .transition(.opacity)
+            .id(tab)
+            // In from the side its tab is on; the page it replaces just fades.
+            .transition(.asymmetric(insertion: .offset(x: forward ? 30 : -30).combined(with: .opacity),
+                                    removal: .opacity))
         }
-        .animation(AppAnimation.standard, value: tab)
+        .animation(.spring(response: 0.36, dampingFraction: 0.86), value: tab)
     }
 }
 
@@ -117,14 +122,13 @@ struct ResultsOverview: View {
     private var numbersCard: some View {
         AppCard(padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "本场数字", folio: "01")
                 // The fastest smash is already the hero; this row is about how the match was played.
                 StatRow(stats: [
                     .init("\(viewModel.summary.totalRallies)", "回合"),
                     .init("\(viewModel.summary.totalShots)", "击球"),
                     .init(String(format: "%.1f", viewModel.summary.averageRallyShots), "平均拍数"),
                     .init("\(longestRally)", "最长", unit: "拍", hero: true, ink: .butter),
-                ], numeralFont: AppFont.numeral(28, relativeTo: .title2))
+                ], numeralFont: AppFont.figure(22))
             }
         }
     }
@@ -132,7 +136,7 @@ struct ResultsOverview: View {
     private var scoreCard: some View {
         AppCard(padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "比分走势", folio: "02")
+                SectionHeader(title: "比分走势")
                 if viewModel.scoreProgression.isEmpty {
                     Text("还没有比分记录").font(AppFont.callout).foregroundStyle(Color.inkSoft)
                 } else {
@@ -149,10 +153,10 @@ struct ResultsOverview: View {
         let far = viewModel.summary.pointsWon[.far, default: 0]
         return HStack(alignment: .center, spacing: AppSpacing.sm) {
             Sticker("近端", fill: .cobalt, foreground: .onCobalt, tilt: -4)
-            OverprintText("\(near)", font: AppFont.numeral(54, relativeTo: .largeTitle), plate: .cobalt,
+            OverprintText("\(near)", font: AppFont.figure(44), plate: .cobalt,
                           offset: CGSize(width: 3, height: 3), blend: .multiply)
-            Text(":").font(AppFont.numeral(40, relativeTo: .title)).foregroundStyle(Color.inkFaint)
-            OverprintText("\(far)", font: AppFont.numeral(54, relativeTo: .largeTitle), plate: .flamingo,
+            Text(":").font(AppFont.figure(32)).foregroundStyle(Color.inkFaint)
+            OverprintText("\(far)", font: AppFont.figure(44), plate: .flamingo,
                           offset: CGSize(width: 3, height: 3), blend: .multiply)
             Sticker("远端", fill: .flamingo, tilt: 4)
             Spacer(minLength: 0)
@@ -164,7 +168,7 @@ struct ResultsOverview: View {
     private var shotMixCard: some View {
         AppCard(padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "击球构成", folio: "03")
+                SectionHeader(title: "击球构成")
                 if viewModel.summary.totalShots == 0 {
                     Text("暂无击球类型").font(AppFont.callout).foregroundStyle(Color.inkSoft)
                 } else {
@@ -177,13 +181,12 @@ struct ResultsOverview: View {
                         HStack(spacing: AppSpacing.sm) {
                             ShotChip(type.glyphKind, size: 28, style: .paper)
                             Text(type.chineseName)
-                                .font(AppFont.numeral(18, relativeTo: .headline))
+                                .font(AppFont.callout.weight(.bold))
                                 .foregroundStyle(Color.ink)
                                 .frame(width: 44, alignment: .leading)
                             InkProgressBar(value: Double(count) / Double(total), fill: type.ink, height: 12)
                             Text("\(count)")
-                                .font(AppFont.numeral(18, relativeTo: .headline))
-                                .monospacedDigit()
+                                .font(AppFont.figure(17))
                                 .foregroundStyle(Color.ink)
                                 .frame(width: 30, alignment: .trailing)
                         }
@@ -209,9 +212,8 @@ struct ResultsHero: View {
         let title = smash != nil ? "本场最快扣杀" : (speed == nil ? "分析完成 · 本场击球" : "本场最快球速")
         let value = speed.map { String(Int($0.rounded())) } ?? "\(summary.totalShots)"
         let unit = speed == nil ? "拍" : "km/h"
-        let note: String = speed == nil ? "没有可靠的球场标定，球速和落点暂不显示。"
-            : smash == nil ? "本场没有识别到扣杀，显示所有击球里最快的一拍。"
-            : "来自手机端的三维轨迹拟合。"
+        // A line under the number only when the number needs a caveat.
+        let note: String? = speed == nil ? "没有球场标定，球速和落点不显示。" : nil
         let shape = RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
         return VStack(alignment: .leading, spacing: 0) {
             Text(title).instrumentLabel(AppFont.label, color: .ink)
@@ -219,10 +221,12 @@ struct ResultsHero: View {
                 OverprintText(value, font: AppFont.hero, plate: .butter, offset: CGSize(width: 5, height: 4))
                 Text(unit).font(AppFont.unit).foregroundStyle(Color.ink)
             }
-            Text(note)
-                .font(AppFont.callout.weight(.semibold))
-                .foregroundStyle(Color.ink)
-                .fixedSize(horizontal: false, vertical: true)
+            if let note {
+                Text(note)
+                    .font(AppFont.callout.weight(.semibold))
+                    .foregroundStyle(Color.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .padding(AppSpacing.lg)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -256,11 +260,6 @@ public struct CourtDiagramView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            SectionHeader(title: "落点地图", folio: "01")
-            Text("每个印章是一个回合的最后落点。点一下，看这一分是怎么打的。")
-                .font(AppFont.callout)
-                .foregroundStyle(Color.inkSoft)
-                .fixedSize(horizontal: false, vertical: true)
             if let caution = viewModel.cautionNotice { ResultNoticeView(notice: caution) }
             InkSegmented(ResultsSideFilter.allCases, selection: $side, ink: .butter, onInk: .ink) { $0.chineseName }
                 .accessibilityLabel("落点一侧")
@@ -312,7 +311,6 @@ public struct CourtDiagramView: View {
             legendItem(inCourt: true)
             legendItem(inCourt: false)
             Spacer(minLength: 0)
-            Text("\(filteredPoints.count) 个落点").instrumentLabel(AppFont.labelSmall)
         }
         .accessibilityElement(children: .combine)
     }
@@ -353,15 +351,6 @@ public struct RallyListView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            SectionHeader(title: "回合记分卡", folio: "01")
-            if onCorrect != nil && !viewModel.rallies.isEmpty {
-                HStack(spacing: 6) {
-                    Image(systemName: "hand.tap.fill").font(.system(size: 12, weight: .bold))
-                    Text(uncertainCount > 0 ? "有 \(uncertainCount) 分 AI 不太确定 · 长按任一行改判" : "判错了？长按那一行改判")
-                }
-                .font(AppFont.callout)
-                .foregroundStyle(Color.inkSoft)
-            }
             if viewModel.rallies.isEmpty {
                 EmptyResultsView(title: "没有识别到回合", message: "当前视频没有足够信号形成可查看的回合。")
             } else {
@@ -371,7 +360,7 @@ public struct RallyListView: View {
                             Button { selectedRally = rally } label: {
                                 RallyListRow(rally: rally, correctable: onCorrect != nil) { correcting = rally }
                             }
-                            .buttonStyle(ScaleButtonStyle())
+                            .buttonStyle(ScaleButtonStyle(scale: 0.98))
                             .simultaneousGesture(LongPressGesture(minimumDuration: 0.45).onEnded { _ in
                                 guard onCorrect != nil else { return }
                                 correcting = rally
@@ -411,8 +400,6 @@ public struct RallyListView: View {
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
-
-    private var uncertainCount: Int { viewModel.rallies.filter(\.isUncertain).count }
 }
 
 private struct RallyListRow: View {
@@ -423,8 +410,7 @@ private struct RallyListRow: View {
     var body: some View {
         HStack(spacing: AppSpacing.sm + 4) {
             Text(String(format: "%02d", rally.index))
-                .font(AppFont.numeral(28, relativeTo: .title2))
-                .monospacedDigit()
+                .font(AppFont.figure(22))
                 .foregroundStyle(Color.ink)
                 .frame(width: 40, alignment: .leading)
             VStack(alignment: .leading, spacing: 6) {
@@ -481,7 +467,7 @@ private struct RallyListRow: View {
 
     private func chip(_ text: String, fill: Color, text textColor: Color) -> some View {
         Text(text)
-            .font(.system(size: 10, weight: .heavy))
+            .font(.system(size: 11, weight: .bold))
             .foregroundStyle(textColor)
             .padding(.horizontal, 6)
             .padding(.vertical, 2)
@@ -528,11 +514,13 @@ public struct RallyDetailView: View {
         VStack(alignment: .leading, spacing: AppSpacing.lg) {
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
                 Text("回合 \(String(format: "%02d", rally.index)) · \(rally.server.chineseName)发球")
-                    .instrumentLabel(AppFont.labelSmall)
+                    .instrumentLabel(AppFont.label)
                 HStack(alignment: .firstTextBaseline, spacing: AppSpacing.md) {
-                    OverprintText("\(rally.shots.count) 拍", font: AppFont.numeral(56, relativeTo: .largeTitle),
-                                  plate: rally.winner == .unknown ? .lilac : rally.winner.ink,
-                                  offset: CGSize(width: 3.5, height: 3), blend: .multiply)
+                    // The count is the title; 拍 sits beside it as its unit.
+                    Text(scorecard: "\(rally.shots.count) 拍", figure: AppFont.figure(46), word: AppFont.title(22))
+                        .foregroundStyle(Color.ink)
+                        .lineLimit(1)
+                        .layoutPriority(1)
                     Sticker("\(rally.endReason.chineseName) · \(rally.winner.chineseName)得分",
                             fill: rally.winner.ink, foreground: rally.winner == .unknown ? .inkSoft : rally.winner.onInk, tilt: -3)
                 }
@@ -542,19 +530,15 @@ public struct RallyDetailView: View {
 
             timeline
 
-            AppCard(padding: AppSpacing.md + 2) {
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    SectionHeader(title: "这一分", folio: "02")
-                    infoRow("结束方式", rally.endReason.chineseName)
-                    infoRow("得分方", rally.winner.chineseName)
-                    infoRow("发球方", rally.server.chineseName)
-                    if rally.serveMissed { infoRow("提示", "第一拍之前已有飞行轨迹") }
-                }
+            if rally.serveMissed {
+                Label("第一拍之前已有飞行轨迹", systemImage: "exclamationmark.circle")
+                    .font(AppFont.callout)
+                    .foregroundStyle(Color.inkSoft)
             }
             PillButton(title: "回放这一分", icon: "play.fill") { onReplay(rally.startFrame) }
                 .accessibilityHint("从第 \(rally.startFrame) 帧开始")
             if let onCorrect {
-                PillButton(title: rally.isUserCorrected ? "再改一次" : "判错了？改判这一分", icon: "pencil",
+                PillButton(title: rally.isUserCorrected ? "再改一次" : "改判这一分", icon: "pencil",
                            style: .secondary, action: onCorrect)
             }
         }
@@ -565,8 +549,6 @@ public struct RallyDetailView: View {
 
     private var timeline: some View {
         VStack(alignment: .leading, spacing: 0) {
-            SectionHeader(title: "击球时间线", folio: "01")
-                .padding(.bottom, AppSpacing.md)
             if rally.shots.isEmpty {
                 Text("没有可显示的击球").font(AppFont.callout).foregroundStyle(Color.inkSoft)
             } else {
@@ -582,15 +564,16 @@ public struct RallyDetailView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
                                 Text(shot.shotType.chineseName)
-                                    .font(AppFont.numeral(22, relativeTo: .title3))
+                                    .font(AppFont.title(19))
                                     .foregroundStyle(Color.ink)
-                                Text("第 \(shot.index) 拍 · \(shot.side.chineseName)")
+                                Text(shot.side.chineseName)
                                     .instrumentLabel(AppFont.labelSmall)
                                 Spacer(minLength: 0)
                             }
                             HStack(spacing: AppSpacing.lg) {
-                                metric(shot.speedKmh.map { String(Int($0.rounded())) }, unit: "km/h", label: "球速")
-                                metric(shot.heightM.map { String(format: "%.1f", $0) }, unit: "m", label: "击球高度")
+                                metric(shot.speedKmh.map { String(Int($0.rounded())) }, unit: "km/h", spoken: "球速")
+                                metric(shot.heightM.map { String(format: "%.1f", $0) }, unit: "m",
+                                       symbol: "arrow.up.and.down", spoken: "击球高度")
                             }
                         }
                         .padding(.vertical, 6)
@@ -611,22 +594,23 @@ public struct RallyDetailView: View {
         }
     }
 
-    private func metric(_ value: String?, unit: String, label: String) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .firstTextBaseline, spacing: 2) {
-                Text(value ?? "--").font(AppFont.numeral(20, relativeTo: .headline)).monospacedDigit()
-                if value != nil { Text(unit).font(AppFont.labelSmall) }
+    /// A measurement on a shot: the figure and its unit, which is what names it. Height gets
+    /// a glyph, since "m" alone could be a distance. One that wasn't measured isn't drawn.
+    @ViewBuilder
+    private func metric(_ value: String?, unit: String, symbol: String? = nil, spoken: String) -> some View {
+        if let value {
+            HStack(alignment: .firstTextBaseline, spacing: 3) {
+                if let symbol {
+                    Image(systemName: symbol)
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(Color.inkSoft)
+                }
+                Text(value).font(AppFont.figure(20))
+                Text(unit).font(AppFont.unit(14)).foregroundStyle(Color.inkSoft)
             }
             .foregroundStyle(Color.ink)
-            Text(value == nil ? "\(label)不可用" : label).instrumentLabel(AppFont.labelSmall)
-        }
-    }
-
-    private func infoRow(_ title: String, _ value: String) -> some View {
-        HStack {
-            Text(title).font(AppFont.callout).foregroundStyle(Color.inkSoft)
-            Spacer()
-            Text(value).font(AppFont.headline).foregroundStyle(Color.ink)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(spoken) \(value) \(unit)")
         }
     }
 }
@@ -643,7 +627,6 @@ public struct PlayerMovementView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            SectionHeader(title: "场上移动", folio: "01")
             if !viewModel.isCalibrated {
                 EmptyResultsView(title: "移动数据不可用", message: "没有球场标定，不能可靠地计算距离、速度或热力图。")
             } else {
@@ -651,9 +634,8 @@ public struct PlayerMovementView: View {
                              ink: side.ink, onInk: side.onInk) { $0.chineseName }
                     .accessibilityLabel("查看一侧")
                 let stats = viewModel.movement[side] ?? MovementStats()
-                Text("点越大，停留越久。覆盖了半场的 \(Int((stats.courtCoverage * 100).rounded()))%。")
-                    .font(AppFont.callout)
-                    .foregroundStyle(Color.inkSoft)
+                Text("覆盖半场 \(Int((stats.courtCoverage * 100).rounded()))%")
+                    .instrumentLabel(AppFont.labelSmall)
                 ResultsHeatmapCanvas(stats: stats, side: side)
                     .frame(maxWidth: 320)
                     .frame(maxWidth: .infinity)
@@ -670,7 +652,7 @@ public struct PlayerMovementView: View {
                 .init(String(format: "%.1f", stats.distanceM), "移动距离", unit: "m"),
                 .init(String(format: "%.1f", stats.averageSpeedMS), "平均速度", unit: "m/s"),
                 .init(String(format: "%.1f", stats.maxSpeedMS), "最高速度", unit: "m/s"),
-            ], numeralFont: AppFont.numeral(28, relativeTo: .title2))
+            ], numeralFont: AppFont.figure(22))
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(side.chineseName)移动距离 \(String(format: "%.1f", stats.distanceM))米，平均速度 \(String(format: "%.1f", stats.averageSpeedMS))米每秒，最高速度 \(String(format: "%.1f", stats.maxSpeedMS))米每秒")

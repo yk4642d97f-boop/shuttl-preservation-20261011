@@ -182,7 +182,7 @@ struct FramingOverlay: View {
         VStack(spacing: 4) {
             HStack(spacing: 6) {
                 Image(systemName: lock.symbol).font(.system(size: 13, weight: .black))
-                Text(lock.title).font(DisplayFace.font(19, relativeTo: .headline))
+                Text(lock.title).font(AppFont.title(16))
             }
             .foregroundStyle(Color.ink)
             .padding(.horizontal, 14)
@@ -287,7 +287,7 @@ struct CameraSetupNote: View {
             ForEach(Array(Self.lines.enumerated()), id: \.offset) { i, line in
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
                     Text("\(i + 1)")
-                        .font(.system(size: 10, weight: .black).monospacedDigit())
+                        .font(.system(size: 10, weight: .heavy).monospacedDigit())
                         .foregroundStyle(Color.paper)
                         .frame(width: 15, height: 15)
                         .background(Color.ink, in: Circle())
@@ -314,7 +314,7 @@ struct CameraSetupNote: View {
         .accessibilityLabel("\(CameraSetup.recommended)。\(CameraSetup.alternative)")
     }
 
-    /// Figures ("1.6 米", "5 米") heavier than the words around them.
+    /// Figures ("1.6 米", "5 米") a step heavier than the words around them.
     private static func line(_ lead: String, _ figure: String, _ tail: String) -> Text {
         let base = Font.system(.subheadline)
         return Text(lead).font(base.weight(.semibold))
@@ -329,7 +329,7 @@ struct CameraSetupTag: View {
     var body: some View {
         HStack(spacing: 5) {
             Image(systemName: "camera.metering.center.weighted").font(.system(size: 10, weight: .bold))
-            Text("1.6 米高 · 后 5 米 · 正中").font(.system(size: 11, weight: .bold)).monospacedDigit()
+            Text("1.6 米高 · 后 5 米 · 正中").font(.system(size: 12, weight: .bold)).monospacedDigit()
         }
         .foregroundStyle(Color.ink)
         .padding(.horizontal, 8)
@@ -354,7 +354,10 @@ struct CameraSleepCard: View {
 
     private var title: String { reason == .idle ? "相机已休息" : "相机先休息" }
     private var line: String { reason == .idle ? "轻点继续" : "轻点录新的一场" }
-    private var why: String {
+    /// Shown only when waking the camera costs something: it holds the analysis back.
+    private var why: String? { reason == .idle ? nil : "正在分析上一场，相机开着它就得等" }
+    /// The full reason, for VoiceOver.
+    private var spoken: String {
         reason == .idle ? "90 秒没录像，先关掉相机，手机不发热" : "正在分析上一场；相机开着会发热，分析要等它关掉"
     }
 
@@ -367,7 +370,7 @@ struct CameraSleepCard: View {
                         .frame(width: 64, height: 64)
                         .overlay(alignment: .topTrailing) {
                             Text("Zz")
-                                .font(DisplayFace.font(15, relativeTo: .caption))
+                                .font(AppFont.unit(13))
                                 .foregroundStyle(Color.ink)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 1)
@@ -377,18 +380,20 @@ struct CameraSleepCard: View {
                                 .offset(x: 12, y: drift ? -12 : -6)
                         }
                     VStack(alignment: .leading, spacing: 4) {
-                        OverprintText(title, font: DisplayFace.font(28, relativeTo: .title2),
+                        OverprintText(title, font: AppFont.title(22),
                                       plate: reason == .idle ? .lilac : .butter, offset: CGSize(width: 2.5, height: 2.5))
-                        Text(why)
-                            .font(AppFont.caption)
-                            .foregroundStyle(Color.inkSoft)
-                            .fixedSize(horizontal: false, vertical: true)
+                        if let why {
+                            Text(why)
+                                .font(AppFont.caption)
+                                .foregroundStyle(Color.inkSoft)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
                 HStack(spacing: 8) {
                     Image(systemName: "hand.tap.fill").font(.system(size: 14, weight: .bold))
                     Text(line)
-                        .font(DisplayFace.font(18, relativeTo: .headline))
+                        .font(AppFont.title(15))
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.leading)
                 }
@@ -411,7 +416,7 @@ struct CameraSleepCard: View {
             withAnimation(.easeInOut(duration: 1.6).repeatForever(autoreverses: true)) { drift = true }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(title)。\(why)")
+        .accessibilityLabel("\(title)。\(spoken)")
         .accessibilityHint(reason == .idle ? "轻点打开相机" : "轻点打开相机，录新的一场")
         .accessibilityAddTraits(.isButton)
     }
@@ -466,7 +471,7 @@ struct RotatePrompt: View {
                 .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).delay(0.4).repeatForever(autoreverses: true),
                            value: turned)
             Text("把手机横过来")
-                .font(DisplayFace.font(26, relativeTo: .title2))
+                .font(AppFont.title(20))
                 .foregroundStyle(Color.ink)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 7)

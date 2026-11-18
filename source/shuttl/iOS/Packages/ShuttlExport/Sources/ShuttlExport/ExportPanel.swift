@@ -50,8 +50,7 @@ struct ExportPanel<Share: View>: View {
                     Sticker("导出中", symbol: "sparkle", fill: .lilac)
                     Spacer(minLength: AppSpacing.sm)
                     Text("\(percent)%")
-                        .font(AppFont.numeral(34, relativeTo: .title2))
-                        .monospacedDigit()
+                        .font(AppFont.figure(27))
                         .foregroundStyle(Color.ink)
                         .contentTransition(.numericText())
                 }
@@ -89,7 +88,7 @@ struct ExportPanel<Share: View>: View {
             // A status, not an action: printed flat in the success ink, no press plate.
             HStack(spacing: AppSpacing.sm) {
                 Image(systemName: "checkmark").font(.system(size: 16, weight: .bold))
-                Text("已保存到相册").font(DisplayFace.font(21, relativeTo: .headline))
+                Text("已保存到相册").font(AppFont.title(17))
             }
             .foregroundStyle(Color.onPistachio)
             .frame(maxWidth: .infinity)
@@ -125,7 +124,7 @@ struct ExportShareLabel: View {
     var body: some View {
         HStack(spacing: AppSpacing.sm) {
             Image(systemName: "square.and.arrow.up").font(.system(size: 16, weight: .bold))
-            Text("分享视频").font(DisplayFace.font(21, relativeTo: .headline))
+            Text("分享视频").font(AppFont.title(17))
         }
         .foregroundStyle(Color.onCobalt)
         .frame(maxWidth: .infinity)

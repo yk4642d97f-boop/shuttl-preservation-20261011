@@ -52,25 +52,27 @@ private struct CareerHero: View {
                 Text("生涯最高球速")
                     .instrumentLabel(AppFont.label, color: .ink)
                 HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
-                    OverprintText(maxSpeed > 0 ? String(format: "%.0f", maxSpeed) : "--", font: AppFont.hero,
-                                  ink: .ink, plate: .cobalt, offset: CGSize(width: 5, height: 4))
+                    CountUp(maxSpeed > 0 ? String(format: "%.0f", maxSpeed) : "--") { figure in
+                        OverprintText(figure, font: AppFont.hero,
+                                      ink: .ink, plate: .cobalt, offset: CGSize(width: 5, height: 4))
+                    }
                     Text("km/h")
                         .font(AppFont.unit)
                         .foregroundStyle(Color.ink)
                 }
-                Text("比一辆高铁出站还快一点")
-                    .font(AppFont.callout.weight(.semibold))
-                    .foregroundStyle(Color.ink)
             }
             .padding(AppSpacing.lg)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.pistachio, in: shape)
         .overlay(shape.strokeBorder(Color.ink, lineWidth: 1.5))
-        .overlay(alignment: .bottomTrailing) { smashSeal.offset(x: -12, y: 28) }
-        .padding(.bottom, AppSpacing.md)
+        // On the top corner, clear of the figure and its unit.
+        .overlay(alignment: .topTrailing) { smashSeal.offset(x: -14, y: -24) }
+        // The seal and the tilted court run past the card's edge; the focus box should not.
+        .contentShape(.accessibility, shape)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("生涯最高球速 \(Int(maxSpeed)) 公里每小时，累计扣杀 \(smashes) 次")
+        // Rounded the same way as the figure on the card (349.6 is shown, and read, as 350).
+        .accessibilityLabel("生涯最高球速 \(Int(maxSpeed.rounded())) 公里每小时，累计扣杀 \(smashes) 次")
     }
 
     private var smashSeal: some View {
@@ -106,10 +108,14 @@ private struct SpeedHistogramCard: View {
         return Double(shots.map(\.speedKmh).reduce(0, +)) / Double(shots.count)
     }
 
+    /// The bars have risen from the baseline (once, when the card first shows).
+    @State private var risen = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     var body: some View {
         AppCard(padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "球速分布", folio: "01")
+                SectionHeader(title: "球速分布")
 
                 Chart {
                     ForEach(buckets) { b in
@@ -117,7 +123,7 @@ private struct SpeedHistogramCard: View {
                             xStart: .value("球速", b.lo + 2),
                             xEnd: .value("球速", b.lo + 23),
                             yStart: .value("次数", 0),
-                            yEnd: .value("次数", b.count)
+                            yEnd: .value("次数", risen ? b.count : 0)
                         )
                         .foregroundStyle(b.zone.ink)
                         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 5, topTrailingRadius: 5))
@@ -126,8 +132,8 @@ private struct SpeedHistogramCard: View {
                         .foregroundStyle(Color.ink)
                         .lineStyle(StrokeStyle(lineWidth: 1.5, dash: [4, 4]))
                         .annotation(position: .top, alignment: .leading, spacing: 4) {
-                            Text("平均 \(Int(average))")
-                                .font(.system(size: 11, weight: .bold))
+                            Text(scorecard: "平均 \(Int(average))",
+                                 figure: AppFont.figure(13), word: .system(size: 11, weight: .bold))
                                 .foregroundStyle(Color.ink)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 2)
@@ -157,6 +163,12 @@ private struct SpeedHistogramCard: View {
                     }
                 }
                 .frame(height: 170)
+                .onAppear {
+                    guard !risen else { return }
+                    withAnimation(reduceMotion ? nil : .spring(response: 0.7, dampingFraction: 0.82).delay(0.1)) {
+                        risen = true
+                    }
+                }
                 .accessibilityLabel("球速分布柱状图，平均 \(Int(average)) 公里每小时")
 
                 HStack(spacing: AppSpacing.md) {
@@ -169,7 +181,7 @@ private struct SpeedHistogramCard: View {
                         }
                     }
                     Spacer(minLength: 0)
-                    Text("km/h").instrumentLabel(AppFont.labelSmall, color: .inkSoft)
+                    Text("km/h").font(AppFont.unit(13)).foregroundStyle(Color.inkSoft)
                 }
                 .accessibilityHidden(true)
 
@@ -200,14 +212,10 @@ private struct ShotTypeCard: View {
         }
     }
 
-    private var favourite: Entry? {
-        entries.filter { $0.id != .unknown }.max { $0.count < $1.count }
-    }
-
     var body: some View {
         AppCard(padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "击球类型", folio: "02")
+                SectionHeader(title: "击球类型")
 
                 HStack(spacing: AppSpacing.lg) {
                     Chart(entries) { e in
@@ -223,9 +231,8 @@ private struct ShotTypeCard: View {
                     .chartBackground { _ in
                         VStack(spacing: -2) {
                             Text("\(shots.count)")
-                                .font(AppFont.numeral(32, relativeTo: .title))
-                                .monospacedDigit()
-                            Text("拍").font(.system(size: 11, weight: .bold))
+                                .font(AppFont.figure(26))
+                            Text("拍").font(.system(size: 12, weight: .bold))
                         }
                         .foregroundStyle(Color.ink)
                     }
@@ -249,13 +256,6 @@ private struct ShotTypeCard: View {
                         }
                     }
                 }
-
-                if let fav = favourite {
-                    (Text("招牌动作：").foregroundColor(.inkSoft)
-                     + Text(fav.id.displayName).foregroundColor(.ink).bold()
-                     + Text("，占全部击球的 \(Int((Double(fav.count) / Double(max(1, shots.count)) * 100).rounded()))%").foregroundColor(.inkSoft))
-                        .font(AppFont.callout)
-                }
             }
         }
     }
@@ -272,11 +272,7 @@ private struct LandingZoneCard: View {
     var body: some View {
         AppCard(padding: AppSpacing.md + 2) {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "击球站位", folio: "03")
-                Text("每个点是一次击球时你站的位置，越大越快。")
-                    .font(AppFont.callout)
-                    .foregroundStyle(Color.inkSoft)
-
+                SectionHeader(title: "击球站位")
                 GeometryReader { geo in
                     let court = CGRect(origin: .zero, size: geo.size).insetBy(dx: 8, dy: 8)
                     ZStack {
@@ -294,11 +290,9 @@ private struct LandingZoneCard: View {
                 .accessibilityLabel("击球站位图，共 \(placed.count) 次击球")
 
                 HStack {
-                    Text("← 近端").instrumentLabel(AppFont.labelSmall, color: .inkSoft)
+                    Text("近端").instrumentLabel(AppFont.labelSmall, color: .inkSoft)
                     Spacer()
-                    Text("球网").instrumentLabel(AppFont.labelSmall, color: .inkSoft)
-                    Spacer()
-                    Text("远端 →").instrumentLabel(AppFont.labelSmall, color: .inkSoft)
+                    Text("远端").instrumentLabel(AppFont.labelSmall, color: .inkSoft)
                 }
                 .accessibilityHidden(true)
             }
@@ -335,12 +329,8 @@ private struct EmptyStatsView: View {
             .accessibilityHidden(true)
             .padding(.bottom, AppSpacing.sm)
 
-            OverprintText("数据还在路上", font: AppFont.numeral(34, relativeTo: .title), plate: .pistachio,
+            OverprintText("还没有数据", font: AppFont.title(24), plate: .pistachio,
                           offset: CGSize(width: 2.5, height: 2.5), blend: .multiply)
-            Text("完成一场比赛的分析后，\n球速、击球类型和落点都会出现在这里。")
-                .font(AppFont.body)
-                .foregroundStyle(Color.inkSoft)
-                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, AppSpacing.xxl)
@@ -367,7 +357,7 @@ struct StatisticsView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppSpacing.lg) {
-                    PageHeader(kicker: "SHUTTL · 数据年鉴", title: "统计", ink: .pistachio)
+                    PageHeader(title: "统计", ink: .pistachio)
 
                     if completed.isEmpty {
                         EmptyStatsView()
@@ -382,8 +372,11 @@ struct StatisticsView: View {
                                 ])
                             }
                             SpeedHistogramCard(allShots: shots, uncalibratedMatches: completed.filter(\.lacksSpeeds).count)
+                                .settlesAtEdges()
                             ShotTypeCard(shots: shots)
+                                .settlesAtEdges()
                             LandingZoneCard(shots: shots)
+                                .settlesAtEdges()
                         }
                         .padding(.horizontal, AppSpacing.gutter)
                     }
@@ -392,7 +385,7 @@ struct StatisticsView: View {
                     NavigationLink(value: AboutRoute()) {
                         HStack(spacing: AppSpacing.sm) {
                             Image(systemName: "info.circle").font(.system(size: 13, weight: .bold))
-                            Text("关于与致谢 · 开源许可")
+                            Text("关于与致谢")
                                 .font(AppFont.callout.weight(.semibold))
                             Spacer(minLength: 0)
                             Image(systemName: "chevron.right").font(.system(size: 11, weight: .bold))
@@ -400,6 +393,8 @@ struct StatisticsView: View {
                         .foregroundStyle(Color.inkSoft)
                         .padding(.vertical, AppSpacing.sm)
                         .overlay(alignment: .top) { AppDivider() }
+                        // The whole row takes the tap, not only the words at its two ends.
+                        .contentShape(Rectangle())
                     }
                     .buttonStyle(ScaleButtonStyle())
                     .padding(.horizontal, AppSpacing.gutter)
@@ -408,6 +403,7 @@ struct StatisticsView: View {
             }
             .tabBarClearance()
             .paperPage()
+            .statusBarScrim()
             #if DEBUG
             .demoScrollAnchor()
             #endif

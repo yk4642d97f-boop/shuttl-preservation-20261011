@@ -1,4 +1,5 @@
 @_exported import ShuttlDesign
+import CoreText
 import SwiftUI
 import UIKit
 
@@ -14,18 +15,22 @@ struct AppTheme: ViewModifier {
         content
             .tint(.cobalt)
             .preferredColorScheme(.light)
+            .simplifiedChineseType()
             .onAppear(perform: configureNavigationBar)
     }
 
     private func configureNavigationBar() {
-        func display(_ size: CGFloat) -> UIFont {
-            let base = UIFont.systemFont(ofSize: size, weight: .black)
-            guard let serif = base.fontDescriptor.withDesign(.serif) else { return base }
-            return UIFont(descriptor: serif, size: size)
+        // UIKit draws these, and SwiftUI's typesetting language doesn't reach it, so the
+        // Simplified Chinese glyph forms are pinned through the font's own fallback list.
+        func title(_ size: CGFloat, _ weight: UIFont.Weight) -> UIFont {
+            let base = UIFont.systemFont(ofSize: size, weight: weight)
+            guard let cascade = CTFontCopyDefaultCascadeListForLanguages(base as CTFont, ["zh-Hans"] as CFArray)
+            else { return base }
+            return UIFont(descriptor: base.fontDescriptor.addingAttributes([.cascadeList: cascade]), size: size)
         }
         let ink = UIColor(Color.ink)
-        let titleAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: ink, .font: display(20)]
-        let largeAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: ink, .font: display(40)]
+        let titleAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: ink, .font: title(17, .bold)]
+        let largeAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: ink, .font: title(34, .heavy)]
 
         let scrolled = UINavigationBarAppearance()
         scrolled.configureWithOpaqueBackground()

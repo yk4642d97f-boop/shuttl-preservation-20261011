@@ -72,26 +72,20 @@ public struct PrintButtonStyle<S: Shape>: ButtonStyle {
 }
 
 // MARK: - SectionHeader
-// Broadsheet section head: tomato folio number, display title, a rule that runs out
-// and ends in a small net-post tick.
+// Section head: display title, then a rule that runs out and ends in a small net-post tick.
+// Use one only where the thing under it needs a name; a section that is the whole of a
+// selected tab, or a row of labelled figures, already has one.
 
 public struct SectionHeader: View {
     public let title: String
-    public var folio: String?
     public var action: (title: String, handler: () -> Void)?
 
-    public init(title: String, folio: String? = nil, action: (title: String, handler: () -> Void)? = nil) {
-        self.title = title; self.folio = folio; self.action = action
+    public init(title: String, action: (title: String, handler: () -> Void)? = nil) {
+        self.title = title; self.action = action
     }
 
     public var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
-            if let folio {
-                Text(folio)
-                    .font(AppFont.labelSmall)
-                    .foregroundStyle(Color.tomatoText)
-                    .fixedSize()
-            }
             Text(title)
                 .font(AppFont.title3)
                 .foregroundStyle(Color.ink)
@@ -113,27 +107,23 @@ public struct SectionHeader: View {
 }
 
 // MARK: - PageHeader
-// Masthead for root screens: mono kicker, a big serif title in ink, and a squiggle
-// in the section's ink.
+// Masthead for root screens: the title in ink and a squiggle in the section's ink.
 
 public struct PageHeader<Trailing: View>: View {
-    public let kicker: String
     public let title: String
     public var ink: Color
     private let trailing: Trailing
 
-    @ScaledMetric(relativeTo: .largeTitle) private var titleSize: CGFloat = 46
+    @ScaledMetric(relativeTo: .largeTitle) private var titleSize: CGFloat = 38
 
-    public init(kicker: String, title: String, ink: Color = .tomato, @ViewBuilder trailing: () -> Trailing) {
-        self.kicker = kicker; self.title = title; self.ink = ink; self.trailing = trailing()
+    public init(title: String, ink: Color = .tomato, @ViewBuilder trailing: () -> Trailing) {
+        self.title = title; self.ink = ink; self.trailing = trailing()
     }
 
     public var body: some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Text(kicker)
-                    .instrumentLabel(AppFont.labelSmall, color: .inkSoft)
-                OverprintText(title, font: .system(size: titleSize, weight: .black, design: .serif), plate: ink,
+                OverprintText(title, font: .system(size: titleSize, weight: .heavy), plate: ink,
                               offset: CGSize(width: 3.5, height: 3), blend: .multiply)
                     .accessibilityAddTraits(.isHeader)
                 Squiggle(waves: 5)
@@ -150,8 +140,8 @@ public struct PageHeader<Trailing: View>: View {
 }
 
 public extension PageHeader where Trailing == EmptyView {
-    init(kicker: String, title: String, ink: Color = .tomato) {
-        self.init(kicker: kicker, title: title, ink: ink) { EmptyView() }
+    init(title: String, ink: Color = .tomato) {
+        self.init(title: title, ink: ink) { EmptyView() }
     }
 }
 

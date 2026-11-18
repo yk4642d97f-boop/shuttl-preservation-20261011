@@ -25,14 +25,14 @@ private struct HeroBlock: View {
         case .analyzing:
             if let waiting = MatchWaiting(localStage: activity?.localStage) {
                 // Waiting its turn: say so, and why; no spinning / pulsing "busy" signals.
-                working(title: "等一下再开始分析", note: waitingNote(waiting), still: waiting.symbol)
+                working(title: waiting.label, note: waitingNote(waiting), still: waiting.symbol)
             } else if match.pipelineStep == .local {
-                working(title: "正在这台手机上分析", note: "识别羽毛球、分割回合、计算球速，全程不联网。分析时请让 Shuttl 保持打开：锁屏或切到别的 App 会暂停，回来后会接着分析。")
+                working(title: "手机分析中")
             } else {
-                working(title: "AI 正在逐帧追踪", note: "识别羽毛球、分割回合、计算球速。通常需要几分钟，可以先离开这个页面。")
+                working(title: "分析中")
             }
-        case .uploading: working(title: "正在上传视频", note: "上传完成后会自动开始分析。可以切到后台；网络中断后可回来重试。")
-        case .recording: working(title: "正在录制", note: "结束录制后会自动上传。")
+        case .uploading: working(title: "上传中")
+        case .recording: working(title: "录制中")
         case .failed:    failed
         }
     }
@@ -58,25 +58,23 @@ private struct HeroBlock: View {
     private var speedPoster: some View {
         let shape = RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
         return VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: AppSpacing.sm) {
-                Text(uncalibrated ? "本场击球" : speedTitle)
-                    .instrumentLabel(AppFont.label, color: .ink)
-                if uncalibrated {
-                    Sticker("标定后才有球速", symbol: "viewfinder", fill: .butter, tilt: -3)
-                }
-            }
+            // Why there is no speed is the calibration card's to say, right below.
+            Text(uncalibrated ? "本场击球" : speedTitle)
+                .instrumentLabel(AppFont.label, color: .ink)
             HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
-                if uncalibrated {
-                    Text(speedText)
-                        .font(AppFont.hero)
-                        .foregroundStyle(Color.ink)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                } else {
-                    OverprintText(speedText, font: AppFont.hero, plate: .butter, offset: CGSize(width: 5, height: 4))
+                CountUp(speedText) { figure in
+                    if uncalibrated {
+                        Text(figure)
+                            .font(AppFont.hero)
+                            .foregroundStyle(Color.ink)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                    } else {
+                        OverprintText(figure, font: AppFont.hero, plate: .butter, offset: CGSize(width: 5, height: 4))
+                    }
                 }
                 Text(speedUnit)
-                    .font(AppFont.unit)
+                    .font(AppFont.unit(22, for: speedUnit))
                     .foregroundStyle(Color.ink)
             }
             Text("\(match.courtLabel) · \(match.durationText) · \(match.rallies.count) 回合")
@@ -116,8 +114,10 @@ private struct HeroBlock: View {
         }
     }
 
+    /// - note: one sentence, only when the title leaves a question (why it is waiting).
+    ///   What to do meanwhile is the card below's to say, once.
     /// - still: a waiting hero shows this glyph, without the spin and pulse of real work.
-    private func working(title: String, note: String, still: String? = nil) -> some View {
+    private func working(title: String, note: String? = nil, still: String? = nil) -> some View {
         let shape = RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
         return HStack(alignment: .top, spacing: AppSpacing.md) {
             ZStack {
@@ -146,10 +146,12 @@ private struct HeroBlock: View {
                 Text(title)
                     .font(AppFont.title2)
                     .foregroundStyle(Color.ink)
-                Text(note)
-                    .font(AppFont.callout)
-                    .foregroundStyle(Color.ink)
-                    .fixedSize(horizontal: false, vertical: true)
+                if let note {
+                    Text(note)
+                        .font(AppFont.callout)
+                        .foregroundStyle(Color.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 progress
                     .padding(.top, AppSpacing.xs)
             }
@@ -171,9 +173,12 @@ private struct HeroBlock: View {
     @ViewBuilder
     private var progress: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(match.progressText(activity))
-                .instrumentLabel(AppFont.label, color: .ink)
-                .contentTransition(.numericText())
+            // While it waits, the title and the note have said everything.
+            if MatchWaiting(localStage: activity?.localStage) == nil {
+                Text(match.progressText(activity))
+                    .instrumentLabel(AppFont.label, color: .ink)
+                    .contentTransition(.numericText())
+            }
             if let fraction = match.progressFraction(activity) {
                 InkProgressBar(value: fraction, fill: .ink, track: .card, height: 12)
             } else if MatchWaiting(localStage: activity?.localStage) == nil {
@@ -197,7 +202,7 @@ private struct HeroBlock: View {
                     .font(AppFont.callout)
                     .fixedSize(horizontal: false, vertical: true)
                 if match.retryIsPointless {
-                    Text("这段视频再分析一次结果也一样。照下面的方法重新拍一段就好。")
+                    Text("这段重试也一样，照下面的方法重拍。")
                         .font(AppFont.callout.weight(.semibold))
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -210,12 +215,7 @@ private struct HeroBlock: View {
                         .accessibilityHint("删除这段视频和它的记录，然后照提示重新拍")
                 }
             } else if let onRetry {
-                VStack(alignment: .leading, spacing: 6) {
-                    PillButton(title: "重试", icon: "arrow.clockwise", style: .secondary, action: onRetry)
-                    Text(match.retryHint)
-                        .font(AppFont.caption)
-                        .frame(maxWidth: .infinity)
-                }
+                PillButton(title: "重试", icon: "arrow.clockwise", style: .secondary, action: onRetry)
             }
         }
         .foregroundStyle(Color.ink)
@@ -246,9 +246,8 @@ private struct RallyRow: View {
     var body: some View {
         HStack(spacing: AppSpacing.md) {
             Text(String(format: "%02d", index))
-                .font(AppFont.numeral(28, relativeTo: .title2))
+                .font(AppFont.figure(22))
                 .foregroundStyle(Color.ink)
-                .monospacedDigit()
                 .frame(width: 40, alignment: .leading)
 
             VStack(alignment: .leading, spacing: 6) {
@@ -360,20 +359,31 @@ struct MatchDetailView: View {
                     onDelete: { confirmingDelete = true }
                 )
 
-                if pipeline?.canCancelRemotely(match) == true {
-                    Button("取消云端分析", role: .destructive) {
-                        guard let pipeline else { return }
-                        lifecycleBusy = true
-                        Task {
-                            defer { lifecycleBusy = false }
-                            do { try await pipeline.cancelRemotely(match) }
-                            catch { lifecycleError = MatchPipeline.failureReason(for: error) }
+                // Ways out of a match that is still in flight: one quiet row under the hero.
+                let canCancel = pipeline?.canCancelRemotely(match) == true
+                let inFlight = match.status == .uploading || match.status == .analyzing
+                if canCancel || inFlight {
+                    HStack(spacing: AppSpacing.lg) {
+                        if canCancel {
+                            quietDestructive("取消云端分析", symbol: "xmark.circle") {
+                                guard let pipeline else { return }
+                                lifecycleBusy = true
+                                Task {
+                                    defer { lifecycleBusy = false }
+                                    do { try await pipeline.cancelRemotely(match) }
+                                    catch { lifecycleError = MatchPipeline.failureReason(for: error) }
+                                }
+                            }
                         }
-                    }.disabled(lifecycleBusy)
-                }
-                if match.status == .uploading || match.status == .analyzing {
-                    Button("删除这场比赛", role: .destructive) { confirmingDelete = true }
-                        .disabled(lifecycleBusy)
+                        if inFlight {
+                            quietDestructive("删除这场比赛", symbol: "trash") { confirmingDelete = true }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .disabled(lifecycleBusy)
+                    .opacity(lifecycleBusy ? 0.5 : 1)
+                    // The 44 pt touch rows carry their own air; without this the row floats.
+                    .padding(.vertical, -AppSpacing.sm)
                 }
                 if needsCorners {
                     CalibrationPromptCard(isLoading: loadingFrame, advice: results.calibrationAdvice) { openCalibration() }
@@ -392,7 +402,7 @@ struct MatchDetailView: View {
                                 .foregroundStyle(Color.onCobalt)
                                 .frame(width: 28, height: 28)
                                 .background(Color.cobalt, in: Circle())
-                            Text("开始回放").font(DisplayFace.font(21, relativeTo: .headline))
+                            Text("开始回放").font(AppFont.title(17))
                                 .foregroundStyle(Color.ink)
                         }
                         .frame(maxWidth: .infinity)
@@ -432,6 +442,8 @@ struct MatchDetailView: View {
         .demoScrollAnchor()
         #endif
         .navigationBarTitleDisplayMode(.inline)
+        // A back chevron, without the name of where it goes back to.
+        .toolbarRole(.editor)
         #if DEBUG
         .task {
             guard DemoMode.confirmsDelete else { return }
@@ -477,6 +489,19 @@ struct MatchDetailView: View {
             calibration = CalibrationFrame.demo()
         }
         #endif
+    }
+
+    /// A destructive action as a text link in the page's own type and tomato ink: present,
+    /// but never competing with the hero above it.
+    private func quietDestructive(_ title: String, symbol: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: symbol)
+                .font(AppFont.callout.weight(.semibold))
+                .foregroundStyle(Color.tomatoText)
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ScaleButtonStyle())
     }
 
     private var overflowMenu: some View {
@@ -556,15 +581,24 @@ struct MatchDetailView: View {
     private var masthead: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(spacing: AppSpacing.sm) {
-                Text(match.createdAt.formatted(.dateTime.year().weekday(.wide).hour().minute()))
-                    .instrumentLabel(AppFont.labelSmall, color: .inkSoft)
-                if match.isOnDevice {
-                    Sticker("手机端分析", symbol: "iphone", fill: .pistachio, tilt: -2)
+                // Year, weekday and time as three fields set apart by space alone. The time
+                // keeps the phone's own 12 / 24-hour setting.
+                HStack(spacing: AppSpacing.sm) {
+                    Text(match.createdAt.formatted(.dateTime.year()))
+                    Text(match.createdAt.formatted(.dateTime.weekday(.abbreviated)))
+                    Text(match.createdAt.formatted(.dateTime.hour().minute()))
                 }
+                .instrumentLabel(AppFont.label, color: .inkSoft)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
             }
-            OverprintText(match.createdAt.formatted(.dateTime.month().day()),
-                          font: AppFont.numeral(54, relativeTo: .largeTitle), plate: .cobalt,
-                          offset: CGSize(width: 3.5, height: 3), blend: .multiply)
+            // The day is the title: its numbers at full size, 月 and 日 beside them as units.
+            Text(scorecard: match.createdAt.formatted(.dateTime.month().day())
+                    .replacingOccurrences(of: "月", with: "月\u{2009}"),
+                 figure: AppFont.figure(46), word: AppFont.title(22))
+                .foregroundStyle(Color.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .accessibilityAddTraits(.isHeader)
         }
         .padding(.top, AppSpacing.xs)
@@ -580,13 +614,13 @@ struct MatchDetailView: View {
                     .init("\(match.rallies.count)", "回合"),
                     .init("\(match.allShots.count)", "击球"),
                     .init("\(smashCount)", "扣杀"),
-                ], numeralFont: AppFont.numeral(28, relativeTo: .title2))
+                ], numeralFont: AppFont.figure(22))
             }
         }
 
         if !match.allShots.isEmpty {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                SectionHeader(title: "击球构成", folio: "01")
+                SectionHeader(title: "击球构成")
                 ShotMixBar(shots: match.allShots, height: 16)
                 ShotLegend(shots: match.allShots)
             }
@@ -594,7 +628,7 @@ struct MatchDetailView: View {
 
         if !match.rallies.isEmpty {
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                SectionHeader(title: "回合记分卡", folio: match.allShots.isEmpty ? "01" : "02")
+                SectionHeader(title: "回合记分卡")
                     .padding(.bottom, AppSpacing.xs)
                 ForEach(Array(match.rallies.enumerated()), id: \.element.id) { i, rally in
                     RallyRow(index: i + 1, rally: rally)

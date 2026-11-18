@@ -38,7 +38,7 @@ public struct RallyCorrectionSheet: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("回合 \(String(format: "%02d", rally.index)) · \(rally.shots.count) 拍")
                         .instrumentLabel(AppFont.labelSmall)
-                    OverprintText("这一分是谁的？", font: AppFont.numeral(34, relativeTo: .title),
+                    OverprintText("这一分是谁的？", font: AppFont.title(24),
                                   plate: .butter, offset: CGSize(width: 2.5, height: 2.5))
                 }
                 Spacer(minLength: 0)
@@ -56,7 +56,7 @@ public struct RallyCorrectionSheet: View {
 
             Button { onCall(.notARally) } label: {
                 Label("这不算一分", systemImage: "nosign")
-                    .font(DisplayFace.font(19, relativeTo: .headline))
+                    .font(AppFont.title(16))
                     .foregroundStyle(Color.ink)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .background(Color.card, in: Capsule())
@@ -94,10 +94,10 @@ public struct RallyCorrectionSheet: View {
         let current = rally.winner == side
         return Button { onCall(call) } label: {
             VStack(spacing: 4) {
-                Text(title).font(DisplayFace.font(24, relativeTo: .title3))
+                Text(title).font(AppFont.title(19))
                 if current {
                     Text(rally.isUserCorrected ? "你改的" : "AI 的判断")
-                        .font(.system(size: 11, weight: .bold))
+                        .font(.system(size: 12, weight: .semibold))
                         .opacity(0.8)
                 }
             }

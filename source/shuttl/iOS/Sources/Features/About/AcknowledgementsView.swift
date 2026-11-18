@@ -72,7 +72,7 @@ struct AcknowledgementsView: View {
                 header
                 ForEach(Array(Acknowledgements.sections.enumerated()), id: \.offset) { i, section in
                     VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                        SectionHeader(title: section.title, folio: String(format: "%02d", i + 1))
+                        SectionHeader(title: section.title)
                         if let note = section.note {
                             Text(note).font(AppFont.caption).foregroundStyle(Color.inkSoft)
                                 .padding(.top, -AppSpacing.xs)
@@ -99,6 +99,9 @@ struct AcknowledgementsView: View {
         #endif
         .navigationTitle("关于与致谢")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarRole(.editor)
+        // The page prints its own title; the bar keeps the name for VoiceOver only.
+        .toolbar { ToolbarItem(placement: .principal) { Color.clear.frame(width: 1, height: 1).accessibilityHidden(true) } }
         .sheet(item: $open) { item in
             LicenceSheet(title: item.name, subtitle: item.licence,
                          text: item.files.compactMap(Acknowledgements.text(of:)).joined(separator: "\n\n\n"))
@@ -120,7 +123,6 @@ struct AcknowledgementsView: View {
     private var header: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Text("SHUTTL · 关于").instrumentLabel(AppFont.labelSmall)
                 Text("关于与致谢")
                     .font(AppFont.title1)
                     .foregroundStyle(Color.ink)
@@ -140,7 +142,7 @@ struct AcknowledgementsView: View {
         HStack(alignment: .top, spacing: AppSpacing.md) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(item.name)
-                    .font(AppFont.numeral(19, relativeTo: .headline))
+                    .font(AppFont.headline)
                     .foregroundStyle(Color.ink)
                 Text(item.role)
                     .font(AppFont.callout)
@@ -155,7 +157,6 @@ struct AcknowledgementsView: View {
             VStack(alignment: .trailing, spacing: 6) {
                 Text(item.licence)
                     .instrumentLabel(AppFont.labelSmall, color: .ink)
-                    .textCase(nil)
                     .fixedSize()
                 Image(systemName: "chevron.right").font(.system(size: 12, weight: .bold)).foregroundStyle(Color.inkFaint)
             }
@@ -168,7 +169,7 @@ struct AcknowledgementsView: View {
 
     private var citations: some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            SectionHeader(title: "学术引用", folio: String(format: "%02d", Acknowledgements.sections.count + 1))
+            SectionHeader(title: "学术引用")
             Text("只引用论文，App 里不包含它们的代码或数据。")
                 .font(AppFont.caption)
                 .foregroundStyle(Color.inkSoft)
@@ -248,7 +249,7 @@ struct LicenceSheet: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(subtitle).instrumentLabel(AppFont.labelSmall).textCase(nil)
+                    Text(subtitle).instrumentLabel(AppFont.labelSmall)
                     Text(title).font(AppFont.title2).foregroundStyle(Color.ink)
                 }
                 Spacer()
@@ -258,8 +259,8 @@ struct LicenceSheet: View {
             AppDivider()
             ScrollView {
                 Text(text.isEmpty ? "（没有找到许可证文件）" : Self.reflow(text))
-                    .font(.system(.caption, design: .monospaced))
-                    .lineSpacing(2)
+                    .font(.system(.footnote))
+                    .lineSpacing(3)
                     .foregroundStyle(Color.ink)
                     .textSelection(.enabled)
                     .frame(maxWidth: .infinity, alignment: .leading)

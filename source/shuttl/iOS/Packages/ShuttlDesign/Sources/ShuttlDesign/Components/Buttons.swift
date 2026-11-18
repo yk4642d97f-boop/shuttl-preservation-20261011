@@ -58,7 +58,7 @@ public struct PillButton: View {
                         .font(.system(size: 16, weight: .bold))
                 }
                 Text(title)
-                    .font(DisplayFace.font(21, relativeTo: .headline))
+                    .font(AppFont.title(17))
             }
         }
         .foregroundStyle(foreground)
@@ -88,10 +88,16 @@ public struct PillButton: View {
 // Subtle press-down scale, no grey flash.
 
 public struct ScaleButtonStyle: ButtonStyle {
-    public init() {}
+    /// How far the label shrinks while pressed. 0.94 suits buttons and chips. A full-width
+    /// card or row at 0.94 pulls in 10 pt a side and looks like it flinched; pass about 0.975
+    /// so it moves the same few points a button does.
+    public var scale: CGFloat
+
+    public init(scale: CGFloat = 0.94) { self.scale = scale }
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.94 : 1.0)
+            .scaleEffect(configuration.isPressed ? scale : 1.0)
             .animation(AppAnimation.springFast, value: configuration.isPressed)
     }
 }

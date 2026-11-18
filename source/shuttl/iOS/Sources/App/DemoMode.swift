@@ -10,10 +10,13 @@ import SwiftData
 ///   -UIDemoOpenReplay        …and then its replay screen (needs -UIDemoOpenMatch)
 ///   -UIDemoTrajectory        feed a synthetic shuttle trail into camera / replay overlays
 ///   -UIDemoRecording         show the camera screen in its recording state (no real capture)
-///   -UIDemoLoginErrors       open sign-up with invalid input and a server error showing
+///   -UIDemoLoginErrors       open sign-up with a complete form the server has just refused
+///   -UIDemoLoginFill <n>     sign-in page (no -UIDemoTab) with 1 = a valid email, 2 = email and password
+///                            (on 注册 that password is still too short), 3 = complete on 注册 too
+///   -UIDemoLoginRegister     sign-in page opens on 注册
 ///   -UIDemoScrollBottom      start scrolling screens at their bottom edge
 ///   -UIDemoOpenStatus <s>    with -UIDemoOpenMatch: open the first match in status s (failed | analyzing)
-///   -UIDemoSaveNotice        show the "已保存，正在手机上分析" slip on the record screen
+///   -UIDemoSaveNotice        show the "已保存，手机分析中" slip on the record screen
 ///   -UIDemoResultsTab <tab>  open on-device results on overview | court | rallies | movement
 ///   -UIDemoLandscape         rotate the camera / replay screens to landscape
 ///   -UIDemoReplayAt <s>      replay opens at s seconds (bands, ticks and the rally chip mid-match)
@@ -42,6 +45,13 @@ enum DemoMode {
     static var showsTrajectory: Bool { isOn && args.contains("-UIDemoTrajectory") }
     static var fakesRecording: Bool { isOn && args.contains("-UIDemoRecording") }
     static var showsLoginErrors: Bool { isOn && args.contains("-UIDemoLoginErrors") }
+    /// Sign-in page: how much of the form is already filled in (0 = nothing).
+    static var loginFill: Int {
+        guard isOn, let i = args.firstIndex(of: "-UIDemoLoginFill"), i + 1 < args.count else { return 0 }
+        return Int(args[i + 1]) ?? 0
+    }
+    /// Sign-in page opens on 注册.
+    static var loginRegisters: Bool { isOn && args.contains("-UIDemoLoginRegister") }
     static var showsSaveNotice: Bool { isOn && args.contains("-UIDemoSaveNotice") }
     static var forcesLandscape: Bool { isOn && args.contains("-UIDemoLandscape") }
     /// With -UIDemoTab statistics: open 关于与致谢.

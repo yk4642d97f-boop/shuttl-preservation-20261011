@@ -18,21 +18,15 @@ private struct MatchCard: View {
                 .frame(width: stubWidth)
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
                 HStack(alignment: .top) {
-                    Text("\(match.courtLabel) · \(match.durationText)")
-                        .font(AppFont.title3)
+                    Text(scorecard: "\(match.courtLabel)\u{2002}\(match.durationText)",
+                         figure: AppFont.figure(20), word: AppFont.title(19))
                         .foregroundStyle(Color.ink)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                     Spacer(minLength: AppSpacing.sm)
-                    if archived {
-                        Label("已完成", systemImage: "checkmark")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundStyle(Color.pistachioText)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 3)
-                            .overlay(Capsule().strokeBorder(Color.pistachioText, lineWidth: 1))
-                            .accessibilityLabel("已完成")
-                    } else {
+                    // A finished match says so with its numbers and its paper stub; only one
+                    // still in motion, or failed, carries a badge.
+                    if !archived {
                         ShuttlBadge(status: match.status, tilt: 3,
                                     waiting: MatchWaiting(localStage: activity?.localStage))
                     }
@@ -52,12 +46,9 @@ private struct MatchCard: View {
             .clipShape(shape)
         }
         .overlay {
-            Path { p in
-                p.move(to: CGPoint(x: stubWidth, y: 12))
-                p.addLine(to: CGPoint(x: stubWidth, y: 400))
-            }
-            .stroke(Color.ink, style: StrokeStyle(lineWidth: 1.25, dash: [3, 4]))
-            .mask(shape.inset(by: 10))
+            TearLine(x: stubWidth)
+                .stroke(Color.ink, style: StrokeStyle(lineWidth: 1.25, dash: [3, 4]))
+                .mask(shape.inset(by: 10))
         }
         .overlay(shape.strokeBorder(Color.ink, lineWidth: 1.5))
         .printShadow(shape, color: .ink, y: 4)
@@ -74,9 +65,8 @@ private struct MatchCard: View {
             Text(match.createdAt.formatted(.dateTime.month(.abbreviated)))
                 .instrumentLabel(AppFont.labelSmall, color: .ink)
             Text("\(Calendar.current.component(.day, from: match.createdAt))")
-                .font(AppFont.numeral(40, relativeTo: .title))
+                .font(AppFont.figure(32))
                 .foregroundStyle(archived ? Color.cobalt : Color.ink)
-                .monospacedDigit()
             Text(match.createdAt.formatted(.dateTime.hour().minute()))
                 .font(AppFont.labelSmall)
                 .foregroundStyle(Color.ink.opacity(0.8))
@@ -94,7 +84,7 @@ private struct MatchCard: View {
                         // Same rule as the detail hero: no court, no speed; the shot count leads.
                         figure("\(match.allShots.count)", "击球")
                         figure("\(match.rallies.count)", "回合")
-                        figure("—", "标定后才有球速", dim: true)
+                        figure("—", "未标定", dim: true)
                     } else {
                         figure(match.maxSpeedText, "km/h 最高")
                         figure("\(match.rallies.count)", "回合")
@@ -107,9 +97,11 @@ private struct MatchCard: View {
             }
         case .analyzing, .uploading:
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                note(match.progressText(activity),
-                     symbol: MatchWaiting(localStage: activity?.localStage)?.symbol ?? match.status.symbol)
-                    .contentTransition(.numericText())
+                // A match that is only waiting has said so on its badge.
+                if MatchWaiting(localStage: activity?.localStage) == nil {
+                    note(match.progressText(activity), symbol: match.status.symbol)
+                        .contentTransition(.numericText())
+                }
                 if let fraction = match.progressFraction(activity) {
                     InkProgressBar(value: fraction, fill: match.status.ink, height: 8)
                 }
@@ -117,21 +109,16 @@ private struct MatchCard: View {
         case .recording:
             note("正在录制", symbol: "record.circle")
         case .failed:
-            VStack(alignment: .leading, spacing: 2) {
-                note(match.failureReason ?? "分析没有成功", symbol: "exclamationmark.triangle")
-                    .lineLimit(2)
-                Text("点开可重试")
-                    .instrumentLabel(AppFont.labelSmall, color: .tomatoText)
-            }
+            note(match.failureReason ?? "分析没有成功", symbol: "exclamationmark.triangle")
+                .lineLimit(2)
         }
     }
 
     private func figure(_ value: String, _ label: String, dim: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(value)
-                .font(AppFont.numeral(24, relativeTo: .title3))
+                .font(AppFont.figure(20))
                 .foregroundStyle(dim ? Color.inkFaint : Color.ink)
-                .monospacedDigit()
             Text(label)
                 .instrumentLabel(AppFont.labelSmall, color: .inkSoft)
         }
@@ -145,9 +132,25 @@ private struct MatchCard: View {
     }
 }
 
+/// The dashed line between the date stub and the card. It is drawn inside the card's own
+/// height: a line run past the bottom edge and masked back still counts towards the card's
+/// size for VoiceOver and for taps, and made every card report itself 400 pt tall.
+private struct TearLine: Shape {
+    let x: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: x, y: rect.minY + 12))
+        path.addLine(to: CGPoint(x: x, y: rect.maxY))
+        return path
+    }
+}
+
 // MARK: - Empty state
 
 private struct EmptyMatchesView: View {
+    @Environment(AppChrome.self) private var chrome: AppChrome?
+
     var body: some View {
         VStack(spacing: AppSpacing.md) {
             ZStack {
@@ -165,12 +168,12 @@ private struct EmptyMatchesView: View {
             .accessibilityHidden(true)
             .padding(.bottom, AppSpacing.sm)
 
-            OverprintText("还没有比赛", font: AppFont.numeral(34, relativeTo: .title), plate: .cobalt,
-                          offset: CGSize(width: 2.5, height: 2.5), blend: .multiply)
-            Text("去「录制」拍下第一场，\nAI 会把每一拍的轨迹画出来。")
-                .font(AppFont.body)
-                .foregroundStyle(Color.inkSoft)
-                .multilineTextAlignment(.center)
+            // The one thing to do on an empty page, and it says so itself.
+            PillButton(title: "去录制第一场", icon: "record.circle") {
+                withAnimation(AppAnimation.bouncy) { chrome?.selectedTab = .record }
+            }
+            .frame(maxWidth: 260)
+            .padding(.top, AppSpacing.sm)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, AppSpacing.xxl)
@@ -194,7 +197,7 @@ struct MatchListView: View {
         NavigationStack(path: $path) {
             ScrollView {
                 VStack(alignment: .leading, spacing: AppSpacing.lg) {
-                    PageHeader(kicker: "SHUTTL · 比赛档案", title: "比赛", ink: .cobalt) {
+                    PageHeader(title: "比赛", ink: .cobalt) {
                         if !matches.isEmpty { countSeal }
                     }
                     if let heat = demoSystemItem(pipeline?.thermalChip, "有点热，这场分析完歇会儿", .mild) {
@@ -212,14 +215,17 @@ struct MatchListView: View {
                     if matches.isEmpty {
                         EmptyMatchesView()
                     } else {
-                        if !active.isEmpty { section("处理中", folio: "01", active) }
-                        if !archived.isEmpty { section("已归档", folio: active.isEmpty ? "01" : "02", archived) }
+                        // Matches still in motion first, then the finished ones. The wider
+                        // gap between the two groups is the only heading they need.
+                        if !active.isEmpty { cards(active) }
+                        if !archived.isEmpty { cards(archived) }
                     }
                 }
                 .padding(.bottom, AppSpacing.xl)
             }
             .tabBarClearance()
             .paperPage()
+            .statusBarScrim()
             .toolbar(.hidden, for: .navigationBar)
             .navigationTitle("比赛")
             .navigationDestination(for: Match.self) { match in
@@ -230,6 +236,10 @@ struct MatchListView: View {
             }
         }
         .onAppear(perform: openDemoMatchIfNeeded)
+        #if DEBUG
+        // The seeded matches can arrive after the first appearance.
+        .onChange(of: matches.count) { openDemoMatchIfNeeded() }
+        #endif
         .alert("没能删除比赛", isPresented: Binding(get: { deletionError != nil }, set: { if !$0 { deletionError = nil } })) {
             Button("知道了", role: .cancel) {}
         } message: { Text(deletionError ?? "") }
@@ -241,14 +251,14 @@ struct MatchListView: View {
         }
     }
 
-    private func section(_ title: String, folio: String, _ items: [Match]) -> some View {
+    private func cards(_ items: [Match]) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            SectionHeader(title: title, folio: folio)
             ForEach(items) { match in
                 NavigationLink(value: match) {
                     MatchCard(match: match, activity: pipeline?.activity(for: match))
                 }
-                .buttonStyle(ScaleButtonStyle())
+                .buttonStyle(ScaleButtonStyle(scale: 0.975))
+                .settlesAtEdges()
                 .contextMenu {
                     if match.status == .failed, let pipeline {
                         Button {
